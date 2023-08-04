@@ -1,0 +1,293 @@
+%% adapted from Chris Bourke's syllabus template for CS 1
+%% https://github.com/cbourke/ComputerScienceI
+%% Accessed on 29 July 2020
+%% Used and distributed under the CC BY-SA 4.0 License
+
+\documentclass[12pt]{scrartcl}
+%\usepackage{tagpdf}
+
+\usepackage{epsfig,amssymb}
+
+%\usepackage{draftwatermark}
+%\SetWatermarkScale{7}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{colortbl} 
+\usepackage{xspace}
+\usepackage[normalem]{ulem}
+\usepackage{multicol}
+\usepackage{todonotes}
+
+\usepackage{tcolorbox}
+
+\definecolor{steelblue}{RGB}{70, 130, 180}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\usepackage[pdflang={en-US}]{hyperref}
+\hypersetup{
+  letterpaper,
+  colorlinks,
+  linkcolor=darkgreen,
+  citecolor=darkgreen,
+  menucolor=darkred,
+  urlcolor=blue,
+  pdfpagemode=none,
+  pdftitle={Syllabus},
+  pdfauthor={Dan DeBlasio},
+  pdfkeywords={}
+}
+\setcounter{tocdepth}{2}
+
+\usepackage{fullpage}
+\pagestyle{empty} %
+\usepackage{subfigure}
+\usepackage{enumitem}
+\setenumerate{nolistsep}
+\setitemize{nolistsep}
+\renewcommand{\labelenumii}{\alph{enumii}.}
+
+
+\setlength{\parindent}{0pt} %
+\setlength{\parskip}{.25cm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\renewcommand*{\titlepagestyle}{fancy}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\lhead{~}
+\chead{~}
+\rhead{~}
+\lfoot{\Title ---Syllabus}
+\cfoot{~}
+\rfoot{\thepage\ / \pageref*{LastPage}}
+
+\makeatletter
+\title{\large Essential Mathematics and Statistics for Scientists}\let\Title\@title
+\subtitle{
+{\small
+Carnegie Mellon University\\
+School of Computer Science\\
+Computational Biology Department
+}
+\vskip-1cm}
+\date{\large 02-680 -- Fall 2023\\ \vspace{1em}\small Revised: \today\\(change since start of classes marked \change{}{in orange})}
+\makeatother
+
+\newcommand{\change}[2]{\textcolor{orange}{#2}}
+%\newcommand{\change}[2]{#2}
+
+
+%\tagpdfifpdftexT
+% {
+%  \pdfcatalog{/Lang (en-US)}
+%  \usepackage[T1]{fontenc}
+% }
+% 
+%\tagpdfsetup{activate-all,tabsorder=structure}
+
+\begin{document}
+%\tagstructbegin{tag=Document}
+
+\maketitle
+
+%\begin{center}
+%{\Huge\color{red}DRAFT}
+%\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{General Information}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\tagmcbegin{tag=P}
+%\paragraph{Course Number:} 02-680
+
+\paragraph{Class Location and Times:} Posner Hall (POS) 153,\\
+\hspace*{3em}Tuesday \& Thursday 3:30pm--4:30pm (Lecture), \\
+\hspace*{3em}Friday 5:00pm-6:20pm (Recitation)
+
+
+\paragraph{Course Description:} 
+This course rigorously introduces fundamental topics in mathematics and statistics 
+to first-year master's students as preparation for more advanced computational coursework. 
+Topics are sampled from information theory, graph theory, proof techniques, phylogenetics, 
+combinatorics, set theory, linear algebra, neural networks, probability distributions and densities, 
+multivariate probability distributions, maximum likelihood estimation, statistical inference, hypothesis testing, 
+Bayesian inference, and stochastic processes. 
+Students completing this course will obtain a broad skillset of mathematical techniques and 
+statistical inference as well as a deep understanding of mathematical proof. 
+They will have the quantitative foundation to immediately step into 
+an introductory master's level machine learning or automation course. 
+This background will also serve students well in advanced courses that apply concepts in 
+machine learning to scientific datasets, such as 
+02-710 (Computational Genomics) or 02-750 (Automation of Biological Research). 
+The course grade will be computed as the result of homework assignments, midterm tests, and class participation.
+
+%\tagmcend
+
+\paragraph{Prerequisite:} 
+High school mathematics (including single- and multi-variable calculus) and ability to reason mathematically.
+
+\paragraph{Course Goals:} 
+Students completing this course will have a broad overview of mathematical techniques, 
+as well as a deep understanding of proof techniques and statistical tests. 
+They will have the quantitative foundation to immediately step into a machine learning or 
+automation course aimed at computational biology or other science MS students. 
+This background will also serve them well in advanced courses that apply concepts in machine learning 
+to scientific datasets, such as 02-710 (Computational Genomics).
+
+\clearpage
+\tableofcontents
+
+
+
+\input{instructional_staff}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logistics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Topics covered this semester:}
+\begin{itemize}
+\item Information theory
+\item Graph theory
+\item Proof techniques
+\item Phylogenetics
+\item Combinatorics
+\item Set theory
+\item Linear algebra
+\item Neural networks
+\item Probabilities
+\item Probability distributions and densities
+\item Multivariate distributions
+\item Maximum likelihood estimation
+\item Statistical inference
+\item Hypothesis testing
+\end{itemize}
+
+\paragraph{Textbook:} 
+There are no required textbooks for this course. Below are optional textbooks. 
+\begin{itemize}
+\item \textbf{Mathematics for Machine Learning} by Deisenroth, Faisal, Ong
+\item \textbf{All of Statistics: A Concise Course in Statistical Inference} by Larry Wasserman 
+\item \textbf{Probability and Statistics} by Morris DeGroot and Mark Schervish
+\end{itemize}
+
+\paragraph{Communication platforms:}
+\begin{itemize}
+\item \textbf{Canvas Homepage.} 
+The course homepage will be hosted on Canvas. 
+Canvas will be used for attendance and as a central repository for grades. 
+You should be automatically enrolled at \url{xxxx}.
+\item \textbf{Discussion Forum.} 
+An online forum is provided on Piazza as an area for discussion and questions. 
+The forum will be moderated by the course staff who will respond to questions, 
+but students are encouraged to help each other via discussion. 
+However, assignment specifics should not be discussed --- 
+any hints will be provided by the teaching staff. 
+You can find the class on Piazza at \url{xxx}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Grading}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Grades are communicated to students in a timely manner. 
+It is the students’ responsibility to keep track of their grades by compiling the grades they receive. 
+Your semester grade will be based on a combination of homework assignments, weekly quizzes, class participation,  mid-term assessment, and a final exam. 
+
+The approximate percentages are as follows:
+\begin{center}
+\begin{tabular}{rl}
+\textbf{60\% } & Homework\\
+\textbf{10\% } & Attendance \& Participation\\
+\textbf{30\% } & Exams (15\% per)\\
+\end{tabular}
+\end{center}
+
+The base percentage-score-to-letter-grade conversion for this course is as follows: 
+
+\begin{center}
+\begin{tabular}{r|ccc}
+ & + & & -\\
+ \hline
+A & 98\% & 93\% & 90\%\\
+B & 88\% & 83\% & 80\%\\
+C & 78\% & 73\% & 70\%\\
+D & 68\% & 63\% & 60\%\\
+\end{tabular}
+\end{center}
+Any lower scores will result in a grade of ``R''.
+These minimums may be lowered without notice but will not be raised. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Homework}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Written homework assignments will test your knowledge of the material covered in class. 
+Homework assignment will be made available at least one week before the due date.
+
+All writing assignments are to be submitted on Canvas on the day it is due.  
+Any assignment turned in after the due date will be deducted 5 percentage points for the first day it is late, 
+and 20 percentage points for every day after that.
+If you have extenuating circumstances, just communicate with us and we'll do what we can to accommodate.  
+
+Homework will be submitted as a \texttt{pdf} document which will need to be generated using an editor of the students choosing. 
+Due to the reliance of this course on mathematical notation the use of \LaTeX{} is encouraged, 
+If using another editor, students should utilize the editor's equation editor to ensure the correct answers are being communicated. 
+To assist those students using \LaTeX, the source code for each assignment will be provided in addition to the \texttt{pdf}.
+
+\begin{tcolorbox}[colback=red!5,colframe=red!75!black,title=Cheating policy]
+All work must be your own. Unauthorized collaboration or \href{https://www.cmu.edu/student-affairs/ocsi/}{plagiarism} will result in a negative grade (e.g., a homework worth 100 points will be factored in as a -100 points towards your final grade) and will be reported to your academic advisor and dean.
+
+\vspace{1em}
+See Section~\ref{sec:cheating}.
+\end{tcolorbox}
+
+\subsubsection{Regrading of Assignments}
+In the event that you feel an assignment was graded incorrectly, 
+you must make the request in writing within one week of receiving the graded material.  
+Your request should include a reference to the section of the assignment you believe was incorrectly graded.   
+By asking for your assignment to be regraded, 
+the whole assignment will be regraded and it is possible that fewer points 
+may be awarded than the previous grade in light of new consideration.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Attendance \& Participation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Attendance will be taken, 
+and we will have occasional in-class exercises that serve to reinforce the concepts we have covered. 
+These exercises will not be graded, but participation will be expected in order to receive a complete grade for that day.
+You are allowed three ``dropped'' attendance grades without penalty. 
+These can be used for any purpose. 
+
+All classes will be live.
+All efforts will be made to record lectures, but will only be made available in extreme circumstances.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exams}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The two exams will test your knowledge of the material from the class. 
+The first midterm will be held in class, and the second midterm will be held during the university’s scheduled time. 
+Dates for the exams will be announced in class, and can be found on the course schedule when available.
+
+The exams will not be cumulative: midterm 2 will cover material encountered after midterm 1. 
+That having been said, later material in the class may build upon the techniques covered in the earlier material.
+
+
+\input{expectations}
+
+\input{integrity}
+
+\input{resources}
+
+\end{document}
