@@ -6,7 +6,7 @@
 \documentclass[12pt]{scrartcl}
 %\usepackage{tagpdf}
 
-\usepackage{epsfig,amssymb}
+\usepackage{epsfig,amssymb} 
 
 %\usepackage{draftwatermark}
 %\SetWatermarkScale{7}
@@ -19,6 +19,7 @@
 \usepackage{xspace}
 \usepackage[normalem]{ulem}
 \usepackage{multicol}
+\setlength{\marginparwidth}{2cm}
 \usepackage{todonotes}
 
 \usepackage{tcolorbox}
@@ -28,13 +29,12 @@
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \usepackage[pdflang={en-US}]{hyperref}
 \hypersetup{
-  letterpaper,
   colorlinks,
   linkcolor=darkgreen,
   citecolor=darkgreen,
   menucolor=darkred,
   urlcolor=blue,
-  pdfpagemode=none,
+  pdfpagemode=UseNone,
   pdftitle={Syllabus},
   pdfauthor={Dan DeBlasio},
   pdfkeywords={}
@@ -56,6 +56,8 @@
 \usepackage{fancyhdr}
 \renewcommand*{\titlepagestyle}{fancy}
 \pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-14.5pt}
 \renewcommand{\headrulewidth}{0.0pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -76,6 +78,7 @@ Computational Biology Department
 }
 \vskip-1cm}
 \date{\large 02-680 -- Fall 2023\\ \vspace{1em}\small Revised: \today\\(change since start of classes marked \change{}{in orange})}
+\author{}
 \makeatother
 
 \newcommand{\change}[2]{\textcolor{orange}{#2}}
@@ -110,8 +113,9 @@ Computational Biology Department
 %\paragraph{Course Number:} 02-680
 
 \paragraph{Class Location and Times:} Posner Hall (POS) 153,\\
-\hspace*{3em}Tuesday \& Thursday 3:30pm--4:30pm (Lecture), \\
+\hspace*{3em}Tuesday \& Thursday 3:30pm--4:50pm (Lecture), \\
 \hspace*{3em}Friday 5:00pm-6:20pm (Recitation)
+
 
 
 \paragraph{Course Description:} 
@@ -154,30 +158,42 @@ to scientific datasets, such as 02-710 (Computational Genomics).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Logistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Topics covered this semester:}
+
+\paragraph{Course Topic Schedule:} Can be found \href{https://docs.google.com/spreadsheets/d/1VhhVtQ6OiOiUol-YNR7yw1RdQCwQw4jsiwoejJQ6trk}{on Google Sheets}\footnote{\url{https://docs.google.com/spreadsheets/d/1VhhVtQ6OiOiUol-YNR7yw1RdQCwQw4jsiwoejJQ6trk}}
+and is subject to change.
+
+
+\textbf{Topics covered this semester:}
+
+\begin{multicols}{2}
 \begin{itemize}
-\item Information theory
-\item Graph theory
-\item Proof techniques
-\item Phylogenetics
-\item Combinatorics
-\item Set theory
+%\item Information theory** % Not currently in course schedule
+%\item Graph theory** % Not currently in course schedule
+%\item Proof techniques* % Not explicitly in the outline but hard to avoid (probably not this high on the list)
+%\item Phylogenetics* % Not explicitly in the outline
+%\item Combinatorics** % Not currently in course schedule
+%\item Set theory* % Not explicitly in the outline but implicity
+\item Sets and functions
 \item Linear algebra
-\item Neural networks
+\item Matrices and vectors
+%\item Neural networks** % Not currently in the course schedule
 \item Probabilities
-\item Probability distributions and densities
+\item Probability distributions 
+\item Probability densities
 \item Multivariate distributions
 \item Maximum likelihood estimation
 \item Statistical inference
 \item Hypothesis testing
 \end{itemize}
+\end{multicols}
 
 \paragraph{Textbook:} 
-There are no required textbooks for this course. Below are optional textbooks. 
+There are no required textbooks for this course. Below are textbooks that can be good references: 
 \begin{itemize}
 \item \textbf{Mathematics for Machine Learning} by Deisenroth, Faisal, Ong
 \item \textbf{All of Statistics: A Concise Course in Statistical Inference} by Larry Wasserman 
 \item \textbf{Probability and Statistics} by Morris DeGroot and Mark Schervish
+\item \textbf{Linear Algebra Done Right} by Sheldon Axler
 \end{itemize}
 
 \paragraph{Communication platforms:}
@@ -185,14 +201,14 @@ There are no required textbooks for this course. Below are optional textbooks.
 \item \textbf{Canvas Homepage.} 
 The course homepage will be hosted on Canvas. 
 Canvas will be used for attendance and as a central repository for grades. 
-You should be automatically enrolled at \url{xxxx}.
+You should be automatically enrolled at \url{https://canvas.cmu.edu/courses/36680}.
 \item \textbf{Discussion Forum.} 
 An online forum is provided on Piazza as an area for discussion and questions. 
 The forum will be moderated by the course staff who will respond to questions, 
 but students are encouraged to help each other via discussion. 
 However, assignment specifics should not be discussed --- 
 any hints will be provided by the teaching staff. 
-You can find the class on Piazza at \url{xxx}.
+You can find the class on Piazza at\\ \url{https://piazza.com/cmu/fall2023/02680}.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -208,9 +224,9 @@ Your semester grade will be based on a combination of homework assignments, week
 The approximate percentages are as follows:
 \begin{center}
 \begin{tabular}{rl}
-\textbf{60\% } & Homework\\
+\textbf{50\% } & Homework\\
 \textbf{10\% } & Attendance \& Participation\\
-\textbf{30\% } & Exams (15\% per)\\
+\textbf{40\% } & Exams (20\% per)\\
 \end{tabular}
 \end{center}
 
@@ -223,7 +239,7 @@ The base percentage-score-to-letter-grade conversion for this course is as follo
 A & 98\% & 93\% & 90\%\\
 B & 88\% & 83\% & 80\%\\
 C & 78\% & 73\% & 70\%\\
-D & 68\% & 63\% & 60\%\\
+D & 68\% & 63\% & ---\\
 \end{tabular}
 \end{center}
 Any lower scores will result in a grade of ``R''.
