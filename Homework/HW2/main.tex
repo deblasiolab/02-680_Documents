@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+%\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+%\usepackage{times} disallowed
+%\usepackage{pslatex}
+%\usepackage{fullpage}
+\usepackage{amssymb,amsmath,amscd,bm}
+\usepackage{amsfonts}
+\usepackage{url}
+\usepackage{boxedminipage}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amscd}
+\usepackage{amstext}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{paralist}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\usepackage{tikz}
+\usepackage{color}
+\usetikzlibrary{fit,positioning}
+\usetikzlibrary{calc}
+
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\footskip}{33pt}
+%\setlength{\textheight}{9.25in}
+\setlength{\textheight}{9.4in}
+\setlength{\textwidth}{7in}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+
+\usepackage[skins,breakable]{tcolorbox}
+\newtcolorbox[]{solution}[1][]{
+% answer formatting
+title=Solution,
+breakable
+}
+
+%\input{sq}
+\def\eqref#1{Eq.~\ref{eq:#1}}
+\def\figref#1{Fig.~\ref{fig:#1}}
+\def\tabref#1{Tab.~\ref{tab:#1}}
+\def\secref#1{Sec.~\ref{sec:#1}}
+\def\argmax{\mathop{\rm argmax}}
+\def\todo#1{[{\color{red}to-do: \it #1}]}
+\def\cjl#1{[{\color{magenta}CJL says: \it #1}]}
+\def\csc#1{[{\color{blue}CC says: \it #1}]}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%\newif\ifpdf
+%\ifx\pdfoutput\undefined
+%  \pdffalse
+%\else
+%  \pdfoutput=1
+%  \pdftrue
+%\fi
+%
+%  \pdftrue
+%\ifpdf
+%  \usepackage[pdftex]{graphicx}
+%  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.PNG}
+%\else
+%  \usepackage[dvips]{graphicx}
+%  \DeclareGraphicsExtensions{.eps,.ps}
+%\fi
+
+\long\def\gobble#1{}
+\long\def\squelch#1#2{#2}
+\def\argmin{\mathop{\rm argmin}}
+\def\argmax{\mathop{\rm argmax}}
+
+
+
+\newenvironment{closeitemize}{\begin{itemize}\topsep=0in\itemsep=0in\parsep=0in}{\end{itemize}}
+\newenvironment{closeenum}{\begin{enumerate}\topsep=0in\itemsep=0in\parsep=0in}{\end{enumerate}}
+\newcommand{\tikzmark}[1]{%
+  \tikz[overlay,remember picture] \node (#1) {};}
+
+\def\ourtitle{02-680: Essential Mathematics and Statistics for Scientists, Fall 2023\\ \\
+HW2: Linear Equations and Decomposition - [andrew-id]\\ \\
+{\small\em Version: 1\\Due: 23:59 EST, October 5, 2023 on Canvas\\
+}
+}
+
+\begin{document}
+
+\thispagestyle{empty}
+\setcounter{page}{1}
+
+\noindent {\large\bf \ourtitle} \vspace*{0.5em} \\
+%{\large\it Project Summary }
+\vspace{0.05in}
+\HRule
+\vspace*{0.1in}    
+
+\input{instructions.tex}
+
+\newpage
+\begin{enumerate}
+\item \input{Q_Matrices} \clearpage
+\item \input{Q_Determinants} \clearpage
+\item \input{Q_Eigen} \clearpage
+\item \input{Q_SVD} \clearpage
+\end{enumerate}
+%\newpage
+%\pagestyle{empty}
+%\bibliographystyle{acm}
+%\bibliography{refs}
+
+\end{document}
