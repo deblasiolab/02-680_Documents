@@ -1,0 +1,10 @@
+[25 points] Parameter Estimation\\
+\begin{enumerate}
+\item The Pareto distribution has the form $$f(x) = \frac{ab^a}{x^{a+1}}, \quad x \geq b$$
+with the parameters $a, b > 0$. For this problem, assume that $b$ is known. We obtain $n$ i.i.d. data points $x_1, x_2, \hdots, x_n$ from the Pareto distribution. Find the MLE estimate $\widehat{a}$.
+\vspace{1cm}
+\item Now suppose $a$ has a $\mathrm{Gamma}(\alpha, \beta)$ prior distribution with probability density function:$$f(a) = \frac{\beta^\alpha}{\Gamma (\alpha)} a^{\alpha-1} e^{-\beta a}$$
+The parameters $\alpha > 0, \beta > 0$ are both known. Find the posterior distribution of $a$ given $x$, and find the MAP estimate $\widetilde{a}$.
+\vspace{1cm}
+\item Assume $\sum_{i=1}^n \log\frac{x^i}{b} \to \infty$ as $n \to \infty$ for the Pareto distribution. Compare the MLE ( $\widehat{a}$ ) and the MAP ( $\widetilde{a}$ ) as $n \to \infty$ and describe your findings in a few words.
+\end{enumerate}

@@ -1,0 +1,73 @@
+[30 Points] Multivariate Distributions \\
+
+\begin{enumerate}
+    \item 
+
+\( \mathbf{X} \) is \( \mathcal{N}_3(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \) with \( \boldsymbol{\mu}^T = (-2, 3, 1) \) and
+\[
+\boldsymbol{\Sigma} = 
+\begin{pmatrix}
+2 & 1 & 4 \\
+1 & 1 & 2 \\
+3 & 2 & 2
+\end{pmatrix}.
+\]
+
+What is the distribution of \( 3X_1 - 2X_2 + X_3 \)? What are its parameters?
+
+    \item 
+
+\( \mathbf{Z} \) is distributed as \( \mathcal{N}_3(\boldsymbol{\mu}, \boldsymbol{\Sigma}) \), where the mean vector \( \boldsymbol{\mu}^T = (1, 0, 2) \) and covariance
+\[
+\boldsymbol{\Sigma} = 
+\begin{pmatrix}
+2 & 0 & -1 \\
+0 & 1 & 0 \\
+-1 & 0 & 3
+\end{pmatrix}.
+\]
+Which of the following random variables are independent? Explain.
+
+\begin{enumerate}
+    \item \( X_1 \) and \( X_2 \)
+    \item \( X_1 \) and \( X_3 \)
+    \item \( X_2 \) and \( X_3 \)
+    \item \( (X_1, X_3) \) and \( X_2 \)
+\end{enumerate}
+
+    
+    \item 
+
+Consider a bivariate normal random vector
+\[
+\begin{bmatrix}
+X_1 \\
+X_2
+\end{bmatrix}
+\sim \mathcal{N}\left(
+\begin{bmatrix}
+\mu_1 \\
+\mu_2
+\end{bmatrix},
+\begin{bmatrix}
+\sigma_1^2 & \sigma_{12} \\
+\sigma_{12} & \sigma_2^2
+\end{bmatrix}
+\right).
+\]
+A useful reparametrization of this distribution uses the correlation coefficient, defined as
+\[
+\rho = \frac{\sigma_{12}}{\sigma_1\sigma_2}.
+\]
+The correlation coefficient is always between $-1$ and $1$. Under this parametrization, the covariance matrix becomes
+\[
+\Sigma =
+\begin{bmatrix}
+\sigma_1^2 & \rho\sigma_1\sigma_2 \\
+\rho\sigma_1\sigma_2 & \sigma_2^2
+\end{bmatrix}.
+\]
+Find the distribution of $X_1 | X_2$ in terms of \(\mu_1, \mu_2, \sigma_1, \sigma_2\), and \(\rho\).
+
+
+\end{enumerate}
