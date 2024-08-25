@@ -130,9 +130,48 @@ We can actually redefine the $L_2$-norm of a vector $x\in\reals^n$ using the dot
 \]
 %%%%%
 \section{Matrices}
+You can almost think of a \emph{matrix} as a 2-dimension vector. 
+We say that an ``$n$-by-$m$'' matrix $M \in \reals^{n\times m}$ has $n$ rows and $m$ columns and we usually write it as:
+\[
+M = \left[\begin{matrix}
+M_{1,1}& 	M_{1,2}& 	\dots& M_{1,m}\\
+M_{2,1}& 	M_{2,2}& 	\dots& M_{2,m}\\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+M_{n,1}& 	M_{n,2}& 	\dots& M_{n,m}
+\end{matrix}\right]
+\]
 
 \subsection{Special Matrices}
+In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} as the entries where the horizontal and vertical component are equal; 
+i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
 
+The \emph{identity} matrix $I_n \in\reals^{n\times n}$ (sometimes simplified to just $I$ when the size is implied from context) 
+is a special square matrix where the main diagonal values are $1$ and all other values are $0$.
+\[
+\forall 1 \le i,j \le n : I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
+\]
 \subsection{Matrix Operations}
+\paragraph{Addition and Scalar Multiplication.}
+Like with vectors, addition of two matricies as well as scalar multiplication are element-wise operations, so for matrices $M,N \in \reals^{n\times m}$ and scalar $a\in\reals$:
+\[O = M+N \rightarrow O_{i,j} = M_{i,j} + N_{i,j} \;\; \forall 1 \le i \le n, 1 \le j \le m\]
+\[O = aM \rightarrow O_{i,j} = a M_{i,j} \;\; \forall 1 \le i \le n, 1 \le j \le m\]
+
+\paragraph{Matrix Multiplication}
+Just like with vectors, multiplying two matrices is more complicated than scalars. 
+The first question is the size of the result, if we multiply $C \in \reals^{n\times p}$ with $D \in \reals^{p\times m}$ we get a matrix $E \in \reals^{n\times m}$;
+notice that the \textit{inner} dimensions are the same.
+And the values in $E$ are defined as follows:
+\[
+E_{i,j} = \sum_{k=1}^m C_{i,k}D{k,j}
+\]
+
+We can actually rewrite this using dot product, lets say that $C_{i,*}$ is the $i$-th column of $C$, and $D_{*,j}$ is the $j$-th column of $D$.
+In that case \[E_{i,j} = C_{i,*}\cdot D_{*,j}^T.\]
+
+What can we do with it? Lets define the following:
+\begin{itemize}
+\item $G$ is an $n$-by-$m$ matrix where $G_{i,j}=1$ if actor $i$ was in an episode of the show $j$ (and $0$ otherwise)
+\item $H$ be an $m$-by-$p$ matrix where $H_{j,k}=1$ if the show $j$ is available to stream on service $k$ (and $0$ otherwise) 
+\end{itemize}
 
 \end{document}
