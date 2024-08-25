@@ -1,0 +1,108 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\include{includes}
+%SetFonts
+
+
+\title{Topic 2: Tuples, Vectors, and Matrices}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%
+\section{Tuples}
+Unlike sets, \emph{tuples} (also called \emph{sequences} or \emph{lists}) are an \textit{ordered} list of objects.
+Think of the position on chess board (or a 2D plane), a color in RGB, etc. 
+
+When these have small cardinality we can use terms like (ordered) pair [2], triple [3], quadruple [4], or more generically an ``$n$-tuple''.
+
+If we're being precise, we normally use angle brackets (``$\langle$'', ``$\rangle$'') but a lot of times we will be lazy and just use parentheses (``('',``)'')
+
+\paragraph{Cartesian Product.}
+A very useful way to construct \emph{set of} tuples is using the \emph{cartesian product} operator, 
+which in essence creates all possible pairs of elements from two sets.
+\[
+S \times T = \left\{\left\langle x,y\right\rangle \mid x \in S \wedge y\in T\right\}
+\]
+
+As an example, lets remember the first two sets from our examples last topic: 
+\[
+A = \left\{\textnormal{``Welcome''}, \textnormal{``to''}, \textnormal{``02-680''}\right\} \textnormal{ and}
+\]\[
+B = \left\{x^2 \mid x=2 \vee x=3 \right\}.
+\]
+In this case the cartesian product is 
+\[
+A \times B = \left\{ \left\langle\textnormal{``Welcome''},4\right\rangle, \left\langle\textnormal{``to''},4\right\rangle, \left\langle\textnormal{``02-680''},4\right\rangle,
+ \left\langle\textnormal{``Welcome''},9\right\rangle, \left\langle\textnormal{``to''},9\right\rangle, \left\langle\textnormal{``02-680''},9\right\rangle \right\}
+\]
+
+It doesn't have to be different sets in the cartesian product though, we can have the product with a set and itself.
+In fact this is performed so often it has its own notation:
+\[
+B \times B = B^2 = \left\{ \left\langle 4,4 \right\rangle, \left\langle 4,9 \right\rangle,  \left\langle 9,4 \right\rangle, \left\langle 9,9 \right\rangle \right\}.
+\]
+This notation also generalizes, so $S^3 = S \times S \times S$, $S^4 = S\times S\times S\times S$ and so on. 
+Notice that order matters in tuples (unlike sets) so $ \left\langle 4,9 \right\rangle \neq \left\langle 9,4 \right\rangle$.
+
+A note about this notation:
+Sometimes we want to have a set of tuples of different lengths (remember sets don't need to be over objects of the same type) 
+so something like 
+\[
+B^2 \cup B^3 = \left\{  \begin{matrix}\left\langle 4,4 \right\rangle, \left\langle 4,9 \right\rangle,  \left\langle 9,4 \right\rangle, \left\langle 9,9 \right\rangle,\\
+				\left\langle 4,4,4 \right\rangle, \left\langle 4,4,9 \right\rangle,  \left\langle 4,9,4 \right\rangle, \left\langle 4,9,9 \right\rangle,\\
+				\left\langle 9,4,4 \right\rangle, \left\langle 9,4,9 \right\rangle,  \left\langle 9,9,4 \right\rangle, \left\langle 9,9,9 \right\rangle \end{matrix}\right\}
+\]
+If we wanted to enumerate all binary numbers up to 8 digits (while omitting leading 0s):
+\[
+\{1\} \times \bigcup_{i=1}^7 \left\{0,1\right\}^i
+\]
+But that leads to the notation we saw last time for strings: $\Sigma^*$.
+Sometimes we want the set of all tuples of any length, then we use the \emph{Kleene star} (or Kleene operator); 
+for some set S, 
+\[
+S^* =  \bigcup_{i=0}^\infty S^i.
+\]
+We will define $S^0 = \langle\rangle$ (the empty tuple) for any $S$, in the case of $\Sigma^0$ we often call it the empty string.
+
+%%%%%
+\section{Vectors}
+When the set used to define a tuple is the set of real $\reals$ (or complex $\mathbb{C}$%
+\footnote{It will generally be true throughout the class that the properties we're discussing also apply to complex numbers, but for simplicity we will usually only directly discuss reals.})
+numbers, we call the tuple a \emph{vector}.
+Specifically an $n$-vector $x$ is defined as an element in \[x\in \reals^n.\] 
+If we want to reference the $i$-th element of $x$ we will write \[x_i\] (or sometimes $x[i]$, this is true of tuples as well).
+
+\subsection{Simple Operations}
+Graphically we can think of vectors (in $\reals^2$) in two way, which are... somewhat equivalent: 
+as a point on the plane, or as an arrow from the origin.
+The second will be useful in this section, but the latter is sometimes useful as well. 
+
+\paragraph{Vector length.}
+If we think of the vector as an arrow, we can say the \emph{length} of the vector (arrow) is the same as the hypotenuse 
+right triangle with each leg having the same length as each one of the elements. 
+In that case we know that for vector $x = \left\langle x_1,x_2\right\rangle\in\reals^2$, the length is $\sqrt{x_1^2 + x_2^2}$.
+To generalize this we say the length of a vector $x\in\reals^n$
+\[
+\|x\| = \sqrt{\sum_{i=1}^n \left(x_i\right)^2}.
+\]
+Often times we call this the $L_2$-norm of a vector. 
+
+\paragraph{Vector addition.}
+
+
+\subsection{Dot Product}
+
+We can actually redefine the $L_2$-norm using the dot product:
+\[
+\|x\| = \sqrt{x \cdot x}.
+\]
+%%%%%
+\section{Matrices}
+
+\subsection{Special Matrices}
+
+\subsection{Matrix Operations}
+
+\end{document}
