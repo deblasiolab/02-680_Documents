@@ -1,0 +1,293 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tablefootnote}
+
+%SetFonts
+\DeclareEmphSequence{\bfseries\itshape}
+\DeclareMathOperator {\ints}{\mathbb{Z}}
+\DeclareMathOperator {\reals}{\mathbb{R}}
+
+%SetFonts
+
+
+\title{Topic 1: Sets, Operators, and Function}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%
+\section{Sets}
+A \emph{set} is an unordered collection of unique elements. 
+We have two standard ways of explicitly defining a set. 
+First is simple (exhaustive) enumeration:
+\[
+A = \left\{\textnormal{``Welcome''}, \textnormal{``to''}, \textnormal{``02-680''}\right\}.
+\]
+In this case the set contains 3 elements, each of which is a string.
+The second way to define a set by abstraction:
+\[
+B = \left\{x^2 \mid x=2 \vee x=3 \right\}.
+\]
+Note here that the right hand side of the definition (after the $\mid$) is a statement written in \emph{predicate logic} (we will talk about this later).
+
+\paragraph{Set Membership.} Likely the most important thing we can do with sets is check if something is in the set, 
+or we would say it is an element of the set. 
+We write that mathematically as $x \in S$ where $x$ is an element and $S$ is a set. 
+So going back to the examples above we would say $16 \in B$, but $4 \notin B$.
+
+\paragraph{Set Cardinality.} 
+We may also want to consider the size of a set, we call this the \emph{cardinality}.
+In the examples above $|A|=3$ and $|B| = 2$.
+Note that if we define another set:
+\[
+C = \left\{ \left(2+2\right), \left(2-2\right), \left(2\times2\right), \left(2\div2\right), \left(2^2\right) \right\}
+\]
+the cardinality $|C|=3$. 
+Why is that? Shouldn't it be 5? 
+Try to rewrite the set using exhaustive enumeration on single integers.
+
+\subsection{Special Sets}
+There are some sets that we use that are so important we define them on their own, they also usually have special symbols. 
+
+\paragraph{The Empty Set.} 
+Its often useful to define the set that contains no elements, we call this the \emph{empty set} or alternately the \emph{null set}. 
+\[
+\emptyset = \left\{\right\}
+\]
+Since there are no elements in $\emptyset$ (which we can write as $\forall x: x \notin \emptyset$, or $\nexists x: x \in \emptyset$), $|\emptyset| = 0$. 
+
+\paragraph{Common Sets.}
+In mathematics we are often talking about a defined set of numbers (think integers, real numbers, etc.), 
+and we use them so often that they get special notation as well. 
+In this course we will mainly restrict ourselves to the \textit{real} numbers, we may encounter any of these:
+\begin{center}
+\begin{tabular}{l|l||l}
+\hline
+Numbers			& Symbol			& Definition\\
+\hline
+\hline
+Naturals 			& $\mathbb{N}$	& Positive Whole Numbers\\
+Integers 			& $\mathbb{Z}$		& All Whole Numbers\\
+Rational Numbers	& $\mathbb{Q}$	& Numbers Representable as Fractions\\
+Real Numbers		& $\mathbb{R}$	& Decimal Numbers\\
+Booleans			& $\left\{0,1\right\}$	& No special symbol, but still important\\
+Characters		& $\Sigma$		& Sometimes ``Alphabet''\footnotemark, useful here since\\
+				&				& \hspace{3em} this course is in Computational Biology\\
+\hline
+\end{tabular}
+\end{center}
+\footnotetext{While the other sets on this list are always the same size, the size of an alphabet is context dependent. Sometimes it's DNA, sometimes its capital latin (english) letters, other times its kanji.}
+(Note in \LaTeX{} we use the command \texttt{\textbackslash{}mathbb} command to create these symbols.)
+
+So we can easily expand $B$ from above to be all squares:
+\[
+B' = \left\{x^2 \mid x \in \ints \right\}
+\]
+
+We some times also want to slightly restrict these sets, so you may see something like $\ints^+$ which is equivalent to ${x \in \ints \mid x > 0}$, 
+or $\ints^{\ge0}$ which is equivalent to ${x \in \ints \mid x \ge 0}$.
+Note that technically $\ints^+$ does not include 0 and $\ints^{\ge0}$ does, 
+but be careful because some authors (hopefully not including myself) use the former when they mean the latter. 
+
+Given that we can further redefine $B'$ above 
+\[
+B'' = \left\{x^2 \mid x \in \ints^{\ge0} \right\}
+\]
+ though $B'$ and $B''$ are equivalent. 
+ 
+%%%%%%%%%%%%%%%%%%%%%
+\section{Operators}
+
+Just like we do with numbers, we often need to compare sets, or do computations on them.
+We call these set operators. 
+
+\paragraph{Union ($\cup$) and Intersection ($\cap$).}
+Both of these operations result in the creation of a new set, 
+you can think of these like the logical operators \textit{and}($\wedge$) and \textit{or}($\vee$). (We will talk about logical operators next week.)
+For two sets $S$ and $T$ we define the following: 
+\[
+S\cup T = \left\{x \mid x \in S \vee x \in T\right\} \textnormal{ and }
+\]\[
+S\cap T = \left\{x \mid x \in S \wedge x \in T\right\} \\
+\]
+That is to say and element is the union if it's in \textit{either} of the two sets, but only in the intersection if its in both. 
+
+Lets look at an example:
+\[
+B \cap C = \left\{4\right\},
+\]
+$4$ is the only element thats in both $B$ and $C$. 
+On the other hand 
+\[
+B \cap C = \left\{0,1,2,4,9\right\},
+\]
+since all of the elements of both sets are included. 
+
+This leads to two interesting properties that we may make use of later, for arbitrary sets $S$ and $T$: 
+\[
+|S\cup T| \le  |S| + |T|
+\]
+\[
+|S\cap T| \le \max\left\{|S|, |T|\right\}
+\]
+
+\paragraph{Set Difference ($\setminus$).}
+Similar to numerical subtraction, the ordering of the operators matters. 
+In fact difference is so similar to subtraction that you may sometimes see the minus sign used in place of the standard backlash. 
+\[
+S\setminus T  = \left\{x \mid x \in S \wedge x \notin T\right\} 
+\]
+You can think if it as the elements that are unique to S. 
+
+Going back to our example:
+\[
+B \setminus C = \left\{9\right\}\textnormal{ and }
+\] \[
+C \setminus B = \left\{0,1,2\right\}
+\]
+
+This means we can play around a little and say that 
+\[
+S \cup T = \left(S \cap T\right) \cup \left(S \setminus T\right) \cup  \left(T \setminus S\right) 
+\]
+
+\paragraph{Complement ($\sim$).}
+While we can write something like $\sim S$, you will normally see set complements written as $\overline{S}$. 
+We also need to assume a \emph{universe} for this operator to be properly defined. 
+This is normally understood from context, but the universe is the set of all possible elements the set $S$ is a part of. 
+Just like we did earlier with $S$ and $T$ being arbitrary sets, let $U$ be an arbitrary universe.
+Once we do that we can define 
+\[
+\overline{S} = \left\{x \in U \mid x \notin S\right\}
+\]
+
+So if we assume that the universe for $B$ is $\ints$,
+then 
+\[
+\overline{B} = \left\{-\infty,....,-1,0,1,2,3,\;\;5,6,7,8,\;\;10,11....,\infty\right\} 
+\]
+
+Using our previously defined items we can also say that 
+\[
+C \setminus B = C \cap \overline{B}
+\]
+
+\paragraph{Subset ($\subseteq$), Superset ($\supseteq$), and equality ($=$).}
+We often need to know if one set \textit{is contained} within another (notice while similar this is different from saying is larger than another). 
+To describe this relationship we say one set is an \emph{subset} of another if all of it's elements are in both sets. 
+That is
+\[
+S \subseteq T \iff \forall x \in S : x \in T
+\]
+
+Similarly, if a set \textit{contains} another set, we can say the original is a \emph{superset} of the other. 
+\[
+S \supseteq T \iff \forall x \in T: x \in S
+\] 
+
+We already know that $B \nsubseteq C$ and $B \nsupseteq C$, but $B \subseteq B'$ and $B' \supseteq B$. 
+
+But what are those little lines under the $\subseteq$ symbol? We will need to explain equality first. 
+\emph{Set equality} is defined as follows:
+\[
+S = T \iff \left(\forall x \in S : x \in T\right) \vee \left(\forall y \in T : y \in S\right)
+\]
+or another way
+\[
+S = T \iff \left(S \subseteq T\right) \vee \left(S \supseteq T\right)
+\]
+
+So if we define $C' = \{0,1,2,4\}$, then $C=C'$.
+
+So then coming back to $\subseteq$ (vs. $\subset$); 
+we define a \emph{proper subset} as
+\[
+S \subset T \iff \left(\forall x \in S : x \in T\right) \vee \left(\exists y \in T : y \notin S\right)
+\]
+In other words for $S$ to be a proper subset of $T$ it first needs to be a subset, but there needs to be at least one item in $T$ thats not in $S$.
+A similar condition exists for \emph{proper superset} which we define as 
+\[
+S \supset T \iff \left(\forall x \in T : x \in S\right) \vee \left(\exists y \in S : y \notin T\right)
+\]
+So going back to our previous examples we can be  more precise $B \subset B'$ and $B' \supset B$;
+but also $B'' \subseteq B'$ but $B'' \not\subset B'$.
+
+\paragraph{Power Set ($\mathcal{P}(\cdot)$)}
+
+So, can we find all the subsets of a set?  
+The \emph{Power Set} is actually the collection of all the subsets of a given set. 
+\[
+\mathcal{P}(S) = \left\{T \mid T \subseteq S\right\}
+\]
+
+It may be easiest to look at an example: 
+\[
+\mathcal{P}\left(B\right) = \left\{ \begin{matrix}\emptyset, \\ \left\{4\right\}, \\ \left\{9\right\}, \\\left\{4,9\right\}\end{matrix} \right\}
+\]
+
+So the power set is a set of sets, and each element of the power set \textit{is a} set.
+(That means a the power set of a power set of a set, i.e. $\mathcal{P}\left(\mathcal{P}\left(B\right)\right)$, is a set of sets of sets and an element is a set of sets....) 
+
+An interesting fact is that the size of the power set of a set is 
+\[
+\left|\mathcal{P}\left(S\right)\right| = 2^{|S|}
+\]
+Why? Think of each element of $\mathcal{P}\left(S\right)$ as a binary number of length $|S|$, 
+if the $i$-th bit (or position) is $1$ then the $i$-th element\footnote{In this particular example we would impose an ordering on the elements which is not in the definition of sets} from $S$ is in that subset. 
+Then each binary number represents a \textit{unique} subset of $S$. 
+
+%%%%%%%%%%%%%%%%%%%%%
+\section{Functions}
+
+We've all seen functions in algebra, and looked at them, say, as a graph:
+\[
+y = 3x^2 + 2
+\]
+
+But we want to make sure we're on the same page when it comes to the generalized function we're going to talk about in this course. 
+We will say that a \emph{function} provides a mapping from one set onto another; 
+formally we say that a function $f$ that maps from a set $S$ to a set $T$ is written as 
+\[
+f: S \mapsto T
+\]
+
+In most algebra classes you were likely working with functions $g$ in the form $g: \reals \mapsto\reals$ (which while not defined above is implied), 
+but that doesn't have to be the case. 
+For instance in Computational Biology, we often want a function to map strings 
+(which we will use the generic notation $\Sigma^*$ for now without explanation, wait till next week)
+to other strings; 
+something like $h: \Sigma^* \mapsto \Sigma^*$. 
+
+\paragraph{Domain, Codomain, and Range.}
+When writing $f: S \mapsto T$ we call $S$ the \emph{domain} set, and $T$ the \emph{codomain}. 
+Note that the codomain is slightly different from the \emph{range} of a function; 
+the range is the subset of $T$ that is reachable from an input in $S$. 
+Formally the range is 
+\[
+\left\{y \in T \mid \exists x \in S : f(x) = y\right\}
+\]
+So thinking about the function at the start of this section ($y = 3x^2 + 2$), 
+in algebra class we would have said that the domain is $\reals$, as is the codomain, but the range (you may have heard it called the image) 
+is the set $\left\{y \in \reals \mid y \ge 2\right\}$ (notice this is always a subset of the codomain). 
+
+\paragraph{Function Composition ($\circ$).}
+We may find ourselves later in the semester needing to apply one function to the output of another,
+this it known as \emph{function composition} defined formally as
+\[
+g\circ f: S \mapsto U \textnormal{ assuming } f: S \mapsto T \wedge g : T \mapsto U.
+\]
+In use it may look something like $g\left(f\left(x\right)\right)$, 
+so $x$ would need to be from $S$ since thats the input to $f$ and since the input to $g$ needs to be from $T$, 
+that also needs to be the codomain of $f$ then the codomain of $g$ ends up as the codomain of the composite function. 
+
+
+\end{document}  
