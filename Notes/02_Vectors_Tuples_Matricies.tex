@@ -89,12 +89,42 @@ To generalize this we say the length of a vector $x\in\reals^n$
 \]
 Often times we call this the $L_2$-norm of a vector. 
 
-\paragraph{Vector addition.}
+\paragraph{Vector addition and scalar multiplication.}
+Both of these operations are element-wise. 
+For vectors $x,y \in \reals^n$
+\[
+z = x+y \;\;\rightarrow \;\; z_i = x_i + y_i \;\;\; \forall 1 \le i \le n.
+\]
+Thus $z \in \reals^n$ as well. 
+
+In the context of this course, especially when talking about vectors, a \emph{scalar} is a single number (i.e. $a \in \reals$) rather than a vector. 
+(The implication is that $\reals$ and $\reals^1$ are not the same thing.)
+When multiplying a vector $x\in \reals^n$ by a scalar $a\in\reals$, we once again apply this element-wise. 
+Thus the result, $z\in\reals^n$ can be computed as:
+\[
+z = ax \;\; \rightarrow \;\; z_i = a x_i \;\;\; \forall 1 \le i \le n.
+\]
 
 
 \subsection{Dot Product}
+While a scalar times a vector is a vector, it turns out a vector times a vector is a scalar! 
+Lets define it first then we will dive in;
+for $x,y \in \reals^n$
+\[
+x \bullet y = \sum_{i=1}^n x_i \cdot y_i.
+\]
+(note sometimes we will use $\bullet$ vs $\cdot$ to differentiate scalar multiplication and dot product, but generally only the latter is used since the domains of the functions are different and can be extracted from context.)
 
-We can actually redefine the $L_2$-norm using the dot product:
+We often think of dot product as telling us how vectors go ``in the same direction''. 
+Consider two cardinal vectors (going directly along an axis) on the plane;
+intuitively they go in totally different directions (note, this is different from \textit{opposite} directions). 
+WLG one vector must be $\langle a, 0 \rangle$ and the other must be  $\langle 0,b \rangle$ (for scalars $a,b\in\reals$). 
+Using the definition above $\langle a, 0 \rangle \bullet \langle 0,b \rangle = 0$.
+Consider a third vector $\langle c, 0 \rangle$ with $c\in\reals$, but enforce that $a \ge 0$ and $c \le 0$. 
+In this case the result is $\langle a, 0 \rangle \bullet \langle c,0 \rangle = ac$, which we know is negative; 
+they share a lot of direction, but go opposite ways! 
+
+We can actually redefine the $L_2$-norm of a vector $x\in\reals^n$ using the dot product:
 \[
 \|x\| = \sqrt{x \cdot x}.
 \]
