@@ -8,8 +8,8 @@
 
 \usepackage{epsfig,amssymb} 
 
-%\usepackage{draftwatermark}
-%\SetWatermarkScale{7}
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
 
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -77,7 +77,7 @@ School of Computer Science\\
 Computational Biology Department
 }
 \vskip-1cm}
-\date{\large 02-680 -- Fall 2023\\ \vspace{1em}\small Revised: \today\\(change since start of classes marked \change{}{in orange})}
+\date{\large 02-680 -- Fall 2024\\ \vspace{1em}\small Revised: \today\\(change since start of classes marked \change{}{in orange})}
 \author{}
 \makeatother
 
@@ -112,21 +112,22 @@ Computational Biology Department
 %\tagmcbegin{tag=P}
 %\paragraph{Course Number:} 02-680
 
-\paragraph{Class Location and Times:} Posner Hall (POS) 153,\\
-\hspace*{3em}Tuesday \& Thursday 3:30pm--4:50pm (Lecture), \\
-\hspace*{3em}Friday 5:00pm-6:20pm (Recitation)
+\paragraph{Class Location and Times:\\} 
+\hspace*{2em}Tuesday \& Thursday \textcolor{red}{3:35pm}\footnote{To accommodate transitions for many students arriving from Mellon Institute, 03-709 will also end 5 minutes early.}\sout{3:30pm}--4:50pm [Lecture], \\ \\
+\hspace*{3em}Friday 5:00pm-6:20pm, Posner Hall (POS) 153 [Recitation]
 
 
 
 \paragraph{Course Description:} 
 This course rigorously introduces fundamental topics in mathematics and statistics 
 to first-year master's students as preparation for more advanced computational coursework. 
-Topics are sampled from information theory, graph theory, proof techniques, phylogenetics, 
+Topics are sampled from information theory, 
+%graph theory, proof techniques, phylogenetics, 
 combinatorics, set theory, linear algebra, neural networks, probability distributions and densities, 
 multivariate probability distributions, maximum likelihood estimation, statistical inference, hypothesis testing, 
 Bayesian inference, and stochastic processes. 
 Students completing this course will obtain a broad skillset of mathematical techniques and 
-statistical inference as well as a deep understanding of mathematical proof. 
+statistical inference. % as well as a deep understanding of mathematical proof. 
 They will have the quantitative foundation to immediately step into 
 an introductory master's level machine learning or automation course. 
 This background will also serve students well in advanced courses that apply concepts in 
@@ -144,10 +145,10 @@ Students completing this course will have a broad overview of mathematical techn
 as well as a deep understanding of proof techniques and statistical tests. 
 They will have the quantitative foundation to immediately step into a machine learning or 
 automation course aimed at computational biology or other science MS students. 
-This background will also serve them well in advanced courses that apply concepts in machine learning 
-to scientific datasets, such as 02-710 (Computational Genomics).
+%This background will also serve them well in advanced courses that apply concepts in machine learning 
+%to scientific datasets, such as 02-710 (Computational Genomics).
 
-\clearpage
+%\clearpage
 \tableofcontents
 
 
@@ -159,7 +160,7 @@ to scientific datasets, such as 02-710 (Computational Genomics).
 \section{Logistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Course Topic Schedule:} Can be found \href{https://docs.google.com/spreadsheets/d/1VhhVtQ6OiOiUol-YNR7yw1RdQCwQw4jsiwoejJQ6trk}{on Google Sheets}\footnote{\url{https://docs.google.com/spreadsheets/d/1VhhVtQ6OiOiUol-YNR7yw1RdQCwQw4jsiwoejJQ6trk}}
+\paragraph{Course Topic Schedule:} Can be found \href{https://docs.google.com/spreadsheets/d/1yREz5WiNu7a7zzntLGzCB2PxGBoPhgRkj2z-mB7QeJE}{on Google Sheets}\footnote{\url{https://docs.google.com/spreadsheets/d/1yREz5WiNu7a7zzntLGzCB2PxGBoPhgRkj2z-mB7QeJE}}
 and is subject to change.
 
 
@@ -167,12 +168,12 @@ and is subject to change.
 
 \begin{multicols}{2}
 \begin{itemize}
-%\item Information theory** % Not currently in course schedule
+\item Information theory % Not currently in course schedule
 %\item Graph theory** % Not currently in course schedule
 %\item Proof techniques* % Not explicitly in the outline but hard to avoid (probably not this high on the list)
 %\item Phylogenetics* % Not explicitly in the outline
 %\item Combinatorics** % Not currently in course schedule
-%\item Set theory* % Not explicitly in the outline but implicity
+\item Set theory % Not explicitly in the outline but implicity
 \item Sets and functions
 \item Linear algebra
 \item Matrices and vectors
@@ -190,10 +191,13 @@ and is subject to change.
 \paragraph{Textbook:} 
 There are no required textbooks for this course. Below are textbooks that can be good references: 
 \begin{itemize}
+
+\item \textbf{Mathematics and Statistics for the Quantitative Sciences} by Betti
+\item \textbf{Connecting Discrete Mathematics and Computer Science} by Liben-Nowell\footnote{\url{https://www.cs.carleton.edu/faculty/dln/book/}}
 \item \textbf{Mathematics for Machine Learning} by Deisenroth, Faisal, Ong
-\item \textbf{All of Statistics: A Concise Course in Statistical Inference} by Larry Wasserman 
-\item \textbf{Probability and Statistics} by Morris DeGroot and Mark Schervish
-\item \textbf{Linear Algebra Done Right} by Sheldon Axler
+%\item \textbf{All of Statistics: A Concise Course in Statistical Inference} by Larry Wasserman 
+%\item \textbf{Probability and Statistics} by Morris DeGroot and Mark Schervish
+%\item \textbf{Linear Algebra Done Right} by Sheldon Axler
 \end{itemize}
 
 \paragraph{Communication platforms:}
@@ -201,14 +205,14 @@ There are no required textbooks for this course. Below are textbooks that can be
 \item \textbf{Canvas Homepage.} 
 The course homepage will be hosted on Canvas. 
 Canvas will be used for attendance and as a central repository for grades. 
-You should be automatically enrolled at \url{https://canvas.cmu.edu/courses/36680}.
+You should be automatically enrolled at \url{https://canvas.cmu.edu/courses/41172}.
 \item \textbf{Discussion Forum.} 
 An online forum is provided on Piazza as an area for discussion and questions. 
 The forum will be moderated by the course staff who will respond to questions, 
 but students are encouraged to help each other via discussion. 
 However, assignment specifics should not be discussed --- 
 any hints will be provided by the teaching staff. 
-You can find the class on Piazza at\\ \url{https://piazza.com/cmu/fall2023/02680}.
+You can find the class on Piazza at\\ \url{https://piazza.com/cmu/fall2024/02680}.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -252,13 +256,13 @@ These minimums may be lowered without notice but will not be raised.
 Written homework assignments will test your knowledge of the material covered in class. 
 Homework assignment will be made available at least one week before the due date.
 
-All writing assignments are to be submitted on Canvas on the day it is due.  
+All writing assignments are to be submitted on Canvas (via Gradescope) on the day it is due.  
 Any assignment turned in after the due date will be deducted 5 percentage points for the first day it is late, 
 and 20 percentage points for every day after that.
 If you have extenuating circumstances, just communicate with us and we'll do what we can to accommodate.  
 
 Homework will be submitted as a \texttt{pdf} document which will need to be generated using an editor of the students choosing. 
-Due to the reliance of this course on mathematical notation the use of \LaTeX{} is encouraged, 
+Due to the reliance of this course on mathematical notation the use of \LaTeX{} is encouraged. 
 If using another editor, students should utilize the editor's equation editor to ensure the correct answers are being communicated. 
 To assist those students using \LaTeX, the source code for each assignment will be provided in addition to the \texttt{pdf}.
 
@@ -280,14 +284,14 @@ may be awarded than the previous grade in light of new consideration.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Attendance \& Participation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Attendance will be taken, 
-and we will have occasional in-class exercises that serve to reinforce the concepts we have covered. 
-These exercises will not be graded, but participation will be expected in order to receive a complete grade for that day.
+Attendance will \emph{not} be taken, 
+but we will have occasional in-class exercises that serve to reinforce the concepts we have covered and provide feedback to the instructor. 
+These exercises will not be graded for correctness, but participation will be expected in order to receive credit.
 You are allowed three ``dropped'' attendance grades without penalty. 
 These can be used for any purpose. 
 
-All classes will be live.
-All efforts will be made to record lectures, but will only be made available in extreme circumstances.
+All classes will be live without an option for virtual participation.
+%All efforts will be made to record lectures, but will only be made available in extreme circumstances.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exams}
