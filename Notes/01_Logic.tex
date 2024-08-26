@@ -1,0 +1,82 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\include{includes}
+%SetFonts
+
+
+\title{Topic 3:  Logic}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%
+\section{Propositions}
+In logic a \emph{proposition} is simply a statement that can be evaluated for truth. 
+Something like ``$2+2=4$'' or ``DJ is the CMU President''. 
+We usually use lower-case letters to represent \emph{atomic propositions}, sort of like variables. 
+Something like 
+\[ p \leftarrow \textnormal{``}2+2=4\textnormal{''}\]
+\[ q \leftarrow \textnormal{``DJ is the CMU President''}.\]
+
+We know that $p$ is true, and $q$ is false. 
+
+A \emph{compound proposition} can take into account multiple atopic propositions to create a single statement: 
+\[ p \wedge q \]
+(which doesn't need to be true). 
+We read the previous as ``$p$ \textit{and} $q$'', 
+so for the whole statement to be true both atomic elements need to be true. 
+ 
+But we can also \textit{negate} a proposition: 
+\[ p \wedge \neg q \]
+now the statement is true! 
+We read this as ``$p$ and not $q$'', 
+or  ``$2+2=4$'' and  ``DJ is \emph{not} the CMU President''.
+
+All of the connectives and operations are listed below: 
+\begin{center}
+\begin{tabular}{lll}
+name 		& symbol/use 		& description\\
+\hline 
+\hline
+negation			& $\neg p$		& ``not $p$''\\
+\hline
+conjunction		& $p \wedge q$		& ``$p$ and $q$''\\
+disjunction		& $p \vee q$		& ``$p$ or $q$''\\
+exclusive or		& $p \oplus q$		& ``$p$ or $q$ but not both''\\
+\hline
+implication		& $p \implies q$	& ``if $p$, then $q$''\\
+double implication 	& $p \iff q$		& ``$p$ if and only if $q$'' \\
+				&				& \hspace{3em}(sometimes shortened to ``iff'')\\
+\hline
+\end{tabular}
+\end{center}
+
+While the order of operations on propositions is top to bottom in the table above, 
+its best to use parenthesis to make sure your statements are clear. 
+Technically the two statements below are the same, one is much more clear:
+\[
+p \vee q \implies \neg r \wedge \ell \;\;\;\; \textnormal{and}\;\;\;\; \left(p\vee q\right) \implies \left(\neg r \wedge \ell\right) 
+\]
+
+%%%%%
+\section{Predicate Logic}
+We often need to talk about groups of items;
+for example we have already talked about sets, so can we make logical statements about sets (or elements there of). 
+
+For example, if we want to say something like:
+``for any integer $x$, the value of $x * 0$ is $0$.''
+We would write that using the \emph{universal qualifier}:
+\[\forall x\in\ints : x*0 = 0\]
+(we say $\forall$ as ``for all'', in fact the latex command for the symbol is \texttt{\textbackslash{}forall}).
+
+But sometimes we want to not talk about all items, but one (or more) in particular, in which case we can use the \emph{existential qualifier}:
+\[\exists y\in\ints: y^2 = |y+y|\]
+(we say $\exists$ as ``there exists'', and the latex is \texttt{\textbackslash{}exists}). 
+In this case there exists \textit{more than one} $y$ that satisfies the proposition, so the statement is true.
+
+We already saw several examples of these symbols in earlier discussions. 
+
+ \subsection{Nested Qualifiers}
+
+\end{document}
