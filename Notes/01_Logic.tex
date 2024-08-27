@@ -10,6 +10,10 @@
 \begin{document}
 \maketitle
 
+\emph{Propositional logic} usually contains unbound variables so the totality of the truth statement is unknown without a specific value. 
+
+\emph{Predicate logic} qualifies those variables so the statement (sentence) can be fully evaluated; typically contains within it a propositional logic statement. 
+
 %%%%%
 \section{Propositional Logic}
 In logic a \emph{proposition} is simply a statement that can be evaluated for truth. 
@@ -18,8 +22,8 @@ We usually use lower-case letters to represent \emph{atomic propositions}, sort 
 Something like 
 \[ p \leftarrow \textnormal{``}2+2=4\textnormal{''}\]
 \[ q \leftarrow \textnormal{``DJ is the CMU President''}.\]
-
 We know that $p$ is true, and $q$ is false. 
+
 
 A \emph{compound proposition} can take into account multiple atopic propositions to create a single statement: 
 \[ p \wedge q \]
@@ -81,6 +85,10 @@ Its important to note that negation and implication are not associative or commu
 
 We may discuss other logical properties as we move through the semester.  
 
+\paragraph{Bound vs Free Variables.} While all the stuff above we know if $p$ and $q$ are \textit{always} true or false (we call these tautologies), 
+most of the time a proposition looks more like this: 
+\[ r \leftarrow \textnormal{``}2+x=4\textnormal{''}\]
+where $x$ is not know (or in other words it's \emph{unbound} or free, thus without a definition of $x$ we can't say if the statement is true or not. 
 
 %%%%%
 \section{Predicate Logic}
