@@ -3,7 +3,7 @@
 %SetFonts
 
 
-\title{Topic 3:  Logic}
+\title{Topic 1:  Logic}
 \author{02-680: Essentials of Mathematics and Statistics}
 %\date{}							% Activate to display a given date or no date
 
@@ -11,7 +11,7 @@
 \maketitle
 
 %%%%%
-\section{Propositions}
+\section{Propositional Logic}
 In logic a \emph{proposition} is simply a statement that can be evaluated for truth. 
 Something like ``$2+2=4$'' or ``DJ is the CMU President''. 
 We usually use lower-case letters to represent \emph{atomic propositions}, sort of like variables. 
@@ -46,7 +46,7 @@ disjunction		& $p \vee q$		& ``$p$ or $q$''\\
 exclusive or		& $p \oplus q$		& ``$p$ or $q$ but not both''\\
 \hline
 implication		& $p \implies q$	& ``if $p$, then $q$''\\
-double implication 	& $p \iff q$		& ``$p$ if and only if $q$'' \\
+mututal implication 	& $p \iff q$		& ``$p$ if and only if $q$'' \\
 				&				& \hspace{3em}(sometimes shortened to ``iff'')\\
 \hline
 \end{tabular}
@@ -59,24 +59,72 @@ Technically the two statements below are the same, one is much more clear:
 p \vee q \implies \neg r \wedge \ell \;\;\;\; \textnormal{and}\;\;\;\; \left(p\vee q\right) \implies \left(\neg r \wedge \ell\right) 
 \]
 
+\paragraph{Negating Statements.}
+Sometimes called \emph{De Morgan's Laws}, negating a compound statement requires a little thought, 
+and we have some examples later in the topic that may help reinforce the ideas. 
+The basic rules are as follows:
+\[ \neg\left(p \vee q\right) \equiv \neg p \wedge \neg q\]
+\[ \neg\left(p \wedge q\right) \equiv \neg p \vee \neg q\]
+(here $\equiv$ is logical equivalence).
+As text were saying ``if not both $p$ and $q$'' is equivalent to saying ``either not $p$ or not $q$''.
+
+\paragraph{Associativity and Commutativity.}
+Just like in addition, most logical operators (specifically conjunction[$\wedge$], disjunction[$\vee$], exclusive or [$\oplus$], and mutual implication [$\iff$]) are associative and commutative.
+As a reminder some examples:
+\begin{equation}
+\left(p \vee q\right) \vee r \equiv v \vee \left(q \vee r\right) \tag{associativity}
+\end{equation}
+\begin{equation}
+p \wedge q \equiv q \wedge p \tag{commutativity}
+\end{equation}
+Its important to note that negation and implication are not associative or commutative (I'll leave that as a thought experiment).
+
+We may discuss other logical properties as we move through the semester.  
+
+
 %%%%%
 \section{Predicate Logic}
-We often need to talk about groups of items;
-for example we have already talked about sets, so can we make logical statements about sets (or elements there of). 
+We often need to talk about groups of items.
 
 For example, if we want to say something like:
 ``for any integer $x$, the value of $x * 0$ is $0$.''
 We would write that using the \emph{universal qualifier}:
 \[\forall x\in\ints : x*0 = 0\]
-(we say $\forall$ as ``for all'', in fact the latex command for the symbol is \texttt{\textbackslash{}forall}).
+(we will talk about it in a coming discussion, but $\ints$ is the symbol for the set of all integers and $\in$ is read as ``element of'' or simply ``in'').
+We say $\forall$ as ``for all'', in fact the latex command for the symbol is \texttt{\textbackslash{}forall}.
+Noice that ``$x*0 = 0$'' is a proposition!
 
 But sometimes we want to not talk about all items, but one (or more) in particular, in which case we can use the \emph{existential qualifier}:
-\[\exists y\in\ints: y^2 = |y+y|\]
-(we say $\exists$ as ``there exists'', and the latex is \texttt{\textbackslash{}exists}). 
+\[\exists y\in\ints: y^2 = |y+y|.\]
+We say $\exists$ as ``there exists'', and the latex is \texttt{\textbackslash{}exists}. 
 In this case there exists \textit{more than one} $y$ that satisfies the proposition, so the statement is true.
 
-We already saw several examples of these symbols in earlier discussions. 
+It may help to think of qualifiers as loops: 
+if you looped through all of the items (in this case integers) you need to find one/or determine that all are true. 
+
+\paragraph{Negation (De Morgan again).}
+ We may also need to negate expressions with qualifiers. 
+ Just like with propositional logic its not trivial. 
+ Once again De Morgan comes to the rescue though: 
+ \[\neg \left[\forall x : P(x)\right] \iff \left[\exists x : \neg P(x)\right]\]
+ \[\neg \left[\exists x : P(x)\right] \iff \left[\forall x : \neg P(x)\right].\]
+ Notice that whats left to do ($\neg P(x)$) is just the negation of a proposition, which we learned how to do earlier. 
 
  \subsection{Nested Qualifiers}
+ It is possible to combine multiple qualifiers together, but we need to be careful about the ordering. 
+ For instance we can say something like 
+ \[
+ \forall x \in \ints : \left[\exists y \in \ints : x = -1 y\right]
+ \]
+ but if we write it incorrectly we find a statement that is \emph{unsatisfiable}
+  \[
+ \exists x \in \ints : \left[\forall y \in \ints : x = -1 y\right].
+ \]
+ 
+ When negating nested qualifiers, its basically a recursive procedure: 
+  \[\neg \left[\exists x : \left[ \forall x: P(x)\right]\right] \iff \left[\forall x : \neg\left[ \forall x: P(x)\right]\right] \iff \left[\forall x : \left[ \exists x: \neg P(x)\right]\right].\]
+  
+\section*{Useful References}
+Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. Ch. 3 
 
 \end{document}
