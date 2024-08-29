@@ -1,3 +1,6 @@
+\RequirePackage{pdfmanagement-testphase} \DocumentMetadata{}
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+
 \usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
 %\geometry{landscape}                		% Activate for rotated page geometry
@@ -7,6 +10,15 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{tablefootnote}
+
+%Accessibility issues
+\usepackage[a-3u]{pdfx}
+
+\usepackage{tagpdf}
+\tagpdfsetup{activate,paratagging,interwordspace}
+\usepackage{accsupp}
+\usepackage{hyperref,lipsum}
+%\usepackage{axessibility}
 
 %SetFonts
 \DeclareEmphSequence{\bfseries\itshape}
