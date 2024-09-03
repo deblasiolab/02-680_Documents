@@ -100,9 +100,9 @@ Both of these operations result in the creation of a new set,
 you can think of these like the logical operators \textit{and}($\wedge$) and \textit{or}($\vee$). (We will talk about logical operators next week.)
 For two sets $S$ and $T$ we define the following: 
 \[
-S\cup T = \left\{x \mid x \in S \vee x \in T\right\} \textnormal{ and }
+S\cup T := \left\{x \mid x \in S \vee x \in T\right\} \textnormal{ and }
 \]\[
-S\cap T = \left\{x \mid x \in S \wedge x \in T\right\} \\
+S\cap T := \left\{x \mid x \in S \wedge x \in T\right\} \\
 \]
 That is to say and element is the union if it's in \textit{either} of the two sets, but only in the intersection if its in both. 
 
@@ -129,7 +129,7 @@ This leads to two interesting properties that we may make use of later, for arbi
 Similar to numerical subtraction, the ordering of the operators matters. 
 In fact difference is so similar to subtraction that you may sometimes see the minus sign used in place of the standard backlash. 
 \[
-S\setminus T  = \left\{x \mid x \in S \wedge x \notin T\right\} 
+S\setminus T  := \left\{x \mid x \in S \wedge x \notin T\right\} 
 \]
 You can think if it as the elements that are unique to S. 
 
@@ -152,7 +152,7 @@ This is normally understood from context, but the universe is the set of all pos
 Just like we did earlier with $S$ and $T$ being arbitrary sets, let $U$ be an arbitrary universe.
 Once we do that we can define 
 \[
-\overline{S} = \left\{x \in U \mid x \notin S\right\}
+\overline{S} := \left\{x \in U \mid x \notin S\right\}
 \]
 
 So if we assume that the universe for $B$ is $\ints$,
@@ -211,7 +211,7 @@ but also $B'' \subseteq B'$ but $B'' \not\subset B'$.
 So, can we find all the subsets of a set?  
 The \emph{Power Set} is actually the collection of all the subsets of a given set. 
 \[
-\mathcal{P}(S) = \left\{T \mid T \subseteq S\right\}
+\mathcal{P}(S) := \left\{T \mid T \subseteq S\right\}
 \]
 
 It may be easiest to look at an example: 
