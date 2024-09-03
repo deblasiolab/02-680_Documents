@@ -9,8 +9,96 @@
 \begin{document}
 \maketitle
 
+%%%
+\section{The Basics}
+Typically we denote a graph as the tuple $G=\langle V, E\rangle$, 
+where $V$ is a set of nodes or \emph{vertices} and 
+\[E\subseteq V\times V \textnormal{\hspace{3em} or \hspace{3em}} E\subseteq \left\{\left\{u,v\right\} : u,v \in V\right\}\] 
+is a set of \emph{edges} or connections between two vertices.
+Which definition we use is dependent on $G$ being \emph{directed} or \emph{undirected} (i.e. does the order of the nodes in the edge set matter).  
+
+Some examples of things that can be represented as graphs: train/flight maps, cell interactions, social networks, etc. 
+In computational biology, we also represent genomes as graphs, in this case as a directed graph with changes denoted by different \emph{paths} from start to finish. 
+A \textit{path} is a sequence of nodes \[\langle v_1, v_2, v_3,...,v_k \rangle\] ($k\ge 1$) where every edge \[\langle v_{i}, v_{i+1}\rangle \in E\textnormal{\hspace{1em} (or  }\{ v_{i}, v_{i+1}\} \in E\textnormal{).}\]
+We say the path has \emph{length} $k$, and that is a path \textit{from} $v_1$ \textit{to} $v_k$.
+
+In the case of a genome graph, each edge would be \emph{labeled} with a string, but in other types of graphs the labels could be numerical 
+(in which we would usually call them \textit{weights}).
+A path label would then be the concatenation of all the edge labels, a path weight would be the sum of the weights. 
+We can also label or weight edges in some scenarios. 
+In all cases weights (labels) are typically represented by a function:
+\[\ell: E \rightarrow \Sigma^* \]
+(or maybe $w: E \rightarrow \reals$).
+
+A lot of talked we want to talk about the \emph{neighborhood} of a node: 
+\[N_G(v) = \left\{ u \mid \left\{u,v\right\} \in E\right\}\]
+and we call the size of this set $\left|N(v)\right|$ the cardinality of the node or the \emph{degree}. 
+In a directed graph we can restrict this to an in- and out-degree (and neighborhood)
+\[N^{in}_G(v) = \left\{ u \mid \left\langle u,v\right\rangle \in E\right\}\]
+\[N^{out}_G(v) = \left\{ u \mid \left\langle v,u\right\rangle \in E\right\}\]
+and thus $N_G(v) = N^{in}_G(v) \cup N^{out}_G$ (and the degrees are the respective set cardinalities). 
+We call all of the nodes in $N_G(v)$ \emph{adjacent} to $v$. 
+
+A graph is \emph{regular} if \[\forall v \in V : |N_G(v)| = k\] for some fixed $k$. 
+
+Note many times we will leave off the $G$ and simply write $N,N^{in},N^{out}$ when the graph in question is clear from context. 
+
+%\paragraph{Isomorphism. } Not sure if this is necessary 
+
+\paragraph{Complete Graphs.}
+A complete graph is one where all edges are present. 
+That is for $G=\langle V, E\rangle$ to be complete, 
+\[E= V\times V \textnormal{\hspace{3em} or \hspace{3em}} E= \left\{\left\{u,v\right\} : u,v \in V\right\}\]
+We also know in that case that it is $|V|-1$ regular.
+We also call complete graphs \emph{Cliques}, especially in the context of subgraphs (below), 
+and we do that so often we have a special notation for that: $\mathcal{K}_n$ (for a clique of size $n$). 
+
+%\paragraph{Planar.}
+
+\paragraph{Subgraph.}
+Many times we only want to look at a particular part of a graph, 
+think about say a regulatory network.
+(A regulatory network is a directed graph with nodes that are genes, 
+and edges going from one gene to another if the source somehow impacts the expression of the sink.) 
+If we run an experiment and get a list of genes that are differentially expressed in some condition 
+(i.e. the expression level is different from the null/healthy case) 
+we may want to try and intuit something looking only at those changes. 
+
+So we define a \emph{subgraph} $G' = \langle V', E'\rangle$ where 
+$V' \subseteq V$ and $E' \subseteq \left\{\left\langle u,v\right\rangle \mid u,v\in V'\wedge \left\langle u,v\right\rangle \in E \right\}$.
+That is we choose a subset of nodes, and the edges associated only with the chose nodes. 
+In the example above, we almost always would want to look at the \emph{induced} subgraph, which is basically the same thing
+but $E'$ is \textit{equal} to the set of edges above rather than a subset.
+
+\subsection{Bipartite Graphs}
+A \emph{Bipartite} graph is $G=\left\langle \left(A\cup B\right), E \right\rangle$ 
+where \[E\subseteq \left\{\left\{u,v\right\} \mid u\in A, v\in B\right\}\] (in directed graphs edges can go from $A$ to $B$ or $B$ to $A$). 
+That is, its a graph where the nodes can be separated into two groups, and no edge exists within the group.  
+These graphs come up a lot when doing some sort of assignment, in which case the actual assignment is a subgraph with all of the nodes but some subset of edges.
+An example could be assigning students to a peer advisor; 
+maybe $A$ is the set of first year students, and $B$ is the second years. 
+$E$ is $A\times B$, and the goal is to find a subgraph such that 
+\[\forall v \in A: |N^{out}_{G'}(v)|=1\]
+(the out-degree of each node in the subgraph is 1).
+
+%%Connected Components? 
+
+\paragraph{Connected.} 
+
+
+%%%%%%%%%
+\section{Trees}
+A tree is a special type of graph that is fully connected and has exactly $|V|-1$ edges. 
+
+One consequence of this is that there are no \emph{cycles};
+a cycle is a special type of path $\langle v_1, v_2,.... v_{k-1}, v_1\rangle$ ($k\ge 2$) that ends at the same node it started at. 
+
+%Using one set and one function, define a tree (remember that $f(x)$ can only have one value...
+
+\paragraph{Phylogeny.}
+
 
 \section*{Useful References}
-Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 11.2-11.3
+Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 11.2-11.4
 
 \end{document}
