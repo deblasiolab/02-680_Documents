@@ -32,16 +32,16 @@ In all cases weights (labels) are typically represented by a function:
 
 A lot of talked we want to talk about the \emph{neighborhood} of a node: 
 \[N_G(v) = \left\{ u \mid \left\{u,v\right\} \in E\right\}\]
-and we call the size of this set $\left|N(v)\right|$ the cardinality of the node or the \emph{degree}. 
+and we call the size of this set \[degree_G(v) := \left|N(v)\right|\] the cardinality of the node or the \emph{degree}. 
 In a directed graph we can restrict this to an in- and out-degree (and neighborhood)
 \[N^{in}_G(v) = \left\{ u \mid \left\langle u,v\right\rangle \in E\right\}\]
 \[N^{out}_G(v) = \left\{ u \mid \left\langle v,u\right\rangle \in E\right\}\]
 and thus $N_G(v) = N^{in}_G(v) \cup N^{out}_G$ (and the degrees are the respective set cardinalities). 
 We call all of the nodes in $N_G(v)$ \emph{adjacent} to $v$. 
 
-A graph is \emph{regular} if \[\forall v \in V : |N_G(v)| = k\] for some fixed $k$. 
+A graph is \emph{regular} if \[\forall v \in V : degree_G(v) = k\] for some fixed $k$. 
 
-Note many times we will leave off the $G$ and simply write $N,N^{in},N^{out}$ when the graph in question is clear from context. 
+Note many times we will leave off the $G$ and simply write $N,N^{in},N^{out},degree$ when the graph in question is clear from context. 
 
 %\paragraph{Isomorphism. } Not sure if this is necessary 
 
@@ -65,7 +65,7 @@ If we run an experiment and get a list of genes that are differentially expresse
 we may want to try and intuit something looking only at those changes. 
 
 So we define a \emph{subgraph} $G' = \langle V', E'\rangle$ where 
-$V' \subseteq V$ and $E' \subseteq \left\{\left\langle u,v\right\rangle \mid u,v\in V'\wedge \left\langle u,v\right\rangle \in E \right\}$.
+$V' \subseteq V$ and \[E' \subseteq \left\{\left\langle u,v\right\rangle \mid u,v\in V'\wedge \left\langle u,v\right\rangle \in E \right\}.\]
 That is we choose a subset of nodes, and the edges associated only with the chose nodes. 
 In the example above, we almost always would want to look at the \emph{induced} subgraph, which is basically the same thing
 but $E'$ is \textit{equal} to the set of edges above rather than a subset.
@@ -84,6 +84,11 @@ $E$ is $A\times B$, and the goal is to find a subgraph such that
 %%Connected Components? 
 
 \paragraph{Connected.} 
+A graph $G$ is \emph{connected} if the following holds:
+\[ \forall u,v \in V : \exists \left\langle u,z_1,z_2,...,z_k,v \right\rangle \in V^* : \langle u,z_1 \rangle, \langle z_1,z_2 \rangle, ... \langle z_k,v \rangle \in E  \]
+That is, the graph is connected if for every pair of nodes, there is a path between them. 
+We say that a \emph{connected component} is a subgraph of $G$ that is connected 
+(note a graph that is already connected will only have one connected component). 
 
 
 %%%%%%%%%
@@ -92,10 +97,42 @@ A tree is a special type of graph that is fully connected and has exactly $|V|-1
 
 One consequence of this is that there are no \emph{cycles};
 a cycle is a special type of path $\langle v_1, v_2,.... v_{k-1}, v_1\rangle$ ($k\ge 2$) that ends at the same node it started at. 
+In a tree, nodes with only one neighbor \[Leaves(G) := \Bigl\{v \in V \;\Big|\; degree(v) =1\Bigr\}\] are called \emph{leaves}. 
+Nodes that are not leaves ($V\setminus Leaves(G)$)  are called \emph{internal nodes}.
+
+Many times we will deal with \emph{rooted} trees, though not always. 
+A rooted tree is one that has a specific node $r\in V$ designated as the root. 
+We call all of its neighbors it's \emph{children}, their neighbors (excluding the root itself) are grandchildren to the root and children to the respective nodes and so on. 
+In rooted trees we can also sometimes need to talk about \emph{levels}. 
+
+In a rooted tree we call all of the nodes below a specific node and the induced graph on them a \emph{subtree}, 
+note this is slightly different from a sub\textit{graph}, since its both restricted to rooted graphs and is definitional an induced subgraph from a specific node. 
 
 %Using one set and one function, define a tree (remember that $f(x)$ can only have one value...
 
-\paragraph{Phylogeny.}
+\paragraph{Regular Trees.} 
+Up to now there was no limit on the number of neighbors (children) a node could have, and in general this is true, but many times we want to know some general property of a tree. 
+We use the term \emph{$k$-ary trees} (more commonly we will talk about \emph{binary tree}, where $k$ is 2).
+A $k$-ary tree is one where every internal node has degree $\forall v\in V, v $ is internal $: |N(v)| \le k+1$. 
+It makes more sense in rooted trees, it means each internal node has at most $k$ children. 
+So in a rooted binary tree, a node has at most 2 children. 
+
+\paragraph{Phylogeny.} 
+In biology we often use trees to show relatedness of species/individuals/strains, and we call them \emph{phylogeny}. 
+In this case we \textit{usually} label the leaves with known examples (exigent species, sequenced strains, etc.) and internal nodes represent (probably unknown) ancestors. 
+Many times we also add edge weights to these graphs that encode evolutionary distance. 
+In phylogeny species that are more related have a common ancestor farther from the root (or one that is \textit{lower}). 
+So in the phylogeny of Humans, Chimpanzee, and Mouse; Human and Chimp would share an ancestor, then only meet Mouse at the root.
+
+\subsection{From Graphs to Trees}
+This will be discussed much more in 02-613, but the process of extracting a tree from a graph is called finding an \emph{spanning tree}. 
+That is, for a graph $G=\langle V, E\rangle$ find a subgraph $T=\langle V, E'\rangle$ where:
+\begin{enumerate}
+\item $E' \subseteq E$
+\item $|E| = |V|-1$
+\item $T$ is connected. 
+\end{enumerate}
+
 
 
 \section*{Useful References}
