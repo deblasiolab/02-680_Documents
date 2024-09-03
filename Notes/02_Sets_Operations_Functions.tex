@@ -119,12 +119,11 @@ since all of the elements of both sets are included.
 
 This leads to two interesting properties that we may make use of later, for arbitrary sets $S$ and $T$: 
 \[
-|S\cup T| \le  |S| + |T|
+\begin{matrix}
+\max\left\{|S|, |T|\right\} &\le& |S\cup T| &\le&  |S| + |T|\\
+0 &\le& |S\cap T| &\le& \min\left\{|S|, |T|\right\}
+\end{matrix}
 \]
-\[
-|S\cap T| \le \max\left\{|S|, |T|\right\}
-\]
-
 \paragraph{Set Difference ($\setminus$).}
 Similar to numerical subtraction, the ordering of the operators matters. 
 In fact difference is so similar to subtraction that you may sometimes see the minus sign used in place of the standard backlash. 
