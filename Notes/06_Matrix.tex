@@ -21,15 +21,7 @@ M_{n,1}& 	M_{n,2}& 	\dots& M_{n,m}
 \end{matrix}\right]
 \]
 
-\section{Special Matrices}
-In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} as the entries where the horizontal and vertical component are equal; 
-i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
 
-The \emph{identity} matrix $I_n \in\reals^{n\times n}$ (sometimes simplified to just $I$ when the size is implied from context) 
-is a special square matrix where the main diagonal values are $1$ and all other values are $0$.
-\[
-\forall 1 \le i,j \le n : I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
-\]
 
 %%%%%%%%%
 \section{Simple Matrix Operations}
@@ -40,7 +32,33 @@ Like with vectors, addition of two matrices as well as scalar multiplication are
 \[O = aM \rightarrow O_{i,j} = a M_{i,j} \;\; \forall 1 \le i \le n, 1 \le j \le m\]
 
 \subsection{Transpose} 
-
+For a given matrix $M \in \reals^{n\times m}$, the transpose $M^T \in \reals^{m \times n}$ is defined such that:
+\[
+\forall I\in[0,n-1], j\in[0,m-1] : M^T_{j,i} = M_{i,j} 
+\]
+This operation works for both matrixes and vectors (which are really $n\times1$ matrices).
+Some examples: 
+\begin{center}
+$\left[\begin{matrix}
+1 & 2 & 3\\
+4 & 5 & 6
+\end{matrix}\right]^T = 
+\left[\begin{matrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6
+\end{matrix}\right]$%
+\hspace{5em}
+$\left[\begin{matrix}
+7 \\
+8 \\
+9 \\
+10 \\
+\end{matrix}\right]^T = \left[\begin{matrix}
+7 & 8 & 9 & 10
+\end{matrix}\right]
+$
+\end{center}
 %%%%%%%%%
 \section{Matrix Multiplication}
 Just like with vectors, multiplying two matrices is more complicated than scalars. 
@@ -63,6 +81,16 @@ What can we do with it? Lets define the following:
 
 %%%%%%%%%%
 \section{Square Matrices}
+
+\subsection{Special Matrices}
+In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} as the entries where the horizontal and vertical component are equal; 
+i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
+
+The \emph{identity} matrix $I_n \in\reals^{n\times n}$ (sometimes simplified to just $I$ when the size is implied from context) 
+is a special square matrix where the main diagonal values are $1$ and all other values are $0$.
+\[
+\forall 1 \le i,j \le n : I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
+\]
 
 \subsection{Symmetry}
 
