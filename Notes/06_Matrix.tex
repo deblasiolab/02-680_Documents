@@ -2,7 +2,7 @@
 %SetFonts
 
 
-\title{Topic 5: Vectors and Matrices}
+\title{Topic 6: Matrices}
 \author{02-680: Essentials of Mathematics and Statistics}
 %\date{}							% Activate to display a given date or no date
 
@@ -10,69 +10,6 @@
 \maketitle
 
 %%%%%
-\section{Vectors}
-When the set used to define a tuple is the set of real $\reals$ (or complex $\mathbb{C}$%
-\footnote{It will generally be true throughout the class that the properties we're discussing also apply to complex numbers, but for simplicity we will usually only directly discuss reals.})
-numbers, we call the tuple a \emph{vector}.
-Specifically an $n$-vector $x$ is defined as an element in \[x\in \reals^n.\] 
-If we want to reference the $i$-th element of $x$ we will write \[x_i\] (or sometimes $x[i]$, this is true of tuples as well).
-
-\subsection{Simple Operations}
-Graphically we can think of vectors (in $\reals^2$) in two way, which are... somewhat equivalent: 
-as a point on the plane, or as an arrow from the origin.
-The second will be useful in this section, but the latter is sometimes useful as well. 
-
-\paragraph{Vector length.}
-If we think of the vector as an arrow, we can say the \emph{length} of the vector (arrow) is the same as the hypotenuse 
-right triangle with each leg having the same length as each one of the elements. 
-In that case we know that for vector $x = \left\langle x_1,x_2\right\rangle\in\reals^2$, the length is $\sqrt{x_1^2 + x_2^2}$.
-To generalize this we say the length of a vector $x\in\reals^n$
-\[
-\|x\| = \sqrt{\sum_{i=1}^n \left(x_i\right)^2}.
-\]
-Often times we call this the $L_2$-norm of a vector. 
-
-\paragraph{Vector addition and scalar multiplication.}
-Both of these operations are element-wise. 
-For vectors $x,y \in \reals^n$
-\[
-z = x+y \;\;\rightarrow \;\; z_i = x_i + y_i \;\;\; \forall 1 \le i \le n.
-\]
-Thus $z \in \reals^n$ as well. 
-
-In the context of this course, especially when talking about vectors, a \emph{scalar} is a single number (i.e. $a \in \reals$) rather than a vector. 
-(The implication is that $\reals$ and $\reals^1$ are not the same thing.)
-When multiplying a vector $x\in \reals^n$ by a scalar $a\in\reals$, we once again apply this element-wise. 
-Thus the result, $z\in\reals^n$ can be computed as:
-\[
-z = ax \;\; \rightarrow \;\; z_i = a x_i \;\;\; \forall 1 \le i \le n.
-\]
-
-
-\subsection{Dot Product}
-While a scalar times a vector is a vector, it turns out a vector times a vector is a scalar! 
-Lets define it first then we will dive in;
-for $x,y \in \reals^n$
-\[
-x \bullet y = \sum_{i=1}^n x_i \cdot y_i.
-\]
-(note sometimes we will use $\bullet$ vs $\cdot$ to differentiate scalar multiplication and dot product, but generally only the latter is used since the domains of the functions are different and can be extracted from context.)
-
-We often think of dot product as telling us how vectors go ``in the same direction''. 
-Consider two cardinal vectors (going directly along an axis) on the plane;
-intuitively they go in totally different directions (note, this is different from \textit{opposite} directions). 
-WLG one vector must be $\langle a, 0 \rangle$ and the other must be  $\langle 0,b \rangle$ (for scalars $a,b\in\reals$). 
-Using the definition above $\langle a, 0 \rangle \bullet \langle 0,b \rangle = 0$.
-Consider a third vector $\langle c, 0 \rangle$ with $c\in\reals$, but enforce that $a \ge 0$ and $c \le 0$. 
-In this case the result is $\langle a, 0 \rangle \bullet \langle c,0 \rangle = ac$, which we know is negative; 
-they share a lot of direction, but go opposite ways! 
-
-We can actually redefine the $L_2$-norm of a vector $x\in\reals^n$ using the dot product:
-\[
-\|x\| = \sqrt{x \cdot x}.
-\]
-%%%%%
-\section{Matrices}
 You can almost think of a \emph{matrix} as a 2-dimension vector. 
 We say that an ``$n$-by-$m$'' matrix $M \in \reals^{n\times m}$ has $n$ rows and $m$ columns and we usually write it as:
 \[
@@ -84,7 +21,7 @@ M_{n,1}& 	M_{n,2}& 	\dots& M_{n,m}
 \end{matrix}\right]
 \]
 
-\subsection{Special Matrices}
+\section{Special Matrices}
 In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} as the entries where the horizontal and vertical component are equal; 
 i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
 
@@ -93,13 +30,19 @@ is a special square matrix where the main diagonal values are $1$ and all other 
 \[
 \forall 1 \le i,j \le n : I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
 \]
-\subsection{Matrix Operations}
-\paragraph{Addition and Scalar Multiplication.}
-Like with vectors, addition of two matricies as well as scalar multiplication are element-wise operations, so for matrices $M,N \in \reals^{n\times m}$ and scalar $a\in\reals$:
+
+%%%%%%%%%
+\section{Simple Matrix Operations}
+
+\subsection{Addition and Scalar Multiplication.}
+Like with vectors, addition of two matrices as well as scalar multiplication are element-wise operations, so for matrices $M,N \in \reals^{n\times m}$ and scalar $a\in\reals$:
 \[O = M+N \rightarrow O_{i,j} = M_{i,j} + N_{i,j} \;\; \forall 1 \le i \le n, 1 \le j \le m\]
 \[O = aM \rightarrow O_{i,j} = a M_{i,j} \;\; \forall 1 \le i \le n, 1 \le j \le m\]
 
-\paragraph{Matrix Multiplication}
+\subsection{Transpose} 
+
+%%%%%%%%%
+\section{Matrix Multiplication}
 Just like with vectors, multiplying two matrices is more complicated than scalars. 
 The first question is the size of the result, if we multiply $C \in \reals^{n\times p}$ with $D \in \reals^{p\times m}$ we get a matrix $E \in \reals^{n\times m}$;
 notice that the \textit{inner} dimensions are the same.
@@ -116,6 +59,17 @@ What can we do with it? Lets define the following:
 \item $G$ is an $n$-by-$m$ matrix where $G_{i,j}=1$ if actor $i$ was in an episode of the show $j$ (and $0$ otherwise)
 \item $H$ be an $m$-by-$p$ matrix where $H_{j,k}=1$ if the show $j$ is available to stream on service $k$ (and $0$ otherwise) 
 \end{itemize}
+
+
+%%%%%%%%%%
+\section{Square Matrices}
+
+\subsection{Symmetry}
+
+\subsection{Trace}
+
+\subsection{Determinant}
+
 
 
 \section*{Useful References}
