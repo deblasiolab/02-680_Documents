@@ -1,70 +1,13 @@
-\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
 \include{includes}
 %SetFonts
 
 
-\title{Topic 4: Tuples, Vectors, and Matrices}
+\title{Topic 5: Vectors and Matrices}
 \author{02-680: Essentials of Mathematics and Statistics}
 %\date{}							% Activate to display a given date or no date
 
 \begin{document}
 \maketitle
-
-%%%%%
-\section{Tuples}
-Unlike sets, \emph{tuples} (also called \emph{sequences} or \emph{lists}) are an \textit{ordered} list of objects.
-Think of the position on chess board (or a 2D plane), a color in RGB, etc. 
-
-When these have small cardinality we can use terms like (ordered) pair [2], triple [3], quadruple [4], or more generically an ``$n$-tuple''.
-
-If we're being precise, we normally use angle brackets (``$\langle$'', ``$\rangle$'') but a lot of times we will be lazy and just use parentheses (``('',``)'')
-
-\paragraph{Cartesian Product.}
-A very useful way to construct \emph{set of} tuples is using the \emph{cartesian product} operator, 
-which in essence creates all possible pairs of elements from two sets.
-\[
-S \times T = \left\{\left\langle x,y\right\rangle \mid x \in S \wedge y\in T\right\}
-\]
-
-As an example, lets remember the first two sets from our examples last topic: 
-\[
-A = \left\{\textnormal{``Welcome''}, \textnormal{``to''}, \textnormal{``02-680''}\right\} \textnormal{ and}
-\]\[
-B = \left\{x^2 \mid x=2 \vee x=3 \right\}.
-\]
-In this case the cartesian product is 
-\[
-A \times B = \left\{ \left\langle\textnormal{``Welcome''},4\right\rangle, \left\langle\textnormal{``to''},4\right\rangle, \left\langle\textnormal{``02-680''},4\right\rangle,
- \left\langle\textnormal{``Welcome''},9\right\rangle, \left\langle\textnormal{``to''},9\right\rangle, \left\langle\textnormal{``02-680''},9\right\rangle \right\}
-\]
-
-It doesn't have to be different sets in the cartesian product though, we can have the product with a set and itself.
-In fact this is performed so often it has its own notation:
-\[
-B \times B = B^2 = \left\{ \left\langle 4,4 \right\rangle, \left\langle 4,9 \right\rangle,  \left\langle 9,4 \right\rangle, \left\langle 9,9 \right\rangle \right\}.
-\]
-This notation also generalizes, so $S^3 = S \times S \times S$, $S^4 = S\times S\times S\times S$ and so on. 
-Notice that order matters in tuples (unlike sets) so $ \left\langle 4,9 \right\rangle \neq \left\langle 9,4 \right\rangle$.
-
-A note about this notation:
-Sometimes we want to have a set of tuples of different lengths (remember sets don't need to be over objects of the same type) 
-so something like 
-\[
-B^2 \cup B^3 = \left\{  \begin{matrix}\left\langle 4,4 \right\rangle, \left\langle 4,9 \right\rangle,  \left\langle 9,4 \right\rangle, \left\langle 9,9 \right\rangle,\\
-				\left\langle 4,4,4 \right\rangle, \left\langle 4,4,9 \right\rangle,  \left\langle 4,9,4 \right\rangle, \left\langle 4,9,9 \right\rangle,\\
-				\left\langle 9,4,4 \right\rangle, \left\langle 9,4,9 \right\rangle,  \left\langle 9,9,4 \right\rangle, \left\langle 9,9,9 \right\rangle \end{matrix}\right\}
-\]
-If we wanted to enumerate all binary numbers up to 8 digits (while omitting leading 0s):
-\[
-\{1\} \times \bigcup_{i=1}^7 \left\{0,1\right\}^i
-\]
-But that leads to the notation we saw last time for strings: $\Sigma^*$.
-Sometimes we want the set of all tuples of any length, then we use the \emph{Kleene star} (or Kleene operator); 
-for some set S, 
-\[
-S^* =  \bigcup_{i=0}^\infty S^i.
-\]
-We will define $S^0 = \langle\rangle$ (the empty tuple) for any $S$, in the case of $\Sigma^0$ we often call it the empty string.
 
 %%%%%
 \section{Vectors}
