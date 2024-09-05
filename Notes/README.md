@@ -6,7 +6,8 @@ These elements are left to the user to add to their own copies of these files.
 
 ### Errata
 
-If you find a logical mistake, feel free to fork this repo, make the change and submit a pull request. 
-Following [Don Knuth's](https://en.wikipedia.org/wiki/Knuth_reward_check) lead, bountys will be awarded for corrections submitted and approved. 
-Please only submit the `.tex` files for pull requests. 
+If you find a logical mistake, please fork this repo, make the change and submit a pull request (only submit the `.tex` files in pull requests). 
+
+Following [Don Knuth's](https://en.wikipedia.org/wiki/Knuth_reward_check) lead, bountys will be awarded for corrections submitted and approved.  
 Unlike Dr. Knuth, the specific bounty amount is left purposefully ambiguous. 
+If it is unclear from your username who you are (i.e. a former/current student) please email Dr. DeBlasio to identify yourself and claim your reward. 
