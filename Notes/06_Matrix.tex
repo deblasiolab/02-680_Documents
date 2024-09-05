@@ -81,23 +81,30 @@ What can we do with it? Lets define the following:
 
 %%%%%%%%%%
 \section{Square Matrices}
+Square matrices (that is, matrices where $m=n$) come up a lot, 
+possibly because of this or vice versa there are several properties and operations that exist only on these. 
 
-\subsection{Special Matrices}
 In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} as the entries where the horizontal and vertical component are equal; 
 i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
 
+\paragraph{Symmetry.}
+We say a square matrix is \emph{symmetric} if $A=A^T$
+(and \textit{anti-symmetric} is $A = -A^T$). 
+That is, $A$ is symmetric if it is mirrored across the main diagonal which often happens for things like distance matrices (though not always as we'll see). 
+Similarly, it is anti-symmetric if it's mirrored across the \textit{anti-diagonal}.
+
+\paragraph{Trace. }
+The \emph{trace} of a matrix $tr(A)$ is the sum of the diagonal elements: \[tr(A) := \sum_{I=1}^n A_{i,i}.\] 
+The trace does not change under transpose, and is distributive across sum and scalar product. 
+
+\subsection{Identity Matrix}
+
 The \emph{identity} matrix $I_n \in\reals^{n\times n}$ (sometimes simplified to just $I$ when the size is implied from context) 
-is a special square matrix where the main diagonal values are $1$ and all other values are $0$.
+is a special symmetric matrix where the main diagonal values are $1$ and all other values are $0$.
 \[
-\forall 1 \le i,j \le n : I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
+\forall I,j \in [1,n]: I_{i,j} = \begin{cases} 1 & i=j\\ 0 & i\ne j\end{cases}
 \]
-
-\subsection{Symmetry}
-
-\subsection{Trace}
-
-\subsection{Determinant}
-
+Note, $I_n$ is symmetric and $tr(I_n)=n$.
 
 
 \section*{Useful References}
