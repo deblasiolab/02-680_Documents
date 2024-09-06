@@ -183,11 +183,11 @@ We already know that $B \nsubseteq C$ and $B \nsupseteq C$, but $B \subseteq B'$
 But what are those little lines under the $\subseteq$ symbol? We will need to explain equality first. 
 \emph{Set equality} is defined as follows:
 \[
-S = T \iff \left(\forall x \in S : x \in T\right) \vee \left(\forall y \in T : y \in S\right)
+S = T \iff \left(\forall x \in S : x \in T\right) \wedge \left(\forall y \in T : y \in S\right)
 \]
 or another way
 \[
-S = T \iff \left(S \subseteq T\right) \vee \left(S \supseteq T\right)
+S = T \iff \left(S \subseteq T\right) \wedge \left(S \supseteq T\right)
 \]
 
 So if we define $C' = \{0,1,2,4\}$, then $C=C'$.
@@ -195,12 +195,12 @@ So if we define $C' = \{0,1,2,4\}$, then $C=C'$.
 So then coming back to $\subseteq$ (vs. $\subset$); 
 we define a \emph{proper subset} as
 \[
-S \subset T \iff \left(\forall x \in S : x \in T\right) \vee \left(\exists y \in T : y \notin S\right)
+S \subset T \iff \left(\forall x \in S : x \in T\right) \wedge \left(\exists y \in T : y \notin S\right)
 \]
 In other words for $S$ to be a proper subset of $T$ it first needs to be a subset, but there needs to be at least one item in $T$ thats not in $S$.
 A similar condition exists for \emph{proper superset} which we define as 
 \[
-S \supset T \iff \left(\forall x \in T : x \in S\right) \vee \left(\exists y \in S : y \notin T\right)
+S \supset T \iff \left(\forall x \in T : x \in S\right) \wedge \left(\exists y \in S : y \notin T\right)
 \]
 So going back to our previous examples we can be  more precise $B \subset B'$ and $B' \supset B$;
 but also $B'' \subseteq B'$ but $B'' \not\subset B'$.
