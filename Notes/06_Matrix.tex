@@ -107,6 +107,38 @@ is a special symmetric matrix where the main diagonal values are $1$ and all oth
 Note, $I_n$ is symmetric and $tr(I_n)=n$.
 
 
+\subsection{Determinants}
+We define the \emph{determinant} of a square matrix $det: \reals^{n\times n} \mapsto \reals$ 
+as a function with the range of all square matrices and a codomain of real numbers. 
+We often write this as $|A|$ for $A\in\reals^{n\times n}$. 
+
+We define determinant \emph{recursively} (meaning it is a function makes a reference to itself), 
+but we first need to define a method for constructing sub-matrices. 
+Lets first say for a matrix $A\in\reals^{n\times n}$ we could say that 
+\[A = A_{[n],[n]}\] 
+remember here that $[n] \iff [1,n] \iff \{1,2,...,n\}$. 
+So really the equation above redefines $A$ using a list of columns and a list of rows. 
+We can then use set math to manipulate those rows/columns (mainly using $\setminus$): 
+\[A_{[n]\setminus i,[n]\setminus j}.\]
+For instance: 
+\[A = \left[\begin{matrix}a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33}\\\end{matrix}\right]\]
+\[A_{[3]\setminus 2,[3]} = \left[\begin{matrix}a_{11} & a_{12} & a_{13}\\ a_{31} & a_{32} & a_{33}\\\end{matrix}\right]\]
+Which is A with all but row $i$ and all but column $j$. 
+To make this easier we will actually shorten this to: 
+\[A_{[n]\setminus i,[n]\setminus j} \iff A_{\setminus i,\setminus j}.\]
+
+We need that notation to more easily define the determinate for any chosen $j$:
+\[
+|A| := (-1)^{(i+j-1)} \sum_{i=1}^n a_{ij} \left|A_{\setminus i,\setminus j}\right|.
+\]
+(It can also be defined for a fixed $i$ and sum over $i$.)
+
+Some explicit examples:
+\[\left|\left[a_{11}\right]\right| = a_{11}\]
+\[\left|\left[\begin{matrix}a_{11} & a_{12}\\ a_{21} & a_{22}\\\end{matrix}\right]\right| = a_{11}a_{22}-a_{21}a_{21}\]
+\[\left|\left[\begin{matrix}a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33}\\\end{matrix}\right]\right| = a_{11}\left|\left[\begin{matrix}a_{22} & a_{23}\\ a_{32} & a_{33}\\\end{matrix}\right]\right|-a_{12}\left|\left[\begin{matrix}a_{21} & a_{23}\\ a_{31} & a_{33}\\\end{matrix}\right]\right|+a_{13}\left|\left[\begin{matrix}a_{21} & a_{22}\\ a_{31} & a_{32}\\\end{matrix}\right]\right|\]
+
+
 \section*{Useful References}
 Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 2.4\\
 Wilder, ``10-606-f23:Lecture 3'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_linalg.pdf}\\

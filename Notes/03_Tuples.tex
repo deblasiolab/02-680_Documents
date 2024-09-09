@@ -43,7 +43,16 @@ In fact this is performed so often it has its own notation:
 \[
 B \times B = B^2 = \left\{ \left\langle 4,4 \right\rangle, \left\langle 4,9 \right\rangle,  \left\langle 9,4 \right\rangle, \left\langle 9,9 \right\rangle \right\}.
 \]
-This notation also generalizes, so $S^3 = S \times S \times S$, $S^4 = S\times S\times S\times S$ and so on. 
+This notation also generalizes, so $S^3 = S \times S \times S$, $S^4 = S\times S\times S\times S$ and so on.
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!75!black,title=Quote from Liben-Newell \S2.4]
+An annoying pedantic point: we are being sloppy with notation in [the notation above]; 
+we only defined the Cartesian product for two sets, 
+so when we write $S\times S\times S$ we “must” mean either $S\times (S\times S)$ or $(S\times S)\times S$. 
+We’re going to ignore this issue, and simply write statements like $\langle 0, 1, 1\rangle \in \{0, 1\}\times \{0, 1\} \times \{0, 1\}$---%
+even though we ought to instead be writing statements like $\langle 0, \langle1, 1\rangle\rangle \in \{0, 1\}\times (\{0, 1\} \times \{0, 1\})$.
+\end{tcolorbox}
+ 
 Notice that order matters in tuples (unlike sets) so $ \left\langle 4,9 \right\rangle \neq \left\langle 9,4 \right\rangle$.
 
 A note about this notation:
