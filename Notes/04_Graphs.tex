@@ -48,7 +48,7 @@ Note many times we will leave off the $G$ and simply write $N,N^{in},N^{out},deg
 \paragraph{Complete Graphs.}
 A complete graph is one where all edges are present. 
 That is for $G=\langle V, E\rangle$ to be complete, 
-\[E= V\times V \textnormal{\hspace{3em} or \hspace{3em}} E= \left\{\left\{u,v\right\} : u,v \in V\right\}\]
+\[E= V\times V\setminus \left\{\left\langle v,v\right\rangle\mid v \in V\right\} \textnormal{\hspace{3em} or \hspace{3em}} E= \left\{\left\{u,v\right\} : u\ne v \in V\right\}\]
 We also know in that case that it is $|V|-1$ regular.
 We also call complete graphs \emph{Cliques}, especially in the context of subgraphs (below), 
 and we do that so often we have a special notation for that: $\mathcal{K}_n$ (for a clique of size $n$). 
@@ -72,7 +72,8 @@ but $E'$ is \textit{equal} to the set of edges above rather than a subset.
 
 \subsection{Bipartite Graphs}
 A \emph{Bipartite} graph is $G=\left\langle \left(A\cup B\right), E \right\rangle$ 
-where \[E\subseteq \left\{\left\{u,v\right\} \mid u\in A, v\in B\right\}\] (in directed graphs edges can go from $A$ to $B$ or $B$ to $A$). 
+where \[E\subseteq \left\{\left\{u,v\right\} \mid u\in A, v\in B\right\}\] (in directed graphs edges can go from $A$ to $B$ or $B$ to $A$)
+and $A\cap B = \emptyset$. 
 That is, its a graph where the nodes can be separated into two groups, and no edge exists within the group.  
 These graphs come up a lot when doing some sort of assignment, in which case the actual assignment is a subgraph with all of the nodes but some subset of edges.
 An example could be assigning students to a peer advisor; 
