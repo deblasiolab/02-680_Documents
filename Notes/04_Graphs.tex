@@ -32,7 +32,8 @@ In all cases weights (labels) are typically represented by a function:
 
 A lot of talked we want to talk about the \emph{neighborhood} of a node: 
 \[N_G(v) = \left\{ u \mid \left\{u,v\right\} \in E\right\}\]
-and we call the size of this set \[degree_G(v) := \left|N(v)\right|\] the cardinality of the node or the \emph{degree}. 
+and we call the size of this set \[degree_G(v) := \left|N_G(v)\right| + \mathds{1}\left(v \in N_G\left(v\right)\right)\] the cardinality of the node or the \emph{degree}. 
+Here $\mathds{1}: \{\texttt{true},\texttt{true}\}\mapsto\{1,0\}$ in an indicator function that produces the value 1 when the input is true, and 0 otherwise.  
 In a directed graph we can restrict this to an in- and out-degree (and neighborhood)
 \[N^{in}_G(v) = \left\{ u \mid \left\langle u,v\right\rangle \in E\right\}\]
 \[N^{out}_G(v) = \left\{ u \mid \left\langle v,u\right\rangle \in E\right\}\]
