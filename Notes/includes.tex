@@ -11,6 +11,9 @@
 \usepackage{tablefootnote}
 \usepackage{dsfont}
 
+\usepackage{arydshln}
+%\usepackage{mathtools}
+
 %Accessibility issues
 \usepackage[a-1b]{pdfx}
 
@@ -30,3 +33,5 @@
 \renewcommand\labelenumi{(\theenumi)}
 
 \usepackage{tcolorbox}
+
+\newenvironment{aside}[1][Aside]{\begin{tcolorbox}[colback=black!5,colframe=black!75!black,title=#1]}{\end{tcolorbox}}
