@@ -1,0 +1,233 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 7: Linear Systems \& Matrix Inverses}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%%%%
+\section{Linear Systems}
+We can define a linear system of $n$ linear equations on $m$ variables as follows: 
+\[\begin{array}{ccccccccc}
+c_{11} x_1 & + & c_{12} x_2 & + & \hdots & + & c_{1m} x_m & = & b_1\\
+c_{21} x_1 & + & c_{22} x_2 & + & \hdots & + & c_{2m} x_m & = & b_2\\
+\vdots & & \vdots & & \ddots & & \vdots & & \vdots\\
+c_{n1} x_1 & + & c_{n2} x_2 & + & \hdots & + & c_{nm} x_m & = & b_n\\
+\end{array}\]
+As an example: 
+\[\begin{array}{rcrcr}
+3 z_1 & + & 2 z_2 & = & -1\\
+ z_1 & - & 5 z_2 & = & 3\\
+\end{array}\]
+
+If we think of $x = \langle x_1, x_2, \hdots x_m\rangle \in \reals^m$, then we can rewrite this system as: 
+\[
+\left[\begin{matrix}
+c_{11} & c_{12} & \hdots & c_{1m}\\
+c_{21} & c_{22} & \hdots & c_{2m}\\
+\vdots & \vdots & \ddots & \vdots\\
+c_{n1} & c_{n2} & \hdots & c_{nm}\\
+\end{matrix}\right]
+\left[\begin{matrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{matrix}\right]
+ = 
+\left[\begin{matrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{matrix}\right]
+\]
+or $Cx=b$ for $C\in\reals^{n\times m}$ and $b\in\reals^n$ (or really $b\in\reals^{n\times 1}$).
+When you expand the matrix multiplication you recover the original system. 
+So in our example: 
+\[
+\left[\begin{matrix} 3 & 2 \\ 1 & -5\end{matrix}\right]
+\left[\begin{matrix} z_1 \\ z_2 \end{matrix}\right] = 
+\left[\begin{matrix} -1 \\ 3\end{matrix}\right]
+\]
+
+If we want to find $x$ (or in our example $z$) 
+we can say its \[x = C^{-1}b,\] 
+but we never talked about exponentials in matrices, and in fact $C^{-1}$ is actually a special matrix 
+called the \emph{inverse} (and it turns out it may not exist). 
+The inverse is the matrix such that $CC^{-1} = C^{-1}C = I_n$ (thus the first condition to the inverse existing is if $C$ is square).
+Remember from algebra we needed the number of equations to be equal to (or larger than) the number of free variables to solve a system. 
+
+So for $C$ above, the inverse is: 
+\[
+C^{-1} = \left[\begin{matrix}\frac{5}{17}& \frac{2}{17}\\\frac{1}{17} & \frac{-3}{17}\end{matrix}\right]
+\]
+so 
+\[
+CC^{-1} = \left[\begin{matrix} 3 & 2 \\ 1 & -5\end{matrix}\right]
+\left[\begin{matrix}\frac{5}{17}& \frac{2}{17}\\\frac{1}{17} & \frac{-3}{17}\end{matrix}\right] = 
+\left[\begin{matrix} (3\frac{5}{17} + 2\frac{1}{17}) & (3\frac{2}{17} + 2\frac{-3}{17})  \\ (1\frac{5}{17} + -5\frac{1}{17}) & (1\frac{2}{17} + -5\frac{-3}{17}) \end{matrix}\right]=
+\left[\begin{matrix} 1 & 0 \\ 0 & 1\end{matrix}\right] = I_2.
+\]
+Because $C^{-1}$ exists we call $C$ \emph{nonsingular} 
+(if the inverse had \textit{not} existed we would call it \emph{singular}). 
+
+If you do the arithmetic: 
+\[x = 
+\left[\begin{matrix}\frac{5}{17}& \frac{2}{17}\\\frac{1}{17} & \frac{-3}{17}\end{matrix}\right]
+\left[\begin{matrix} -1 \\ 3\end{matrix}\right]=
+\left[\begin{matrix} \left(\frac{5}{17}\cdot-1 + \frac{2}{17}\cdot3\right) \\ \left(\frac{1}{17}\cdot-1+ \frac{-3}{17}\cdot3\right)\end{matrix}\right]=
+\left[\begin{matrix} \frac{1}{17}\\ \frac{-10}{17}\end{matrix}\right]
+\]
+
+This means that solving a system of equations is as simple as finding a matrix inverse! 
+
+
+
+%%%%%%%
+\section{Elementary Operations}
+We saw in the previous topic that for $A\in\reals^{n\times m}$, $I_n A = A$. 
+Elementary operations are simple manipulations of the identity matrix in this multiplication to obtain new matrices. 
+So if \[A = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right]\]
+then \[I_3A = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right].\]
+
+\subsection{Type I (swap rows)}
+Let 
+\[E = \left[\begin{matrix}1 & 0 & 0\\ 0 & 0 & 1\\ 0 & 1 & 0\\\end{matrix}\right]\]
+then
+ \[EA = \left[\begin{matrix}1 & 0 & 0\\ 0 & 0 & 1\\ 0 & 1 & 0\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\  3 & 6\\2 & 5\\\end{matrix}\right].\]
+Notice that $E$ is produced by swapping the 2nd and 3rd rows of $I_3$, 
+similarly the result $EA$ is $A$ with the 2nd and 3rd row swapped. 
+
+\begin{aside}[Connection to linear systems]
+This has a correlation in linear systems: swapping the order of the equations. 
+Notice that this does not change the location of the intersection of the lines.
+\end{aside}
+
+\subsection{Type II (scale a row)}
+Let 
+\[G = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \alpha\end{matrix}\right] \; \textnormal{where }\alpha\ne0\]
+then 
+\[GA = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \alpha\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3\alpha & 6\alpha\end{matrix}\right].\]
+Notice in this case $G$ is obtained from $I_3$ by multiplying the 3rd row by $\alpha$, 
+and the same thing happens to $A$ in the result. 
+
+\begin{aside}[Connection to linear systems]
+Again, in linear systems, a scalar product to a whole equation is still the same line in the vector space 
+(the constant ends up reducing out).
+\end{aside}
+
+\subsection{Type III (add row to another)}
+Let 
+\[G = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right] \; \textnormal{where }\beta\in\reals\]
+then 
+\[GA = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 + 1\beta & 6+4\beta\end{matrix}\right].\]
+So in this case we add the value of the first row times $\beta$ to the bottom row. 
+
+\begin{aside}[Connection to linear systems]
+In linear systems, finding the (weighted sum) of two equations is like finding a line thats ``between'' the two. 
+In the plane you can think of it as a rotation around the solution. 
+\end{aside}
+
+All of these operations can be ``undone'' by finding reversing matrices $\overline{E},\overline{G},\overline{H}$ such that 
+$\overline{E}(EA)=A$, $\overline{G}(GA)=A$, and $\overline{H}(HA)=A$. 
+Try to find them on your own.  
+
+The question still remains: 
+how do we find an inverse?!?
+
+%%%%%%%%%
+\section{Finding a Matrix Inverse}
+The proof of the following is beyond the scope of this course, but can be found in \textit{Hoffman and Kunze} [p.23] (see citation below). 
+
+\begin{tcolorbox}
+Matrix $A\in\reals^{n\times n}$ is invertible (nonsingular) iff 
+there exists a set of elementary matrices $\{E_1, E_2, \hdots, E_k\}$ 
+such that $A =  E_1E_2\hdots E_k$.
+(That is, $A$ is equal to the product of a set of elementary matrices.)
+\end{tcolorbox}
+
+Again the proof is beyond this course but we take the following into account here as well: 
+\begin{tcolorbox}
+For $A_1, A_2, \hdots, A_n\in\reals^{n\times n}$ which are all invertible, 
+the product $A_1A_2\hdots A_n$ is also invertible. 
+In addition, it's inverse $\left(A_1A_2\hdots A_{n-1}A_n\right)^{-1} = A_n^{-1}A_{n-1}^{-1}\hdots A_2^{-1}A_1^{-1}$.
+\end{tcolorbox}
+
+Because $A^{-1}$ is invertible (assuming $A$ is) we can say $A^{-1} = E_kE_{k-1}\hdots E_2E_1$.
+And in turn \[(E_kE_{k-1}\hdots E_2E_1)A = I_n.\] 
+Therefore, if we can find a set of elementary operations that convert $A$ into $I_n$, 
+the result of these operations is equal to $A^{-1}$. 
+
+\subsection{Procedure}
+\begin{enumerate}
+\item Create a \textit{partitioned} matrix 
+\[
+\left[\begin{array}{c;{2pt/1pt}c}A&I_n\end{array}\right] = 
+\left[\begin{array}{cccc;{2pt/1pt}cccc}
+A_{11} & A_{12} & \hdots & A_{1m} & 1 & 0 & \hdots & 0\\
+A_{21} & A_{22} & \hdots & A_{2m} & 0 & 1 & \hdots & 0\\
+\vdots & \vdots & \ddots & \vdots &\vdots & \vdots & \ddots & \vdots \\
+A_{n1} & A_{n2} & \hdots & A_{nm} & 0 & 0 & \hdots & 1\\
+\end{array}\right]
+\]
+\item Apply a row operation to the matrix created.\label{step:operation}
+\item While the \textit{left} hand side is not equal to $I_n$, repeat step~\ref{step:operation}.
+\end{enumerate}
+
+\paragraph{An Example.} So applying the procedure to the example above: 
+\[\left[\begin{array}{cc;{2pt/1pt}cc} 3 & 2 & 1 & 0\\ 1 & -5 & 0 & 1\end{array}\right]\]
+Subtract 3 times the second row from the first (that is $\beta=-3$ in Type III).
+\[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 17 & 1 & -3\\ 1 & -5 & 0 & 1\end{array}\right]\]
+Divide the first tow by 17 (this is $\alpha=\frac{1}{17}$ in Type II).
+\[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 1 & \frac{1}{17} & \frac{-3}{17}\\ 1 & -5 & 0 & 1\end{array}\right]\]
+Swap the first and second rows (Type I).
+\[\left[\begin{array}{cc;{2pt/1pt}cc}  1 & -5 & 0 & 1\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
+Add 5 times the second row to the first (Type III with $\beta=5$).
+\[\left[\begin{array}{cc;{2pt/1pt}cc}  1 & 0 & \frac{5}{17} & \frac{2}{17}\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
+We can now the right hand side is exactly the inverse we saw above! 
+
+Note, this is not the only way of finding the inverse, but will be helpful in the next section. 
+
+%%%%%%%%
+\section{Solving Linear Systems without an Inverse}
+The procedure above is great if $C$ is nonsingular, but what if its not?
+What if $C$ isn't even square (that is, if the system is over- or under-defined)?
+
+It turns out we can use a very similar procedure to find a solution (if it exists). 
+This time we set up a slightly different partitioned matrix: 
+\[
+\left[\begin{array}{c;{2pt/1pt}c}A&b\end{array}\right] = 
+\left[\begin{array}{cccc;{2pt/1pt}c}
+A_{11} & A_{12} & \hdots & A_{1m} & b_1\\
+A_{21} & A_{22} & \hdots & A_{2m} & b_2\\
+\vdots & \vdots & \ddots & \vdots &\vdots  \\
+A_{n1} & A_{n2} & \hdots & A_{nm} & b_n\\
+\end{array}\right]
+\]
+
+This single matrix contains our whole problem, 
+and in fact every time we make an elementary operation on it, 
+it defines a new problem thats has the same solution. 
+Remember the notes pointed out when talking about elementary operations. 
+
+That means if we can get to a state where the left hand side is the identity,
+what we end up with is a system where every equation is simply one variable and a number (in the $b$ column). 
+So we can use, basically, the same procedure as before. 
+
+Lets look at our example:
+\[\left[\begin{array}{cc;{2pt/1pt}c} 3 & 2 & -1\\ 1 & -5 & 3\end{array}\right]\]
+Once again, apply a Type III operation with $\beta=-3$ from row 2 to row 1,
+\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 17 & -10\\ 1 & -5 & 3\end{array}\right]\]
+Apply Type II with $\alpha=\frac{1}{17}$ to row 1. 
+\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & -5 & 3\end{array}\right]\]
+Apply Type III with $\beta=5$ from row 1 to row 2.
+\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & 0 & \frac{1}{17}\end{array}\right]\]
+
+If we turn that back into a system of equations, its: 
+
+\[\begin{array}{rcrcr}
+ & & z_2 & = & \frac{-10}{17}\\
+ z_1 & &  & = & \frac{1}{17}\\
+\end{array}\]
+
+\section*{Useful References}
+Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 1.1-1.6\\
+Hoffman and Kunze, ``Linear Algebra, 2e''
+
+
+\end{document}
