@@ -93,10 +93,14 @@ In a square matrix $N\in\reals^{n\times n}$, we define the \emph{main diagonal} 
 i.e. $\left\{N_{i,i} \mid 1 \le i \le n\right\}$. 
 
 \paragraph{Symmetry.}
-We say a square matrix is \emph{symmetric} if $A=A^T$
-(and \textit{anti-symmetric} is $A = -A^T$). 
+We say a square matrix is \emph{symmetric} if $A=A^T$.
 That is, $A$ is symmetric if it is mirrored across the main diagonal which often happens for things like distance matrices (though not always as we'll see). 
-Similarly, it is anti-symmetric if it's mirrored across the \textit{anti-diagonal}.
+
+\begin{aside}[Correction from class]
+A matrix's \textit{anti-symmetric} is $A = -A^T$. This is different than the idea of an anti-transpose introduced in class. \\
+
+There is no actual operation that produces a matrix that mirrored across the \textit{anti-diagonal}.
+\end{aside}
 
 \paragraph{Trace. }
 The \emph{trace} of a matrix $tr(A)$ is the sum of the diagonal elements: \[tr(A) := \sum_{I=1}^n A_{i,i}.\] 
@@ -138,14 +142,18 @@ To make this easier we will actually shorten this to:
 
 We need that notation to more easily define the determinate for any chosen $j$:
 \[
-|A| := (-1)^{(i+j)} \sum_{i=1}^n A_{ij} \left|A_{\setminus i,\setminus j}\right|.
+|A| := \sum_{i=1}^n  (-1)^{(i+j)}  A_{ij} \left|A_{\setminus i,\setminus j}\right|.
 \]
 (It can also be defined for a fixed $i$ and sum over $i$.)
 
 Some explicit examples:
 \[\left|\left[A_{11}\right]\right| = A_{11}\]
 \[\left|\left[\begin{matrix}A_{11} & A_{12}\\ A_{21} & A_{22}\\\end{matrix}\right]\right| = A_{11}A_{22}-A_{21}A_{21}\]
-\[\left|\left[\begin{matrix}A_{11} & A_{12} & A_{13}\\ A_{21} & A_{22} & A_{23}\\ A_{31} & A_{32} & A_{33}\\\end{matrix}\right]\right| = A_{11}\left|\left[\begin{matrix}A_{22} & A_{23}\\ A_{32} & A_{33}\\\end{matrix}\right]\right|-A_{12}\left|\left[\begin{matrix}A_{21} & A_{23}\\ A_{31} & A_{33}\\\end{matrix}\right]\right|+A_{13}\left|\left[\begin{matrix}A_{21} & A_{22}\\ A_{31} & A_{32}\\\end{matrix}\right]\right|\]
+\[
+\begin{aligned}[t]
+\left|\left[\begin{matrix}A_{11} & A_{12} & A_{13}\\ A_{21} & A_{22} & A_{23}\\ A_{31} & A_{32} & A_{33}\\\end{matrix}\right]\right| 
+& = A_{11}\left|\left[\begin{matrix}A_{22} & A_{23}\\ A_{32} & A_{33}\\\end{matrix}\right]\right|-A_{12}\left|\left[\begin{matrix}A_{21} & A_{23}\\ A_{31} & A_{33}\\\end{matrix}\right]\right|+A_{13}\left|\left[\begin{matrix}A_{21} & A_{22}\\ A_{31} & A_{32}\\\end{matrix}\right]\right| \\
+& = A_{11}\left(A_{22}A_{33}-A_{23}A_{32}\right)-A_{12}\left(A_{21}A_{33}-A_{23}A_{31}\right)+A_{13}\left(A_{21}A_{32}-A_{22}A_{31}\right) \end{aligned}\]
 
 
 \section*{Useful References}
