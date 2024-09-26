@@ -174,7 +174,7 @@ A_{n1} & A_{n2} & \hdots & A_{nm} & 0 & 0 & \hdots & 1\\
 \[\left[\begin{array}{cc;{2pt/1pt}cc} 3 & 2 & 1 & 0\\ 1 & -5 & 0 & 1\end{array}\right]\]
 Subtract 3 times the second row from the first (that is $\beta=-3$ in Type III).
 \[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 17 & 1 & -3\\ 1 & -5 & 0 & 1\end{array}\right]\]
-Divide the first tow by 17 (this is $\alpha=\frac{1}{17}$ in Type II).
+Divide the first row by 17 (this is $\alpha=\frac{1}{17}$ in Type II).
 \[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 1 & \frac{1}{17} & \frac{-3}{17}\\ 1 & -5 & 0 & 1\end{array}\right]\]
 Swap the first and second rows (Type I).
 \[\left[\begin{array}{cc;{2pt/1pt}cc}  1 & -5 & 0 & 1\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
@@ -225,6 +225,87 @@ If we turn that back into a system of equations, its:
  & & z_2 & = & \frac{-10}{17}\\
  z_1 & &  & = & \frac{1}{17}\\
 \end{array}\]
+
+
+
+\paragraph{Exercise} Determine (trough either method above) the solution to the following system: 
+
+\[\begin{array}{rcrcr}
+-x_1 & +  & 3 x_2 & = & 5\\
+x_1 & -  &  3x_2 & = & 1\\
+\end{array}\]
+
+\subsection{Example in Under Determined System}
+Lets look at the following system: 
+\[\begin{array}{rcrcrcrcrcr}
+2x_1 & - & x_2 & + & 4x_3 & + & x_4 & - & x_5 & = & 4\\
+3x_1 & + & 2x_2 & - & 2x_3 & - & 5x_4 & + & 2x_5 & = & 9\\
+x_1 & + & x_2 & + & 6x_3 & + & 2x_4 & + & x_5 & = & 7\\
+\end{array}\]
+
+Since the system has only three equations for five dimensions, the solution cannot be a point,
+but can we determine the hyper-plane (if it exists) of the intersection? 
+
+Using the method from above lets set up the problem as a matrix reduction: 
+
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+2 & -1 & 4 & 1 & -1 & 4\\
+3 & 2 & -2 & -5 &  2 & 9\\
+1 & 1 & 6 & 2 &  1 & 7\\
+\end{array}\right]\]
+
+Type I: swap rows 1 and 3 (hint puts the leading 1 in the top row):
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 1 & 6 & 2 &  1 & 7\\
+3 & 2 & -2 & -5 &  2 & 9\\
+2 & -1 & 4 & 1 & -1 & 4\\
+\end{array}\right]\]
+
+Type III (x2): add row 1 with $\beta=-3$ to row 2, and add row 1 with $\beta=-2$ to row 3:
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 1 & 6 & 2 &  1 & 7\\
+0 & -1 & -20 & -11 &  -1 & -12\\
+0 & -3 & -8 & -3 & -3 & -10\\
+\end{array}\right]\]
+
+Type II: scale row 2 with $\alpha=-1$ (again to get a leading 1):
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 1 & 6 & 2 &  1 & 7\\
+0 & 1 & 20 & 11 &  1 & 12\\
+0 & -3 & -8 & -3 & -3 & -10\\
+\end{array}\right]\]
+
+Type III (x2): add row 2 with $\beta=-1$ to row 1, and add row 2 with $\beta=3$ to row 3:
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 0 & -14 & -9 &  0 & -5\\
+0 & 1 & 20 & 11 &  1 & 12\\
+0 & 0 & 52 & 30 & 0 & 26\\
+\end{array}\right]\]
+
+
+Type II: scale row 3 with $\alpha=\frac{1}{52}$ (again to get a leading 1):
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 0 & -14 & -9 &  0 & -5\\
+0 & 1 & 20 & 11 &  1 & 12\\
+0 & 0 & 1 & \frac{30}{52} & 0 & \frac{26}{52}\\
+\end{array}\right]\]
+
+Type III (x2): add row 3 with $\beta=14$ to row 1, and add row 3 with $\beta=-20$ to row 2:
+\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+1 & 0 & 0 & -\frac{48}{52} &  0 & 2\\
+0 & 1 & 0 & -\frac{28}{56} &  1 & 2\\
+0 & 0 & 1 & \frac{30}{52} & 0 & \frac{26}{52}\\
+\end{array}\right]\]
+
+Put that back into equation form:
+\[\begin{array}{rcrcrcrcrcr}
+x_1 &  & & &  & - & -\frac{48}{52}x_4 &  & & = & 2\\
+&  & x_2 & &  & - & \frac{28}{56} x_4 & + & x_5 & = & 2\\
+&  & &  & x_3 & + & \frac{30}{52}x_4 &  & & = & \frac{26}{52}\\
+\end{array}\]
+
+We can solve these equations for $x_1, x_2,$ and $x_3$ then for any arbitrary $x_4$ and $x_5$ we have a valid solution to the system. 
+
 
 \section*{Useful References}
 Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 1.1-1.6\\
