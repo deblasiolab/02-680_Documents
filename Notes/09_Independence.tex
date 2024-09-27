@@ -1,0 +1,185 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 9: Linear Independence}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+For a set $S=\left\{v_1,v_2,...,v_n\right\}$ of vectors from vector space $V$, 
+we say the set is \emph{linearly independent} iff 
+\[
+\alpha_1v_1 + \alpha_2v_2 + \hdots + \alpha_nv_n = \mathbf{0} \;\;\;\implies\;\;\; \alpha_1=\alpha_2=...=\alpha_n = \mathbf{0}.
+\]
+
+That is to say, for any vector $v_i\in S$ there is no \emph{linear combination} of $S\setminus\left\{v_i\right\}$ that is equal to $v_i$. 
+Here $\alpha_1v_1 + \alpha_2v_2 + \hdots + \alpha_nv_n$ with $\forall i: \alpha_i\in\reals$ is a linear combination of the vectors in $S$.
+Usually simplified to:  \[\sum_{i=1}^n \alpha_iv_i\]
+
+Assume the opposite, a vector $\alpha'$ such that $v_i = \sum_{j\in [n]\setminus\{i\}}\alpha'_jv_j$. 
+We could set $\alpha'_i=-1$
+and $\sum_{j\in [n]}\alpha'_jv_j=\mathbf{0}$, but the $\alpha'$'s are non-zero. 
+Which would violate the definition above.
+
+\paragraph{Example.} Consider the following set of vectors in $\reals^2$:
+\[\left\{\begin{matrix}
+\langle1,2\rangle,
+\langle2,1\rangle,
+\langle8,7\rangle
+\end{matrix}\right\}.\]
+Is this set linearly independent? 
+
+To find out we can test if the following has only one solution: 
+\[\alpha_1 \langle1,2\rangle +
+\alpha_2 \langle2,1\rangle +
+\alpha_3 \langle8,7\rangle =
+\langle0,0\rangle\]
+or more familiarly: 
+\[
+\begin{array}{rcrcrcr}
+\alpha_1 & + & 2\alpha_2 & + & 8 \alpha_3 & = & 0\\
+2\alpha_1 & + & \alpha_2 & + & 7 \alpha_3 & = & 0\\
+\end{array}
+\]
+Which we know how to reduce: 
+\[
+\left[
+\begin{array}{ccc;{4pt/2pt}c}
+1 & 0 & 2 & 0\\
+0 & 1 & 3 & 0\\
+\end{array}
+\right]
+\]
+Meaning that for any arbitrary $\alpha_3$, setting $\alpha_1 = -2\alpha_3$ and $\alpha_2 = -3\alpha_3$ the linear combination is $\mathbf{0}$. 
+Since $\alpha_3$ can be non-zero the vectors are not linearly independent. 
+
+
+
+%%%%%%%%%%%%
+\section{Span}
+For a set of vectors, we say the \emph{span} is another set of vectors that consists of all linear combinations. 
+So in the case above
+\[
+\langle8,7\rangle \in span\left(\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\right) = 
+\left\{\alpha_1\left\langle1,2\right\rangle + \alpha_2\left\langle2,1\right\rangle \mid \alpha_1,\alpha_2 \in \reals\right\}
+\]
+
+Formally for a set of vectors $D$, 
+\[
+span(D) := \left\{\sum_{i=1}^{|D|} \alpha_iD_i \mid \forall i \in [|D|]\alpha_i \in \reals \right\}
+\]
+
+The span of any set is a vector space. 
+
+If $D$ is a subset of elements from a vector space $V$, then $D$ is a subspace of $V$. 
+
+So in the example above since $\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\subseteq\reals^2$,
+the vector space defined by the set is also a subpace of $\reals^2$.
+
+%%%%%%%%%%%%
+\section{Basis}
+Simply stated, the basis of a vector space is the smallest set of linearly independent vectors that span the space. 
+
+More formally, we say a set $B=\{b_1,b_2,...,b_n\} \subseteq V$ is a \emph{basis} of vector space $V$ iff:
+\begin{itemize}
+\item $V = span(B)$
+\item $\nexists b_i\in B : V = span(B\setminus\{b_i\})$, that is we cannot remove any element and have it still span all of $V$.
+\end{itemize}
+
+So that means for every element in $V$, there is a linear combination of the elements in $B$ that is equal:
+\[\forall v \in V : \exists \alpha : \sum_{i=1}^n \alpha_ib_i = v.\]
+
+We call the vector $\alpha$ above the \emph{coordinate representation} of vector $v$ with respect to the basis. 
+For those who have worked with PCA before, you can think of the basis as your PCs and the coordinate representation as the transformation into PC space. 
+
+We say the size of basis set is the \emph{dimension} of the vector space. 
+
+\subsection{Orthonormal Basis}
+Recall that two vectors are orthogonal if the dot product is 0. 
+We can also say that a vector $v$ is \emph{normal} if $\|v\|_2=1$ (graphically it means it lies on the unit (hyper)sphere. 
+
+A basis $B$ is considered an \emph{orthonormal basis} if:
+\begin{enumerate}
+\item $\forall b_i, b_j\in B: b_i \dot b_j = 0$ (meaning all bases are orthogonal), and 
+\item $\forall b \in B : \|b\|_2=1$ (all vectors are normal). 
+\end{enumerate}
+
+The nice think about an orthonormal basis is that when you convert to coordinate representations, you preserve length and angles between vectors. 
+
+The most common orthonormal basis for $\reals^n$ is the \emph{standard} basis: 
+\[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\middle|\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
+That is for $\reals^3$ the standard basis is $\left\{\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\right\}$.
+
+Notice though that for $\reals^2$ the standard basis is $\left\{\langle1,0\rangle,\langle0,1\rangle\right\}$.
+But we can use a secondary basis \[B'=\left\{\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\rangle,\langle\frac{1}{\sqrt{2}},-\frac{1}{\sqrt{2}}\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
+This means that for any two vectors the coordinate representation of the vectors in both basis will maintain the norms and dot-products. 
+
+\paragraph{Example.}
+In vector space $\reals^2$ let \[v_1 = \langle6,2\rangle\;\;\;\;\textnormal{and}\;\;\;\; v_2 = \langle5,-3\rangle.\]
+If we choose the orthonormal basis  $B'$ from above, 
+we find the coordinate representations:
+\[
+v'_1 = \langle4\sqrt{2},2\sqrt{2}\rangle \;\;\;\;\textnormal{and}\;\;\;\; v'_2 = \langle\sqrt{2},4\sqrt{2}\rangle.
+\]
+by solving the following systems of equations: 
+\[
+\begin{array}{rcrcr}
+\frac{\alpha_1}{\sqrt{2}} &+& \frac{\alpha_2}{\sqrt{2}} &=& 6\\
+\frac{\alpha_1}{\sqrt{2}} &-& \frac{\alpha_2}{\sqrt{2}} &=& 2\\ 
+\end{array} \;\;\;\;\textnormal{and}\;\;\;\; \begin{array}{rcrcr}
+\frac{\beta_1}{\sqrt{2}} &+& \frac{\beta_2}{\sqrt{2}} &=& 5\\
+\frac{\beta_1}{\sqrt{2}} &-& \frac{\beta_2}{\sqrt{2}} &=& 3\\ 
+\end{array}\]
+
+We can see that the lengths of the vectors are preserved: 
+\[
+\begin{array}{rcl}
+\|v_1\|_2 & \stackrel{?}{=} & \|v'_1\|_2\\
+\sqrt{6^2+2^2} & \stackrel{?}{=} & \sqrt{(4\sqrt{2})^2+(2\sqrt{2})^2}\\
+\sqrt{36+4} & \stackrel{?}{=} & \sqrt{32 + 8}\\
+\sqrt{40} & = & \sqrt{40}\\
+\end{array}\;\;\;\;\textnormal{and}\;\;\;\; 
+\begin{array}{rcl}
+\|v_1\|_2 & \stackrel{?}{=} & \|v'_1\|_2\\
+\sqrt{5^2+(-3)^2} & \stackrel{?}{=} & \sqrt{(1\sqrt{2})^2+(4\sqrt{2})^2}\\
+\sqrt{25+9} & \stackrel{?}{=} & \sqrt{2 + 32}\\
+\sqrt{34} & = & \sqrt{34}\\
+\end{array} 
+\]
+as is the angle (dot product)
+\[\begin{array}{rcl}
+v_1 \cdot v_2 & \stackrel{?}{=} & v'_1 \cdot v'_2 \\
+\langle6,2\rangle\cdot \langle5,-3\rangle&  \stackrel{?}{=}  & \langle4\sqrt{2},2\sqrt{2}\rangle\cdot\langle\sqrt{2},4\sqrt{2}\rangle\\
+6\cdot5+2\cdot-3&  \stackrel{?}{=}  & 4\sqrt{2}\cdot\sqrt{2}+2\sqrt{2}\cdot4\sqrt{2}\\
+30-6 &  \stackrel{?}{=}  & 8 + 16\\
+
+\end{array} 
+\]
+
+%%%%%%%%%%%%
+\section{Rank}
+Looking back to matrices quickly,
+remember we can think of a matrix $A\in\reals^{n\times m}$ as a set of vectors (either $n$ length $m$ vectors of rows, or $m$ length $n$ vectors of columns). 
+The \emph{rank} is the number of linearly independent vectors. 
+While you may see both \textit{row rank} and \textit{column rank} independently, 
+it turns out these are actually always the same (proof omitted). 
+
+We say a matrix is \emph{full rank} if $rank(A)=\min(m,n)$. (Notice it's always the case that $rank(A)\le\min(m,n)$.)
+
+Because of the property above $rank(A) = rank(A^T)$. 
+
+Then for some second matrix $B\in\reals^{m\times p}$: $rank(AB) \le \min(rank(A),rank(B))$. 
+
+And for a third matrix $C\in\reals^{n\times m}$: $rank(A + B) \le rank(A) + rank(B).$
+
+
+\section*{Useful References}
+Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 3.1-3.4\\
+Wilder, ``10-606-f23:Lecture 4'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_vectorspace.pdf}\\
+Kolter, ``Linear Algebra Review and Reference'', \url{https://www.cs.cmu.edu/~zkolter/course/15-884/linalg-review.pdf} \S3.6
+
+
+\end{document}
