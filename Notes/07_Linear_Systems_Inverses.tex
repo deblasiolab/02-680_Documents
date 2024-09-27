@@ -218,12 +218,14 @@ Apply Type II with $\alpha=\frac{1}{17}$ to row 1.
 \[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & -5 & 3\end{array}\right]\]
 Apply Type III with $\beta=5$ from row 1 to row 2.
 \[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & 0 & \frac{1}{17}\end{array}\right]\]
+Apply Type 1 to swap  row 1 to row 2.
+\[\left[\begin{array}{cc;{2pt/1pt}c} 1 & 0 & \frac{1}{17}\\0 & 1 & \frac{-10}{17}\end{array}\right]\]
 
 If we turn that back into a system of equations, its: 
 
 \[\begin{array}{rcrcr}
- & & z_2 & = & \frac{-10}{17}\\
  z_1 & &  & = & \frac{1}{17}\\
+ & & z_2 & = & \frac{-10}{17}\\
 \end{array}\]
 
 
@@ -305,6 +307,18 @@ x_1 &  & & &  & - & -\frac{48}{52}x_4 &  & & = & 2\\
 \end{array}\]
 
 We can solve these equations for $x_1, x_2,$ and $x_3$ then for any arbitrary $x_4$ and $x_5$ we have a valid solution to the system. 
+
+\begin{aside}[Row-Reduced Echelon Form]
+While not necessary for further topics, it may be useful in developing a strategy for the reduction, 
+we're really aiming for whats known as \emph{row-reduced echelon form} of the matrix as defined below:
+\begin{enumerate}
+\item the first (left-most) non-zero entry in each row is a 1; this is called the \textit{leading entry}, 
+\item in any column with a leading entry, that 1 is the only non-zero value,
+\item in row $i$ the leading entry must be to the left of the leading entry (if it exists) in row $i+1$, and 
+\item rows with only zeros are at the end of the matrix.
+\end{enumerate}
+In all of the examples above final matrix is in row-reduced echelon form, the ones preceding it violate one of the rules. 
+\end{aside}
 
 
 \section*{Useful References}
