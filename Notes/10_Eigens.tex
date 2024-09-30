@@ -1,0 +1,159 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 10: Eigenvalues and Eigenvectors}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+For a square matrix $A\in\reals^{n\times n}$ for which $Ax=\lambda x$, 
+we define $\lambda\in\reals$ as an \emph{eigenvalue} and $x\in\reals^{n}\setminus\mathbf{0}$ as an \emph{eigenvector}. 
+Together we call these \emph{eigenelements}. 
+
+The main idea is that the \emph{transformation} of $x$ by $A$ results in a vector that points in the same direction of $x$, but scaled by $\lambda$. 
+
+Lets look at an example: let $A=\begin{bmatrix}3 & 4 \\ 2 & 1\end{bmatrix}$, $x=\begin{bmatrix}2\\1\end{bmatrix}$, and $\lambda=5$.
+\[\begin{array}{rcl}
+Ax&  \stackrel{?}{=}  &\lambda x\\
+\begin{bmatrix}3 & 4 \\ 2 & 1\end{bmatrix}\begin{bmatrix}2\\1\end{bmatrix} &  \stackrel{?}{=}  & 5\begin{bmatrix}2\\1\end{bmatrix}\\
+\begin{bmatrix}(3\cdot2)+(4\cdot1)\\(2\cdot2)+(1\cdot1)\end{bmatrix} &  \stackrel{?}{=}  & \begin{bmatrix}(5\cdot2)\\(5\cdot1)\end{bmatrix}\\
+\begin{bmatrix}10\\5\end{bmatrix} & = & \begin{bmatrix}10\\5\end{bmatrix}\\
+\end{array}\]
+
+but given only $A$, how can we find the eigenelements? 
+
+\section{Finding Eigenelements}
+Lets break down the original equation: 
+\[\begin{array}{rcl}
+Ax&=&\lambda x\\
+Ax&=&\lambda I_n x\\
+Ax-\lambda I_n x&=&\lambda I_n x-\lambda I_n x\\
+(A-\lambda I_n)x & = & 0\\
+\end{array}\]
+
+Since we know $x$ cannot be $\mathbf{0}$ then $(A-\lambda I_n)$ but be 0 to satisfy the equation. 
+This is actually a linear system on one variable!
+It turns out this only has non-trivial solutions when $(A-\lambda I_n)$ is singular (that is, it can't be invertible). 
+
+And remember we know that a matrix is singular when the determinant is $0$: 
+ \[|A-\lambda I_n|=0.\]
+We call this a \emph{characteristic equation}. 
+
+Lets look at the example from above, 
+we can rewrite it this way: 
+\[\begin{array}{rcl}
+\begin{bmatrix}3 & 4 \\ 2 & 1\end{bmatrix}-\lambda\begin{bmatrix}1&0\\0&1\end{bmatrix} & = & 0\\
+\begin{bmatrix}3-\lambda & 4 \\ 2 & 1-\lambda\end{bmatrix} & = & 0\\
+(3-\lambda)(1-\lambda)-(4)(2) & = & 0\\
+(3-4\lambda+\lambda^2)-(8) & = & 0\\
+\lambda^2-4\lambda-5 & = & 0\\
+(\lambda+1)(\lambda - 5)  & = & 0\\
+\end{array}\]
+
+So we know that this matrix is singular when $\lambda = 5$ and $-1$. 
+These are the eigenvalues of $A$, to find the eigenvectors we plug this back into the original equation and solve for $x$. 
+\[\begin{array}{rcl}
+\left(\begin{bmatrix}3 & 4 \\ 2 & 1\end{bmatrix}-5\begin{bmatrix}1&0\\0&1\end{bmatrix}\right)\begin{bmatrix}x_1\\x_2\end{bmatrix} & = & 0\\
+\begin{bmatrix}-2 & 4 \\ 2 & -4\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} & = & 0\\
+\end{array}\]
+
+We can use whatever method we want to solve the system but we will find that for \[\lambda=5, x=\begin{bmatrix}2\\1\end{bmatrix}.\]
+Similarly for $\lambda=-1$ we get the system:  
+\[\begin{bmatrix}4 & 4 \\ 2 & 2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix} = 0 \rightarrow x=\begin{bmatrix}1\\-1\end{bmatrix}.\]
+Note in both of these cases there is a trivial solution of $x=\mathbf{0}$ but this is disallowed by definition. 
+
+\begin{aside}
+A consequence of above is that the determinant is the sum of the eigenvalues: \[|A|=\sum_{i=1}^n \lambda_i\]
+\end{aside}
+
+\paragraph{A larger example. }
+Find the eigenelements of $B=\begin{bmatrix}1&1&-1\\2&3&-4\\4&1&-4\end{bmatrix}.$
+
+We first write down the characteristic equation:
+\[\begin{array}{rcl}
+\left|\begin{matrix}1-\lambda&1&-1\\2&3-\lambda&-4\\4&1&-4-\lambda\end{matrix}\right| & = & 0\\
+(1)\left|\begin{matrix}2&-4\\4&-4-\lambda\end{matrix}\right| - 
+(3-\lambda)\left|\begin{matrix}1-\lambda&-1\\4&-4-\lambda\end{matrix}\right| + 
+(1)\left|\begin{matrix}1-\lambda&-1\\2&-4\end{matrix}\right| & = & 0\\
+\textnormal{(note we chose column 2 because it had more 1's)}\\
+\textnormal{... details left to the reader ... }\\
+%((2)(-4-\lambda)-(-4)(4)) - (3-\lambda)((1-\lambda)(-4-\lambda)-(-1)(4)) \\+ ((1-\lambda)(-4)-(-1)(2)) & = & 0\\
+%((-8-2\lambda)+16) - (3-\lambda)(-4+4\lambda-\lambda+\lambda^2+4) \\+ (-4+4\lambda+2) & = & 0\\
+%(-2\lambda+8) - (3-\lambda)(3\lambda+\lambda^2) + (4\lambda-2) & = & 0\\
+%(-2\lambda+8) - (9\lambda-3\lambda^2+3\lambda^2-\lambda^3) + (4\lambda-2) & = & 0\\
+%(-2\lambda+8) - (9\lambda-\lambda^3) + (4\lambda-2) & = & 0\\
+%\lambda^3 + (-2-9+4)\lambda + (8-2) & = & 0\\
+\lambda^3 -7 \lambda + 6 & = & 0\\
+(\lambda-1)(\lambda-2)(\lambda+3) & = & 0\\
+\end{array}\]
+Therefore our eigenvalues are $\lambda=1,2,$ and $-3$. 
+
+If we solve the system: \[\left(\begin{bmatrix}1&1&-1\\2&3&-4\\4&1&-4\end{bmatrix}-\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}\right)\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}=\begin{bmatrix}0\\0\\0\end{bmatrix}\] we find that $x_1=x_2=x_3.$ So we can say $x=\begin{bmatrix}1\\1\\1\end{bmatrix}$.
+
+Finding the other eigenvectors is left as an exercise. 
+
+\section{Triangular Matrices}
+A matrix $T\in\reals^{n\times n}$ is triangular if all values on one side of the diagonal are 0:
+\[
+\begin{bmatrix}
+T_{11} & T_{12} & \hdots & T_{1(n-1)} & T_{1n}\\
+0 & T_{22} & \hdots & T_{2(n-1)} & T_{2n}\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \hdots & T_{(n-1)(n-1)} & T_{(n-1)n}\\
+0 & 0 & \hdots & 0 & T_{nn}\\
+\end{bmatrix}
+\textnormal{or} 
+\begin{bmatrix}
+T_{11} & 0 & \hdots & 0 & 0 \\
+T_{11} & T_{22} & \hdots & 0 & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+T_{(n-1)1} & T_{(n-1)2} & \hdots & T_{(n-1)(n-1)} &0\\
+T_{n1} & T_{n2} & \hdots & T_{n(n-1)} & T_{nn}\\
+\end{bmatrix}.
+\]
+
+It turns out triangular matrices have some special properties: 
+\begin{itemize}
+\item $\displaystyle |T| = \sum_{i=1}^n T_{ii}$, and 
+\item $\langle \lambda_1, \lambda_2, ..., \lambda_n\rangle = \langle T_{11}, T_{22}, ... T_{nn}\rangle$. 
+\end{itemize}
+
+\paragraph{Example.} Find the eigenelements of $D=\begin{bmatrix}0&1&2&1\\0&1&0&2\\0&0&1&0\\0&0&0&2\end{bmatrix}$.
+
+\[\begin{array}{rcl}
+\left|\begin{matrix}-\lambda&1&2&1\\0&1-\lambda&0&2\\0&0&1-\lambda&1\\0 & 0 & 0 & 2-\lambda\end{matrix}\right| & = & 0\\
+-\lambda\left|\begin{matrix}1-\lambda&0&2\\0&1-\lambda&1\\0 & 0 & 2-\lambda\end{matrix}\right| & = & 0\\
+(-\lambda)(1-\lambda)\left|\begin{matrix}1-\lambda&1\\0 & 2-\lambda\end{matrix}\right| & = & 0\\
+(-\lambda)(1-\lambda)^2(2-\lambda) & = & 0\\
+\end{array}\]
+
+We know $\lambda$s are $0,1,2$ (since they are the distinct values). 
+
+We can solve for each $\lambda$:
+
+$\lambda=0$: 
+\[(D-0I_4)x = 0 \rightarrow \left(\begin{array}{rcrcrcr} x_2 & + & 2x_3 & + & x_4 & = & 0\\ x_2 & + &  & + & 2x_4 & = & 0\\ &  & x_3 &&&  = & 0\\ & &&& 2x_4 & = & 0\\\end{array}\right)\rightarrow x = \begin{bmatrix}1\\0\\0\\0\end{bmatrix}\]
+Notice that $x_1$ is an arbitrary value. 
+
+$\lambda=2$:
+\[(D-2I_4)x = 0 \rightarrow \left(\begin{array}{rcrcrcrcr} -2x_1 & + & x_2 & + & 2x_3 & + & x_4 & = & 0\\ &&-x_2 & + &  & + & 2x_4 & = & 0\\ &&&  & -x_3 &&&  = & 0\\ &&& &&& 0& = & 0\\\end{array}\right)\rightarrow x = \begin{bmatrix}\frac{3}{2}x_4\\2x_4\\0\\x_4\end{bmatrix}=\begin{bmatrix}3\\4\\0\\2\end{bmatrix}\]
+Notice that $x_4$ is an arbitrary value, but chosen to make the vector integers.  
+
+$\lambda=1$:
+\[(D-I_4)x = 0 \rightarrow \left(\begin{array}{rcrcrcrcr} -x_1 & + & x_2 & + & 2x_3 & + & x_4 & = & 0\\ && & &  &  & 2x_4 & = & 0\\ &&&  & 0 &&&  = & 0\\ &&& &&& x_4 & = & 0\\\end{array}\right)\rightarrow\]
+\[\left(\begin{array}{rcrcrcrcr}-x_1 & + & x_2 & + & 2x_3 &  &  & = & 0\\ &&& &&& x_4 & = & 0\\\end{array}\right) \rightarrow x = \begin{bmatrix}1\\1\\0\\0\end{bmatrix} \textnormal{ and }\begin{bmatrix}2\\0\\1\\0\end{bmatrix}\]
+(Note these are \textit{bases} of the space defined by the system above.)
+
+
+\section{Eigendecomposition and Diagonalization}
+
+
+\section*{Useful References}
+Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 7\\
+Wilder, ``10-606-f23:Lecture 6'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_vectorspace.pdf}\\
+Kolter, ``Linear Algebra Review and Reference'', \url{https://www.cs.cmu.edu/~zkolter/course/15-884/linalg-review.pdf} \S 3.12
+
+\end{document}
