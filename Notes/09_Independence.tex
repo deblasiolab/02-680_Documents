@@ -67,12 +67,12 @@ For a set of vectors, we say the \emph{span} is another set of vectors that cons
 So in the case above
 \[
 \langle8,7\rangle \in span\left(\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\right) = 
-\left\{\alpha_1\left\langle1,2\right\rangle + \alpha_2\left\langle2,1\right\rangle \mid \alpha_1,\alpha_2 \in \reals\right\}
+\left\{\alpha_1\left\langle1,2\right\rangle + \alpha_2\left\langle2,1\right\rangle \;\middle|\; \alpha_1,\alpha_2 \in \reals\right\}
 \]
 
 Formally for a set of vectors $D$, 
 \[
-span(D) := \left\{\sum_{i=1}^{|D|} \alpha_iD_i \mid \forall i \in [|D|]\alpha_i \in \reals \right\}
+span(D) := \left\{\sum_{i=1}^{|D|} \alpha_iD_i \;\middle|\; \forall i \in [|D|]\alpha_i \in \reals \right\}
 \]
 
 The span of any set is a vector space. 
@@ -92,7 +92,7 @@ More formally, we say a set $B=\{b_1,b_2,...,b_n\} \subseteq V$ is a \emph{basis
 \item $\nexists b_i\in B : V = span(B\setminus\{b_i\})$, that is we cannot remove any element and have it still span all of $V$.
 \end{itemize}
 
-So that means for every element in $V$, there is a linear combination of the elements in $B$ that is equal:
+So that means for every element in $V$, there is a \textit{unique} linear combination of the elements in $B$ that is equal:
 \[\forall v \in V : \exists \alpha : \sum_{i=1}^n \alpha_ib_i = v.\]
 
 We call the vector $\alpha$ above the \emph{coordinate representation} of vector $v$ with respect to the basis. 
@@ -113,7 +113,7 @@ A basis $B$ is considered an \emph{orthonormal basis} if:
 The nice think about an orthonormal basis is that when you convert to coordinate representations, you preserve length and angles between vectors. 
 
 The most common orthonormal basis for $\reals^n$ is the \emph{standard} basis: 
-\[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\middle|\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
+\[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\;\middle|\;dle|\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
 That is for $\reals^3$ the standard basis is $\left\{\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\right\}$.
 
 Notice though that for $\reals^2$ the standard basis is $\left\{\langle1,0\rangle,\langle0,1\rangle\right\}$.
@@ -178,6 +178,8 @@ Then for some second matrix $B\in\reals^{m\times p}$: $rank(AB) \le \min(rank(A)
 
 And for a third matrix $C\in\reals^{n\times m}$: $rank(A + B) \le rank(A) + rank(B).$
 
+Note that in the reduced form we talked about in the Topic 7, the number of non-zero rows is the rank (and the rows are going to be linearly independent). 
+This also means that any nonsingular (invertable) matrix is full rank (i.e. rank is equal to $n$). 
 
 \section*{Useful References}
 Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 3.1-3.4\\
