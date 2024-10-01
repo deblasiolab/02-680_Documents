@@ -22,7 +22,7 @@ To be considered a vector space, the 3 elements have to satisfy the following co
 \item $\forall v_1,v_2\in V, \alpha \in \reals: \alpha (v_1 + v_2) = \alpha v_1 + \alpha v_2$
 \item $\forall v_1,v_2\in V, \alpha,\beta \in \reals: (\alpha+\beta) v = \alpha v + \beta v$
 \item $\forall v_1,v_2\in V, \alpha,\beta \in \reals: \alpha(\beta v) = (\alpha\beta) v$
-\item$\exists \textnormal{ unique }\mathbf{1} \in V : \forall v \in V : \mathbf{1}v = v$ 
+\item$\forall v \in V : 1v = v$ 
 \end{enumerate} 
 
 \paragraph{Example.} 
@@ -62,7 +62,7 @@ We can define
 The proof of this is left to you. 
 
 \section{Subspaces}
-A subset $S$ of a vector space $V$ is called a \emph{subspace} if $S$ is also a vector space under the operations inherited from $V$. 
+A subset $S$ of a vector space $V$ is called a \emph{subspace} if $S$ is also a vector space \textit{under the operations inherited from $V$ } (note this would inherently require that $\mathbf{0}\in S$, but this should fall out from the requirements below).
 
 Every vector space has at least two subspaces: (1) $V$ itself, and (2) $\{\mathbf{0}\}\subseteq V$. 
 These are both called \textit{trivial} subspaces. 
