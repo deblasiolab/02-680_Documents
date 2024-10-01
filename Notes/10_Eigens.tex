@@ -66,7 +66,12 @@ Similarly for $\lambda=-1$ we get the system:
 Note in both of these cases there is a trivial solution of $x=\mathbf{0}$ but this is disallowed by definition. 
 
 \begin{aside}
-A consequence of above is that the determinant is the sum of the eigenvalues: \[|A|=\sum_{i=1}^n \lambda_i\]
+Consequence of above are 
+\begin{itemize}
+\item That the determinant is the sum of the eigenvalues: \[|A|=\sum_{i=1}^n \lambda_i\]
+\item The rank of $A$ is equal to the number of non-zero eigenvalues
+\item If $A$ is nonsingular, then $1/\lambda_i$ is an eigenvalue of $A^{-1}$ with the same associated original eigenvector
+\end{itemize}
 \end{aside}
 
 \paragraph{A larger example. }
@@ -148,7 +153,51 @@ $\lambda=1$:
 (Note these are \textit{bases} of the space defined by the system above.)
 
 
+
+\paragraph{Symmetric Matrices.}
+If a matrix is symmetric (that is $A=A^T$): 
+\begin{itemize}
+\item all eigenvalues are real, and 
+\item eigenvectors ore orthonormal. 
+\end{itemize}
+
+
 \section{Eigendecomposition and Diagonalization}
+If we create a new matrix $X\in\reals^{n\times n}$ where each \textit{column} is one of the eigenvectors of $A$, 
+then create $\Lambda\in\reals^{n\times n}$ which contains the eigenvalues on the diagonal (i.e. $\Lambda = \langle\lambda_1,\lambda_2,...,\lambda_n\rangle I_n$ it turns out that 
+\[ AX = X\Lambda \]
+because it satisfies all of the eigenelement sets simultaneously. 
+
+If the eigenvectors are linearly independent then $X$ is invertable. 
+If $X$ is invertable, then 
+\[ A = X\Lambda X^{-1}.\]
+
+We call a $A$ \emph{diagonalizable} if it can be rewritten this way. 
+This is sometimes also called an \emph{eigendecomposition}.
+
+\subsection{Singlar Value Decomposition}
+While we're only going to briefly discuss it in this class
+the form \[ A = X\Lambda X^{-1}\]
+is similar to whats known as the \emph{Singular Value Decomposition} 
+of a rectangular matrix $R\in\reals^{n\times m}$
+as 
+\[R=USV\]
+ (sometimes $\Sigma$ is used in place of $S$ but this is a reserved character in this class) 
+ where $U\in\reals^{n\times n}$, $V\in\reals^{m\times m}$, 
+ and $S\in\left\{\widehat{diag_{n\times m}}(x) \mid x\in\reals^{min(n,m)}\right\}\subset\reals^{n\times m}$.
+ Here the \[\widehat{diag_{n\times m}}\left(\left\langle x_1,x_2,...x_m\right\rangle\right) = 
+ \begin{bmatrix}x_1 & 0 & \hdots & 0\\0 & x_2 & \hdots & 0\\\vdots&\vdots&\ddots&\vdots\\0 & 0 & \hdots & x_m\\0 & 0 & \hdots &0\\\vdots&\vdots&\vdots&\vdots\\\end{bmatrix} \textnormal{ or }
+ \begin{bmatrix}x_1 & 0 & \hdots & 0 & 0 & \hdots\\0 & x_2 & \hdots & 0 & 0 & \hdots\\\vdots&\vdots&\ddots&\vdots\\0 & 0 & \hdots & x_m & 0 & \hdots\\\end{bmatrix}
+ .\] 
+ It produces the left matrix when $n>m$, and the right when $m$ is larger; 
+ that is it creates a diagonal matrix padded with 0 rows/columns to make it the correct size.
+ 
+ Lets assume you're in the situation where you have $n$ users who reviewed $m$ movies and those ratings are in matrix $E\in\reals^{n\times m}$. 
+ If you can find the SVD of the matrix such that $E=FGH$ such that $F\in\reals^{n\times m}$, $H\in\reals^{m\times m}$ and $G$ is a diagonal $m$-dimension square matrix each of these represents something about your set. 
+ $F$ and $H$ show commonalities between users or movies respectively, 
+ and $G$ is a connection matrix. 
+ 
+ The details about finding this are beyond the scope of this course. 
 
 
 \section*{Useful References}
