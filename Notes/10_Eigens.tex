@@ -178,7 +178,7 @@ This is sometimes also called an \emph{eigendecomposition}.
 \subsection{Singlar Value Decomposition}
 While we're only going to briefly discuss it in this class
 the form \[ A = X\Lambda X^{-1}\]
-is similar to whats known as the \emph{Singular Value Decomposition} 
+is similar to whats known as the \emph{Singular Value Decomposition} (SVD)
 of a rectangular matrix $R\in\reals^{n\times m}$
 as 
 \[R=USV\]
@@ -196,6 +196,10 @@ as
  If you can find the SVD of the matrix such that $E=FGH$ such that $F\in\reals^{n\times m}$, $H\in\reals^{m\times m}$ and $G$ is a diagonal $m$-dimension square matrix each of these represents something about your set. 
  $F$ and $H$ show commonalities between users or movies respectively, 
  and $G$ is a connection matrix. 
+ 
+ Another example would be gene correlations, assume you have multiple assays of gene's expressions in various conditions. 
+ If you can decompose that matrix using the theory above you'd have a correlation matrix of genes, correlation of assays, and a relationship matrix. 
+ 
  
  The details about finding this are beyond the scope of this course. 
 

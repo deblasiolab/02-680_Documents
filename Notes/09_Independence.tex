@@ -117,7 +117,7 @@ The most common orthonormal basis for $\reals^n$ is the \emph{standard} basis:
 That is for $\reals^3$ the standard basis is $\left\{\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\right\}$.
 
 Notice though that for $\reals^2$ the standard basis is $\left\{\langle1,0\rangle,\langle0,1\rangle\right\}$.
-But we can use a secondary basis \[B'=\left\{\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\rangle,\langle\frac{1}{\sqrt{2}},-\frac{1}{\sqrt{2}}\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
+But we can use a secondary basis \[B'=\left\{\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\rangle,\langle\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}}\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
 This means that for any two vectors the coordinate representation of the vectors in both basis will maintain the norms and dot-products. 
 
 \paragraph{Example.}
@@ -161,6 +161,22 @@ v_1 \cdot v_2 & \stackrel{?}{=} & v'_1 \cdot v'_2 \\
 
 \end{array} 
 \]
+
+\begin{aside}[Matrix as Transformation]
+Note that if we construct a matrix $T$ for which the columns are our basis vectors, 
+we can use matrix multiplication to find the coordinate representation: $vT=\alpha$.
+\vspace{2em}
+
+So in the example above: 
+\[T=\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix}\]
+and it follows that 
+\[
+\begin{bmatrix}6\\2\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}4\sqrt{2}\\2\sqrt{2}\end{bmatrix}
+\;\;\;\textnormal{ and }\;\;\;
+\begin{bmatrix}5\\-3\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}\sqrt{2}\\4\sqrt{2}\end{bmatrix}
+\]
+This will be more useful when talking about eigenelements and decomposition in the next topic. 
+\end{aside}
 
 %%%%%%%%%%%%
 \section{Rank}
