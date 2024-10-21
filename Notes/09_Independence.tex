@@ -26,17 +26,17 @@ Which would violate the definition above.
 
 \paragraph{Example.} Consider the following set of vectors in $\reals^2$:
 \[\left\{\begin{matrix}
-\langle1,2\rangle,
-\langle2,1\rangle,
-\langle8,7\rangle
+\left\langle1,2\right\rangle,
+\left\langle2,1\right\rangle,
+\left\langle8,7\right\rangle
 \end{matrix}\right\}.\]
 Is this set linearly independent? 
 
 To find out we can test if the following has only one solution: 
-\[\alpha_1 \langle1,2\rangle +
-\alpha_2 \langle2,1\rangle +
-\alpha_3 \langle8,7\rangle =
-\langle0,0\rangle\]
+\[\alpha_1 \left\langle1,2\right\rangle +
+\alpha_2 \left\langle2,1\right\rangle +
+\alpha_3 \left\langle8,7\right\rangle =
+\left\langle0,0\right\rangle\]
 or more familiarly: 
 \[
 \begin{array}{rcrcrcr}
@@ -55,9 +55,9 @@ Which we know how to reduce:
 \]
 Meaning that for any arbitrary $\alpha_3$, setting $\alpha_1 = -2\alpha_3$ and $\alpha_2 = -3\alpha_3$ the linear combination is $\mathbf{0}$. 
 Since $\alpha_3$ can be non-zero the vectors are not linearly independent. 
-(For instance $2 \langle1,2\rangle +
-3 \langle2,1\rangle=
- \langle8,7\rangle$.)
+(For instance $2 \left\langle1,2\right\rangle +
+3 \left\langle2,1\right\rangle=
+ \left\langle8,7\right\rangle$.)
 
 
 
@@ -66,21 +66,20 @@ Since $\alpha_3$ can be non-zero the vectors are not linearly independent.
 For a set of vectors, we say the \emph{span} is another set of vectors that consists of all linear combinations. 
 So in the case above
 \[
-\langle8,7\rangle \in span\left(\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\right) = 
+\left\langle8,7\right\rangle \in span\left(\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\right) = 
 \left\{\alpha_1\left\langle1,2\right\rangle + \alpha_2\left\langle2,1\right\rangle \;\middle|\; \alpha_1,\alpha_2 \in \reals\right\}
 \]
 
-Formally for a set of vectors $D$, 
+Formally for a set of vectors $D$ with cardinality $\left|D\right|=n$, 
 \[
-span(D) := \left\{\sum_{i=1}^{|D|} \alpha_iD_i \;\middle|\; \forall i \in [|D|]\alpha_i \in \reals \right\}
+span(D) := \left\{\sum_{i=1}^{n} \alpha_iD_i \;\middle|\; \forall i \in \left[n\right]: \alpha_i \in \reals \right\}
 \]
 
-The span of any set is a vector space. 
-
-If $D$ is a subset of elements from a vector space $V$, then $D$ is a subspace of $V$. 
+If $D\subseteq V$ for a vector space $V$, then $D$ is always a valid subspace of $V$. 
+(Can we test this on the span of one vector?)
 
 So in the example above since $\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\subseteq\reals^2$,
-the vector space defined by the set is also a subpace of $\reals^2$.
+the vector space defined by the set is also a subpace of $\reals^2$. 
 
 %%%%%%%%%%%%
 \section{Basis}
@@ -114,18 +113,18 @@ The nice think about an orthonormal basis is that when you convert to coordinate
 
 The most common orthonormal basis for $\reals^n$ is the \emph{standard} basis: 
 \[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\;\middle|\;dle|\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
-That is for $\reals^3$ the standard basis is $\left\{\langle1,0,0\rangle,\langle0,1,0\rangle,\langle0,0,1\rangle\right\}$.
+That is for $\reals^3$ the standard basis is $\left\{\left\langle1,0,0\right\rangle,\left\langle0,1,0\right\rangle,\left\langle0,0,1\right\rangle\right\}$.
 
-Notice though that for $\reals^2$ the standard basis is $\left\{\langle1,0\rangle,\langle0,1\rangle\right\}$.
-But we can use a secondary basis \[B'=\left\{\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\rangle,\langle\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}}\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
+Notice though that for $\reals^2$ the standard basis is $\left\{\left\langle1,0\right\rangle,\left\langle0,1\right\rangle\right\}$.
+But we can use a secondary basis \[B'=\left\{\left\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right\rangle,\left\langle\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}}\right\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
 This means that for any two vectors the coordinate representation of the vectors in both basis will maintain the norms and dot-products. 
 
 \paragraph{Example.}
-In vector space $\reals^2$ let \[v_1 = \langle6,2\rangle\;\;\;\;\textnormal{and}\;\;\;\; v_2 = \langle5,-3\rangle.\]
+In vector space $\reals^2$ let \[v_1 = \left\langle6,2\right\rangle\;\;\;\;\textnormal{and}\;\;\;\; v_2 = \left\langle5,-3\right\rangle.\]
 If we choose the orthonormal basis  $B'$ from above, 
 we find the coordinate representations:
 \[
-v'_1 = \langle4\sqrt{2},2\sqrt{2}\rangle \;\;\;\;\textnormal{and}\;\;\;\; v'_2 = \langle\sqrt{2},4\sqrt{2}\rangle.
+v'_1 = \left\langle4\sqrt{2},2\sqrt{2}\right\rangle \;\;\;\;\textnormal{and}\;\;\;\; v'_2 = \left\langle\sqrt{2},4\sqrt{2}\right\rangle.
 \]
 by solving the following systems of equations: 
 \[
@@ -155,7 +154,7 @@ We can see that the lengths of the vectors are preserved:
 as is the angle (dot product)
 \[\begin{array}{rcl}
 v_1 \cdot v_2 & \stackrel{?}{=} & v'_1 \cdot v'_2 \\
-\langle6,2\rangle\cdot \langle5,-3\rangle&  \stackrel{?}{=}  & \langle4\sqrt{2},2\sqrt{2}\rangle\cdot\langle\sqrt{2},4\sqrt{2}\rangle\\
+\left\langle6,2\right\rangle\cdot \left\langle5,-3\right\rangle&  \stackrel{?}{=}  & \left\langle4\sqrt{2},2\sqrt{2}\right\rangle\cdot\left\langle\sqrt{2},4\sqrt{2}\right\rangle\\
 6\cdot5+2\cdot-3&  \stackrel{?}{=}  & 4\sqrt{2}\cdot\sqrt{2}+2\sqrt{2}\cdot4\sqrt{2}\\
 30-6 &  \stackrel{?}{=}  & 8 + 16\\
 
