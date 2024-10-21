@@ -1,0 +1,267 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 11: Calculus Review}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%
+\section{Derivatives}
+ From some function $f(x)$ where $x$ is a scalar:
+ \begin{itemize}
+ \item the derivative $\displaystyle\frac{df}{dx}$ is th change in value of $f$ as you increase/decrease $x$.
+ \item Formally $\displaystyle\frac{df}{dx}=\lim_{h\rightarrow 0}\frac{f\left(x+h\right) - f(x)}{h}$.
+ \end{itemize}
+ 
+ Lets derive one of our known rules below, for instance let $f(x)=x^n$. 
+ \begin{align}
+ \frac{d(x^n)}{dx}=&\lim_{h\rightarrow 0}\frac{(x-h)^n - x^n}{h}\\
+ =& \lim_{h\rightarrow 0}\frac{\sum_{i=0}^n {n \choose i} x^{(n-i)}h^i - x^n}{h}\\
+ =& \lim_{h\rightarrow 0}\frac{\sum_{i=1}^{n} {n \choose i} x^{(n-i)}h^i}{h}\\
+ =& \lim_{h\rightarrow 0}\sum_{i=1}^{n} {n \choose i} x^{(n-i)}h^{i-1}\\
+ =& \lim_{h\rightarrow 0} \left[{n \choose 1}x^{(n-1)}h^{1-1} + \sum_{i=2}^{n} {n \choose i} x^{(n-i)}h^{i-1}\right]\\
+ =& nx^{(n-1)} + \lim_{h\rightarrow 0} \left[\sum_{i=2}^{n} {n \choose i} x^{(n-i)}h^{i-1}\right]\\
+ =& nx^{(n-1)}
+ \end{align}
+ 
+
+%%%%%%%%%%%
+\section{Integrals}
+For some function $f'(x)$ where $x$ is a scalar, 
+the integral $\displaystyle￼\int f'(x)$ can be thought of as the inverse of differentiation
+
+For more review, we recommend: 3blue1brown.com/topics/calculus
+
+
+%%%%%%%%%%%
+%\section{Differential Equations}
+
+%%%%%%%%%%%%%%%%%%
+\section{Application: Gradient Based Optimization}
+\emph{Optimization} is the task of either minimizing or maximizing some function. 
+For some $f(x)$, find the $x$ that maximizes $f(x)$. 
+Using mathematics: 
+\[ x^* = \argmax_{\forall x} f(x) \]
+(Note that above we use maximization, but this would be equivalent to minimizing some function $g(x)=-f(x)$.)
+
+Remember the derivative of a function is the rate of change, or slope; 
+thus it can be used to tell us how to change $x$ in order to have a maximizing impact on $f(x)$. 
+
+\[\frac{df}{dx} \approx \frac{f(x+\varepsilon)-f(x)}{\varepsilon}\]
+we can rewrite $\frac{df}{dx}$ as $f'(x)$ for ease, so then reducing
+\[\varepsilon f'(x) \approx f(x+\varepsilon)-f(x)\]
+\[f(x) + \varepsilon f'(x) \approx f(x+\varepsilon)\]
+
+Notice that when $f'(x)=0$, we can change x, but nothing happens. 
+We call this a \emph{critical} or \emph{stationary} point. 
+
+Lets look at an example, lets say we want to mimize: 
+\[f(x) = \frac{x^2}{2}  \;\;\rightarrow\;\; f'(x) = x.\]
+
+If $x>0; f'(x)>0$ and thus to reach a critical point we need to add a negative $\varepsilon$ 
+(since we want to minimize the function value). 
+Alternatively, if $x<0: f'(x)<0$ and thus we need to add a positive $\varepsilon$. 
+If $x=0, f'(x)=0$ and thus we've found a critical point. 
+
+Looking at another example lets say we want to still find the minimum, but for 
+\[g(x) = \frac{-x^2}{2}  \;\;\rightarrow\;\; g'(x) = -x.\]
+Its still the case that we want to add an $\varepsilon$ opposite the sign of the slope since we want to minimize; 
+if $g'(x)<0$ then $\varepsilon>0$, $g'(x)>0$ then $\varepsilon<0$, and $g'(x)=0$ found a critical point. 
+
+So once again, we have a critical point at $x=0$, 
+but if we look at the two examples in the first if we were slightly away from 0 the derivative would have sent us \textit{toward} 0, in the second it sends us away. 
+So we can say the critical point of $x=0$ is \emph{stable} for $f(x)$ and \emph{unstable} for $g(x)$. 
+
+What we've described here is a slight simplification of \emph{gradient descent} first described by Cauchy in the 1867. 
+One of the most commonly used optimization procedures in machine learning. 
+
+\subsection{Example}
+Consider the equation \[3x^4-10x^3-12x^2+18x-3.\]
+The derivative is \[12x^3-30x^2-24x+18=6(x-3)(x+1)(2x-1).\]
+This has 3 values that are zero: $x=3,-1,\frac{1}{2}.$
+
+
+To find out if they are local minima or maxima we can take the second derivative: 
+\[36x^2-60x-24\] 
+and determine if its positive or negative at each point: 
+$x=3 (+),-1 (+),\frac{1}{2}(-).$
+
+Thus only $x=3$ and $1$ are candidates for minima, 
+we can get their original values:
+\[3(3)^4-10(3)^3-12(3)^2+18(3)-3=-84\]
+\[3(-1)^4-10(-1)^3-12(-1)^2+18(-1)-3=-20\]
+
+Thus the global minimum is at $x=3$.
+%%%%%%%%%%%%%%%%%%
+\section{Gradients (Multivariable Derivation)}
+When a function has multiple variables we cannot simply take the derivative of the whole thing. 
+For instance, lets say we have a function $f:\reals^n\mapsto\reals$, 
+as a real example think of euclidean norm: 
+\[e(x) = \sqrt{x_1^2+x_2^2}.\]
+
+Now, since $x$ is a vector, when need to take the gradient $\nabla f$ (sort of $\frac{df}{dx}$ when $x$ is a vector). 
+We define the gradient as follows:
+\[\nabla f = \begin{bmatrix}\frac{\partial f}{\partial x_1}&\frac{\partial f}{\partial x_2}&....&\frac{\partial f}{\partial x_n}\end{bmatrix}\]
+when $x\in\reals^n$. 
+In the example above that means 
+\[\nabla e = \begin{bmatrix}\frac{\partial e}{\partial x_1}&\frac{\partial e}{\partial x_1}\end{bmatrix}= \begin{bmatrix}\frac{x_1}{ \sqrt{x_1^2+x_2^2}}&\frac{x_2}{\sqrt{x_1^2+x_2^2}}\end{bmatrix}\]
+Note we need the chain rule then the polynomial rule for both derivatives. 
+
+They key here is to realize that the dimension of the gradient (the number of derivatives) 
+is dependent on the dimension of the input to the function (not the output).
+
+
+%%%%%%%%%%%%%%%%%%
+\section{Application: Least Squares Minimization}
+Assume we have a problem which can be set up as 
+\[Ax=b\]
+where $A\in\reals^{m\times n}$, and $b\in\reals^n$.
+But let it be the case that $b\notin span(columns(A))$,
+therefore we know $\not\exists x\in\reals^n$ such that $Ax=b$.
+
+Can we find something ``close enough''?
+
+Lets say we want to minimize $\|Ax-b\|_2^2$ (we sometimes call this the squared error). 
+\begin{aside}[Norm Squared]
+Its helpful here to remember that for any vector \[x\in\reals^n: \|x\|_2^2 = \sum_{i=1}^n x_i^2 = x^Tx.\]
+
+The derivation is left as an exercise.
+\end{aside}
+
+Remember from above, to find a minimum we need to find the critical points and evaluate them, so we need to find the gradient. 
+\[\begin{array}{ccc}
+\|Ax-b\|_2^2 & = & (Ax-b)^T(Ax-b)\\
+& = & (x^TA^T-b^T)(Ax-b)\\
+& = & x^TA^TAx-2AXb^t+b^Tb
+\end{array}\]
+
+The gradient with respect to $x$ of this is then $2A^TAx-2A^Tb$.
+
+For this to be 0, \[A^TAx=A^Tb\]
+solving for $x$ (assuming $A^TA$ is invertible)
+\[x = (A^TA)^{-1}A^Tb.\]
+
+
+%%%%%%%%%%%%%%%%%%
+\section{Jacobian (Multivariable/Multifunction Derivation)}
+Sometimes we also have functions that have both multiple variable input, and multiple variable output. 
+So any function $g: \reals^n\mapsto\reals^m$ with $m,n\in\reals^{\ge2}$.
+We say the \emph{Jacobian} of $g$ is 
+\[J_g(x) = \begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \hdots & \frac{\partial f_1}{\partial x_n} \\  
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \hdots & \frac{\partial f_2}{\partial x_n} \\  
+\vdots & \vdots & \ddots & \vdots\\
+\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \hdots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}\]
+
+So for instance $h:\reals^2\mapsto\reals^2$:
+\[h(x) = x^T\begin{bmatrix}3 & 1\\0 & -1\end{bmatrix}x = \begin{bmatrix}3x_1^2\\x_1x_2 -x_2^2\end{bmatrix}\]
+then the jacobian is 
+\[J_h(x) = \begin{bmatrix} 
+\frac{d(3x_1^2)}{x_1} & \frac{d(3x_1^2)}{x_2}\\
+\frac{d(x_1x_2 -x_2^2)}{x_1} & \frac{d(x_1x_2 -x_2^2)}{x_2}\end{bmatrix} = 
+\begin{bmatrix} 
+6x_1 & 0\\
+x_2 & x_1-2x_2
+\end{bmatrix}
+\]
+
+
+\iffalse
+%%%%%%%%%%%%%%%%%%
+\section{Application: tRNA production}
+Assume all tRNA are divided into two classes: bound (which we will represent the count of at time $t$ as $m_1(t)$) 
+and unbound ($m_2(t)$) to an amino acid.
+
+We have some other known variables that are important: 
+\begin{itemize}
+\item[$\alpha$:] rate of tRNA production
+\item[$\beta$:] rate of amino acid binding
+\item[$\gamma$:]rate of amino acid loss (unbinding)
+\item[$\delta$:] rate of tRNA degradation
+\end{itemize}
+
+Our goal will be to find the change in tRNA over time. 
+Lets set up some basics:
+\[\begin{array}{rrrrr}
+m_1(t+1) =&\alpha &- \beta m_1(t)& + \gamma m_2(t)& - \delta m_1(t)\\
+m_2(t+1) = & &+ \beta m_1(t) &- \gamma m_2(t)& - \delta m_2(t)
+\end{array}\]
+
+Lets do a little more algebra for a second (it will make sense in a moment). \\
+First lets simplify: 
+\[\begin{array}{rrrrr}
+m_1(t+1) =&\alpha &+(- \beta-\delta) m_1(t)& + \gamma m_2(t)\\
+m_2(t+1) = & &+ \beta m_1(t) & +(-\gamma- \delta) m_2(t)
+\end{array}\]
+
+Then we can rewrite this a little:
+\[
+\begin{bmatrix}m_1(t+1)\\m_2(t+1)\end{bmatrix} = 
+\begin{bmatrix} (- \beta-\delta) & \gamma\\ \beta& (-\gamma- \delta)\end{bmatrix}
+\begin{bmatrix}m_1(t)\\m_2(t)\end{bmatrix} +
+\begin{bmatrix}\alpha\\0\end{bmatrix}
+\]
+and with the appropriate matrices:
+\[m(t+1)=Mm(t)+b\]
+
+But we can also think of this as being: 
+\[J_m(t) = Mm+b\]
+\[
+J_m(t) = 
+\begin{bmatrix} (- \beta-\delta) & \gamma\\ \beta& (-\gamma- \delta)\end{bmatrix}
+\begin{bmatrix}m_1(t)\\m_2(t)\end{bmatrix} +
+\begin{bmatrix}\alpha\\0\end{bmatrix}
+\]
+
+If we want to find stasis we can examine the critical points (when $Mm(t)+b=0$). 
+
+This is an example of a problem you might see in the Modeling and Simulation course. 
+\fi
+
+
+\section*{Useful References}
+Deisenroth, Faisal, and Ong, ``Mathematics for Machine Learning''. \S 5
+
+%%%%%%%%%%%%%%%%%%
+\clearpage
+
+ \begin{table}
+ \caption{Differentiation rules}
+\footnotesize
+ \vspace{1em} 
+ \begin{center}
+ \begin{tabularx}{0.9\textwidth}{|l|X|}
+ \hline
+ constant multiple rule & \[\frac{d}{dx}\left(cf\left(x\right)\right) = cf'\left(x\right)\]\\\hline
+polynomial rule &\[\frac{d}{dx}\left(x^n\right) = nx^{n-1}\]\\\hline
+\multirow{2}{*}{exponent rules} & \[\frac{d}{dx}\left(e^{g(x)}\right) = e^{g(x)}g'(x)\]\\
+ & \[\frac{d}{dx}\left(c^{g(x)}\right) = c^{g(x)}g'(x)\ln c\]\\\hline
+ log rule & \[\frac{d}{dx}\left(\log _c g\left(x\right)\right) = \frac{g'(x)}{g(x)\ln a}\]\\\hline
+ sum rule & \[\frac{d}{dx}\left(f\left(x\right) + g\left(x\right)\right) = f'(x) + g'(x)\]\\\hline
+ product rule & \[\frac{d}{dx}\left(f\left(x\right)g\left(x\right)\right) = f'(x)g(x) + f(x)g'(x)\]\\\hline
+ quotient rule & \[\frac{d}{dx}\left(\frac{f(x)}{g(x)}\right) = \frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}\]\\\hline
+ chain rule & \[\frac{d}{dx}\left(f\left(g\left(x\right)\right)\right) = f'\left(g\left(x\right)\right)g'(x)\]\\\hline
+ \end{tabularx}
+ \end{center}
+\end{table}
+ \begin{table}
+ \caption{Integration rules} 
+\vspace{1em} \begin{center}
+\footnotesize
+ \begin{tabularx}{0.9\textwidth}{|l|X|}
+ \hline
+ constant multiple rule & \[￼￼￼￼\int cf\left(x\right) dx = c\int f(x) dx\]\\\hline
+polynomial rule &\[\int x^n dx = \frac{x^{n+1}}{a+1} + c\]\\\hline
+\multirow{2}{*}{exponent rules} & \[\int e^{x} dx = e^{x}\]\\
+ & \[\int c^x dx = \frac{c^x}{\ln c}\]\\\hline
+ log rule & \[\int \frac{1}{x} dx = \ln |x| + c\]\\\hline
+ sum rule & \[\int\left(f(x)\pm g(x)\right) dx  = \int f(x) dx \pm \int g(x) dx\]\\\hline
+ \end{tabularx}
+ \end{center}
+\end{table}
+
+\end{document}
