@@ -159,7 +159,11 @@ We say the \emph{Jacobian} of $g$ is
 \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \hdots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}\]
 
 So for instance $h:\reals^2\mapsto\reals^2$:
-\[h(x) = x^T\begin{bmatrix}3 & 1\\0 & -1\end{bmatrix}x = \begin{bmatrix}3x_1^2\\x_1x_2 -x_2^2\end{bmatrix}\]
+\[h(x) = x^T\begin{bmatrix}3 & 1\\0 & -1\end{bmatrix}{\color{red}\begin{bmatrix}x_1 & 0\\ 0 & x_2\end{bmatrix}} 
+%{\color{red}=x^T \begin{bmatrix}3*x_1+1*0 & 3*0+1*x_2\\0*x_1+-1*0&0*0+-1*x_2\end{bmatrix}}
+{\color{red}=x^T \begin{bmatrix}3x_1 & x_2\\0&-x_2\end{bmatrix}}
+%{\color{red}=\begin{bmatrix}3*x_1^2 \\ x_1x_2-x_2^2\end{bmatrix}}
+= \begin{bmatrix}3x_1^2\\x_1x_2 -x_2^2\end{bmatrix}\]
 then the jacobian is 
 \[J_h(x) = \begin{bmatrix} 
 \frac{d(3x_1^2)}{x_1} & \frac{d(3x_1^2)}{x_2}\\
