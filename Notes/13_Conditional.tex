@@ -1,0 +1,186 @@
+\include{includes}
+
+\title{Topic 13: Conditional Probability}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%
+\section{Basics}
+We think of conditional probability as a restriction to some subset of our sample space. 
+If we know one thing happened already whats the probability of another conditioned on the thing we know. 
+
+The basic rule of conditional probability is the following:
+For some probability space $(\Omega, \mathcal{A}, P)$, and for events $A,B\in\mathcal{A}$
+\[p(A\mid B) = \frac{p(A\cap B)}{p(B)}\]
+
+Using the axiom of total probability we can show that 
+\[p(A \mid \Omega) = \frac{p(A \cap \Omega)}{p(\Omega)} = \frac{p(A)}{1}\]
+
+Going back to the example from last topic if $A_{firstheads}$ is defined as before and $A_{allheads}=\langle\texttt{Heads},\texttt{Heads}\rangle$,
+we can say that 
+\[p(A_{allheads} \mid A_{firstheads}) = \frac{p(A_{allheads} \cap A_{firstheads})}{p(A_{firstheads})} = \frac{1/4}{1/2} = \frac{1}{2}\]
+This is based on the fact that \[A_{allheads} \subseteq A_{firstheads} \implies A_{allheads} \cap A_{firstheads} = A_{allheads}.\]
+This can be interpreted as ``the probability you end up with both coin flips being heads, given that the first coin was heads.'' 
+
+If we examine the opposite: 
+``the probability the first coin was heads, given that you end up with both coin flips being heads'' 
+the logic here still makes sense
+\[p(A_{firstheads}\mid A_{allheads} ) = \frac{1/4}{1/4} = 1.\]
+
+\paragraph{Another example.}
+Consider the following scenario for people's illnesses:
+\begin{center}
+\begin{tabular}{c|c|c}
+\textbf{Flu? ($F$)} & \textbf{Cough? ($C$)} & \textbf{$p(C/\overline{C} \cap F/\overline{F})$}\\
+\hline
+$F$ & $C$ & $0.3$\\
+$F$ & $\overline{C}$ & $0.2$\\
+$\overline{F}$ & $C$ & $0.15$\\
+$\overline{F}$ & $\overline{C}$ & $0.25$\\
+\end{tabular}
+\end{center}
+
+How do we calculate the probability you have flu given that you have a cough? 
+\[p(F \mid C) = \frac{p(C \cap F)}{p(C)}\]
+But how do we get $p(C)$?
+
+%%%%%%%%%%%%%
+\subsection{Sum Rule.}
+If we have some partition of the space $A_1, A_2,..., A_n$
+(remember a partition is a set of sets that all are disjoint, but $\bigcup_{i=1}^nA_i=\Omega$), 
+then we can say the following: 
+\[p(B) = \sum_{i=1}^n p(B\cap A_i).\]
+
+So, going back to our original question above, 
+we can say that 
+\[p(C) = p(C \cap F) + p(C \cap \overline{F}) = 0.3 + 0.15\]
+
+Therefore 
+\[p(F \mid C) = \frac{p(C \cap F)}{p(C)} = \frac{0.3}{0.45} = \frac{2}{3}\]
+
+%%%%%%%%%%%%%
+\subsection{Product and Chain Rules.}
+The product rule, is an algebraic manipulation of the conditional probability definition, but comes in handy quite often (if $p(B)>0$):
+\[p(A\cap B) = p(A\mid B)p(B).\]
+The chain rule is an expansion of this to multiple events $D_1,D_2,...D_n$ (notice there is no condition on these events)
+\begin{align*}
+&p(D_1 \cap D_2 \cap ... \cap D_n)\\
+&= p(D_n \mid D_1 \cap D_2 \cap ... \cap D_{n-1})p(D_1 \cap D_2 \cap ... \cap D_{n-1})\\
+& = p(D_n \mid D_1 \cap D_2 \cap ... \cap D_{n-1}) p(D_{n-1} \mid D_1 \cap D_2 \cap ... \cap D_{n-2})p(D_1 \cap D_2 \cap ... \cap D_{n-2})\\
+& = ...\\
+& = p(D_n| D_1 \cap D_2 \cap ... \cap D_{n-1})...p(D_3|D_1\cap D_2)p(D_2 | D_1)p(D_1)\\
+& = p(D_1)p(D_2 | D_1)p(D_3|D_1\cap D_2)...p(D_n| D_1 \cap D_2 \cap ... \cap D_{n-1})
+\end{align*}
+
+%%%%%%%%%%%%%
+\subsection{Independence} 
+Events $A$ and $B$ are \emph{independent} if \[p(A\cap B) = p(A)\cdot p(B).\]
+
+They are \emph{conditionally independent} if \[p(A\cap B|C) = p(A|C)\cdot p(B|C).\]
+
+\paragraph{Example.}
+A box contains two coins: a regular coin ($p(\texttt{Heads})=p(\texttt{Tails})=\frac{1}{2}$) and one fake two-headed coin ($p(\texttt{Heads})=1$), 
+we choose a coin and flip it twice.  
+
+Define the following events.
+\begin{itemize}
+\item[$A$] --- First coin toss results in a \texttt{Heads} (let $\overline{A}$ be \texttt{Tails})
+\item[$B$] --- Second coin toss results in a \texttt{Heads}  (let $\overline{B}$ be \texttt{Tails})
+\item[$C$] --- the regular coin has been selected  (let $\overline{C}$ be the biased coin)
+\end{itemize}
+
+So, the conditional probabilities are as follows: 
+\begin{center}\begin{tabular}{rlrl}
+$p(A|C)$ & $= \frac{1}{2}$ & $p(A|\overline{C})$ & $= 1$\\
+$p(B|C)$ & $= \frac{1}{2}$ & $p(B|\overline{C})$ & $= 1$\\
+$p(A\cap B|C)$ & $= \frac{1}{4}$ & $p(A\cap B|\overline{C})$ & $= 1$\\
+\multicolumn{2}{r}{$p(C)=p(\overline{C})$} & \multicolumn{2}{l}{$=\frac{1}{2}$}
+\end{tabular}\end{center}
+
+Since \[p(A\cap B|C) = \frac{1}{4} = p(A|C)\cdotp(B|C)\]
+and \[p(A\cap B|\overline{C}) = 1 = p(A|\overline{C})\cdotp(B|\overline{C})\]
+we can see $A$ and $B$ are \textit{conditionally} independent,
+but are they (regular) independent? 
+
+We know from the sum rule that if we have a partition ($C$ and $\overline C$) we can say that 
+\[p(A) = p(A\cap C) + p(A \cap \overline{C})\]
+then using the product rule, 
+\[=p(A|C)p(C) + p(A|\overline{C})p(\overline{C}) = \frac{1}{2}\cdot \frac{1}{2} + 1\cdot\frac{1}{2} = \frac{3}{4}\]
+
+$p(B)=\frac{3}{4}$ using the same logic.
+
+But to determine if $A$ and $B$ are independent we need to know $p(A\cap B)$, we can use the same trick: 
+\begin{align*}
+p(A\cap B) &= p(A\cap B|C)p(C) + p(A\cap B|\overline{C})p(\overline{C})\\
+	& = p(A|C)p(B|C)p(C) + p(A|\overline{C})p(B|\overline{C})p(\overline{C}) \\
+	& = \frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2}+1\cdot1\cdot\frac{1}{2}\\
+	& = \frac{1}{8} + \frac{1}{2} = \frac{5}{8} = \frac{10}{16}.
+\end{align*}
+But since $p(A)\cdot p(B) = \frac{3}{4}\cdot\frac{3}{4} = \frac{9}{16}$, 
+we can see the coin flips are not independent. 
+
+\paragraph{Example.} 
+Consider again rolling a (6-sided) die and let 
+\begin{itemize}
+\item[$A$] $=\{1,2\}$
+\item[$B$] $=\{2,4,6\}$
+\item[$C$] $=\{1,4\}$
+\end{itemize}
+
+\[p(A) = \frac{1}{3} \;\; p(B)=\frac{1}{2}\]
+
+\[p(A\cap B) = \frac{1}{6} = p(A)\cdot p(B)\]
+
+But, 
+\[p(A\mid C) = \frac{1}{2} \;\; p(B\mid C)=\frac{1}{2}\]
+
+\[p(A\cup B\mid C) = p(\{2\}\mid C) = 0\]
+thus 
+\[p(A\cup B \mid C) = 0 \ne \frac{1}{4} = p(A\mid C) \cdot p(B\mid C).\]
+
+%%%%%%%%%%%%%%%
+\section{Bayes' Rule}
+
+For some probability space $(\Omega, \mathcal{A}, P)$, and for some event that already happened $B\in\mathcal{A}.$
+Then the probability that some event $A\in\mathcal{A}$ also happens:
+\[p(A\mid B) = \frac{p(A\cap B)}{p(B)}\]
+(where $p(B)>0$). 
+
+\paragraph{Bayes' Rule}\footnote{originally published in 1763 by Thomas Bayes} tells us
+\[p(A\mid B) = \frac{p(B\mid A)p(A)}{p(B)}\]
+we call 
+\begin{itemize}
+\item[]$p(A)$ --- the prior
+\item[]$p(B\mid A)$ --- the likelihood
+\item[]$p(A\mid B)$ --- the posterior 
+\end{itemize}
+
+Another form:
+\[p(A\mid B) = \frac{p(B\mid A)p(A)}{p(B)} = \frac{p(B\mid A)p(A)}{p(B\mid A)p(A) + p(B\mid \overline A)p(\overline A)}\]
+
+\paragraph{Example.} 
+Let $A$ be event where you have the flu, and $B$ be the event you cough. 
+Given the following information: 
+\begin{itemize}
+\item[] Prior: $p(A)=0.05$ (background probability that you have a cough for no reason)
+\item[] Likelihood:
+\begin{itemize} 
+\item $p(B\mid A) = 0.8$ (probability you have a cough given you have the flu), 
+\item $p(B\mid \overline A) = 0.2$ (probability you have a cough if you don't have the flu)
+\end{itemize}
+\end{itemize}
+Whats the probability you have the flu if you have a cough ($p(A\mid B)$)?
+
+\[p(A\mid B) = \frac{p(B\mid A)p(A)}{p(B\mid A)p(A) + p(B\mid \overline A)p(\overline A)} = \frac{(0.8)(0.05)}{(0.8)(0.05)+(0.2)(0.95)}=\frac{0.04}{0.04+0.19}\approx 0.174\]
+
+What if you're really susceptible to a cough, so $p(A)=0.5$:
+\[p(A\mid B) = \frac{p(B\mid A)p(A)}{p(B\mid A)p(A) + p(B\mid \overline A)p(\overline A)} = \frac{(0.8)(0.5)}{(0.8)(0.5)+(0.2)(0.5)}=\frac{0.4}{0.4+0.1}=0.8\]
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S 1 
+Degroot and Schervish. ``Probability and Statistics'' \S 2
+
+\end{document}
