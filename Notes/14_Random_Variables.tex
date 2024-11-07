@@ -1,0 +1,397 @@
+\include{includes}
+
+\title{Topic 14: Random Variables}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+The formal definition of a random variable $X$, is as a mapping: \[X: \Omega \mapsto \reals\]
+which assigns a real number $X(\omega)$ to an outcome in our space (note this is not a probability in and of itself). 
+
+As an example, let say we toss a coin twice, we know we get $\Omega_{twocoin}$ as defined in previous lectures. 
+We can assign a variable $C(\omega)$ to be the count of the number of heads in each outcome.
+
+
+We can then example probabilities of the possible values a random variable $X$ can take on (its range), 
+we usually use a lower case of the came name, $x$. 
+We can think of this as the sum of the probabilities 
+of all the outcomes that lead to a particular value. 
+
+\begin{center}
+%\caption{Running example for $\Omega_{twocoin}$}
+\begin{tabular}{c|c|c}
+\textbf{$\omega$} & \textbf{$p(\omega)$} & \textbf{$C(\omega)$}\\
+\hline
+\texttt{HH}		& 1/4 &		$2$\\
+\texttt{HT}		& 1/4 &		$1$\\
+\texttt{TH}		& 1/4 &		$1$\\
+\texttt{TT}		& 1/4 &		$0$\\
+\end{tabular}%
+%
+\hspace{5em}%
+%
+\begin{tabular}{c|c}
+\textbf{$c$} &	\textbf{$p(C=c)$}\\
+\hline
+0 &		1/4\\
+1 &		1/2\\
+2 & 		1/4\\
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%
+%\section{Probability Distributions}
+\section{Discrete random variables --- Probability Mass Functions}
+In this case we call the probability distribution a \emph{probability mass function} (PMF). 
+Below is a visualization of the PMF for $C$ above. 
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    xmin=-.5,xmax=2.5,
+    ymin=0, ymax=1,
+    xtick={0,1,2},
+    enlargelimits=false,
+    xlabel={$c$},
+    ylabel={$p(C=c)$},
+]
+\addplot[
+    blue,
+    only marks,
+    scatter,
+    mark=o,
+    mark size=2.9pt]
+coordinates{(0,0.25) (1,0.5) (2,0.25)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+As another example lets again examine rolling two dice (for simplicity, 4 sided), 
+and let $V(\omega)$ be the value of the sum of the two rolled dice. 
+
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+%\caption{Running example for $\Omega_{twocoin}$}
+\begin{tabular}{c|c|c}
+\textbf{$\omega$} & \textbf{$p(\omega)$} & \textbf{$C(\omega)$}\\
+\hline
+\texttt{11}		& 1/16 &		$2$\\
+\texttt{12}		& 1/16 &		$3$\\
+\texttt{13}		& 1/16 &		$4$\\
+\texttt{14}		& 1/16 &		$5$\\
+\texttt{21}		& 1/16 &		$3$\\
+\texttt{22}		& 1/16 &		$4$\\
+\texttt{23}		& 1/16 &		$5$\\
+\texttt{24}		& 1/16 &		$6$\\
+\texttt{31}		& 1/16 &		$4$\\
+\texttt{32}		& 1/16 &		$5$\\
+\texttt{33}		& 1/16 &		$6$\\
+\texttt{34}		& 1/16 &		$7$\\
+\texttt{41}		& 1/16 &		$5$\\
+\texttt{42}		& 1/16 &		$6$\\
+\texttt{43}		& 1/16 &		$7$\\
+\texttt{44}		& 1/16 &		$8$\\
+\end{tabular}%
+%
+\begin{tabular}{c|c}
+\textbf{$c$} &	\textbf{$p(C=c)$}\\
+\hline
+2 & 		1/16\\
+3 & 		1/8\\
+4 & 		3/16\\
+5 & 		1/4\\
+6 & 		3/16\\
+7 & 		1/8\\
+8 & 		1/16\\
+\end{tabular}%
+\end{minipage}\begin{minipage}{0.55\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+    xmin=1.5,xmax=8.5,
+    ymin=0, ymax=1,
+    xtick={2,3,4,5,6,7,8},
+    enlargelimits=false,
+    xlabel={$c$},
+    ylabel={$p(C=c)$},
+]
+\addplot[
+    blue,
+    only marks,
+    scatter,
+    mark=o,
+    mark size=2.9pt]
+coordinates{(2,0.0625) (3,0.125) (4, 0.1875) (5, 0.25) (6,0.1875) (7,0.125) (8,0.0625)};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+
+\end{center}
+
+%%%%%%%%%%%%%
+\subsection{Bernoulli} 
+A well-known PMF is a \emph{Bernoulli Distribution} which is defined as follows
+with probability of success ($k=1$) $0 \le \alpha \le 1$ for $\Omega = \{0,1\}$: 
+\[p(k) = \begin{cases}\alpha & k=1\\1-\alpha & k=0\end{cases}\]
+or put anther way
+\[p(k) = \alpha^k(1-\alpha)(1-k) \;\; \forall k\in\Omega\]
+
+\paragraph{Example Scenario.} A single (possibly biased) coin flip with probability of heads $\alpha$.
+
+%%%%%%%%%%%%%
+\subsection{Binomial.}
+Another (maybe the most) well-known PMF is the \emph{Binomial Distribution}, 
+again we say the probability of a (single) trial's success is $0 \le \alpha \le 1$, 
+but now we have $n$ trials and we want to know the probability of getting $k\le n$ successes 
+(this makes $\Omega = \{0,1,2,...n\}$).
+In this case 
+\[p(k) = \binom n k \alpha^k (1-\alpha)^{n-k} \;\; \forall k\in\Omega.\]
+
+\paragraph{Example Scenario.} $n$ repeated coin flips, each one bring independent and having probability of heads $\alpha$.
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={binom(\k,\n,\p)=\n!/(\k!*(\n-\k)!)*\p^\k*(1-\p)^(\n-\k);}
+]
+\begin{axis}[
+    samples at={0,...,40},
+    ymin=0,ymax=0.25,
+    ytick={0,0.1,0.2},
+    xlabel={$k$},
+    ylabel={$p(k)$},
+]
+\addplot [mark=o,blue,dashed,mark options={solid}] {binom(x,40,0.1)}; \addlegendentry{$\alpha=0.1$}
+\addplot [mark=o,red,dashed,mark options={solid}] {binom(x,40,0.3)}; \addlegendentry{$\alpha=0.3$}
+\addplot [mark=o,green,dashed,mark options={solid}] {binom(x,40,0.5)}; \addlegendentry{$\alpha=0.5$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%
+\subsection{Poisson.}
+\label{subsec:poisson}
+Poisson distributions are used to model rare events over time. 
+
+\[p(k) = \frac{\lambda^ke^{-\lambda}}{k!} \;\; \forall k\in\Omega.\]
+
+\paragraph{Example Scenario.} 
+One of the first applications of the Poisson distribution was by statistician Ladislaus Bortkiewicz. 
+In the late 1800s, he investigated accidental deaths by horse kick of soldiers in the Prussian army. 
+He analyzed 20 years of data for 10 army corps, equivalent to 200 years of observations of one corps.
+
+He found that a mean of 0.61 soldiers per corps died from horse kicks each year. 
+However, most years, no soldiers died from horse kicks. 
+On the other end of the spectrum, 
+one tragic year there were four soldiers in the same corps who died from horse kicks.%
+\footnote{see \textbf{Ladislaus von Bortkiewicz} ``The Law of Small Numbers'', 1898. pp. 23-25}
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={poisson(\k,\l)=((\l^\k)*(e^(-\l)))/(\k!);}
+]
+\begin{axis}[
+    samples at={0,...,20},
+    ymin=0,ymax=0.4,
+    ytick={0,0.1,0.2,0.3,0.4},
+    xlabel={$k$},
+    ylabel={$p(k)$},
+]
+\addplot [mark=o,blue,dashed,mark options={solid}] {poisson(x,1)}; \addlegendentry{$\lambda=1$}
+\addplot [mark=o,red,dashed,mark options={solid}] {poisson(x,4)}; \addlegendentry{$\lambda=4$}
+\addplot [mark=o,green,dashed,mark options={solid}] {poisson(x,10)}; \addlegendentry{$\lambda=10$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+
+%%%%%%%%%%%%%
+\subsection{Geometric.}
+
+\[p(k) = (1-\alpha)^{k-1}\alpha \;\; \forall k\in\Omega.\]
+
+\paragraph{Example Scenario.} Number of coin flips (probability of heads $\alpha$) needed to get $k$ heads. 
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={genom(\k,\a)=(1-\a)^(\k-1)*\a;}
+]
+\begin{axis}[
+    samples at={1,...,10},
+    ymin=0,ymax=1,
+    xlabel={$k$},
+    ylabel={$p(k)$},
+]
+\addplot [mark=o,blue,dashed,mark options={solid}] {genom(x,0.2)}; \addlegendentry{$\alpha=0.2$}
+\addplot [mark=o,red,dashed,mark options={solid}] {genom(x,0.5)}; \addlegendentry{$\alpha=0.5$}
+\addplot [mark=o,green,dashed,mark options={solid}] {genom(x,0.8)}; \addlegendentry{$\alpha=0.8$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+%%%%%
+\section{Continuous Random Variables -- Probability Density Functions}
+In the case of continuous random variable (think grades, weight, height, rainfall [in.], etc.) 
+the probability distribution is referred to as a \emph{Probability Density Function} (PDF). 
+We still have the same properties as before, everything sums to 1, all the probabilities are non-negative, etc.
+but we typically consider a \textit{range} rather than a single value to test. 
+In the case of PDFs the probability is the area under the curve along a range (the total area is going to end up being one), 
+but when we're talking about area under the curve we're really considering the integral:
+\[\int_{-\infty}^\infty p(X=x) dx = 1\]
+therefore to test something like $p(a \le X \le b)$ we need to find
+\[p(a \le X \le b) = \int_{a}^{b} p(X=x) dx \]
+
+
+%%%%%%%%%%%%%
+\subsection{Uniform.}
+
+All outcomes with value between $a$ and $b>a$ are equally probable:
+\[p(k) = \begin{cases}\frac{1}{b-a} & a \le k \le b\\0 & \text{othwerwise}\end{cases}\]
+
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={uni(\k,\a,\b)=and(\k>=\a,\k<=\b)*(1/(\b-\a));}
+]
+\begin{axis}[
+    samples at={-6,-5.001,-4.999,-3.001,-2.999,-1.001,-0.999,2.999,3.001,4.999,5.001,6},
+    ymin=0,ymax=0.5,
+    xlabel={$\omega$},
+    ylabel={$p(\omega)$},
+]
+\addplot [blue] {uni(x,-5,5)}; \addlegendentry{$a=-5,b=5$}
+\addplot [red] {uni(x,-1,3)}; \addlegendentry{$a=-1,b=3$}
+\addplot [green] {uni(x,-3,3)}; \addlegendentry{$a=-3,b=3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%
+\subsection{Gaussian}
+Also called the \emph{normal} distribution. 
+Is parameterized by the mean (center) value of the samples $\mu\in\reals$,
+and the standard deviation (spread) of the samples $\sigma>0$
+
+\[p(x) = \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\]
+
+\paragraph{Example Scenario.} Most natural phenomena (average daily temperature, height of adults, etc.). 
+
+
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={gaus(\k,\m,\s)=1/(\s*sqrt(2*pi))*exp(-((\k-\m)^2)/(2*\s^2));}
+]
+\begin{axis}[
+    samples=50,smooth,
+    ymin=0,ymax=1,
+    xlabel={$\omega$},
+    ylabel={$p(\omega)$},
+]
+\addplot [blue] {gaus(x,0,0.5)}; \addlegendentry{$\mu=0,\sigma=0.5$}
+\addplot [red] {gaus(x,0,1)}; \addlegendentry{$\mu=0,\sigma=1$}
+\addplot [green] {gaus(x,-2,0.75)}; \addlegendentry{$\mu=-2,\sigma=0.75$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+
+%%%%%%%%%%%%%
+\subsection{Exponential.}
+Parameterized by a value of $\lambda>0$, which is the average rate of arrivals over time.
+\[p(k) = \lambda e^{-k\lambda}\]
+
+\paragraph{Example Scenario.} The \emph{waiting time} between rare events 
+(notice this can also thought of as the time between Poisson events, Sec.~\ref{subsec:poisson}).
+
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={exp_dist(\k,\l)=(\k>=-1)*\l*exp(-1*\l*\k);}
+]
+\begin{axis}[
+	xmin=0,smooth,samples=50,
+    xlabel={$\omega$},
+    ylabel={$p(\omega)$},
+]
+\addplot [blue] {exp_dist(x,0.5)}; \addlegendentry{$\lambda=0.5$}
+\addplot [red] {exp_dist(x,1)}; \addlegendentry{$\lambda=1$}
+\addplot [green] {exp_dist(x,1.5)}; \addlegendentry{$\lambda=1.5$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+%%%%%%%%%%%%%%%%
+\section{Cumulative Distribution Functions}
+Sometimes we need to know the probability over a range, where the lower bound is $-\infty$ (or upper/$\infty$). 
+Something like: 
+\[p(X\le x).\]
+
+%%%%%%%
+\subsection{Discrete}
+For discrete this is somewhat intuitive: 
+\[p(X\le x) = \sum_{y \in \{\omega \in \Omega \mid \omega \le x\}} p(X=y)\]
+
+In the example above, the probability 
+\[p(C\le c) = \sum_{d \in \left\{x \in \ints | x \ge 2 \wedge x \le c\right\}}p(C=d)\]
+so if we want to know
+\[p(C\le 4) = \sum_{d\in\{2,3,4\}} p(C=d) = p(C=2) + p(C=3) + p(C=4) = \frac{1}{16} + \frac{1}{8} + \frac{3}{16} = \frac{3}{8}\]
+
+This in and of itself can also be visualized: 
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    xmin=1.5,xmax=8.5,
+    ymin=0, ymax=1,
+    xtick={2,3,4,5,6,7,8},
+    enlargelimits=false,
+    xlabel={$c$},
+    ylabel={$p(C=c)$},
+]
+\addplot[
+    blue,
+    only marks,
+    mark=o,
+    mark size=2.9pt]
+coordinates{(2,0.0625) (3,0.1875) (4, 0.375) (5, 0.625) (6,0.8125) (7,0.9375) (8,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+%%%%%%%
+\subsection{Continuous}
+
+For continuous random variables, it looks similar to the property we had earlier: 
+\[p(X\le x) = \int_{-\infty}^x p(X=x) dx\]
+
+So for instance, if we look at the exponential  distribution: 
+\[(pX\le x) = \int_{-\infty}^x  \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}} dx\]
+
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={gaus_cdf(\x,\m,\s)=1/(1 + exp(-0.07056*((\x-\m)/\s)^3 - 1.5976*(\x-\m)/\s));}
+]
+\begin{axis}[
+     legend style={at={(1,1)},anchor=north west},
+    samples=50,smooth,
+    ymin=0,ymax=1,
+    xlabel={$\omega$},
+    ylabel={$p(\omega)$},
+]
+\addplot [blue] {gaus_cdf(x,0,0.5)}; \addlegendentry{$\mu=0,\sigma=0.5$}
+\addplot [red] {gaus_cdf(x,0,1)}; \addlegendentry{$\mu=0,\sigma=1$}
+\addplot [green] {gaus_cdf(x,-2,0.75)}; \addlegendentry{$\mu=-2,\sigma=0.75$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S\S 2.1-2.4
+
+
+\end{document}
