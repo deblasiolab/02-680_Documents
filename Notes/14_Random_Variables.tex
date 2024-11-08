@@ -239,16 +239,22 @@ We still have the same properties as before, everything sums to 1, all the proba
 but we typically consider a \textit{range} rather than a single value to test. 
 In the case of PDFs the probability is the area under the curve along a range (the total area is going to end up being one), 
 but when we're talking about area under the curve we're really considering the integral:
-\[\int_{-\infty}^\infty p(X=x) dx = 1\]
+\[p(X\le x) = \int_{-\infty}^x f(x) dx = 1\]
 therefore to test something like $p(a \le X \le b)$ we need to find
-\[p(a \le X \le b) = \int_{a}^{b} p(X=x) dx \]
+\[p(a \le X \le b) = \int_{a}^{b} f(x)dx \]
 
+Notice that $f(x)$ is not a probability in and of itself, the probability comes from the integral. 
+Thats why the probability of a single value ($p(X=x)$) is (usually) zero. 
+
+\begin{aside}[Correction from class]
+the initial version of these notes had a wrong formula (they excluded the nuance of the function $f(x)$. 
+\end{aside}
 
 %%%%%%%%%%%%%
 \subsection{Uniform.}
 
 All outcomes with value between $a$ and $b>a$ are equally probable:
-\[p(k) = \begin{cases}\frac{1}{b-a} & a \le k \le b\\0 & \text{othwerwise}\end{cases}\]
+\[f(k) = \begin{cases}\frac{1}{b-a} & a \le k \le b\\0 & \text{othwerwise}\end{cases}\]
 
 
 \begin{center}
@@ -275,7 +281,7 @@ Also called the \emph{normal} distribution.
 Is parameterized by the mean (center) value of the samples $\mu\in\reals$,
 and the standard deviation (spread) of the samples $\sigma>0$
 
-\[p(x) = \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\]
+\[f(x) = \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\]
 
 \paragraph{Example Scenario.} Most natural phenomena (average daily temperature, height of adults, etc.). 
 
@@ -303,7 +309,7 @@ and the standard deviation (spread) of the samples $\sigma>0$
 %%%%%%%%%%%%%
 \subsection{Exponential.}
 Parameterized by a value of $\lambda>0$, which is the average rate of arrivals over time.
-\[p(k) = \lambda e^{-k\lambda}\]
+\[f(k) = \lambda e^{-k\lambda}\]
 
 \paragraph{Example Scenario.} The \emph{waiting time} between rare events 
 (notice this can also thought of as the time between Poisson events, Sec.~\ref{subsec:poisson}).
@@ -343,24 +349,56 @@ so if we want to know
 
 This in and of itself can also be visualized: 
 \begin{center}
+%\begin{tikzpicture}
+%\begin{axis}[
+%    xmin=1.5,xmax=8.5,
+%    ymin=0, ymax=1,
+%    xtick={2,3,4,5,6,7,8},
+%    enlargelimits=false,
+%    xlabel={$c$},
+%    ylabel={$p(C=c)$},
+%]
+%\addplot[
+%    blue,
+%    only marks,
+%    mark=o,
+%    mark size=2.9pt]
+%coordinates{(2,0.0625) (3,0.1875) (4, 0.375) (5, 0.625) (6,0.8125) (7,0.9375) (8,1)};
+%\end{axis}
+%\end{tikzpicture}
+
 \begin{tikzpicture}
 \begin{axis}[
-    xmin=1.5,xmax=8.5,
-    ymin=0, ymax=1,
-    xtick={2,3,4,5,6,7,8},
-    enlargelimits=false,
-    xlabel={$c$},
-    ylabel={$p(C=c)$},
+    clip=false,
+    jump mark left,
+    ymin=0,ymax=1,
+    xmin=0, xmax=10,
+    every axis plot/.style={very thick},
+    discontinuous,
+    table/create on use/cumulative distribution/.style={
+        create col/expr={\thisrow{f(x)}}   
+    }
 ]
-\addplot[
-    blue,
-    only marks,
-    mark=o,
-    mark size=2.9pt]
-coordinates{(2,0.0625) (3,0.1875) (4, 0.375) (5, 0.625) (6,0.8125) (7,0.9375) (8,1)};
+\addplot [red] table [y=cumulative distribution]{
+x f(x)
+0 0
+2 0.0625
+3 0.1875
+4 0.375
+5 0.625
+6 0.8125
+7 0.9375
+8 1
+10 1
+};
 \end{axis}
+
 \end{tikzpicture}
 \end{center}
+
+
+Notice that technically, the CDF even for a discrete value is defined between elements in the range, 
+so in the example above we can ask $p(C \le 4.78) = \frac{3}{8}$.
 
 %%%%%%%
 \subsection{Continuous}
@@ -369,7 +407,8 @@ For continuous random variables, it looks similar to the property we had earlier
 \[p(X\le x) = \int_{-\infty}^x p(X=x) dx\]
 
 So for instance, if we look at the exponential  distribution: 
-\[(pX\le x) = \int_{-\infty}^x  \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}} dx\]
+\[p(X\le x) = \int_{-\infty}^x  \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}} dx\]
+Note that the actual integration here is beyond the scope of this course. 
 
 
 \begin{center}
