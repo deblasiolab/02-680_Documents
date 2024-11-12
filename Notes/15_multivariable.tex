@@ -1,0 +1,161 @@
+\include{includes}
+
+\title{Topic 15: Multiple Random Variables}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+Sometimes we need to deal with the interactions of more than one random variable. 
+
+Consider tossing a (fair) coin 3 times, and define two random variables: 
+\begin{itemize}
+\item{$X$} --- the number of heads in the first toss
+\item {$Y$} --- the number of heads in all 3 tosses
+\end{itemize}
+
+We want to know the joint probability (that is, the probability $p(X=x,Y=y)$): 
+
+\begin{center}
+\begin{tabular}{cr||c|c|c|c|c}
+	&& \multicolumn{4}{c|}{$Y$}\\
+	&& 0 & 1 & 2 & 3\\
+\hline\hline
+\multirow{2}{*}{$X$} & 0	& 1/8		& 1/4		& 1/8		& 0	\\%&	1/2\\
+\cline{3-6}
+			& 1	&	0	& 1/8		& 1/4		& 1/8		\\%&1/2\\
+\hline
+%			&	&	1/8	&3/8 		& 3/8		& 1/8 	&\\
+\end{tabular}
+\end{center}
+
+\section{Marginal Probabilities}
+What if we're given the joint probability of some events and want to find out the underlying probability of the events. 
+
+\paragraph{Example.}
+Assume we have two \emph{unfair} coins, which we will model as random variables $X$ and $Y$, 
+
+and we're given the following joint probabilities: 
+\begin{center}
+\begin{tabular}{cr||c|c|c}
+	&& \multicolumn{2}{c|}{$Y$}\\
+	&& \texttt{Heads} & \texttt{Tails}\\
+\hline\hline
+\multirow{2}{*}{$X$} & \texttt{Heads}	& 1/10		& 2/10		& 3/10\\
+\cline{3-4}
+			& \texttt{Tails}	&	3/10	& 4/10		& 7/10\\
+\hline
+			&			&	4/10	& 6/10\\
+\end{tabular}
+\end{center}
+
+If we want to determine, say $P(X=\texttt{Tails})$, it turns out we can some over all the possibilities of $Y$: 
+\[P(X=\texttt{Tails}) = \sum_{y\in\{\texttt{Heads},\texttt{Tails}\}}p(X=\texttt{Tails},Y=y) = \frac{3}{10} + \frac{4}{10} = \frac{7}{10}\]
+
+Doing all the math, both coins are biased toward \texttt{Tails},  the first coin ($X$) more-so. 
+
+\subsection{Continuous Random Variables}
+For continuous random variables, this again turns from sums into integrals. 
+Assume you're given a joint distribution function $f(x,y)$.
+We can, as before, find the joint probability for a range as a (double) integral: 
+\[p(a \le X \le b, c \le Y \le d) = \int_a^b \int_c^d f(x,y) dy dx\]
+
+And to get a marginal distribution function 
+\[f(x) = \int_{-\infty}^\infty f(x,y) dy\]
+
+
+\paragraph{Example.} 
+Lets say we're drawing points uniformly over the unit square, 
+in this case 
+\[f(x,y) = \begin{cases} 1 & 0 \le x,y \le 1\\ 0 & \text{otherwise}\end{cases}\]
+
+So if we wan to find 
+\[ p\left(X\le \frac{1}{2}, Y \le \frac{1}{2}\right) = \int_0^\frac{1}{2} \int_0^\frac{1}{2} 1 dydx = 
+\Eval{\Eval{xy}{0}{\frac{1}{2}}}{0}{\frac{1}{2}} = 
+\Eval{x\cdot\frac{1}{2}-x\cdot0}{0}{\frac{1}{2}}\]\[ = 
+\left(\frac{1}{2}\cdot\frac{1}{2} - \frac{1}{2}\cdot0\right) - \left(0 \cdot\frac{1}{2} - 0 \cdot 0\right) = \frac{1}{4}\]
+
+%%%%%%%%%%%%%%
+\section{Independence of Random Variables}
+Similar to independence for event probabilities, two random variables $X$ and $Y$ are independent iff 
+\[
+\forall x, y : \;\; p(X=x,Y=y) = p(X=x)\cdot p(Y=y)
+\]
+
+
+Work left to the reader: one of the situations below  describes independent random variables the other does not. 
+
+\begin{center}
+\begin{tabular}{cr||c|c|c}
+	&& \multicolumn{2}{c|}{$Y$}\\
+	&& \texttt{Heads} & \texttt{Tails}\\
+\hline\hline
+\multirow{2}{*}{$X$} & \texttt{Heads}	& 1/4		& 1/4		& 1/2\\
+\cline{3-4}
+			& \texttt{Tails}	&	1/4	& 1/4		& 1/2\\
+\hline
+			&			&	1/2	& 1/2\\
+\end{tabular}\hspace{3em}
+%
+\begin{tabular}{cr||c|c|c}
+	&& \multicolumn{2}{c|}{$Y$}\\
+	&& \texttt{Heads} & \texttt{Tails}\\
+\hline\hline
+\multirow{2}{*}{$X$} & \texttt{Heads}	& 1/2		& 0		& 1/2\\
+\cline{3-4}
+			& \texttt{Tails}	&	0	& 1/2		& 1/2\\
+\hline
+			&			&	1/2	& 1/2\\
+\end{tabular}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%
+\section{Conditional Distributions}
+Similar to independence for event probabilities, for two random variables $X$ and $Y$ :
+\[p(X\mid Y) = \frac{p(X,Y)}{p(X)}\]
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+\textit{BRCA1} mutation & \textit{P53} mutation & develops cancer \\
+$G_1$ & $G_2$ & $C$& $p(G_1,G_2,C)$\\
+\hline\hline
+\texttt{N}& \texttt{N}& \texttt{N}& $0.24$\\
+\texttt{N}& \texttt{N}& \texttt{Y}& $0.01$\\
+\texttt{N}& \texttt{Y}& \texttt{N}& $0.20$\\
+\texttt{N}& \texttt{Y}& \texttt{Y}& $0.05$\\
+\texttt{Y}& \texttt{N}& \texttt{N}& $0.15$\\
+\texttt{Y}& \texttt{N}& \texttt{Y}& $0.10$\\
+\texttt{Y}& \texttt{Y}& \texttt{N}& $0.05$\\
+\texttt{Y}& \texttt{Y}& \texttt{Y}& $0.20$\\
+\end{tabular}
+\end{center}
+
+Compute $p(C\mid G_1,G_2)$.
+
+\[
+p(C\mid G_1,G_2) = \frac{p(G_1,G_2,C)}{p(G_1,G_2)} =  \frac{p(G_1,G_2,C)}{p(G_1,G_2,C=\texttt{N})+p(G_1,G_2,C=\texttt{Y})} 
+\]
+
+Note that \[p(G_1=a,G_2=b) = \frac{\sum_{c\in\{\texttt{Y},\texttt{N}\}}p(G_1=a,G_2=b,C=c)}{\sum_{g_1\in\{\texttt{Y},\texttt{N}\}}\sum_{g_2\in\{\texttt{Y},\texttt{N}\}}\sum_{c\in\{\texttt{Y},\texttt{N}\}}p(G_1=g_1,G_2=g_2,C=c)}\]
+but because the denominator is $1$ it is left out of the equation above for ease exposition. 
+
+\begin{center}
+\begin{tabular}{c|c|c}
+%\textit{BRCA1} mutation & \textit{P53} mutation \\
+$G_1$ & $G_2$ & $p(C=1\mid G_1,G_2)$\\
+\hline\hline
+\texttt{N}& \texttt{N}& $\frac{0.01}{0.24+0.01} = 0.04$\\
+\texttt{N}& \texttt{Y}& $\frac{0.05}{0.20+0.05} = 0.20$\\
+\texttt{Y}& \texttt{N}& $\frac{0.10}{0.15+0.10} = 0.40$\\
+\texttt{Y}& \texttt{Y}& $\frac{0.20}{0.05+0.20} = 0.80$\\
+\end{tabular}
+\end{center}
+
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S\S 2.5-2.7
+
+\end{document}
