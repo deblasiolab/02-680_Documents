@@ -18,6 +18,10 @@
 
 \usepackage{pgfplots,pgfplotstable}
 
+\usepackage[autosize,forceshell]{dot2texi}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
 \makeatletter
 \long\def\ifnodedefined#1#2#3{%
     \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
@@ -70,6 +74,8 @@
 \DeclareMathOperator {\reals}{\mathbb{R}}
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\V}{\mathbb{V}}
 
 
 \renewcommand\labelenumi{(\theenumi)}
