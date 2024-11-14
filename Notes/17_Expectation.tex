@@ -1,0 +1,130 @@
+
+\include{includes}
+
+\title{Topic 17: Expectation and Moments}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%
+\section{Expectation}
+Given a probability distribution $p(X)$ of a random variable $X$, how can we summarize the distribution with a single value? 
+
+The expectation of a random variable is a number that attempts to capture the center of $p(X)$ 
+and can be interpreted as the long-run average of many independent samples from the given distribution.
+
+For a (discrete) random variable $X$, the \emph{expected value} is 
+\[\E[X] = \sum_{x\in range(X)} x \cdot p(X=x).\]
+We sometimes also call this the \emph{mean} or \emph{first moment} of the variable. 
+
+For instance, in our previous examples, for a pair of 4-sided die: 
+\[\E[C] = 2 \cdot \frac{1}{16} + 3  \cdot \frac{2}{16} + 4 \cdot\frac{3}{16} + 5\cdot\frac{4}{16} + 6\cdot\frac{3}{16} + 7\cdot\frac{2}{16} + 8 \cdot \frac{1}{16} = \frac{80}{16} = 5\]
+
+Note that in this case the expected value happens to be one of the outcomes, 
+but if we consider a random variable $D$ which is the outcome of a single 6-sided die: 
+\[\E[D] = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6} = \frac{21}{6} = \frac{7}{2}\]
+which is not a possible outcome. 
+
+For a continuous random variable, again we swap a sum for an integral:
+\[\E[X] = \int_{-\infty}^\infty x \cdot f(x) dx\]
+
+So if we look at random variable $U\sim Uniform(-1,3)$, and thus $f(u)=\frac{1}{4}$. 
+\[\E[U] = \int_{-\infty}^\infty x \cdot \frac{1}{4} dx = \left.\frac{1}{8} x^2 \right|_{-1}^3 = \frac{9}{8} - \frac{1}{8} = 1\]
+
+%%%%%%%%%%%%%%
+\section{Variance and Standard Deviation}
+In addition to the mean, many times we want to know something about how ``far'' the likely outcomes are from the mean,
+in the normal distribution from last week this visually is about how narrow the bell is. 
+To do this we define the \emph{variance} of a random variable as  
+\[\V[X] = \E\left[\left[X-\E\left[X\right]\right]^2\right]\]
+The variance is the expected squared difference between a random variables and its mean. 
+
+The \emph{standard deviation} of a variable is the square root of the variance:
+\[\sigma(X) = \sqrt{\V[X]} = \sqrt{ \E\left[\left[X-\E\left[X\right]\right]^2\right]}\]
+
+If we look at a first coin, $F$:
+\[\E[F] = \frac{1}{2}\]
+The difference between $X$ and $\E[F]$ is $+\frac{1}{2}$ and $-\frac{1}{2}$ (with equal probability). 
+\[\V[F] = \E\left[\left[F-\E\left[F\right]\right]^2\right] = \left(\frac{1}{2}\left(+\frac{1}{2}\right)^2 + \frac{1}{2}\left(-\frac{1}{2}\right)^2\right) = \frac{1}{4}\]
+and thus
+\[\sigma[F] = \sqrt{\V[F]} = \sqrt{\frac{1}{4}} =\frac{1}{2}.\]
+
+What if instead we tried to simulate a coin flip into variable $S$. 
+But we made a mistake and now we get 1 or 0 with probability $0.4995$, but in some cases we output 100 (with probability $0.001$). 
+What are $\E[S], \V[S], \sigma[S]$?
+\[\E[S] = 0 \cdot 0.4995 + 1 \cdot 0.4995 + 100 * 0.001 = 0 + 0.4995 + 0.1 = 0.5995\]
+\[\V[S] = \E\left[\left[S-\E\left[S\right]\right]^2\right] \]\[ = \left(0.4995 \cdot 0.5995^2\right) + \left(0.4995 \cdot 0.4005^2\right) + \left(0.01 \cdot  99.4005^2\right) 
+\approx  0.180 + 0.080 + 9.880 \approx 10.14\]
+\[\sigma[S] = \sqrt{\V[S]} \approx \sqrt{10.14} \approx 3.184\]
+So clearly the variance is much higher, but how often do we actually expect to see a value of 100? 
+If $p(S=100)=0.001$ thats approximately one in every 1000 throws,
+if we throw much less than that we may think its a fair coin. 
+That leads the question of how we measure these things in practice. 
+
+%%%%%%%%%%%%%%%
+\section{Properties of Expectation and Variance}
+
+%%%%%
+\subsection{Summation}
+For some set $X_1, X_2, ..., X_n$ of independent random variables
+\[\E\left[\sum_{i\in[n]} X_i\right] = \sum_{i\in[n]} \E[X_i] \hspace{5em} 
+\V\left[\sum_{i\in[n]} X_i\right] = \sum_{i\in[n]} \V[X_i]\]
+
+%%%%%
+\subsection{Linearity}
+For some random variable $X$ and constants $a,b\in\reals$
+\[\E\left[aX+b\right] = a\E[X]+b \hspace{5em} 
+\V\left[aX+b\right] = a^2\V[X]\]
+
+%%%%%%%%%%%%%%%%%
+\section{Conditional Expectation and Variance}
+
+%%%%%%%%%%%
+\subsection{Discrete}
+\[\E\left[X\mid Y=y\right] = \sum_x \left(x \cdot p(X=x \mid Y=y)\right)\]
+\[\V\left[X\mid Y=y\right] = \sum_x \left(\left[x-\E\left[X\mid Y=y\right]\right]^2 \cdot p(X=x \mid Y=y)\right)\]
+
+%%%%%%%%%%%
+\subsection{Continuous}
+\[\E\left[X\mid Y=y\right] = \int_{-\infty}^\infty \left(x \cdot f(x\mid y) dx\right)\]
+\[\E\left[X\mid Y=y\right] = \int_{-\infty}^\infty \left(\left[x-\E\left[X\mid Y=y\right]\right]^2 \cdot f(x\mid y) dx\right)\]
+
+\paragraph{Example.}
+Assume $X\sim Uniform(0,1), Y\mid X=x \sim Uniform(x,1)$. 
+\begin{align*}
+\E[Y\mid X=x] &= \int_{-\infty}^\infty \left(y \cdot f(y\mid x) dy\right) \\
+&= \int_x^1 \left(y \cdot \frac{1}{1-x} dy\right)\\
+&= \frac{1}{1-x} \int_x^1 \left(y dy\right)\\
+&= \frac{1}{1-x} \cdot \left[\frac{1}{2}y^2\right]^1_x\\
+&= \frac{1}{1-x} \cdot \left[\frac{1}{2}-\frac{1}{2}x^2\right]\\
+&= \frac{1-x^2}{2(1-x)} = \frac{(1+x)}{2}
+\end{align*}
+\begin{align*}
+\V[Y\mid X=x] &= \int_{-\infty}^\infty  \left(\left[y-\E\left[Y\mid X=x\right]\right]^2 \cdot f(y\mid x) \right)dy \\
+& =  \int_x^1  \left(\left[y - \frac{(1+x)}{2}\right]^2 \cdot  \frac{1}{1-x} \right)dy\\
+& =  \frac{1}{1-x} \int_x^1  \left(\frac{\left(2y - (1 +x)\right)^2}{4} \right)dy\\
+& = \frac{1}{1-x} \int_x^1  \left(\frac{\left(4y^2 - 4(1 +x)y + (1 +x)^2\right)}{4} \right)dy\\
+& = \frac{1}{1-x} \int_x^1  \left(y^2 - (1+x)y +\frac{(1 +x)^2}{4} \right)dy\\
+& = \frac{1}{1-x} \left[\frac{y^3}{3} - \frac{(1+x)}{2}y^2 +\frac{(1 +x)^2}{4}y \right]^1_x\\
+& = \frac{1}{1-x} \left[\frac{y^3}{3} + \frac{y(1+x)((1+x)-2y)}{4} \right]^1_x\\
+& = \frac{1}{1-x} \left[\frac{1-x^3}{3} + \frac{(1+x)^2(x-1))}{4} \right]^1_x\\
+& = \frac{1}{1-x} \left[ \frac{(1-x)(1+x+x^2)}{3} - \frac{(1+x)^2\left(1-x\right)}{4} \right]\\
+& = \frac{(1+x+x^2)}{3} -\frac{(1+x)^2}{4}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%
+\section{Covariance \& Correlation}
+Given two random variables $X$ and $Y$ with expectations 
+$\mu_X = \E[X]$ and $\mu_Y=\E[Y]$ respectively. 
+The \emph{covariance} between the two is defined as
+\[Cov(X,Y) = \E\left[(X-\mu_x)(Y-\mu_Y)\right]=\E[XY]-\E[X]\E[Y]\]
+
+Assume also that the standard deviations are $\sigma_X$ and $\sigma_Y$, 
+then the \emph{correlation} of $X$ and $Y$ is defined as 
+\[\rho(X,Y) = \frac{Cov(X,Y)}{\sigma_X\sigma_Y}\]
+
+You can think of correlation as a normalized version of covariance. 
+
+\end{document}
