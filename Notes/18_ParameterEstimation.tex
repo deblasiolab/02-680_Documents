@@ -33,5 +33,35 @@ Generally two types of statistics
 Note that a statistic is itself a random variable 
 because a new experiment will produce new data to compute it.
 
+%%%%%%%%%%%%%%%
+\section{Some Basics}
+
+Consider a dataset $X_1, X_2, \cdots, X_n$ of i.i.d. (independent and identically distributed) random variables from the same unknown distribution. 
+That is, for each $X_i$s, the underlying distributions have the same $\mu$ and $\sigma$. 
+
+Let $\overline{X_n}$ be the average of the actual value of the observations:
+\[\overline{X_n} = \frac{X_1 + X_2 + \cdots + X_n}{n} = \frac{1}{n} \sum_{i=1}^n X_i.\]
+Note this is different from the expected value of the underlying distribution $\mu$.
+Note also that $\overline{X_n}$ is also a random variable in and of itself. 
+
+\paragraph{Example. }
+Consider a dataset $C_1, C_2,\cdots,C_{100}$ of 100 fair coin flips (chosen iid), with the corresponding random variables 
+taking on values of 1 for Heads and 0 for Tails. 
+Assume 48 of the 100 coins are heads, then $\overline{C_{100}} = \frac{48}{100}$. 
+
+
+\paragraph{Law of Large Numbers.} The \emph{law of large numbers} says that as $n$ grows, the probability that $\overline{X_n}$ is close to $\mu$ approaches 1. 
+\[\lim_{n\rightarrow\infty} p\left(\overline{X_n}=\mu\right) \mapsto 1.\]
+
+\paragraph{Central Limit Theorem (brief introduction).} While similar to the law of large numbers the \emph{Central Limit Theorem} says that $n$ grows, 
+the distribution of $\overline{X_n}$ converges to the Gaussian (normal) distribution $N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$. 
+\[\lim_{n\rightarrow\infty} \overline{X_n} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right).\]
+
+These both say something similar and speak to the fact that more data will make the empirical mean will approach the underlying (theoretical) mean. 
+But the Central Limit Theorem is more precise, it allows us to approximate the probability that the sample size is not adequate 
+(gives some confidence on the probability from the LLN).
+We will see much more about this over the next couple weeks. 
+
+
 
 \end{document}
