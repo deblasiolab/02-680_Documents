@@ -62,4 +62,218 @@ But the Central Limit Theorem is more precise, it allows us to approximate the p
 (gives some confidence on the probability from the LLN).
 We will see much more about this over the next couple weeks. 
 
+%%%%%%%%%%%%
+\section{Statistical Inference}
+We've been talking a lot about the models themselves and hinting at how to use those distributions. 
+We will use \emph{Statistical Interference} or \emph{Learning} to try to make the models we've been learning about
+match the observations we've made about the world. 
+ 
+Thinking about the coin flip simulator from the other day: 
+1 out of 1000 times it outputs a nonsense number, 
+the other outcomes are split between heads and tails. 
+We call the simulator a \textit{data generator} that produces things we can see
+which we call \textit{observations}.
+On the other side, we have a set of models, one of which we think may match our intuition about the generator, 
+remember that each of those models had a set of \textit{parameters}.  
+Statical inference is the task of trying to learn the parameters from the observations. 
+
+
+\begin{center}
+\begin{dot2tex}[neato]
+digraph O {
+node [shape="box"];
+subgraph S{
+     label="Cannot be seen by us";
+    graph[style="dashed"];
+    G [label="Data Generator",style="dashed"];
+}
+D [label="Observations"];
+E [label="Experience"];
+P [label="Parameter Estimation"];
+M [label="Model"];
+G -- D [style="dashed"];
+D -- P;
+E -- P;
+P -- M;
+}
+\end{dot2tex}
+\end{center}
+
+Assume you have a set 
+\[\mathcal{D} = X_1, X_2, \cdots, X_n\] 
+of i.i.d. random variables from some unknown distribution. 
+
+Let $\mathcal{F}$ be a statistical model defined as a set of probability distributions.
+
+We will focus on parametric models defined as
+\[\mathcal{F}≔\{f(x \mid  \theta):\theta\in\Theta\},\]
+where 
+\[\theta = \{\theta_1, \theta_2, \cdots, \theta_k\} \] 
+are unknown parameters $\theta\in\Theta$.
+
+The task is to find a distribution $\hat{f}\in\mathcal{F}$ that models the phenomenon well,
+which includes modeling the associated $\theta$. 
+
+We want to do this in a way that has:
+\begin{itemize} 
+\item the ability to generalize well, 
+\item the ability to incorporate prior knowledge and assumptions, and 
+\item the ability to scale.
+\end{itemize}
+
+%%%%%%%%%%%%
+\subsection{Data Likelihood}
+Remember Bayes' Theorem (written slightly differently): 
+
+\[p(hypothesis \mid data) = \frac{p(data \mid hypothesis) p(hypothesis)}{p(data)}\]
+
+If we can figure out all the values on the right, we can get the probability of interest on the left 
+(how good our model parameters are given the data).  
+
+Lets start by looking at the most complicated component of the RHS: $p(data \mid hypothesis)$, 
+or in our case $p(\mathcal{D} \mid \theta)$. 
+Remember that the elements of $\mathcal{D}$ are i.i.d. thus we can rewrite it: 
+\[p(\mathcal{D} \mid \theta) = p(X_1,X_2,\cdots,X_n\mid\theta) = \prod_{i=1}^n p(X_i \mid \theta)\]
+
+\begin{aside}[$\log$ likelihood]
+As we saw in the activity last week, when taking the product of probabilities the values can get very small. 
+So we many times take the $\log$ likelihood of the function. 
+This also take the product to a sum. 
+\[ \log(p(X_1,X_2,\cdots,X_n\mid\theta)) = \sum_{i=1}^n \log(p(X_i \mid \theta))\]
+\end{aside}
+
+%%%%%%%%%%%%%%
+\section{Maximum Likelihood}
+The \emph{maximum likelihood estimate} (MLE) is a way to estimate the value of a parameter of interest $\theta$.
+This is the most frequently used method for parameter estimation. 
+
+Thinking about how we maximize a function (or really find the parameter that maximizes the function), 
+we need to take its derivative and check the $0$ points. 
+\[\frac{d}{d\theta}p(\mathcal{D}\mid \theta)=0\]
+(but we also need to ensure its a max and not a min or saddle.)
+If there is no critical point, then we will use the maximum allowable parameter value. 
+
+\paragraph{Example. }
+Lets look at flipping a coin $n$ times, but we don't know if its fair or not. 
+So each of the $\mathcal{D} = X_1, X_2, \cdots, X_n$ trials are independent, 
+thus $X_i \sim Bernouli(\alpha)$, and thus $f(X_i=x\mid\theta)=\alpha^x(1-\alpha)^{1-x}$, 
+here $\theta = \{\alpha\}$. 
+But we also combine the trials, so it ends up looking a little like the binomial distribution, 
+assuming $k$ of our $n$ flips were heads: 
+\[p(\mathcal{D}\mid\theta) = {n \choose k} \alpha^k(1-\alpha)^{n-k}\]
+and we want to estimate $\alpha$. 
+
+Notice that while through Bayes' rule we need $p(\theta)$ and $p(\mathcal{D})$ 
+the former is typically uniform and the latter does not change thus neither need to be considered when optimizing. 
+
+So lets assume that we have a sequence $\mathcal{D} = X_1, X_2, \cdots, X_{10} = 1,1,1,0,0,0,0,0,1,0$.
+So we want to know 
+\[\argmax_\theta f(\mathcal{D}\mid\theta) = \argmax_\theta \left({10 \choose 4} \alpha^4(1-\alpha)^6\right)\]
+
+To find $\theta$ we using calculus we need the derivative: 
+\[\frac{d}{d\theta}\left({10 \choose 4} \alpha^4(1-\alpha)^6\right) = {10 \choose 4}\left(4\alpha^3\cdot(1-\alpha)^6-6\alpha^4(1-\alpha)^5\right)\]
+
+Doing some algebra (notice the binomial coefficient is a constant thus does not impact the maximal $\theta$)
+\begin{align*}
+4\alpha^3\cdot(1-\alpha)^6&=6\alpha^4(1-\alpha)^5\\
+4(1-\alpha) &= 6\alpha\\
+4 &= 10\alpha\\
+\end{align*}
+
+So the zero point(s) are 4/10, since thats a maximum we know $\hat{\alpha} = \frac{4}{10}$.
+Thus, given the sample we have, it looks like the coin is not fair. 
+
+%%%%%%%%%%%%%%%%%%%%%
+\section{Deriving MLE for generic distributions}
+Remember the basic steps to finding the MLE are: 
+\begin{itemize}
+\item Write down the log likelihood of the data, then
+\item Maximize log likelihood (usually using calculus. 
+\end{itemize}
+
+%%%%%%%%%
+\subsection{Bernoulli}
+
+Can we make the derivation in the example above more general. 
+
+Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
+where $X_i \sim Bernouli(\alpha)$.
+Find the MLE of $\theta=\{\alpha\}$.
+
+\begin{align*}
+\frac{d}{dx} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{dx} \ln \prod_{i=0}^n p(X_i\mid\theta)\\
+					    		     	&= \frac{d}{dx} \ln \alpha^s(1-\alpha)^{n-s} & \text{assuming $s$ successes}\\
+					    			& = \frac{d}{dx} s \ln \alpha + (n-s) \ln (1-\alpha)\\
+								& = \frac{s}{\alpha} - \frac{n-1}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a}{x} \frac{d}{dx}  f(x)			     
+\end{align*}
+
+Therefore, for a set of $n$ Bernulli random variables with $s$ successes, (when we solve the previous equation equal to 0) 
+\[\hat\alpha = \frac{s}{n}\]
+(which aligns with the previous example). 
+
+%%%%%%%%%
+\subsection{Normal (Gaussian)}
+Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
+where $X_i \sim \mathcal{N}(\mu, \sigma^2)$.
+Find the MLE of $\theta = \{\mu,\sigma^2\}$.
+
+\begin{align*}
+p(\mathcal{D}\mid\mu,\sigma^2) & = \prod_{i=1}^n p(X_i\mid\mu,\sigma^2)\\
+						& = \prod_{i=1}^n \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\\
+						& = \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x-\mu)^2}		     
+\end{align*}
+
+\begin{align*}
+\ln p(\mathcal{D}\mid\mu,\sigma^2) 
+						& = \ln \left(\left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x-\mu)^2}\right)	\\
+						& = \ln \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2	\\	
+						& = -n \ln \sigma - n \ln \sqrt{2\pi} - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2	\\	     
+\end{align*}
+
+Then we need to do two derivatives: 
+\begin{align*}
+\frac{d}{d\mu} {\color{red}-n \ln \sigma - n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
+\frac{d}{d\mu} \frac{-1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
+\frac{-1}{2\sigma^2}\sum_{i=1}^n \left(2\cdot(x-\mu)\cdot(-1)\right) &= 0\\
+\sum_{i=1}^n \left(x-\mu\right) &= 0\\
+\end{align*}
+
+Thus $\displaystyle\hat\mu_{MLE} = \frac{1}{n}\sum_{i=1}^n x_i$. 
+
+\begin{align*}
+\frac{d}{d\sigma} -n \ln \sigma {\color{red}- n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
+\frac{d}{d\mu} -n \ln \sigma - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2&= 0\\
+\frac{-n}{\sigma} + \sigma^-3\sum_{i=1}^n (x-\mu)^2 &= 0\\
+\sigma^-2\sum_{i=1}^n (x-\mu)^2 &= n\\
+\end{align*}
+
+Thus $\displaystyle\hat\sigma^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (x-\hat\mu_{MLE})^2$. 
+
+%%%%%%%%%%%%%
+\subsection{Poisson}
+Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
+where $X_i \sim Poisson(\lambda)$.
+Find the MLE of $\theta = \{\lambda\}$.
+
+\begin{align*}
+\ln p(\mathcal{D}\mid\mu,\sigma^2) & = \ln\left(\prod_{i=1}^n p(X_i\mid\mu,\sigma^2)\right)\\
+						& = \ln \left(\prod_{i=1}^n e^{-\lambda}\frac{\lambda^x_i}{x_i!}\right)\\
+						& = \ln \left(e^{-n\lambda}\frac{\lambda^{\sum_{i=1}^n x_i}}{ \prod_{i=1}^nx_i!}\right)\\
+						& = -n\lambda + \ln \lambda \sum_{i=1}^n x_i -\sum_{i=1}^n\ln(x_i!)\\
+\end{align*}
+
+Then find the max (0 of the derivative)
+\begin{align*}
+\frac{d}{d\lambda} \left( -n\lambda + \ln \lambda \sum_{i=1}^n x_i{\color{red} -\sum_{i=1}^n\ln(x_i!)}\right) &= 0\\
+-n + \frac{1}{\lambda}\sum_{i=1}^n x_i & =0\\
+\sum_{i=1}^n x_i & =n\lambda\\
+\end{align*}
+
+And thus $\displaystyle\hat\lambda_{MLE} = \frac{1}{n}\sum_{i=1}^n x_i$.
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S9
+Degroot and Schervish. ``Probability and Statistics''  \S\S7.5
+
+
 \end{document}
