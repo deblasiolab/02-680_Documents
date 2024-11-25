@@ -95,4 +95,126 @@ Will have a smaller effect on the posterior estimate
 
 As the sample size goes to infinity, data will dominate the estimate.
 
+\begin{aside}[An additional distribution: Beta]
+The Beta distribution visually looks like an un-balanced normal. 
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={beta(\x,\a,\b)=\a<=0||\b<=0?1/0:\x<0||\x>1?0.0:((\x^(\a-1))*((1-\x)^(\b-1))*((\a+\b)-1)!)/((\a-1)!*(\b-1)!);}
+]
+\begin{axis}[
+    samples=500,
+    ymin=0,ymax=3,
+    xmin=-0.1,xmax=1.1,
+    xlabel={$x$},
+    ylabel={Beta},
+    legend pos=outer north east,
+]
+\addplot [blue] {beta(x,1,1)}; \addlegendentry{$\alpha_{S}=1,\alpha_{F}=1$}
+\addplot [red] {beta(x,2,2)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=2$}
+\addplot [green] {beta(x,2,6)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=6$}
+\addplot [purple] {beta(x,6,2)}; \addlegendentry{$\alpha_{S}=6,\alpha_{F}=2$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[f(x;\alpha_S, \alpha_F) = \frac{x^{(\alpha_S-1)}(1-x)^{(\alpha_F)}}{B(\alpha_S,\alpha_F)}\]
+where 
+\[B(\alpha_S,\alpha_F) = \frac{\Gamma(\alpha_S,\alpha_F)}{\Gamma(\alpha_S)\Gamma(\alpha_F)}\text{ and } \Gamma(a) = (a-1)!.\]
+
+When $X\sim Beta(\alpha_S, \alpha_F)$, $\mathbb{E}[X] = \frac{\alpha_S}{\alpha_S + \alpha_F}$.
+
+\end{aside}
+
+If we model the posterior as a \emph{Beta} distribution on $c_{H_0}$ and $c_{T_0}$
+(that is $p(\theta)\sim Beta(c_{H_0},c_{T_0})$).
+
+If we then want to find the \textit{prior}, $p(\theta\mid\mathcal{D})$? 
+\begin{align*}
+p(\theta\mid\mathcal{D}) & = \frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}\\
+				& \propto p(\mathcal{D}\mid\theta)p(\theta)\\
+				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot Beta(\alpha_{H_0},\alpha_{T_0})\\
+				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot \frac{p^{(\alpha_{H_0}-1)}(1-p)^{(\alpha_{T_0})}}{B(\alpha_{H_0},\alpha_{T_0})}\\
+				& \sim Beta(\alpha_{H}+\alpha_{H_0},\alpha_{T}+\alpha_{T_0})
+\end{align*}
+
+%%%%%%%%%%%%%
+\section{Maximum \textit{a Posteriori} (MAP) Estimation}
+
+As a reminder 
+\[\hat\theta_{MLE} = \argmax_{\theta\in\Theta} p(\mathcal{D}\mid \theta).\]
+On the other hand if we want to include information of our prior knowledge 
+then we have MAP:
+\[\hat\theta_{MAP} = \argmax_{\theta\in\Theta} p(\theta\mid\mathcal{D}) =  \argmax_{\theta\in\Theta} p(\mathcal{D}\mid \theta)\cdot p(\theta).\]
+
+Note that in both cases we're making a \emph{point estimate} of $\theta$. 
+We still don't have the whole picture, we're using data to estimate our model, 
+but MAP is \emph{partially Bayesian}. 
+
+
+%%%%%%%%%%%%%%%
+\subsection{Example: \textit{Known} Prior}
+There are three types of coins which have different probabilities of landing heads when tossed
+\begin{itemize}
+\item[] Type $A$ coins are fair and have probability 0.5 of heads
+\item[] Type $B$ coins are bent and have probability 0.6 of heads
+\item[] Type $C$ coins are bent and have probability 0.9 of heads
+\end{itemize}
+
+Suppose you have a drawer containing 5 coins: 
+5 of type $A$, 3 of type $B$, and 2 of type $C$. 
+You reach into the drawer and pick a coin at random. 
+Without showing you the coin is flipped \textbf{once} and get \textbf{tails}. 
+What is the probability it is type $A$? Type $B$? Type $C$? 
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
+$\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
+\hline
+\hline
+$A$	& 0.5		& 0.5		& 0.4		& 0.641\\
+$B$	& 0.3		& 0.6		& 0.4		& 0.308\\
+$C$	& 0.2		& 0.9		& 0.1		& 0.051\\
+\hline
+\end{tabular}
+\end{center}
+
+Thus $\hat\theta_{MAP} = A$. 
+
+What if you then flip the same coin another 9 times, so including the first coin we have 
+$\alpha_H=6$ and $\alpha_T=4$.
+Notice in the table below, the prior does not change. 
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
+$\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
+\hline
+\hline
+$A$	& 0.5		& $0.97x10^{-3}$ & $4.88x10^{-4}$	& 0.570\\
+$B$	& 0.3		& $1.19x10^{-3}$ & $3.58x10^{-4}$	& 0.418\\
+$C$	& 0.2		& $0.05x10^{-3}$ & $0.11x10^{-4}$	& 0.012\\
+\hline
+\end{tabular}
+\end{center}
+
+In this case, its still true that $\hat\theta_{MAP} = A$,
+but $\hat\theta_{MLE} = B$. 
+
+
+%%%%%%%%%%%%%%%
+\subsection{\textit{Unknown} Prior}
+Assume we have a similar scenario but this time we don't know the prior, 
+we follow a similar procedure to that for MLE: 
+take the zero point of the log probability. 
+\[\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta)p(\theta) = 0\]
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S11
+Degroot and Schervish. ``Probability and Statistics''  \S\S7.1-7.4
+
+
 \end{document}
