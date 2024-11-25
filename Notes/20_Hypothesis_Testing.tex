@@ -1,0 +1,85 @@
+\include{includes}
+
+\title{Topic 20: Hypothesis Testing}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+Once we have taken our data and tried to fit a model to it, 
+we often want to know if that fit model matches our original assumptions about the data. 
+We call this \emph{hypothesis testing}, 
+and we use these techniques to put an actual value on this match. 
+
+We add some terminology on what we've been talking about with respect to statistics 
+and frame things as follows: 
+we first define our \emph{alternate hypothesis}, which we will denote $H_1$, 
+this will be the set of events that define what we want to ask about the confidence in happening; 
+we then define the \emph{null hypothesis}, which we denote $H_0$, 
+this is the set of events that are all outcomes other than than our alternate. 
+%So if we're asking about a coin being unfair, the alternate would be that its biased and the null hypothesis is that its fair. 
+So lets say were asking if a drug has a measurable impact on cholesterol, 
+the null hypothesis would be that cholesterol stayed the same 
+and the alternate hypothesis would be that it changed. 
+
+We usually refer to a hypothesis test telling us if we should \emph{reject} or \emph{retain} the null hypothesis. 
+
+%%%%%%%%%%%
+\section{Defining Errors}
+Errors occur when the hypothesis test tells us something thats wrong. 
+So in the example above 
+if the test tells us to reject the null (that is, its confident that the cholesterol changed) 
+but in reality it didn't change we call this a \emph{Type I} error. 
+On the other hand if our test tells us to retain the null but in reality the value \textit{did} change 
+we call that a \emph{Type II} error. 
+
+\begin{center}
+\begin{tabular}{|cc||c|c|}
+\hline
+&& \multicolumn{2}{c|}{Hypothesis Test Result}\\
+&& Retain $H_0$ & Reject $H_0$\\
+\hline \hline
+\multirow{2}{*}{Truth} & $H_0$ & & Type I Error\\
+\cline{2-4}
+& $H_1$ & Type II Error & \\
+\hline
+\end{tabular}
+\end{center}
+
+We say the 
+\begin{itemize}
+\item[] \textbf{Type I Error Rate} is $p(\text{reject }H_0, H_0 \text{ is true})$,  
+\item[] \textbf{Type II Error Rate} is $p(\text{retain }H_0, H_1 \text{ is true})$, and 
+\item[] Statistical \emph{Power} is 1 - Type II Error Rate. 
+\end{itemize}
+The last point means that the higher power tests have a stronger ability to detect signals for $H_1$. 
+
+Let's look at it visually, first for what we call a \emph{two-sided} test, 
+that is $H_0: \mu = x$ and $H_1: \mu \ne x$. 
+\begin{center}
+\begin{tikzpicture}[
+    declare function={gaus(\k,\m,\s)=1/(\s*sqrt(2*pi))*exp(-((\k-\m)^2)/(2*\s^2));}
+]
+\begin{axis}[
+     width=.8\textwidth,
+     height=.3\textwidth,
+    xmin=-5,xmax=5,
+    xlabel={$\omega$},
+    ylabel={$p(\omega)$},
+    samples=100,smooth,
+    xtick={-2,2},
+    xticklabels={$\mu_0$,$\mu^*$},
+    ytick={0},yticklabels={},
+]
+\addplot [blue] {gaus(x,-2,1)}; \addlegendentry{$H_0$}
+\addplot [red] {gaus(x,2,1)}; \addlegendentry{$H_0$}
+\draw[ultra thin, dashed] (axis cs:-2,0) -- (axis cs:-2,0.4);
+\draw[ultra thin, dashed] (axis cs:2,0) -- (axis cs:2,0.4);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+
+\end{document}
