@@ -212,6 +212,36 @@ we follow a similar procedure to that for MLE:
 take the zero point of the log probability. 
 \[\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta)p(\theta) = 0\]
 
+\begin{aside}[Conjugate Priors]
+Definition: If the prior and the posterior belong to the same parametric family, 
+then the prior is said to be conjugate for the likelihood.
+Parameters of the prior distribution
+are often called ``hyperparameters''.\\
+Example: $\alpha_S,\alpha_F$ in $Beta(\alpha_S,\alpha_F)$.
+\vspace{1em}
+
+How do you set the hyperparameters?
+\begin{itemize}
+\item Prior knowledge (from experienced domain-specific experts)
+\item If no prior knowledge, use “uninformative” prior (e.g., $Beta(1,1)$)
+\end{itemize}
+\vspace{1em}
+
+Some common conjugate prior sets are in the table below:
+\begin{center}\begin{tabular}{|c|c|c|}
+\hline
+Prior & Likelihood & Posterior\\
+\hline\hline
+Beta & Bernoulli & Beta\\
+Beta & Binomial & Beta\\
+Gamma & Poisson & Gamma\\
+Normal & Normal & Normal\\
+\hline
+\end{tabular}\end{center}
+
+
+\end{aside}
+
 \section*{Useful References}
 Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S11
 Degroot and Schervish. ``Probability and Statistics''  \S\S7.1-7.4
