@@ -1,0 +1,95 @@
+\include{includes}
+
+\title{Review via Linear Regression}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+The \emph{linear regression} problem is as follows 
+(we covered this briefly in Topic 10, but with a slightly different formula):
+\begin{itemize}
+\item[\textbf{$x$}] --- Independent variable[s] (what we control)
+\item[\textbf{$y$}] --- Dependent variable[s] (the measured values)
+\item[\textbf{$\beta_s$}] -- slope
+\item[\textbf{$\beta_0$}] -- intercept
+\end{itemize} 
+
+
+Some examples of regression in biology:
+\begin{center}\begin{tabular}{|c|c|}
+\hline
+Independent & Dependent\\
+\hline\hline
+Expression of genes expressed in immune response & asthma severity\\
+\hline
+Expression of regulator genets & Expression of target genes\\
+\hline
+Clinical variables & Insulin level\\
+\hline
+... & ...
+\end{tabular}\end{center}
+
+Lets assume we have some $x,y\in\reals^n$, for $n$ samples where each $(x_i,y_i)$ are corresponding. 
+Then \[y = x^T\beta_s + \beta_0\]
+
+To simplify things lets define:
+$X = \begin{bmatrix} x_1 & 1\\x_2 & 1\\\vdots & \vdots\\x_n & 1\end{bmatrix}$ and $\beta = \begin{bmatrix}\beta_s\\\beta_0\end{bmatrix}$, 
+then the equation above becomes simply:
+\[y = X\beta.\]
+
+Recall (possibly) from earlier that we want to find $\beta$ that minimizes the $\|y-X\beta\|^2_2$, 
+or the square of the $L_2$-norm. 
+
+\begin{align*}
+\|y-X\beta\|^2_2 & = (y-X\beta)^T(y-X\beta)\\
+& =  (y^T-\beta^TX^T)(y-X\beta)\\
+& = y^Ty + \beta^TX^TX\beta - 2 \beta^TX^Ty
+\end{align*}
+
+To find the critical point of the curve (i.e. the minimum) we need
+\begin{align*}
+\frac{d}{d\beta} y^Ty + \beta^TX^TX\beta - 2 \beta^TX^Ty &= 0\\
+\frac{d}{d\beta}\beta^TX^TX\beta^2  - \frac{d}{d\beta}2 \beta^TX^Ty &= 0\\
+2 X^TX\beta - 2 X^Ty &=0\\
+2 X^TX\beta &= 2 X^Ty \\
+\beta &= X^Ty(X^TX)^{-1}
+\end{align*}
+
+What if I want to know the probability of some $y_i$ given $x_i$? (so $p(y_i\mid x_i)$)
+
+Assuming its some natural process, we can assume 
+\[p(y_i\mid x_i) \sim \mathcal{N}(\beta_0 + \beta_s x_i, \sigma^2).\]
+or equivalently
+\[y= \beta_0 + \beta_s x_i + \epsilon, \epsilon \sim \mathcal{N}(0,\sigma^2).\]
+
+So given the data, we can actually use MLE to find $\beta$!
+
+\begin{align*}
+\ln p(\mathcal{D}\mid \beta, \sigma^2) &= \ln \left[\prod_{i=1}^{n} \frac{1}{\sigma^2\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2}(y_i-x_i\beta)^2}\right]\\
+	&= \sum_{i=1}^{n} \ln \left[\frac{1}{\sigma^2\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2}(y_i-x_i\beta)^2}\right]\\
+	&=  \frac{-n}{2}\ln \sigma^2 + \sum_{i=1}^{n} \ln e^{-\frac{1}{2\sigma^2}(y_i-x_i\beta)^2}\\
+	&= \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial\beta} \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2 &= \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2\\
+&=  \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2} (Y-X\beta)^2\\
+&= -\frac{1}{2\sigma^2}  \frac{\partial}{\partial\beta} (Y^2-2Y^TX\beta+\beta^TX^TX\beta)\\
+&= ... \\
+\end{align*}
+
+$\hat\beta_{MLE} = X^Ty(X^TX)^{-1}$, thats just Least Squares!
+
+But we don't know $\sigma$, thats actually, what we want to know because it models how uncertain we are with any given output.
+
+\begin{align*}
+\frac{\partial}{\partial\sigma^2} \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2 &= \frac{-n}{2\sigma^2} +\frac{1}{2}(\sigma^2)^{-2}\sum_{i=1}^{n} (y_i-x_i\beta)^2
+\end{align*}
+
+$\hat\sigma^2_{MLE} = \frac{\sum_{i=1}^{n} (y_i-x_i\beta)^2}{n}$
+
+With these we can determine for some new $\tilde y$ and $\tilde x$ what $p(\tilde y \mid \tilde x)$ is. 
+
+\end{document}
