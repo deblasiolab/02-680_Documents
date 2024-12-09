@@ -36,10 +36,10 @@
         \ifnodedefined{marker}{
             \pgfpointdiff{\pgfpointanchor{marker}{center}}%
              {\pgfpoint{0}{0}}%
-             \ifdim\pgf@y>0pt
-                \tikzset{options/.style={mark=*, fill=white}}
-                %\draw [densely dashed] (marker-|0,0) -- (0,0);
-                \draw plot [mark=*] coordinates {(marker-|0,0)};
+             \ifdim\pgf@y>0pt%
+                \draw [densely dashed] (marker-|0,0) -- (0,0);
+                \tikzset{options/.style={mark=*,fill=white}}
+                \draw plot [mark=none] coordinates {(marker-|0,0)};
              \else
                 \tikzset{options/.style={mark=none}}
              \fi
