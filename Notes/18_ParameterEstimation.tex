@@ -201,7 +201,7 @@ where $X_i \sim Bernouli(\alpha)$.
 Find the MLE of $\theta=\{\alpha\}$.
 
 \begin{align*}
-\frac{d}{d\alpha} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{d\alpha} \ln \prod_{i=0}^n p(X_i\mid\theta)\\
+\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{d\theta} \ln \prod_{i=0}^n p(X_i\mid\theta)\\
 					    		     	&= \frac{d}{d\alpha} \ln \alpha^s(1-\alpha)^{n-s} & \text{assuming $s$ successes}\\
 					    			& = \frac{d}{d\alpha} s \ln \alpha + (n-s) \ln (1-\alpha)\\
 								& = \frac{s}{\alpha} - \frac{n-s}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a}{x} \frac{d}{dx}  f(x)			     
