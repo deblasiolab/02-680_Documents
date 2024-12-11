@@ -162,7 +162,7 @@ There are three types of coins which have different probabilities of landing hea
 \end{itemize}
 
 Suppose you have a drawer containing 5 coins: 
-5 of type $A$, 3 of type $B$, and 2 of type $C$. 
+10 of type $A$, 3 of type $B$, and 2 of type $C$. 
 You reach into the drawer and pick a coin at random. 
 Without showing you the coin is flipped \textbf{once} and get \textbf{tails}. 
 What is the probability it is type $A$? Type $B$? Type $C$? 
@@ -174,9 +174,9 @@ Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
 $\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
 \hline
 \hline
-$A$	& 0.5		& 0.5		& 0.4		& 0.641\\
-$B$	& 0.3		& 0.6		& 0.4		& 0.308\\
-$C$	& 0.2		& 0.9		& 0.1		& 0.051\\
+$A$	& 0.5		& 0.5		& 0.25	& $\approx0.510$\\
+$B$	& 0.3		& 0.4		& 0.12	& $0.490$\\
+$C$	& 0.2		& 0.1		& 0.02	& $\approx0.041$\\
 \hline
 \end{tabular}
 \end{center}
