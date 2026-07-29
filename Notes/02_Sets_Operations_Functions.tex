@@ -2,7 +2,7 @@
 %SetFonts
 
 
-\title{Topic 2: Sets, Operators, and Function}
+\title{Topic 2: Sets, Operators, and Functions}
 \author{02-680: Essentials of Mathematics and Statistics}
 %\date{}							% Activate to display a given date or no date
 
@@ -18,7 +18,7 @@ First is simple (exhaustive) enumeration:
 A = \left\{\textnormal{``Welcome''}, \textnormal{``to''}, \textnormal{``02-680''}\right\}.
 \]
 In this case the set contains 3 elements, each of which is a string.
-The second way to define a set by abstraction:
+The second way to define a set is by abstraction:
 \[
 B = \left\{x^2 \mid x=2 \vee x=3 \right\}.
 \]
@@ -70,7 +70,7 @@ Characters		& $\Sigma$		& Sometimes ``Alphabet''\footnotemark, useful here since
 \hline
 \end{tabular}
 \end{center}
-\footnotetext{While the other sets on this list are always the same size, the size of an alphabet is context dependent. Sometimes it's DNA, sometimes its capital latin (english) letters, other times its kanji.}
+\footnotetext{While the other sets on this list are always the same size, the size of an alphabet is context dependent. Sometimes it's DNA, sometimes its capital latin (english) letters, other times it's kanji.}
 (Note in \LaTeX{} we use the command \texttt{\textbackslash{}mathbb} command to create these symbols.)
 
 So we can easily expand $B$ from above to be all squares:
@@ -79,7 +79,7 @@ B' = \left\{x^2 \mid x \in \ints \right\}
 \]
 
 We some times also want to slightly restrict these sets, so you may see something like $\ints^+$ which is equivalent to ${x \in \ints \mid x > 0}$, 
-or $\ints^{\ge0}$ which is equivalent to ${x \in \ints \mid x \ge 0}$.
+or $\ints^{\ge0}$ which is equivalent to $\{x \in \ints \mid x \ge 0\}$.
 Note that technically $\ints^+$ does not include 0 and $\ints^{\ge0}$ does, 
 but be careful because some authors (hopefully not including myself) use the former when they mean the latter. 
 
@@ -104,7 +104,7 @@ S\cup T := \left\{x \mid x \in S \vee x \in T\right\} \textnormal{ and }
 \]\[
 S\cap T := \left\{x \mid x \in S \wedge x \in T\right\} \\
 \]
-That is to say and element is the union if it's in \textit{either} of the two sets, but only in the intersection if its in both. 
+That is to say an element is the union if it's in \textit{either} of the two sets, but only in the intersection if its in both. 
 
 Lets look at an example:
 \[
@@ -126,11 +126,11 @@ This leads to two interesting properties that we may make use of later, for arbi
 \]
 \paragraph{Set Difference ($\setminus$).}
 Similar to numerical subtraction, the ordering of the operators matters. 
-In fact difference is so similar to subtraction that you may sometimes see the minus sign used in place of the standard backlash. 
+In fact difference is so similar to subtraction that you may sometimes see the minus sign used in place of the standard backslash. 
 \[
 S\setminus T  := \left\{x \mid x \in S \wedge x \notin T\right\} 
 \]
-You can think if it as the elements that are unique to S. 
+You can think of it as the elements that are unique to S. 
 
 Going back to our example:
 \[
@@ -167,7 +167,7 @@ C \setminus B = C \cap \overline{B}
 
 \paragraph{Subset ($\subseteq$), Superset ($\supseteq$), and equality ($=$).}
 We often need to know if one set \textit{is contained} within another (notice while similar this is different from saying is larger than another). 
-To describe this relationship we say one set is an \emph{subset} of another if all of it's elements are in both sets. 
+To describe this relationship we say one set is a \emph{subset} of another if all of its elements are in both sets. 
 That is
 \[
 S \subseteq T \iff \forall x \in S : x \in T
@@ -190,14 +190,14 @@ or another way
 S = T \iff \left(S \subseteq T\right) \wedge \left(S \supseteq T\right)
 \]
 
-So if we define $C' = \{0,1,2,4\}$, then $C=C'$.
+So if we define $C' = \{0,1,4\}$, then $C=C'$.
 
 So then coming back to $\subseteq$ (vs. $\subset$); 
 we define a \emph{proper subset} as
 \[
 S \subset T \iff \left(\forall x \in S : x \in T\right) \wedge \left(\exists y \in T : y \notin S\right)
 \]
-In other words for $S$ to be a proper subset of $T$ it first needs to be a subset, but there needs to be at least one item in $T$ thats not in $S$.
+In other words for $S$ to be a proper subset of $T$ it first needs to be a subset, but there needs to be at least one item in $T$ that's not in $S$.
 A similar condition exists for \emph{proper superset} which we define as 
 \[
 S \supset T \iff \left(\forall x \in T : x \in S\right) \wedge \left(\exists y \in S : y \notin T\right)
@@ -219,7 +219,7 @@ It may be easiest to look at an example:
 \]
 
 So the power set is a set of sets, and each element of the power set \textit{is a} set.
-(That means a the power set of a power set of a set, i.e. $\mathcal{P}\left(\mathcal{P}\left(B\right)\right)$, is a set of sets of sets and an element is a set of sets....) 
+(That means the power set of a power set of a set, i.e. $\mathcal{P}\left(\mathcal{P}\left(B\right)\right)$, is a set of sets of sets and an element is a set of sets....) 
 
 An interesting fact is that the size of the power set of a set is 
 \[
@@ -272,16 +272,16 @@ Thinking again about the function we used earlier, it is a function if the domai
 and it is a function if they are both $\ints$. 
 \vspace{1em}
 
-But it is \emph{not} a function if the domain is $\reals$ and the $\ints$; 
+But it is \emph{not} a function if the domain is $\reals$ and the codomain is $\ints$; 
 in this case there are elements in the domain (lets say $d=1.5\in\reals$) 
-for which the result of the equation part ($f(d)=(1.5)^2+3=2.25+3=5.25$)
+for which the result of the equation part ($f(d)=3(1.5)^2+2=6.75+2=8.75$)
 is not in the codomain ($5.25\notin\ints$).    
 Thus the specification is not a function ($f(x) = 3x^2 + 2$, $f: \reals\mapsto\ints$).
 \end{tcolorbox}
 
 \paragraph{Function Composition ($\circ$).}
 We may find ourselves later in the semester needing to apply one function to the output of another,
-this it known as \emph{function composition} defined formally as
+this i known as \emph{function composition} defined formally as
 \[
 g\circ f: S \mapsto U \textnormal{ assuming } f: S \mapsto T \wedge g : T \mapsto U.
 \]

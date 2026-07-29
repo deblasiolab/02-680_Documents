@@ -32,8 +32,8 @@ For instance if the event is that the first of two coin tosses is heads.
 \langle\texttt{Heads},\texttt{Heads}\rangle,
 \langle\texttt{Heads},\texttt{Tails}\rangle\} \subset \Omega_{twocoin} \]
 
-We say the \emph{probability} $P(A)$ of an event $A$ is the fraction of all outcomes that $A$ covers. 
-So in the example above $P(A_{firstheads})=\frac{1}{2}$.
+We say the \emph{probability} $p(A)$ of an event $A$ is the fraction of all outcomes that $A$ covers. 
+So in the example above $p(A_{firstheads})=\frac{1}{2}$.
 
 An \emph{event space}, $\mathcal{A}$, is the set of all possible events. 
 For discrete events (such as coin flips) this can be thought of typically as the power set of $\Omega$. 
@@ -57,15 +57,15 @@ In the previous example if $A_{threetails}$ is the event that you get 3 tails wh
 $p(A_{threetails})=0$ but this can't be negative.
 
 \paragraph{Axiom 2: Total Probability.}
-For any event space $\Omega$, $p(\Omega)=1$. 
+For any sample space $\Omega$, $p(\Omega)=1$. 
 That is, the probability of something in the sample space happening is 1. 
 So for the example above the probability of a single coin flip being either \texttt{Heads} or \texttt{Tails} is 1, 
 (as defined) there are no other possible outcomes. 
 
-\paragraph{Axiom 3: Disjoint Event Space.}
-For \textit{disjoint} event spaces $A_1, A_2, ..., A_n$, \[p(A_1\cup A_2\cup ... \cup A_n)=p(A_1) + p(A_2) + ... + p(A_n).\]
+\paragraph{Axiom 3: Disjoint Events.}
+For \textit{disjoint} events $A_1, A_2, ..., A_n$, \[p(A_1\cup A_2\cup ... \cup A_n)=p(A_1) + p(A_2) + ... + p(A_n).\]
 So in a single coin flip if $A_{heads}$ and $A_{tails}$ are the events of a single coin flip being heads and tails respectively, 
-we can see the event spaces are disjoint (they don't share any outcomes)
+we can see the events are disjoint (they don't share any outcomes)
 so \[p(A_{heads} \cup A_{tails}) = p(A_{heads}) + p(A_{tails}) = \frac{1}{2} + \frac{1}{2} = 1.\]
 
 As a counter example lets define \[A_{lastheads}=\{
@@ -107,7 +107,7 @@ With some algebra we find the original statement.
 
 From axiom 1: $0 \le p(A)$. 
 
-We also know $p(\overline{A})\ge 0$ from axiom 1. (or really  $-1 p(\overline{A})\le 0$)
+We also know $p(\overline{A})\ge 0$ from axiom 1. (or really  $-1\times p(\overline{A})\le 0$)
 
 From above we know $p(A) = 1-p(\overline{A}) \le 1-0 = 1$.
 
@@ -126,10 +126,10 @@ For a coin toss effect, there are two methods for explaining $p(\texttt{Heads})=
 
 \paragraph{Frequentists.} 
 You flip a coin 100 times, you get \texttt{Heads} approximately 50 of those tosses. 
-Frequentist are very objective in the explanation of things. 
+Frequentists are very objective in the explanation of things. 
 
 \paragraph{Bayesian.}
-You \textit{believe} you will get tails 50\% of the times you flip the coin. 
+You \textit{believe} you will get heads 50\% of the times you flip the coin. 
 Bayesian logic is subject to its interpretation. 
 
 \end{document}

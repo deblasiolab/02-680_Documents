@@ -34,9 +34,9 @@ Like with vectors, addition of two matrices as well as scalar multiplication are
 \subsection{Transpose} 
 For a given matrix $M \in \reals^{n\times m}$, the transpose $M^T \in \reals^{m \times n}$ is defined such that:
 \[
-\forall I\in[0,n-1], j\in[0,m-1] : M^T_{j,i} = M_{i,j} 
+\forall i\in[1,n], j\in[1,m] : M^T_{j,i} = M_{i,j} 
 \]
-This operation works for both matrixes and vectors (which are really $n\times1$ matrices).
+This operation works for both matricies and vectors (which are really $n\times1$ matrices).
 Some examples: 
 \begin{center}
 $\left[\begin{matrix}
@@ -66,15 +66,15 @@ The first question is the size of the result, if we multiply $C \in \reals^{n\ti
 notice that the \textit{inner} dimensions are the same.
 And the values in $E$ are defined as follows:
 \[
-E_{i,j} = \sum_{k=1}^m C_{i,k}D_{k,j}
+E_{i,j} = \sum_{k=1}^p C_{i,k}D_{k,j}
 \]
 
 We can actually rewrite this using dot product, but lets quickly introduce some notation.
 Lets first say for a matrix $A\in\reals^{n\times m}$ we could say that 
 \[A = A_{[n],[m]}\] 
 remember here that $[n] \iff [1,n] \iff \{1,2,...,n\}$. 
-So really the equation above redefines $A$ using a list of columns and a list of rows. 
-That means we can lets $C_{i,[p]}$ is the $i$-th column of $C$, and $D_{[p],j}$ is the $j$-th column of $D$.
+So really the equation above redefines $A$ using a list of rows and a list of columns. 
+That means we can say that $C_{i,[p]}$ is the $i$-th row of $C$, and $D_{[p],j}$ is the $j$-th column of $D$.
 In that case \[E_{i,j} = C_{i,[p]}\cdot D_{[p],j}^T.\]
 
 What can we do with it? Lets define the following:
@@ -103,7 +103,7 @@ There is no actual operation that produces a matrix that mirrored across the \te
 \end{aside}
 
 \paragraph{Trace. }
-The \emph{trace} of a matrix $tr(A)$ is the sum of the diagonal elements: \[tr(A) := \sum_{I=1}^n A_{i,i}.\] 
+The \emph{trace} of a matrix $tr(A)$ is the sum of the diagonal elements: \[tr(A) := \sum_{i=1}^n A_{i,i}.\] 
 The trace does not change under transpose, and is distributive across sum and scalar product. 
 
 \subsection{Identity Matrix}
@@ -123,13 +123,13 @@ AI_m = A \;\;\;\textnormal{and}\;\;\; I_nA = A.
 
 \subsection{Determinants}
 We define the \emph{determinant} of a square matrix $det: \reals^{n\times n} \mapsto \reals$ 
-as a function with the range of all square matrices and a codomain of real numbers. 
+as a function with the domain of all square matrices and a codomain of real numbers. 
 We often write this as $|A|$ for $A\in\reals^{n\times n}$. 
 
-We define determinant \emph{recursively} (meaning it is a function makes a reference to itself), 
+We define determinant \emph{recursively} (meaning it is a function that makes a reference to itself), 
 but we first need to define a method for constructing sub-matrices. 
 
-Using the notation of sets of column/row indexes ($A = A_{[n],[n]}$) can then use set math to manipulate those rows/columns (mainly using $\setminus$): 
+Using the notation of sets of column/row indexes ($A = A_{[n],[n]}$) we can then use set math to manipulate those rows/columns (mainly using $\setminus$): 
 \[A_{[n]\setminus i,[n]\setminus j}.\]
 Which is A with all but row $i$ and all but column $j$. 
 
@@ -144,11 +144,11 @@ We need that notation to more easily define the determinate for any chosen $j$:
 \[
 |A| := \sum_{i=1}^n  (-1)^{(i+j)}  A_{ij} \left|A_{\setminus i,\setminus j}\right|.
 \]
-(It can also be defined for a fixed $i$ and sum over $i$.)
+(It can also be defined for a fixed $i$ and sum over $j$.)
 
 Some explicit examples:
 \[\left|\left[A_{11}\right]\right| = A_{11}\]
-\[\left|\left[\begin{matrix}A_{11} & A_{12}\\ A_{21} & A_{22}\\\end{matrix}\right]\right| = A_{11}A_{22}-A_{21}A_{21}\]
+\[\left|\left[\begin{matrix}A_{11} & A_{12}\\ A_{21} & A_{22}\\\end{matrix}\right]\right| = A_{11}A_{22}-A_{12}A_{21}\]
 \[
 \begin{aligned}[t]
 \left|\left[\begin{matrix}A_{11} & A_{12} & A_{13}\\ A_{21} & A_{22} & A_{23}\\ A_{31} & A_{32} & A_{33}\\\end{matrix}\right]\right| 

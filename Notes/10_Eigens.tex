@@ -34,7 +34,7 @@ Ax-\lambda I_n x&=&\lambda I_n x-\lambda I_n x\\
 (A-\lambda I_n)x & = & 0\\
 \end{array}\]
 
-Since we know $x$ cannot be $\mathbf{0}$ then $(A-\lambda I_n)$ but be 0 to satisfy the equation. 
+Since we know $x$ cannot be $\mathbf{0}$ then $(A-\lambda I_n)$ must be 0 to satisfy the equation. 
 This is actually a linear system on one variable!
 It turns out this only has non-trivial solutions when $(A-\lambda I_n)$ is singular (that is, it can't be invertible). 
 
@@ -69,7 +69,7 @@ Note in both of these cases there is a trivial solution of $x=\mathbf{0}$ but th
 Consequence of above are 
 \begin{itemize}
 \item That the determinant is the product of the eigenvalues: \[|A|=\prod_{i=1}^n \lambda_i\]
-\item The rank of $A$ is equal to the number of non-zero eigenvalues
+\item The rank of $A$ is equal to the number of non-zero eigenvalues (if $A$ is diagonalizable) 
 \item If $A$ is nonsingular, then $1/\lambda_i$ is an eigenvalue of $A^{-1}$ with the same associated original eigenvector
 \end{itemize}
 \end{aside}
@@ -113,7 +113,7 @@ T_{11} & T_{12} & \hdots & T_{1(n-1)} & T_{1n}\\
 \textnormal{or} 
 \begin{bmatrix}
 T_{11} & 0 & \hdots & 0 & 0 \\
-T_{11} & T_{22} & \hdots & 0 & 0\\
+T_{21} & T_{22} & \hdots & 0 & 0\\
 \vdots & \vdots & \ddots & \vdots & \vdots\\
 T_{(n-1)1} & T_{(n-1)2} & \hdots & T_{(n-1)(n-1)} &0\\
 T_{n1} & T_{n2} & \hdots & T_{n(n-1)} & T_{nn}\\
@@ -164,18 +164,20 @@ If a matrix is symmetric (that is $A=A^T$):
 
 \section{Eigendecomposition and Diagonalization}
 If we create a new matrix $X\in\reals^{n\times n}$ where each \textit{column} is one of the eigenvectors of $A$, 
-then create $\Lambda\in\reals^{n\times n}$ which contains the eigenvalues on the diagonal (i.e. $\Lambda = \langle\lambda_1,\lambda_2,...,\lambda_n\rangle I_n$ it turns out that 
+then create $\Lambda\in\reals^{n\times n}$ which contains the eigenvalues on the diagonal 
+%(sort $\Lambda = \langle\lambda_1,\lambda_2,...,\lambda_n\rangle I_n$ 
+it turns out that 
 \[ AX = X\Lambda \]
 because it satisfies all of the eigenelement sets simultaneously. 
 
-If the eigenvectors are linearly independent then $X$ is invertable. 
-If $X$ is invertable, then 
+If the eigenvectors are linearly independent then $X$ is invertible. 
+If $X$ is insertable, then 
 \[ A = X\Lambda X^{-1}.\]
 
 We call a $A$ \emph{diagonalizable} if it can be rewritten this way. 
 This is sometimes also called an \emph{eigendecomposition}.
 
-\subsection{Singlar Value Decomposition}
+\subsection{Singular Value Decomposition}
 While we're only going to briefly discuss it in this class
 the form \[ A = X\Lambda X^{-1}\]
 is similar to whats known as the \emph{Singular Value Decomposition} (SVD)
@@ -184,7 +186,8 @@ as
 \[R=USV\]
  (sometimes $\Sigma$ is used in place of $S$ but this is a reserved character in this class) 
  where $U\in\reals^{n\times n}$, $V\in\reals^{m\times m}$, 
- and $S\in\left\{\widehat{diag_{n\times m}}(x) \mid x\in\reals^{min(n,m)}\right\}\subset\reals^{n\times m}$.
+ and $S\in\left\{\widehat{diag_{n\times m}}(x) \mid x\in\reals^{min(n,m)}\right\}\subset\reals^{n\times m}$. 
+ (WOLG assume $m \le n$.)
  Here the \[\widehat{diag_{n\times m}}\left(\left\langle x_1,x_2,...x_m\right\rangle\right) = 
  \begin{bmatrix}x_1 & 0 & \hdots & 0\\0 & x_2 & \hdots & 0\\\vdots&\vdots&\ddots&\vdots\\0 & 0 & \hdots & x_m\\0 & 0 & \hdots &0\\\vdots&\vdots&\vdots&\vdots\\\end{bmatrix} \textnormal{ or }
  \begin{bmatrix}x_1 & 0 & \hdots & 0 & 0 & \hdots\\0 & x_2 & \hdots & 0 & 0 & \hdots\\\vdots&\vdots&\ddots&\vdots\\0 & 0 & \hdots & x_m & 0 & \hdots\\\end{bmatrix}
@@ -205,7 +208,7 @@ as
 
 
 \section*{Useful References}
-Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 7\\
+Isaak and Manougian, ``Basic Concepts of Linear Algebra''. \S 7\\
 Wilder, ``10-606-f23:Lecture 6'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_vectorspace.pdf}\\
 Kolter, ``Linear Algebra Review and Reference'', \url{https://www.cs.cmu.edu/~zkolter/course/15-884/linalg-review.pdf} \S 3.12
 

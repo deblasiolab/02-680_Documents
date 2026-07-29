@@ -24,7 +24,7 @@ Something like
 We know that $p$ is true, and $q$ is false. 
 
 
-A \emph{compound proposition} can take into account multiple atopic propositions to create a single statement: 
+A \emph{compound proposition} can take into account multiple atomic propositions to create a single statement: 
 \[ p \wedge q \]
 (which doesn't need to be true). 
 We read the previous as ``$p$ \textit{and} $q$'', 
@@ -49,14 +49,14 @@ disjunction		& $p \vee q$		& ``$p$ or $q$''\\
 exclusive or		& $p \oplus q$		& ``$p$ or $q$ but not both''\\
 \hline
 implication		& $p \implies q$	& ``if $p$, then $q$''\\
-mututal implication 	& $p \iff q$		& ``$p$ if and only if $q$'' \\
+mutual implication 	& $p \iff q$		& ``$p$ if and only if $q$'' \\
 				&				& \hspace{3em}(sometimes shortened to ``iff'')\\
 \hline
 \end{tabular}
 \end{center}
 
 While the order of operations on propositions is top to bottom in the table above, 
-its best to use parenthesis to make sure your statements are clear. 
+it's best to use parentheses to make sure your statements are clear. 
 Technically the two statements below are the same, one is much more clear:
 \[
 p \vee q \implies \neg r \wedge \ell \;\;\;\; \textnormal{and}\;\;\;\; \left(p\vee q\right) \implies \left(\neg r \wedge \ell\right) 
@@ -69,25 +69,25 @@ The basic rules are as follows:
 \[ \neg\left(p \vee q\right) \equiv \neg p \wedge \neg q\]
 \[ \neg\left(p \wedge q\right) \equiv \neg p \vee \neg q\]
 (here $\equiv$ is logical equivalence).
-As text were saying ``if not both $p$ and $q$'' is equivalent to saying ``either not $p$ or not $q$''.
+The text equivalent would be like saying ``if not both $p$ and $q$'' is equivalent to saying ``either not $p$ or not $q$''.
 
 \paragraph{Associativity and Commutativity.}
 Just like in addition, most logical operators (specifically conjunction[$\wedge$], disjunction[$\vee$], exclusive or [$\oplus$], and mutual implication [$\iff$]) are associative and commutative.
 As a reminder some examples:
 \begin{equation}
-\left(p \vee q\right) \vee r \equiv v \vee \left(q \vee r\right) \tag{associativity}
+\left(p \vee q\right) \vee r \equiv p \vee \left(q \vee r\right) \tag{associativity}
 \end{equation}
 \begin{equation}
 p \wedge q \equiv q \wedge p \tag{commutativity}
 \end{equation}
-Its important to note that negation and implication are not associative or commutative (I'll leave that as a thought experiment).
+It's important to note that negation and implication are not associative or commutative (I'll leave that as a thought experiment).
 
 We may discuss other logical properties as we move through the semester.  
 
 \paragraph{Bound vs Free Variables.} While all the stuff above we know if $p$ and $q$ are \textit{always} true or false (we call these tautologies), 
 most of the time a proposition looks more like this: 
 \[ r \leftarrow \textnormal{``}2+x=4\textnormal{''}\]
-where $x$ is not know (or in other words it's \emph{unbound} or free, thus without a definition of $x$ we can't say if the statement is true or not. 
+where $x$ is not known (or in other words it's \emph{unbound} or free, thus without a definition of $x$ we can't say if the statement is true or not. 
 
 %%%%%
 \section{Predicate Logic}
@@ -99,7 +99,7 @@ We would write that using the \emph{universal qualifier}:
 \[\forall x\in\ints : x*0 = 0\]
 (we will talk about it in a coming discussion, but $\ints$ is the symbol for the set of all integers and $\in$ is read as ``element of'' or simply ``in'').
 We say $\forall$ as ``for all'', in fact the latex command for the symbol is \texttt{\textbackslash{}forall}.
-Noice that ``$x*0 = 0$'' is a proposition!
+Notice that ``$x*0 = 0$'' is a proposition!
 
 But sometimes we want to not talk about all items, but one (or more) in particular, in which case we can use the \emph{existential qualifier}:
 \[\exists y\in\ints: y^2 = |y+y|.\]
@@ -129,7 +129,7 @@ if you looped through all of the items (in this case integers) you need to find 
  \]
  
  When negating nested qualifiers, its basically a recursive procedure: 
-  \[\neg \left[\exists x : \left[ \forall x: P(x)\right]\right] \iff \left[\forall x : \neg\left[ \forall x: P(x)\right]\right] \iff \left[\forall x : \left[ \exists x: \neg P(x)\right]\right].\]
+  \[\neg \left[\exists x : \left[ \forall y: P(x,y)\right]\right] \iff \left[\forall x : \neg\left[ \forall y: P(x,y)\right]\right] \iff \left[\forall x : \left[ \exists y: \neg P(x,y)\right]\right].\]
   
 \section*{Useful References}
 Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. Ch. 3 

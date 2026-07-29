@@ -13,13 +13,13 @@
 \section{Derivatives}
  From some function $f(x)$ where $x$ is a scalar:
  \begin{itemize}
- \item the derivative $\displaystyle\frac{df}{dx}$ is th change in value of $f$ as you increase/decrease $x$.
+ \item the derivative $\displaystyle\frac{df}{dx}$ is the change in value of $f$ as you increase/decrease $x$.
  \item Formally $\displaystyle\frac{df}{dx}=\lim_{h\rightarrow 0}\frac{f\left(x+h\right) - f(x)}{h}$.
  \end{itemize}
  
  Lets derive one of our known rules below, for instance let $f(x)=x^n$. 
  \begin{align}
- \frac{d(x^n)}{dx}=&\lim_{h\rightarrow 0}\frac{(x-h)^n - x^n}{h}\\
+ \frac{d(x^n)}{dx}=&\lim_{h\rightarrow 0}\frac{(x+h)^n - x^n}{h}\\
  =& \lim_{h\rightarrow 0}\frac{\sum_{i=0}^n {n \choose i} x^{(n-i)}h^i - x^n}{h}\\
  =& \lim_{h\rightarrow 0}\frac{\sum_{i=1}^{n} {n \choose i} x^{(n-i)}h^i}{h}\\
  =& \lim_{h\rightarrow 0}\sum_{i=1}^{n} {n \choose i} x^{(n-i)}h^{i-1}\\
@@ -77,7 +77,7 @@ So once again, we have a critical point at $x=0$,
 but if we look at the two examples in the first if we were slightly away from 0 the derivative would have sent us \textit{toward} 0, in the second it sends us away. 
 So we can say the critical point of $x=0$ is \emph{stable} for $f(x)$ and \emph{unstable} for $g(x)$. 
 
-What we've described here is a slight simplification of \emph{gradient descent} first described by Cauchy in the 1867. 
+What we've described here is a slight simplification of \emph{gradient descent} first described by Cauchy in the 1847. 
 One of the most commonly used optimization procedures in machine learning. 
 
 \subsection{Example}
@@ -91,7 +91,7 @@ To find out if they are local minima or maxima we can take the second derivative
 and determine if its positive or negative at each point: 
 $x=3 (+),-1 (+),\frac{1}{2}(-).$
 
-Thus only $x=3$ and $1$ are candidates for minima, 
+Thus only $x=3$ and $-1$ are candidates for minima, 
 we can get their original values:
 \[3(3)^4-10(3)^3-12(3)^2+18(3)-3=-84\]
 \[3(-1)^4-10(-1)^3-12(-1)^2+18(-1)-3=-20\]
@@ -109,7 +109,7 @@ We define the gradient as follows:
 \[\nabla f = \begin{bmatrix}\frac{\partial f}{\partial x_1}&\frac{\partial f}{\partial x_2}&....&\frac{\partial f}{\partial x_n}\end{bmatrix}\]
 when $x\in\reals^n$. 
 In the example above that means 
-\[\nabla e = \begin{bmatrix}\frac{\partial e}{\partial x_1}&\frac{\partial e}{\partial x_1}\end{bmatrix}= \begin{bmatrix}\frac{x_1}{ \sqrt{x_1^2+x_2^2}}&\frac{x_2}{\sqrt{x_1^2+x_2^2}}\end{bmatrix}\]
+\[\nabla e = \begin{bmatrix}\frac{\partial e}{\partial x_1}&\frac{\partial e}{\partial x_2}\end{bmatrix}= \begin{bmatrix}\frac{x_1}{ \sqrt{x_1^2+x_2^2}}&\frac{x_2}{\sqrt{x_1^2+x_2^2}}\end{bmatrix}\]
 Note we need the chain rule then the polynomial rule for both derivatives. 
 
 They key here is to realize that the dimension of the gradient (the number of derivatives) 
@@ -120,7 +120,7 @@ is dependent on the dimension of the input to the function (not the output).
 \section{Application: Least Squares Minimization}
 Assume we have a problem which can be set up as 
 \[Ax=b\]
-where $A\in\reals^{m\times n}$, and $b\in\reals^n$.
+where $A\in\reals^{m\times n}$, and $b\in\reals^m$.
 But let it be the case that $b\notin span(columns(A))$,
 therefore we know $\not\exists x\in\reals^n$ such that $Ax=b$.
 
@@ -137,7 +137,7 @@ Remember from above, to find a minimum we need to find the critical points and e
 \[\begin{array}{ccc}
 \|Ax-b\|_2^2 & = & (Ax-b)^T(Ax-b)\\
 & = & (x^TA^T-b^T)(Ax-b)\\
-& = & x^TA^TAx-2AXb^t+b^Tb
+& = & x^TA^TAx-2x^TA^Tb+b^Tb
 \end{array}\]
 
 The gradient with respect to $x$ of this is then $2A^TAx-2A^Tb$.
@@ -150,13 +150,13 @@ solving for $x$ (assuming $A^TA$ is invertible)
 %%%%%%%%%%%%%%%%%%
 \section{Jacobian (Multivariable/Multifunction Derivation)}
 Sometimes we also have functions that have both multiple variable input, and multiple variable output. 
-So any function $g: \reals^n\mapsto\reals^m$ with $m,n\in\reals^{\ge2}$.
+So any function $g: \reals^n\mapsto\reals^m$ with $m,n\in\ints^{\ge2}$.
 We say the \emph{Jacobian} of $g$ is 
 \[J_g(x) = \begin{bmatrix}
-\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \hdots & \frac{\partial f_1}{\partial x_n} \\  
-\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \hdots & \frac{\partial f_2}{\partial x_n} \\  
+\frac{\partial g_1}{\partial x_1} & \frac{\partial g_1}{\partial x_2} & \hdots & \frac{\partial g_1}{\partial x_n} \\  
+\frac{\partial g_2}{\partial x_1} & \frac{\partial g_2}{\partial x_2} & \hdots & \frac{\partial g_2}{\partial x_n} \\  
 \vdots & \vdots & \ddots & \vdots\\
-\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \hdots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}\]
+\frac{\partial g_m}{\partial x_1} & \frac{\partial g_m}{\partial x_2} & \hdots & \frac{\partial g_m}{\partial x_n} \end{bmatrix}\]
 
 So for instance $h:\reals^2\mapsto\reals^2$:
 \[h(x) = x^T\begin{bmatrix}3 & 1\\0 & -1\end{bmatrix}{\color{red}\begin{bmatrix}x_1 & 0\\ 0 & x_2\end{bmatrix}} 
@@ -245,7 +245,7 @@ Deisenroth, Faisal, and Ong, ``Mathematics for Machine Learning''. \S 5
 polynomial rule &\[\frac{d}{dx}\left(x^n\right) = nx^{n-1}\]\\\hline
 \multirow{2}{*}{exponent rules} & \[\frac{d}{dx}\left(e^{g(x)}\right) = e^{g(x)}g'(x)\]\\
  & \[\frac{d}{dx}\left(c^{g(x)}\right) = c^{g(x)}g'(x)\ln c\]\\\hline
- log rule & \[\frac{d}{dx}\left(\log _c g\left(x\right)\right) = \frac{g'(x)}{g(x)\ln a}\]\\\hline
+ log rule & \[\frac{d}{dx}\left(\log_c g\left(x\right)\right) = \frac{g'(x)}{g(x)\ln c}\]\\\hline
  sum rule & \[\frac{d}{dx}\left(f\left(x\right) + g\left(x\right)\right) = f'(x) + g'(x)\]\\\hline
  product rule & \[\frac{d}{dx}\left(f\left(x\right)g\left(x\right)\right) = f'(x)g(x) + f(x)g'(x)\]\\\hline
  quotient rule & \[\frac{d}{dx}\left(\frac{f(x)}{g(x)}\right) = \frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}\]\\\hline
@@ -261,8 +261,8 @@ polynomial rule &\[\frac{d}{dx}\left(x^n\right) = nx^{n-1}\]\\\hline
  \hline
  constant multiple rule & \[￼￼￼￼\int cf\left(x\right) dx = c\int f(x) dx\]\\\hline
 polynomial rule &\[\int x^n dx = \frac{x^{n+1}}{n+1} + c\]\\\hline
-\multirow{2}{*}{exponent rules} & \[\int e^{x} dx = e^{x}\]\\
- & \[\int c^x dx = \frac{c^x}{\ln c}\]\\\hline
+\multirow{2}{*}{exponent rules} & \[\int e^{x} dx = e^{x}+c\]\\
+ & \[\int a^x dx = \frac{a^x}{\ln a} + c\]\\\hline
  log rule & \[\int \frac{1}{x} dx = \ln |x| + c\]\\\hline
  sum rule & \[\int\left(f(x)\pm g(x)\right) dx  = \int f(x) dx \pm \int g(x) dx\]\\\hline
  \end{tabularx}

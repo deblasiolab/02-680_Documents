@@ -30,14 +30,14 @@ In all cases weights (labels) are typically represented by a function:
 \[\ell: E \rightarrow \Sigma^* \]
 (or maybe $w: E \rightarrow \reals$).
 
-A lot of talked we want to talk about the \emph{neighborhood} of a node: 
+A lot of times we want to talk about the \emph{neighborhood} of a node: 
 \[N_G(v) = \left\{ u \mid \left\{u,v\right\} \in E\right\}\]
 and we call the size of this set \[degree_G(v) := \left|N_G(v)\right| + \mathds{1}\left(v \in N_G\left(v\right)\right)\] the cardinality of the node or the \emph{degree}. 
-Here $\mathds{1}: \{\texttt{true},\texttt{true}\}\mapsto\{1,0\}$ in an indicator function that produces the value 1 when the input is true, and 0 otherwise.  
+Here $\mathds{1}: \{\texttt{true},\texttt{false}\}\mapsto\{1,0\}$ in an indicator function that produces the value 1 when the input is true, and 0 otherwise.  
 In a directed graph we can restrict this to an in- and out-degree (and neighborhood)
 \[N^{in}_G(v) = \left\{ u \mid \left\langle u,v\right\rangle \in E\right\}\]
 \[N^{out}_G(v) = \left\{ u \mid \left\langle v,u\right\rangle \in E\right\}\]
-and thus $N_G(v) = N^{in}_G(v) \cup N^{out}_G$ (and the degrees are the respective set cardinalities). 
+and thus $N_G(v) = N^{in}_G(v) \cup N^{out}_G(v)$ (and the degrees are the respective set cardinalities). 
 We call all of the nodes in $N_G(v)$ \emph{adjacent} to $v$. 
 
 A graph is \emph{regular} if \[\forall v \in V : degree_G(v) = k\] for some fixed $k$. 
@@ -115,7 +115,8 @@ note this is slightly different from a sub\textit{graph}, since its both restric
 \paragraph{Regular Trees.} 
 Up to now there was no limit on the number of neighbors (children) a node could have, and in general this is true, but many times we want to know some general property of a tree. 
 We use the term \emph{$k$-ary trees} (more commonly we will talk about \emph{binary tree}, where $k$ is 2).
-A $k$-ary tree is one where every internal node has degree $\forall v\in V, v $ is internal $: |N(v)| \le k+1$. 
+A $k$-ary tree is one where every internal node has degree at most $k+1$; that is 
+$\forall v\in V, v $ is internal $: |N(v)| \le k+1$. 
 It makes more sense in rooted trees, it means each internal node has at most $k$ children. 
 So in a rooted binary tree, a node has at most 2 children. 
 
@@ -131,7 +132,7 @@ This will be discussed much more in 02-613, but the process of extracting a tree
 That is, for a graph $G=\langle V, E\rangle$ find a subgraph $T=\langle V, E'\rangle$ where:
 \begin{enumerate}
 \item $E' \subseteq E$
-\item $|E| = |V|-1$
+\item $|E'| = |V|-1$
 \item $T$ is connected. 
 \end{enumerate}
 

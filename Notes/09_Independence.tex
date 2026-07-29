@@ -75,11 +75,11 @@ Formally for a set of vectors $D$ with cardinality $\left|D\right|=n$,
 span(D) := \left\{\sum_{i=1}^{n} \alpha_iD_i \;\middle|\; \forall i \in \left[n\right]: \alpha_i \in \reals \right\}
 \]
 
-If $D\subseteq V$ for a vector space $V$, then $D$ is always a valid subspace of $V$. 
+If $D\subseteq V$ for a vector space $V$, then $span(D)$ is always a valid subspace of $V$. 
 (Can we test this on the span of one vector?)
 
 So in the example above since $\left\{\left\langle1,2\right\rangle,\left\langle2,1\right\rangle\right\}\subseteq\reals^2$,
-the vector space defined by the set is also a subpace of $\reals^2$. 
+the vector space defined by the set is also a subspace of $\reals^2$. 
 
 %%%%%%%%%%%%
 \section{Basis}
@@ -105,18 +105,18 @@ We can also say that a vector $v$ is \emph{normal} if $\|v\|_2=1$ (graphically i
 
 A basis $B$ is considered an \emph{orthonormal basis} if:
 \begin{enumerate}
-\item $\forall b_i, b_j\in B: b_i \dot b_j = 0$ (meaning all bases are orthogonal), and 
+\item $\forall b_i, b_j\in B, i\ne j: b_i \cdot b_j = 0$ (meaning all bases are orthogonal), and 
 \item $\forall b \in B : \|b\|_2=1$ (all vectors are normal). 
 \end{enumerate}
 
-The nice think about an orthonormal basis is that when you convert to coordinate representations, you preserve length and angles between vectors. 
+The nice thing about an orthonormal basis is that when you convert to coordinate representations, you preserve length and angles between vectors. 
 
 The most common orthonormal basis for $\reals^n$ is the \emph{standard} basis: 
-\[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\;\middle|\;dle|\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
+\[\left\{\left\langle x_1, x_2, ... x_n\right\rangle \in \reals^n \;\;\middle|\;\; \sum_{i=1}^n x_i = 1, \forall i : x_i \in \left\{0,1\right\}\right\}\]
 That is for $\reals^3$ the standard basis is $\left\{\left\langle1,0,0\right\rangle,\left\langle0,1,0\right\rangle,\left\langle0,0,1\right\rangle\right\}$.
 
 Notice though that for $\reals^2$ the standard basis is $\left\{\left\langle1,0\right\rangle,\left\langle0,1\right\rangle\right\}$.
-But we can use a secondary basis \[B'=\left\{\left\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right\rangle,\left\langle\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}}\right\rangle\right\}\] is also an orthonormal basis for $\reals^2$. 
+But we can use a secondary basis \[B'=\left\{\left\langle\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right\rangle,\left\langle\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}}\right\rangle\right\}\] that is also an orthonormal basis for $\reals^2$. 
 This means that for any two vectors the coordinate representation of the vectors in both basis will maintain the norms and dot-products. 
 
 \paragraph{Example.}
@@ -133,7 +133,7 @@ by solving the following systems of equations:
 \frac{\alpha_1}{\sqrt{2}} &-& \frac{\alpha_2}{\sqrt{2}} &=& 2\\ 
 \end{array} \;\;\;\;\textnormal{and}\;\;\;\; \begin{array}{rcrcr}
 \frac{\beta_1}{\sqrt{2}} &+& \frac{\beta_2}{\sqrt{2}} &=& 5\\
-\frac{\beta_1}{\sqrt{2}} &-& \frac{\beta_2}{\sqrt{2}} &=& 3\\ 
+\frac{\beta_1}{\sqrt{2}} &-& \frac{\beta_2}{\sqrt{2}} &=& -3\\ 
 \end{array}\]
 
 We can see that the lengths of the vectors are preserved: 
@@ -145,7 +145,7 @@ We can see that the lengths of the vectors are preserved:
 \sqrt{40} & = & \sqrt{40}\\
 \end{array}\;\;\;\;\textnormal{and}\;\;\;\; 
 \begin{array}{rcl}
-\|v_1\|_2 & \stackrel{?}{=} & \|v'_1\|_2\\
+\|v_2\|_2 & \stackrel{?}{=} & \|v'_2\|_2\\
 \sqrt{5^2+(-3)^2} & \stackrel{?}{=} & \sqrt{(1\sqrt{2})^2+(4\sqrt{2})^2}\\
 \sqrt{25+9} & \stackrel{?}{=} & \sqrt{2 + 32}\\
 \sqrt{34} & = & \sqrt{34}\\
@@ -170,9 +170,9 @@ So in the example above:
 \[T=\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix}\]
 and it follows that 
 \[
-\begin{bmatrix}6\\2\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}4\sqrt{2}\\2\sqrt{2}\end{bmatrix}
+\begin{bmatrix}6 & 2\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}4\sqrt{2}\\2\sqrt{2}\end{bmatrix}
 \;\;\;\textnormal{ and }\;\;\;
-\begin{bmatrix}5\\-3\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}\sqrt{2}\\4\sqrt{2}\end{bmatrix}
+\begin{bmatrix}5 & -3\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} = \begin{bmatrix}\sqrt{2}\\4\sqrt{2}\end{bmatrix}
 \]
 This will be more useful when talking about eigenelements and decomposition in the next topic. 
 \end{aside}
@@ -191,13 +191,13 @@ Because of the property above $rank(A) = rank(A^T)$.
 
 Then for some second matrix $B\in\reals^{m\times p}$: $rank(AB) \le \min(rank(A),rank(B))$. 
 
-And for a third matrix $C\in\reals^{n\times m}$: $rank(A + B) \le rank(A) + rank(B).$
+And for a third matrix $C\in\reals^{n\times m}$: $rank(A + C) \le rank(A) + rank(C).$
 
 Note that in the reduced form we talked about in the Topic 7, the number of non-zero rows is the rank (and the rows are going to be linearly independent). 
-This also means that any nonsingular (invertable) matrix is full rank (i.e. rank is equal to $n$). 
+This also means that any nonsingular (invertible) matrix is full rank (i.e. rank is equal to $n$). 
 
 \section*{Useful References}
-Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 3.1-3.4\\
+Isaak and Manougian, ``Basic Concepts of Linear Algebra''. \S 3.1-3.4\\
 Wilder, ``10-606-f23:Lecture 4'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_vectorspace.pdf}\\
 Kolter, ``Linear Algebra Review and Reference'', \url{https://www.cs.cmu.edu/~zkolter/course/15-884/linalg-review.pdf} \S3.6
 

@@ -113,9 +113,9 @@ Again, in linear systems, a scalar product to a whole equation is still the same
 
 \subsection{Type III (add row to another)}
 Let 
-\[G = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right] \; \textnormal{where }\beta\in\reals\]
+\[H = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right] \; \textnormal{where }\beta\in\reals\]
 then 
-\[GA = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 + 1\beta & 6+4\beta\end{matrix}\right].\]
+\[HA = \left[\begin{matrix}1 & 0 & 0\\ 0 & 1 & 0\\ \beta & 0 & 1\end{matrix}\right]\left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 & 6\end{matrix}\right] = \left[\begin{matrix}1 & 4 \\ 2 & 5\\ 3 + 1\beta & 6+4\beta\end{matrix}\right].\]
 So in this case we add the value of the first row times $\beta$ to the bottom row. 
 
 \begin{aside}[Connection to linear systems]
@@ -186,8 +186,8 @@ Note, this is not the only way of finding the inverse, but will be helpful in th
 
 %%%%%%%%
 \section{Solving Linear Systems without an Inverse}
-The procedure above is great if $C$ is nonsingular, but what if its not?
-What if $C$ isn't even square (that is, if the system is over- or under-defined)?
+The procedure above is great if $C$ is nonsingular, but what if it's not?
+What if $C$ isn't even square (that is, if the system is over- or under-determined)?
 
 It turns out we can use a very similar procedure to find a solution (if it exists). 
 This time we set up a slightly different partitioned matrix: 
@@ -203,7 +203,7 @@ A_{n1} & A_{n2} & \hdots & A_{nm} & b_n\\
 
 This single matrix contains our whole problem, 
 and in fact every time we make an elementary operation on it, 
-it defines a new problem thats has the same solution. 
+it defines a new problem that has the same solution. 
 Remember the notes pointed out when talking about elementary operations. 
 
 That means if we can get to a state where the left hand side is the identity,
@@ -218,7 +218,7 @@ Apply Type II with $\alpha=\frac{1}{17}$ to row 1.
 \[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & -5 & 3\end{array}\right]\]
 Apply Type III with $\beta=5$ from row 1 to row 2.
 \[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & 0 & \frac{1}{17}\end{array}\right]\]
-Apply Type 1 to swap  row 1 to row 2.
+Apply Type I to swap  row 1 to row 2.
 \[\left[\begin{array}{cc;{2pt/1pt}c} 1 & 0 & \frac{1}{17}\\0 & 1 & \frac{-10}{17}\end{array}\right]\]
 
 If we turn that back into a system of equations, its: 
@@ -230,7 +230,7 @@ If we turn that back into a system of equations, its:
 
 
 
-\paragraph{Exercise} Determine (trough either method above) the solution to the following system: 
+\paragraph{Exercise} Determine (through either method above) the solution to the following system: 
 
 \[\begin{array}{rcrcr}
 -x_1 & +  & 3 x_2 & = & 5\\
@@ -256,7 +256,7 @@ Using the method from above lets set up the problem as a matrix reduction:
 1 & 1 & 6 & 2 &  1 & 7\\
 \end{array}\right]\]
 
-Type I: swap rows 1 and 3 (hint puts the leading 1 in the top row):
+Type I: swap rows 1 and 3 (this puts the leading 1 in the top row):
 \[\left[\begin{array}{ccccc;{2pt/1pt}c} 
 1 & 1 & 6 & 2 &  1 & 7\\
 3 & 2 & -2 & -5 &  2 & 9\\
@@ -295,14 +295,14 @@ Type II: scale row 3 with $\alpha=\frac{1}{52}$ (again to get a leading 1):
 Type III (x2): add row 3 with $\beta=14$ to row 1, and add row 3 with $\beta=-20$ to row 2:
 \[\left[\begin{array}{ccccc;{2pt/1pt}c} 
 1 & 0 & 0 & -\frac{48}{52} &  0 & 2\\
-0 & 1 & 0 & -\frac{28}{56} &  1 & 2\\
+0 & 1 & 0 & -\frac{28}{52} &  1 & 2\\
 0 & 0 & 1 & \frac{30}{52} & 0 & \frac{26}{52}\\
 \end{array}\right]\]
 
 Put that back into equation form:
 \[\begin{array}{rcrcrcrcrcr}
-x_1 &  & & &  & - & -\frac{48}{52}x_4 &  & & = & 2\\
-&  & x_2 & &  & - & \frac{28}{56} x_4 & + & x_5 & = & 2\\
+x_1 &  & & &  & - & \frac{48}{52}x_4 &  & & = & 2\\
+&  & x_2 & &  & - & \frac{28}{52} x_4 & + & x_5 & = & 2\\
 &  & &  & x_3 & + & \frac{30}{52}x_4 &  & & = & \frac{26}{52}\\
 \end{array}\]
 
@@ -322,7 +322,7 @@ In all of the examples above final matrix is in row-reduced echelon form, the on
 
 
 \section*{Useful References}
-Isaak and Monougian, ``Basic Concepts of Linear Algebra''. \S 1.1-1.6\\
+Isaak and Manougian, ``Basic Concepts of Linear Algebra''. \S 1.1-1.6\\
 Hoffman and Kunze, ``Linear Algebra, 2e''
 
 
