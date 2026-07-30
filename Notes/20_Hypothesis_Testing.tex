@@ -17,7 +17,7 @@ and frame things as follows:
 we first define our \emph{alternate hypothesis}, which we will denote $H_1$, 
 this will be the set of events that define what we want to ask about the confidence in happening; 
 we then define the \emph{null hypothesis}, which we denote $H_0$, 
-this is the set of events that are all outcomes other than than our alternate. 
+this is the set of events that are all outcomes other than our alternate. 
 %So if we're asking about a coin being unfair, the alternate would be that its biased and the null hypothesis is that its fair. 
 So lets say were asking if a drug has a measurable impact on cholesterol, 
 the null hypothesis would be that cholesterol stayed the same 
@@ -27,9 +27,9 @@ We usually refer to a hypothesis test telling us if we should \emph{reject} or \
 
 %%%%%%%%%%%
 \section{Defining Errors}
-Errors occur when the hypothesis test tells us something thats wrong. 
+Errors occur when the hypothesis test tells us something that's wrong. 
 So in the example above 
-if the test tells us to reject the null (that is, its confident that the cholesterol changed) 
+if the test tells us to reject the null (that is, it's confident that the cholesterol changed) 
 but in reality it didn't change we call this a \emph{Type I} error. 
 On the other hand if our test tells us to retain the null but in reality the value \textit{did} change 
 we call that a \emph{Type II} error. 
@@ -121,7 +121,7 @@ $H_0: \mu \le x$ and $H_1: \mu > x$.
 \end{tikzpicture}
 \end{center}
 
-In this example, one again the Type I and Type II errors are shown in the blue and red shaded regions, 
+In this example, once again the Type I and Type II errors are shown in the blue and red shaded regions, 
 but we can also see the power of the test (green stripped region). 
 
 \paragraph{Main Takeaways. }
@@ -137,9 +137,9 @@ Similarly, as $\mu^*$ and $\mu_0$ become further apart both errors will go down,
 Lets assume we have some data $\mathcal{D} = X_1,X_2,\cdots,X_n$ that follows the same distribution with known $p(X_i\mid\theta)$.
 We will perform a test in 3 steps:
 \begin{enumerate}
-\item Compute a test statistic (a function of the data) thats appropriate for the distribution: \[T = r(X_1,X_2,\cdots,X_n),\]
+\item Compute a test statistic (a function of the data) that's appropriate for the distribution: \[T = r(X_1,X_2,\cdots,X_n),\]
 \item Compute a $p$-value (we will talk about this below), then 
-\item For a desired significance level $\beta$ and the $p$-value, decide whether to retain or reject $H_0$. 
+\item For a desired significance level $\alpha$ and the $p$-value, decide whether to retain or reject $H_0$. 
 \end{enumerate}
 
 We will use the ongoing example from above about testing the efficacy of a drug for high cholesterol, 
@@ -152,7 +152,7 @@ And lets assume we're running a two-sided test
 (we don't know if the impact is going to lower or raise cholesterol we just want to know if it changes); thus
 $H_0: \mu = \mu_0$ and $H_1: \mu \ne  \mu_0$.
 
-Under the null hypothesis \[\overline{X_n}\sim\mathcal{N}(x, \sigma^2/n)\] 
+Under the null hypothesis \[\overline{X_n}\sim\mathcal{N}(\mu_0, \sigma^2/n)\] 
 or as we saw \[\frac{\overline{X_n}-\mu_0}{\sigma/\sqrt{n}}\sim\mathcal{N}(0,1).\]
 
 \paragraph{Step 2.}
@@ -183,7 +183,7 @@ Notice that usually one-sided tests can be more powerful as they are only integr
 When performing tests, the main thing we need to do is determine: 
 \begin{itemize}
 \item the distribution we think the data came from, 
-\item the test statistic thats appropriate for those samples, and 
+\item the test statistic that's appropriate for those samples, and 
 \item the distribution that applies to the test statistic\\ (it may be different than the one for the data). 
 \end{itemize}
 
@@ -209,7 +209,7 @@ distribution but $t$ distribution has a thicker tail.
 \begin{center}
 \begin{tikzpicture}[
     declare function={gaus(\k,\m,\s)=1/(\s*sqrt(2*pi))*exp(-((\k-\m)^2)/(2*\s^2));},
-    declare function={gamma(\z)=2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+    declare function={gamma(\z)=2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- ((715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z);},
     %declare function={gamma(\x)=(\x-1)!;},
     %declare function={tdist(\x,\v)=(gamma((\v+1.)/2.)/(((pi*\v)^0.5)*gamma(\v/2.)))*(((1.+(\x^2./\v))^(-(\v+1.)/2.));}
     declare function={tdist(\x,\n)= gamma((\n+1)/2.)/(sqrt(\n*pi) *gamma(\n/2.)) *((1+(\x*\x)/\n)^(-(\n+1)/2.));}
@@ -232,7 +232,7 @@ distribution but $t$ distribution has a thicker tail.
 \end{tikzpicture}
 \end{center}
 
-As $v\rightarrow\infty$, the distribution above becomes a normal distribution.
+As $\nu\rightarrow\infty$, the distribution above becomes a normal distribution.
 
 \end{aside}
 
@@ -296,7 +296,7 @@ expected counts& 312.75 & 104.25 & 104.25 & 34.75 & 556\\
 \end{center}
 
 In this case the test statistic will be 
-\[\sum\frac{\left(c_i - n\cdot \dot{p}_i\right)^2}{ \dot{p}_i)}\sim\chi^2_{n-1}\]
+\[\sum\frac{\left(c_i - n\cdot \dot{p}_i\right)^2}{ \dot{p}_i}\sim\chi^2_{n-1}\]
 
 \begin{aside}[The $\chi^2$ distribution]
 \[X\sim\chi^2_{p}\]
@@ -308,7 +308,7 @@ Here $p$ is the number of degrees of freedom, and in all cases $x>0$.
 \begin{tikzpicture}[
     declare function={isint(\x) = (int(\x)==\x);},
     declare function={logof2 = 0.693147180559945;},
-    declare function={gamma(\z)=2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+    declare function={gamma(\z)=2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- ((715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z);},
     declare function={chisq(\x,\k)=\k<=0||!isint(\k)?1/0:x<=0?0.0:exp((0.5*\k-1.0)*ln(\x)-0.5*\x-gamma(0.5*\k)-\k*0.5*logof2);},
 ]
 \begin{axis}[
@@ -334,7 +334,7 @@ then
 
 Looking at the previous example with Mendel's pea plants. 
 \[
-\sum_{i=1}{4}\frac{\left(c_i - n\cdot \dot{p}_i\right)^2}{ \dot{p}_i)}\]\[
+\sum_{i=1}^{4}\frac{\left(c_i - n\cdot \dot{p}_i\right)^2}{ \dot{p}_i)}\]\[
 = \frac{(315-312.75)^2}{312.75} + 
 \frac{(101-104.25)^2}{104.25} + 
 \frac{(108-104.25)^2}{104.25} + 

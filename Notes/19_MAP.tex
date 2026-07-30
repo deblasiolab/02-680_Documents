@@ -53,27 +53,27 @@ Subjective interpretation
 \hline
 you ``believe'' that you will get tails 50\% of the time & 
 the relative frequency of tails goes to 1/2 as the number of flips goes to infinity\\
-they consider a range of values each with its own probability of being true
+they consider a range of values each with its own probability of being true& they consider the parameter a single fixed (if unknown) value\\
 \end{tabularx}
 
 %%%%%%%%%%%%%
 \section{Bayesians' Approach to Parameter Estimation}
 Lets look at the coin flip example we had in the last topic: 
  $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
-where $X_i \sim Bernouli(\alpha)$.
+where $X_i \sim Bernoulli(\alpha)$.
 We can further summarize $\mathcal{D}$ into $c_H$ and $c_T$ 
 representing the counts of heads and tails respectively. 
 
 We saw last time that \[\hat\alpha_{MLE} = \frac{c_H}{c_H+c_T}.\]
 
 But this is assuming we know nothing about $\alpha$ ahead of time. 
-What if we \textit{believe} that its 50/50, so we can add what are called \emph{pseudocounts}
+What if we \textit{believe} that it's 50/50, so we can add what are called \emph{pseudocounts}
 to the input $c_{H_0}$ and $c_{T_0}$.
 And thus compute 
 \[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}.\]
 
 \paragraph{Example. }
-Lets assume we have some an experiment where we throw a coin 100 times, we want to know $\alpha$, $c_H=0$ and $c_T=100$.
+Let's assume we have an experiment where we throw a coin 100 times, we want to know $\alpha$, $c_H=0$ and $c_T=100$.
 
 Vanilla MLE would say that 
 \[\hat\alpha_{MLE} = \frac{c_H}{c_H+c_T} = \frac{0}{0 + 100} = 0\]
@@ -118,9 +118,9 @@ The Beta distribution visually looks like an un-balanced normal.
 \end{tikzpicture}
 \end{center}
 
-\[f(x;\alpha_S, \alpha_F) = \frac{x^{(\alpha_S-1)}(1-x)^{(\alpha_F)}}{B(\alpha_S,\alpha_F)}\]
+\[f(x;\alpha_S, \alpha_F) = \frac{x^{(\alpha_S-1)}(1-x)^{(\alpha_F-1)}}{B(\alpha_S,\alpha_F)}\]
 where 
-\[B(\alpha_S,\alpha_F) = \frac{\Gamma(\alpha_S,\alpha_F)}{\Gamma(\alpha_S)\Gamma(\alpha_F)}\text{ and } \Gamma(a) = (a-1)!.\]
+\[B(\alpha_S,\alpha_F) = \frac{\Gamma(\alpha_S+\alpha_F)}{\Gamma(\alpha_S)\Gamma(\alpha_F)}\text{ and } \Gamma(a) = (a-1)!.\]
 
 When $X\sim Beta(\alpha_S, \alpha_F)$, $\mathbb{E}[X] = \frac{\alpha_S}{\alpha_S + \alpha_F}$.
 
@@ -129,12 +129,12 @@ When $X\sim Beta(\alpha_S, \alpha_F)$, $\mathbb{E}[X] = \frac{\alpha_S}{\alpha_S
 If we model the posterior as a \emph{Beta} distribution on $c_{H_0}$ and $c_{T_0}$
 (that is $p(\theta)\sim Beta(c_{H_0},c_{T_0})$).
 
-If we then want to find the \textit{prior}, $p(\theta\mid\mathcal{D})$? 
+If we then want to find the \textit{posterior}, $p(\theta\mid\mathcal{D})$? 
 \begin{align*}
 p(\theta\mid\mathcal{D}) & = \frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}\\
 				& \propto p(\mathcal{D}\mid\theta)p(\theta)\\
 				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot Beta(\alpha_{H_0},\alpha_{T_0})\\
-				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot \frac{p^{(\alpha_{H_0}-1)}(1-p)^{(\alpha_{T_0})}}{B(\alpha_{H_0},\alpha_{T_0})}\\
+				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot \frac{p^{(\alpha_{H_0}-1)}(1-p)^{(\alpha_{T_0}-1)}}{B(\alpha_{H_0},\alpha_{T_0})}\\
 				& \sim Beta(\alpha_{H}+\alpha_{H_0},\alpha_{T}+\alpha_{T_0})
 \end{align*}
 
@@ -161,8 +161,8 @@ There are three types of coins which have different probabilities of landing hea
 \item[] Type $C$ coins are bent and have probability 0.9 of heads
 \end{itemize}
 
-Suppose you have a drawer containing 5 coins: 
-10 of type $A$, 3 of type $B$, and 2 of type $C$. 
+Suppose you have a drawer containing 10 coins: 
+5 of type $A$, 3 of type $B$, and 2 of type $C$. 
 You reach into the drawer and pick a coin at random. 
 Without showing you the coin is flipped \textbf{once} and get \textbf{tails}. 
 What is the probability it is type $A$? Type $B$? Type $C$? 
@@ -174,9 +174,9 @@ Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
 $\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
 \hline
 \hline
-$A$	& 0.5		& 0.5		& 0.25	& $\approx0.510$\\
-$B$	& 0.3		& 0.4		& 0.12	& $0.490$\\
-$C$	& 0.2		& 0.1		& 0.02	& $\approx0.041$\\
+$A$	& 0.5		& 0.5		& 0.25	& $\approx0.641$\\
+$B$	& 0.3		& 0.4		& 0.12	& $\approx0.308$\\
+$C$	& 0.2		& 0.1		& 0.02	& $\approx0.051$\\
 \hline
 \end{tabular}
 \end{center}
@@ -201,7 +201,7 @@ $C$	& 0.2		& $0.05x10^{-3}$ & $0.11x10^{-4}$	& 0.012\\
 \end{tabular}
 \end{center}
 
-In this case, its still true that $\hat\theta_{MAP} = A$,
+In this case, it's still true that $\hat\theta_{MAP} = A$,
 but $\hat\theta_{MLE} = B$. 
 
 

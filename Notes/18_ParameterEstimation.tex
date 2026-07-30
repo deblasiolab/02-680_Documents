@@ -214,7 +214,7 @@ Find the MLE of $\theta=\{\alpha\}$.
 								& = \frac{s}{\alpha} - \frac{n-s}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a}{x} \frac{d}{dx}  f(x)			     
 \end{align*}
 
-Therefore, for a set of $n$ Bernulli random variables with $s$ successes, (when we solve the previous equation equal to 0) 
+Therefore, for a set of $n$ Bernoulli random variables with $s$ successes, (when we solve the previous equation equal to 0) 
 \[\hat\alpha = \frac{s}{n}\]
 (which aligns with the previous example). 
 
@@ -263,7 +263,7 @@ where $X_i \sim Poisson(\lambda)$.
 Find the MLE of $\theta = \{\lambda\}$.
 
 \begin{align*}
-\ln p(\mathcal{D}\mid\mu,\lambda) & = \ln\left(\prod_{i=1}^n p(X_i\mid\mu,\lambda)\right)\\
+\ln p(\mathcal{D}\mid\lambda) & = \ln\left(\prod_{i=1}^n p(X_i\mid\lambda)\right)\\
 						& = \ln \left(\prod_{i=1}^n e^{-\lambda}\frac{\lambda^{x_i}}{x_i!}\right)\\
 						& = \ln \left(e^{-n\lambda}\frac{\lambda^{\sum_{i=1}^n x_i}}{ \prod_{i=1}^nx_i!}\right)\\
 						& = -n\lambda + \ln \lambda \sum_{i=1}^n x_i -\sum_{i=1}^n\ln(x_i!)\\
