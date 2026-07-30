@@ -7,15 +7,15 @@
 \begin{document}
 \maketitle
 
-The formal definition of a random variable $X$, is as a mapping: \[X: \Omega \mapsto \reals\]
+The formal definition of a random variable $X$, is as a mapping: \[X: \Omega \to \reals\]
 which assigns a real number $X(\omega)$ to an outcome in our space (note this is not a probability in and of itself). 
 
-As an example, let say we toss a coin twice, we know we get $\Omega_{twocoin}$ as defined in previous lectures. 
+As an example, let's say we toss a coin twice, we know we get $\Omega_{twocoin}$ as defined in previous lectures. 
 We can assign a variable $C(\omega)$ to be the count of the number of heads in each outcome.
 
 
-We can then example probabilities of the possible values a random variable $X$ can take on (its range), 
-we usually use a lower case of the came name, $x$. 
+We can then examine probabilities of the possible values a random variable $X$ can take on (its range), 
+we usually use a lower case of the same name, $x$. 
 We can think of this as the sum of the probabilities 
 of all the outcomes that lead to a particular value. 
 
@@ -43,7 +43,7 @@ of all the outcomes that lead to a particular value.
 
 %%%%%%%%%%%%%%%%%%
 %\section{Probability Distributions}
-\section{Discrete random variables --- Probability Mass Functions}
+\section{Discrete Random Variables --- Probability Mass Functions}
 In this case we call the probability distribution a \emph{probability mass function} (PMF). 
 Below is a visualization of the PMF for $C$ above. 
 
@@ -68,14 +68,14 @@ coordinates{(0,0.25) (1,0.5) (2,0.25)};
 \end{tikzpicture}
 \end{center}
 
-As another example lets again examine rolling two dice (for simplicity, 4 sided), 
+As another example let's again examine rolling two dice (for simplicity, 4 sided), 
 and let $V(\omega)$ be the value of the sum of the two rolled dice. 
 
 \begin{center}
 \begin{minipage}{0.4\textwidth}
 %\caption{Running example for $\Omega_{twocoin}$}
 \begin{tabular}{c|c|c}
-\textbf{$\omega$} & \textbf{$p(\omega)$} & \textbf{$C(\omega)$}\\
+\textbf{$\omega$} & \textbf{$p(\omega)$} & \textbf{$V(\omega)$}\\
 \hline
 \texttt{11}		& 1/16 &		$2$\\
 \texttt{12}		& 1/16 &		$3$\\
@@ -96,7 +96,7 @@ and let $V(\omega)$ be the value of the sum of the two rolled dice.
 \end{tabular}%
 %
 \begin{tabular}{c|c}
-\textbf{$c$} &	\textbf{$p(C=c)$}\\
+\textbf{$v$} &	\textbf{$p(V=v)$}\\
 \hline
 2 & 		1/16\\
 3 & 		1/8\\
@@ -113,8 +113,8 @@ and let $V(\omega)$ be the value of the sum of the two rolled dice.
     ymin=0, ymax=1,
     xtick={2,3,4,5,6,7,8},
     enlargelimits=false,
-    xlabel={$c$},
-    ylabel={$p(C=c)$},
+    xlabel={$v$},
+    ylabel={$p(V=v)$},
 ]
 \addplot[
     blue,
@@ -134,21 +134,21 @@ coordinates{(2,0.0625) (3,0.125) (4, 0.1875) (5, 0.25) (6,0.1875) (7,0.125) (8,0
 A well-known PMF is a \emph{Bernoulli Distribution} which is defined as follows
 with probability of success ($k=1$) $0 \le \alpha \le 1$ for $\Omega = \{0,1\}$: 
 \[p(k) = \begin{cases}\alpha & k=1\\1-\alpha & k=0\end{cases}\]
-or put anther way
+or put another way
 \[p(k) = \alpha^k(1-\alpha)^{(1-k)} \;\; \forall k\in\Omega\]
 
 \paragraph{Example Scenario.} A single (possibly biased) coin flip with probability of heads $\alpha$.
 
 %%%%%%%%%%%%%
-\subsection{Binomial.}
+\subsection{Binomial}
 Another (maybe the most) well-known PMF is the \emph{Binomial Distribution}, 
 again we say the probability of a (single) trial's success is $0 \le \alpha \le 1$, 
 but now we have $n$ trials and we want to know the probability of getting $k\le n$ successes 
-(this makes $\Omega = \{0,1,2,...n\}$).
+(this makes $\Omega = \{0,1,2,...,n\}$).
 In this case 
 \[p(k) = \binom n k \alpha^k (1-\alpha)^{n-k} \;\; \forall k\in\Omega.\]
 
-\paragraph{Example Scenario.} $n$ repeated coin flips, each one bring independent and having probability of heads $\alpha$.
+\paragraph{Example Scenario.} $n$ repeated coin flips, each one being independent and having probability of heads $\alpha$.
 
 \begin{center}
 \begin{tikzpicture}[
@@ -170,11 +170,12 @@ In this case
 
 
 %%%%%%%%%%%%%
-\subsection{Poisson.}
+\subsection{Poisson}
 \label{subsec:poisson}
-Poisson distributions are used to model rare events over time. 
+Poisson distributions are used to model rare events over time, with $\lambda$ representing the expected number of events per interval. 
 
-\[p(k) = \frac{\lambda^ke^{-\lambda}}{k!} \;\; \forall k\in\Omega.\]
+\[p(k) = \frac{\lambda^ke^{-\lambda}}{k!} \;\; \forall k\in\Omega \text{ where } \Omega = \{0,1,2,...\}.\]
+
 
 \paragraph{Example Scenario.} 
 One of the first applications of the Poisson distribution was by statistician Ladislaus Bortkiewicz. 
@@ -208,9 +209,10 @@ one tragic year there were four soldiers in the same corps who died from horse k
 
 
 %%%%%%%%%%%%%
-\subsection{Geometric.}
+\subsection{Geometric}
 
-\[p(k) = (1-\alpha)^{k-1}\alpha \;\; \forall k\in\Omega.\]
+\[p(k) = (1-\alpha)^{k-1}\alpha \;\; \forall k\in\Omega \text{ where } $\Omega = \{1,2,...\}$.\]
+
 
 \paragraph{Example Scenario.} 
 {\color{red}Probability that the $k$-th coin-flip is the first head (probability of heads $\alpha$) with the previous throws being tails.}
@@ -234,10 +236,11 @@ one tragic year there were four soldiers in the same corps who died from horse k
 \end{center}
 
 %%%%%
-\section{Continuous Random Variables -- Probability Density Functions}
+\section{Continuous Random Variables --- Probability Density Functions}
 In the case of continuous random variable (think grades, weight, height, rainfall [in.], etc.) 
 the probability distribution is referred to as a \emph{Probability Density Function} (PDF). 
-We still have the same properties as before, everything sums to 1, all the probabilities are non-negative, etc.
+We still have the same properties as before, everything integrates (sums) to 1, 
+all the densities are non-negative, etc.; 
 but we typically consider a \textit{range} rather than a single value to test. 
 In the case of PDFs the probability is the area under the curve along a range (the total area is going to end up being one), 
 but when we're talking about area under the curve we're really considering the integral:
@@ -246,17 +249,17 @@ but when we're talking about area under the curve we're really considering the i
 \[p(a \le X \le b) = \int_{a}^{b} f(x)dx \]
 
 Notice that $f(x)$ is not a probability in and of itself, the probability comes from the integral. 
-Thats why the probability of a single value ($p(X=x)$) is (usually) zero. 
+That's why the probability of a single value ($p(X=x)$) is (usually) zero. 
 
-\begin{aside}[Correction from class]
-the initial version of these notes had a wrong formula (they excluded the nuance of the function $f(x)$. 
-\end{aside}
+
+
+
 
 %%%%%%%%%%%%%
-\subsection{Uniform.}
+\subsection{Uniform}
 
-All outcomes with value between $a$ and $b>a$ are equally probable:
-\[f(k) = \begin{cases}\frac{1}{b-a} & a \le k \le b\\0 & \text{othwerwise}\end{cases}\]
+All outcomes with value between $a$ and $b>a$ are equally likely:
+\[f(x) = \begin{cases}\frac{1}{b-a} & a \le x \le b\\0 & \text{otherwise}\end{cases}\]
 
 
 \begin{center}
@@ -280,8 +283,8 @@ All outcomes with value between $a$ and $b>a$ are equally probable:
 %%%%%%%%%%%%%
 \subsection{Gaussian}
 Also called the \emph{normal} distribution. 
-Is parameterized by the mean (center) value of the samples $\mu\in\reals$,
-and the standard deviation (spread) of the samples $\sigma>0$
+It is parameterized by the mean (center) value of the samples $\mu\in\reals$,
+and the standard deviation (spread) of the samples $\sigma>0$.
 
 \[f(x) = \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\]
 
@@ -309,17 +312,18 @@ and the standard deviation (spread) of the samples $\sigma>0$
 
 
 %%%%%%%%%%%%%
-\subsection{Exponential.}
-Parameterized by a value of $\lambda>0$, which is the average rate of arrivals over time.
-\[f(k) = \lambda e^{-k\lambda}\]
+\subsection{Exponential}
+Parameterized by a value of $\lambda>0$, which is the average rate of arrivals over time 
+(assuming $x\ge 0$).
+\[f(x) = \lambda e^{-x\lambda}\]
 
 \paragraph{Example Scenario.} The \emph{waiting time} between rare events 
-(notice this can also thought of as the time between Poisson events, Sec.~\ref{subsec:poisson}).
+(notice this can also be thought of as the time between Poisson events, Sec.~\ref{subsec:poisson}).
 
 
 \begin{center}
 \begin{tikzpicture}[
-    declare function={exp_dist(\k,\l)=(\k>=-1)*\l*exp(-1*\l*\k);}
+    declare function={exp_dist(\k,\l)=(\k>=0)*\l*exp(-1*\l*\k);}
 ]
 \begin{axis}[
 	xmin=0,smooth,samples=50,
@@ -341,13 +345,13 @@ Something like:
 
 %%%%%%%
 \subsection{Discrete}
-For discrete this is somewhat intuitive: 
-\[p(X\le x) = \sum_{y \in \{\omega \in \Omega \mid \omega \le x\}} p(X=y)\]
+For discrete this is as follows: 
+\[p(X\le x) = \sum_{y \in \text{range}(X),y\le x} p(X=y)\] %\{\omega \in \Omega \mid \omega \le x\}
 
 In the example above, the probability 
-\[p(C\le c) = \sum_{d \in \left\{x \in \ints | x \ge 2 \wedge x \le c\right\}}p(C=d)\]
+\[p(V\le v) = \sum_{d \in \left\{x \in \ints \mid x \ge 2 \wedge x \le v\right\}}p(V=d)\]
 so if we want to know
-\[p(C\le 4) = \sum_{d\in\{2,3,4\}} p(C=d) = p(C=2) + p(C=3) + p(C=4) = \frac{1}{16} + \frac{1}{8} + \frac{3}{16} = \frac{3}{8}\]
+\[p(V\le 4) = \sum_{d\in\{2,3,4\}} p(V=d) = p(V=2) + p(V=3) + p(V=4) = \frac{1}{16} + \frac{1}{8} + \frac{3}{16} = \frac{3}{8}\]
 
 This in and of itself can also be visualized: 
 \begin{center}
@@ -379,7 +383,8 @@ This in and of itself can also be visualized:
     discontinuous,
     table/create on use/cumulative distribution/.style={
         create col/expr={\pgfmathaccuma + \thisrow{f(x)}}   
-    }
+    },
+    xlabel={$v$}, ylabel={$p(V\le v)$}
 ]
 \addplot [red] table [y=cumulative distribution]{
 x f(x)
@@ -401,7 +406,7 @@ x f(x)
 
 
 Notice that technically, the CDF even for a discrete value is defined between elements in the range, 
-so in the example above we can ask $p(C \le 4.78) = \frac{3}{8}$.
+so in the example above we can ask $p(V \le 4.78) = \frac{3}{8}$.
 
 %%%%%%%
 \subsection{Continuous}
@@ -409,7 +414,7 @@ so in the example above we can ask $p(C \le 4.78) = \frac{3}{8}$.
 For continuous random variables, it looks similar to the property we had earlier: 
 \[p(X\le x) = \int_{-\infty}^x f(z) dz\]
 
-So for instance, if we look at the gausian distribution: 
+So for instance, if we look at the Gaussian distribution: 
 \[p(X\le x) = \int_{-\infty}^x  \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(z-\mu)^2}{-2\sigma^2}} dz\]
 Note that the actual integration here is beyond the scope of this course. 
 
@@ -433,7 +438,7 @@ Note that the actual integration here is beyond the scope of this course.
 \end{center}
 
 \section*{Useful References}
-Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S\S 2.1-2.4
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S\S 2.1--2.4
 
 
 \end{document}
