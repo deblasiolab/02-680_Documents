@@ -15,21 +15,21 @@ Sometimes we need a more complicated conditional description.
 One way to do this is using a network (graph). 
 
 \begin{center}
-\begin{dot2tex}[neato,mathmode]
+\begin{dot2tex}[dot,mathmode]
 digraph G {
 forcelabels=true;
 rankdir="LR";
 edge [style="-triangle 90"]
 node [shape="oval"];
-X -- Y; 
-X -- Z [constraint=false];
-Y -- Z;
+X -> Y; 
+X -> Z [constraint=false];
+Y -> Z;
 }
 \end{dot2tex}
 \end{center}
 
 In general for a network such as this we define the probabilities as: 
-\[p\Big(\left\langle Q_1, Q_2, ..., Q_d\right\rangle\Big) = \prod_{i=0}^d\; p\!\left(Q_i \middle| \bigwedge_{j \in N^{in}(Q_i)} Q_j\right)\]
+\[p\Big(\left\langle Q_1, Q_2, ..., Q_d\right\rangle\Big) = \prod_{i=1}^d\; p\!\left(Q_i \middle| \bigwedge_{j \in N^{in}(Q_i)} Q_j\right)\]
 remember that $N^{in}(v)$ is the set of in-neighbors of $v$ in a graph. 
 
 So for the Bayesian Network above, we may have something like:  
@@ -68,14 +68,14 @@ $x$ & $y$	& $z=1$ & $z=0$\\
 
 But if we alter the network to the following (i.e. remove the dependence of $Z$ on $X$), 
 \begin{center}
-\begin{dot2tex}[neato,mathmode]
+\begin{dot2tex}[dot,mathmode]
 digraph G {
 forcelabels=true;
 rankdir="LR";
 edge [style="-triangle 90"]
 node [shape="oval"];
-X -- Y; 
-Y -- Z;
+X -> Y; 
+Y -> Z;
 }
 \end{dot2tex}
 \end{center}
@@ -101,7 +101,7 @@ $x$ & $y=1$	&	$y=0$ \\
 %
 \begin{tabular}{|c|c|c|}
 \hline
-&  \multicolumn{2}{c|}{$p(Z \mid Y, X)$}\\
+&  \multicolumn{2}{c|}{$p(Z \mid Y)$}\\
  $y$	& $z=1$ & $z=0$\\
 \hline \hline
 0 	&	$0.2$	& $0.8$\\

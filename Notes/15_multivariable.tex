@@ -50,7 +50,7 @@ and we're given the following joint probabilities:
 \end{tabular}
 \end{center}
 
-If we want to determine, say $P(X=\texttt{Tails})$, it turns out we can some over all the possibilities of $Y$: 
+If we want to determine, say $P(X=\texttt{Tails})$, it turns out we can sum over all the possibilities of $Y$: 
 \[P(X=\texttt{Tails}) = \sum_{y\in\{\texttt{Heads},\texttt{Tails}\}}p(X=\texttt{Tails},Y=y) = \frac{3}{10} + \frac{4}{10} = \frac{7}{10}\]
 
 Doing all the math, both coins are biased toward \texttt{Tails},  the first coin ($X$) more-so. 
@@ -70,7 +70,7 @@ Lets say we're drawing points uniformly over the unit square,
 in this case 
 \[f(x,y) = \begin{cases} 1 & 0 \le x,y \le 1\\ 0 & \text{otherwise}\end{cases}\]
 
-So if we wan to find 
+So if we want to find 
 \[ p\left(X\le \frac{1}{2}, Y \le \frac{1}{2}\right) = \int_0^\frac{1}{2} \int_0^\frac{1}{2} 1 dydx = 
 \Eval{\Eval{xy}{0}{\frac{1}{2}}}{0}{\frac{1}{2}} = 
 \Eval{x\cdot\frac{1}{2}-x\cdot0}{0}{\frac{1}{2}}\]\[ = 
@@ -119,7 +119,7 @@ Similar to independence for event probabilities, for two random variables $X$ an
 
 \begin{center}
 \begin{tabular}{c|c|c|c}
-\textit{BRCA1} mutation & \textit{P53} mutation & develops cancer \\
+\textit{BRCA1} mutation & \textit{P53} mutation & develops cancer & \\
 $G_1$ & $G_2$ & $C$& $p(G_1,G_2,C)$\\
 \hline\hline
 \texttt{N}& \texttt{N}& \texttt{N}& $0.24$\\
@@ -145,7 +145,7 @@ but because the denominator is $1$ it is left out of the equation above for ease
 \begin{center}
 \begin{tabular}{c|c|c}
 %\textit{BRCA1} mutation & \textit{P53} mutation \\
-$G_1$ & $G_2$ & $p(C=1\mid G_1,G_2)$\\
+$G_1$ & $G_2$ & $p(C=\texttt{Y}\mid G_1,G_2)$\\
 \hline\hline
 \texttt{N}& \texttt{N}& $\frac{0.01}{0.24+0.01} = 0.04$\\
 \texttt{N}& \texttt{Y}& $\frac{0.05}{0.20+0.05} = 0.20$\\

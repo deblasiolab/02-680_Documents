@@ -51,10 +51,17 @@ Assume 48 of the 100 coins are heads, then $\overline{C_{100}} = \frac{48}{100}$
 
 
 \paragraph{Law of Large Numbers.} The \emph{law of large numbers} says that as $n$ grows, the probability that $\overline{X_n}$ is close to $\mu$ approaches 1. 
-\[\lim_{n\rightarrow\infty} p\left(\overline{X_n}=\mu\right) \mapsto 1.\]
+\[\lim_{n\rightarrow\infty} p\left(\overline{X_n}=\mu\right) \to 1.\]
+
+\begin{aside}[pedantry detail]
+Technically the probability that a continuous random variable's sample mean 
+is exactly equal to $\mu$ is generally 0 for any finite $n$, and stays 0 in the limit.
+Thus it's more precise to say that it's within some small region around $\mu$. 
+\[\lim_{n\rightarrow\infty} p(|\overline{X_n}-\mu| < \epsilon) \to 1, \text{ for any } \epsilon > 0\]
+\end{aside}
 
 \paragraph{Central Limit Theorem (brief introduction).} While similar to the law of large numbers the \emph{Central Limit Theorem} says that $n$ grows, 
-the distribution of $\overline{X_n}$ converges to the Gaussian (normal) distribution $N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$. 
+the distribution of $\overline{X_n}$ converges to the Gaussian (normal) distribution $N\left(\mu, \frac{\sigma^2}{n}\right)$. 
 \[\lim_{n\rightarrow\infty} \overline{X_n} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right).\]
 
 These both say something similar and speak to the fact that more data will make the empirical mean will approach the underlying (theoretical) mean. 
@@ -65,7 +72,7 @@ We will see much more about this over the next couple weeks.
 %%%%%%%%%%%%
 \section{Statistical Inference}
 We've been talking a lot about the models themselves and hinting at how to use those distributions. 
-We will use \emph{Statistical Interference} or \emph{Learning} to try to make the models we've been learning about
+We will use \emph{Statistical Inference} or \emph{Learning} to try to make the models we've been learning about
 match the observations we've made about the world. 
  
 Thinking about the coin flip simulator from the other day: 
@@ -75,7 +82,7 @@ We call the simulator a \textit{data generator} that produces things we can see
 which we call \textit{observations}.
 On the other side, we have a set of models, one of which we think may match our intuition about the generator, 
 remember that each of those models had a set of \textit{parameters}.  
-Statical inference is the task of trying to learn the parameters from the observations. 
+Statistical inference is the task of trying to learn the parameters from the observations. 
 
 
 \begin{center}
@@ -138,7 +145,7 @@ Remember that the elements of $\mathcal{D}$ are i.i.d. thus we can rewrite it:
 \begin{aside}[$\log$ likelihood]
 As we saw in the activity last week, when taking the product of probabilities the values can get very small. 
 So we many times take the $\log$ likelihood of the function. 
-This also take the product to a sum. 
+This also takes the product to a sum. 
 \[ \log(p(X_1,X_2,\cdots,X_n\mid\theta)) = \sum_{i=1}^n \log(p(X_i \mid \theta))\]
 \end{aside}
 
@@ -150,13 +157,13 @@ This is the most frequently used method for parameter estimation.
 Thinking about how we maximize a function (or really find the parameter that maximizes the function), 
 we need to take its derivative and check the $0$ points. 
 \[\frac{d}{d\theta}p(\mathcal{D}\mid \theta)=0\]
-(but we also need to ensure its a max and not a min or saddle.)
+(but we also need to ensure it's a max and not a min or saddle.)
 If there is no critical point, then we will use the maximum allowable parameter value. 
 
 \paragraph{Example. }
-Lets look at flipping a coin $n$ times, but we don't know if its fair or not. 
+Let's look at flipping a coin $n$ times, but we don't know if it's fair or not. 
 So each of the $\mathcal{D} = X_1, X_2, \cdots, X_n$ trials are independent, 
-thus $X_i \sim Bernouli(\alpha)$, and thus $f(X_i=x\mid\theta)=\alpha^x(1-\alpha)^{1-x}$, 
+thus $X_i \sim Bernoulli(\alpha)$, and thus $f(X_i=x\mid\theta)=\alpha^x(1-\alpha)^{1-x}$, 
 here $\theta = \{\alpha\}$. 
 But we also combine the trials, so it ends up looking a little like the binomial distribution, 
 assuming $k$ of our $n$ flips were heads: 
@@ -188,7 +195,7 @@ Thus, given the sample we have, it looks like the coin is not fair.
 Remember the basic steps to finding the MLE are: 
 \begin{itemize}
 \item Write down the log likelihood of the data, then
-\item Maximize log likelihood (usually using calculus. 
+\item Maximize log likelihood (usually using calculus). 
 \end{itemize}
 
 %%%%%%%%%
@@ -197,11 +204,11 @@ Remember the basic steps to finding the MLE are:
 Can we make the derivation in the example above more general. 
 
 Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
-where $X_i \sim Bernouli(\alpha)$.
+where $X_i \sim Bernoulli(\alpha)$.
 Find the MLE of $\theta=\{\alpha\}$.
 
 \begin{align*}
-\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{d\theta} \ln \prod_{i=0}^n p(X_i\mid\theta)\\
+\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{d\theta} \ln \prod_{i=1}^n p(X_i\mid\theta)\\
 					    		     	&= \frac{d}{d\alpha} \ln \alpha^s(1-\alpha)^{n-s} & \text{assuming $s$ successes}\\
 					    			& = \frac{d}{d\alpha} s \ln \alpha + (n-s) \ln (1-\alpha)\\
 								& = \frac{s}{\alpha} - \frac{n-s}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a}{x} \frac{d}{dx}  f(x)			     
@@ -242,9 +249,9 @@ Thus $\displaystyle\hat\mu_{MLE} = \frac{1}{n}\sum_{i=1}^n x_i$.
 
 \begin{align*}
 \frac{d}{d\sigma} -n \ln \sigma {\color{red}- n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\frac{d}{d\mu} -n \ln \sigma - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2&= 0\\
-\frac{-n}{\sigma} + \sigma^-3\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\sigma^-2\sum_{i=1}^n (x-\mu)^2 &= n\\
+\frac{d}{d\sigma} -n \ln \sigma - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2&= 0\\
+\frac{-n}{\sigma} + \sigma^{-3}\sum_{i=1}^n (x-\mu)^2 &= 0\\
+\sigma^{-2}\sum_{i=1}^n (x-\mu)^2 &= n\\
 \end{align*}
 
 Thus $\displaystyle\hat\sigma^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (x-\hat\mu_{MLE})^2$. 
@@ -256,8 +263,8 @@ where $X_i \sim Poisson(\lambda)$.
 Find the MLE of $\theta = \{\lambda\}$.
 
 \begin{align*}
-\ln p(\mathcal{D}\mid\mu,\sigma^2) & = \ln\left(\prod_{i=1}^n p(X_i\mid\mu,\sigma^2)\right)\\
-						& = \ln \left(\prod_{i=1}^n e^{-\lambda}\frac{\lambda^x_i}{x_i!}\right)\\
+\ln p(\mathcal{D}\mid\mu,\lambda) & = \ln\left(\prod_{i=1}^n p(X_i\mid\mu,\lambda)\right)\\
+						& = \ln \left(\prod_{i=1}^n e^{-\lambda}\frac{\lambda^{x_i}}{x_i!}\right)\\
 						& = \ln \left(e^{-n\lambda}\frac{\lambda^{\sum_{i=1}^n x_i}}{ \prod_{i=1}^nx_i!}\right)\\
 						& = -n\lambda + \ln \lambda \sum_{i=1}^n x_i -\sum_{i=1}^n\ln(x_i!)\\
 \end{align*}

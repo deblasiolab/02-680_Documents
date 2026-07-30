@@ -46,7 +46,7 @@ The \emph{standard deviation} of a variable is the square root of the variance:
 
 If we look at a first coin, $F$:
 \[\E[F] = \frac{1}{2}\]
-The difference between $X$ and $\E[F]$ is $+\frac{1}{2}$ and $-\frac{1}{2}$ (with equal probability). 
+The difference between $F$ and $\E[F]$ is $+\frac{1}{2}$ and $-\frac{1}{2}$ (with equal probability). 
 \[\V[F] = \E\left[\left[F-\E\left[F\right]\right]^2\right] = \left(\frac{1}{2}\left(+\frac{1}{2}\right)^2 + \frac{1}{2}\left(-\frac{1}{2}\right)^2\right) = \frac{1}{4}\]
 and thus
 \[\sigma[F] = \sqrt{\V[F]} = \sqrt{\frac{1}{4}} =\frac{1}{2}.\]
@@ -55,12 +55,12 @@ What if instead we tried to simulate a coin flip into variable $S$.
 But we made a mistake and now we get 1 or 0 with probability $0.4995$, but in some cases we output 100 (with probability $0.001$). 
 What are $\E[S], \V[S], \sigma[S]$?
 \[\E[S] = 0 \cdot 0.4995 + 1 \cdot 0.4995 + 100 * 0.001 = 0 + 0.4995 + 0.1 = 0.5995\]
-\[\V[S] = \E\left[\left[S-\E\left[S\right]\right]^2\right] \]\[ = \left(0.4995 \cdot 0.5995^2\right) + \left(0.4995 \cdot 0.4005^2\right) + \left(0.01 \cdot  99.4005^2\right) 
+\[\V[S] = \E\left[\left[S-\E\left[S\right]\right]^2\right] \]\[ = \left(0.4995 \cdot 0.5995^2\right) + \left(0.4995 \cdot 0.4005^2\right) + \left(0.001 \cdot  99.4005^2\right) 
 \approx  0.180 + 0.080 + 9.880 \approx 10.14\]
 \[\sigma[S] = \sqrt{\V[S]} \approx \sqrt{10.14} \approx 3.184\]
 So clearly the variance is much higher, but how often do we actually expect to see a value of 100? 
-If $p(S=100)=0.001$ thats approximately one in every 1000 throws,
-if we throw much less than that we may think its a fair coin. 
+If $p(S=100)=0.001$ that's approximately one in every 1000 throws,
+if we throw much less than that we may think it's a fair coin. 
 That leads the question of how we measure these things in practice. 
 
 %%%%%%%%%%%%%%%
@@ -89,7 +89,7 @@ For some random variable $X$ and constants $a,b\in\reals$
 %%%%%%%%%%%
 \subsection{Continuous}
 \[\E\left[X\mid Y=y\right] = \int_{-\infty}^\infty \left(x \cdot f(x\mid y) dx\right)\]
-\[\E\left[X\mid Y=y\right] = \int_{-\infty}^\infty \left(\left[x-\E\left[X\mid Y=y\right]\right]^2 \cdot f(x\mid y) dx\right)\]
+\[\V\left[X\mid Y=y\right] = \int_{-\infty}^\infty \left(\left[x-\E\left[X\mid Y=y\right]\right]^2 \cdot f(x\mid y) dx\right)\]
 
 \paragraph{Example.}
 Assume $X\sim Uniform(0,1), Y\mid X=x \sim Uniform(x,1)$. 
@@ -109,7 +109,7 @@ Assume $X\sim Uniform(0,1), Y\mid X=x \sim Uniform(x,1)$.
 & = \frac{1}{1-x} \int_x^1  \left(y^2 - (1+x)y +\frac{(1 +x)^2}{4} \right)dy\\
 & = \frac{1}{1-x} \left[\frac{y^3}{3} - \frac{(1+x)}{2}y^2 +\frac{(1 +x)^2}{4}y \right]^1_x\\
 & = \frac{1}{1-x} \left[\frac{y^3}{3} + \frac{y(1+x)((1+x)-2y)}{4} \right]^1_x\\
-& = \frac{1}{1-x} \left[\frac{1-x^3}{3} + \frac{(1+x)^2(x-1))}{4} \right]^1_x\\
+& = \frac{1}{1-x} \left[\frac{1-x^3}{3} + \frac{(1+x)^2(x-1)}{4} \right]^1_x\\
 & = \frac{1}{1-x} \left[ \frac{(1-x)(1+x+x^2)}{3} - \frac{(1+x)^2\left(1-x\right)}{4} \right]\\
 & = \frac{(1+x+x^2)}{3} -\frac{(1+x)^2}{4}
 \end{align*}
@@ -119,7 +119,7 @@ Assume $X\sim Uniform(0,1), Y\mid X=x \sim Uniform(x,1)$.
 Given two random variables $X$ and $Y$ with expectations 
 $\mu_X = \E[X]$ and $\mu_Y=\E[Y]$ respectively. 
 The \emph{covariance} between the two is defined as
-\[Cov(X,Y) = \E\left[(X-\mu_x)(Y-\mu_Y)\right]=\E[XY]-\E[X]\E[Y]\]
+\[Cov(X,Y) = \E\left[(X-\mu_X)(Y-\mu_Y)\right]=\E[XY]-\E[X]\E[Y]\]
 
 Assume also that the standard deviations are $\sigma_X$ and $\sigma_Y$, 
 then the \emph{correlation} of $X$ and $Y$ is defined as 
