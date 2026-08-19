@@ -1,0 +1,110 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 6: Vectors}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+We saw that we can easily build tuples using Cartesian product, and the notation is even more simplified when the sets involved are uniform (i.e. the same). 
+When the set used to define a tuple is the set of real $\reals$ (or complex $\mathbb{C}$%
+\footnote{It will generally be true throughout the class that the properties we're discussing also apply to complex numbers, but for simplicity we will usually only directly discuss reals.})
+numbers, we call the tuple a \emph{vector}.
+Specifically an $n$-vector $x$ is defined as an element in \[x\in \reals^n.\] 
+If we want to reference the $i$-th element of $x$ we will write \[x_i\] (or sometimes $x[i]$, this is true of tuples as well).
+
+%%%%%
+\section{Simple Operations}
+Graphically we can think of vectors (in $\reals^2$) in two ways, which are somewhat equivalent: 
+as a point on the plane, or as an arrow from the origin.
+The second will be useful in this section, but the latter is sometimes useful as well. 
+
+
+\subsection{Vector Addition and Scalar Multiplication}
+Both of these operations are element-wise. 
+For vectors $x,y \in \reals^n$
+\[
+z = x+y \;\;\rightarrow \;\; z_i = x_i + y_i \;\;\; \forall 1 \le i \le n.
+\]
+Thus $z \in \reals^n$ as well. 
+
+In the context of this course, especially when talking about vectors, a \emph{scalar} is a single number (i.e. $a \in \reals$) rather than a vector. 
+(The implication is that $\reals$ and $\reals^1$ are not the same thing.)
+When multiplying a vector $x\in \reals^n$ by a scalar $a\in\reals$, we once again apply this element-wise. 
+Thus the result, $z\in\reals^n$ can be computed as:
+\[
+z = ax \;\; \rightarrow \;\; z_i = a x_i \;\;\; \forall 1 \le i \le n.
+\]
+
+\subsection{Norms}
+Informally \emph{$\ell_p$ norm} of a vector is a measure of its size.
+Here $p\in\mathbb{Z}^{\ge1}$.  
+All norms, written as a function $\|\_\|_p: \reals^n \mapsto \reals$.
+Each has the following properties:
+\begin{itemize}
+\item $\forall x \in \reals^n : \|x\|_p\ge 0$
+\item $\forall x \in \reals^n, c\in\reals : \|cx\|_p = |c|\cdot\|x\|_p$ 
+\item $\forall x,y \in \reals^n : \|x+y\|_p\le \|x\|_p + \|y\|_p$
+\item $\|x\|_p = 0 \iff x=0$
+\end{itemize}
+
+The 3rd property comes up a lot, it's called the \emph{triangle inequality}
+
+In general the form of the $\ell_p$ norm is:
+\[
+\|x\|_p = \left(\sum_{i=1}^n \left|x_i\right|^p\right)^{\frac{1}{p}}.
+\]
+
+
+
+\paragraph{Vector length.} Often times called the $\ell_2$- or Euclidean-norm of a vector. 
+If we think of the vector as an arrow, we can say the \emph{length} of the vector (arrow) is the same as the hypotenuse 
+of a right triangle with each leg having the same length as each one of the elements. 
+In that case we know that for vector $x = \left\langle x_1,x_2\right\rangle\in\reals^2$, the length is $\sqrt{x_1^2 + x_2^2}$.
+To generalize this we say the length of a vector $x\in\reals^n$
+\[
+\|x\|_2 = \sqrt{\sum_{i=1}^n \left(x_i\right)^2}.
+\]
+
+\paragraph{Other common norms.}
+The $\ell_1$-norm (Manhattan/Taxicab Distance):
+\[
+\|x\|_1 = \sum_{i=1}^n \left|x_i\right|.
+\]
+
+The $\ell_\infty$-norm: 
+\[
+\|x\|_\infty = \max_{x_i \in x} \big(\left|x_i\right|\big)
+\]
+
+
+\section{Dot Product}
+While a scalar times a vector is a vector, it turns out a vector times a vector is a scalar! 
+Lets define it first then we will dive in;
+for $x,y \in \reals^n$
+\[
+x \bullet y = \sum_{i=1}^n x_i \cdot y_i.
+\]
+(note sometimes we will use $\bullet$ vs $\cdot$ to differentiate scalar multiplication and dot product, but generally only the latter is used since the domains of the functions are different and can be extracted from context.)
+
+We often think of dot product as telling us how vectors go ``in the same direction''. 
+Consider two cardinal vectors (going directly along an axis) on the plane;
+intuitively they go in totally different directions (note, this is different from \textit{opposite} directions). 
+WLOG one vector must be $\langle a, 0 \rangle$ and the other must be  $\langle 0,b \rangle$ (for scalars $a,b\in\reals$). 
+Using the definition above $\langle a, 0 \rangle \bullet \langle 0,b \rangle = 0$.
+Consider a third vector $\langle c, 0 \rangle$ with $c\in\reals$, but enforce that $a > 0$ and $c < 0$. 
+In this case the result is $\langle a, 0 \rangle \bullet \langle c,0 \rangle = ac$, which we know is negative; 
+they share a lot of direction, but go opposite ways! 
+
+We can actually redefine the $L_2$-norm of a vector $x\in\reals^n$ using the dot product:
+\[
+\|x\| = \sqrt{x \cdot x}.
+\]
+
+\section*{Useful References}
+Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 2.4
+
+\end{document}

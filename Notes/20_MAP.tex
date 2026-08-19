@@ -1,0 +1,250 @@
+\include{includes}
+
+\title{Topic 20: Maximum \emph{a posteriori} Estimation}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%
+\section{The Frequentist versus Bayesian Schools}
+
+Both schools of statistics start with probability. 
+For Bayesian inference, we take $H$ to be a hypothesis (parameters) and $D$ some data. 
+Different people will have different a priori beliefs --- 
+but we would still like to make useful inferences from data. 
+
+When $p(H)$ is known, there is no disagreement, we will all just follow Bayes' Rule as written. 
+
+\begin{center}
+\begin{dot2tex}[dot,mathmode]
+digraph O {
+direction="TB";
+node [shape="box"];
+B [label="p(H\mid D) = \frac{p(D\mid H)p(H)}{p(D)}"];
+P [label="p(H\mid D) = \frac{p(D\mid H){\color{blue} p_{prior}(H)}}{p(D)}"];
+F [label="\text{Likelihood }L(H \mid D) = p(D\mid H)"];
+B->P[color="blue",label="\color{blue}\text{Bayesian}"];
+B->F[color="orange",label="\color{orange}\text{Frequentist}"];
+}
+\end{dot2tex}
+\end{center}
+
+When the prior is \textit{not} known, 
+\emph{Bayesian} logic requires us to develop a prior based on some information we have (intuition); 
+while \emph{Frequentist} logic uses only information in the provided data. 
+
+Bayesians and frequentists take fundamentally different approaches to this challenge.
+The reasons for this split are both practical (ease of implementation and computation) and 
+philosophical (subjectivity versus objectivity and the nature of probability). 
+
+The main philosophical difference concerns the \emph{meaning of probability}.
+
+\begin{tabularx}{\textwidth}{XX}
+\hline
+Bayesians & Frequentists\\
+\hline\hline
+the idea that probability is an abstract concept that measures a state of knowledge or a degree of belief in a given proposition &
+the idea that probabilities represent long-term frequencies of repeatable random experiments\\
+\hline
+Subjective interpretation
+& Objective interpretation\\
+\hline
+you ``believe'' that you will get tails 50\% of the time & 
+the relative frequency of tails goes to 1/2 as the number of flips goes to infinity\\
+they consider a range of values each with its own probability of being true& they consider the parameter a single fixed (if unknown) value\\
+\end{tabularx}
+
+%%%%%%%%%%%%%
+\section{Bayesians' Approach to Parameter Estimation}
+Lets look at the coin flip example we had in the last topic: 
+ $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
+where $X_i \sim Bernoulli(\alpha)$.
+We can further summarize $\mathcal{D}$ into $c_H$ and $c_T$ 
+representing the counts of heads and tails respectively. 
+
+We saw last time that \[\hat\alpha_{MLE} = \frac{c_H}{c_H+c_T}.\]
+
+But this is assuming we know nothing about $\alpha$ ahead of time. 
+What if we \textit{believe} that it's 50/50, so we can add what are called \emph{pseudocounts}
+to the input $c_{H_0}$ and $c_{T_0}$.
+And thus compute 
+\[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}.\]
+
+\paragraph{Example. }
+Let's assume we have an experiment where we throw a coin 100 times, we want to know $\alpha$, $c_H=0$ and $c_T=100$.
+
+Vanilla MLE would say that 
+\[\hat\alpha_{MLE} = \frac{c_H}{c_H+c_T} = \frac{0}{0 + 100} = 0\]
+  
+But we have a small belief this is a fair coin, so lets assume we add the pseudocounts $c_{H_0}=c_{T_0}=1$, 
+in that case 
+\[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}=\frac{0+1}{0+100+1+1} = \frac{1}{102}.\]
+
+If we're more confident in our prior and set  $c_{H_0}=c_{T_0}=100$ then
+\[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}=\frac{0+100}{0+100+100+100} = \frac{100}{300} = \frac{1}{3}.\]
+
+Pseudocounts are a way of exerting your \textit{belief}
+\begin{itemize}
+\item[] \textbf{Larger pseudocounts} – represent a strong prior belief\\\hspace*{3em}
+Will have a greater effect on the posterior estimate
+\item[] \textbf{Small pseudocounts} – represent a weak prior belief\\\hspace*{3em}
+Will have a smaller effect on the posterior estimate
+\end{itemize}
+
+As the sample size goes to infinity, data will dominate the estimate.
+
+\begin{aside}[An additional distribution: Beta]
+The Beta distribution visually looks like an un-balanced normal. 
+
+\begin{center}
+\begin{tikzpicture}[
+    declare function={beta(\x,\a,\b)=\a<=0||\b<=0?1/0:\x<0||\x>1?0.0:((\x^(\a-1))*((1-\x)^(\b-1))*((\a+\b)-1)!)/((\a-1)!*(\b-1)!);}
+]
+\begin{axis}[
+    samples=500,
+    ymin=0,ymax=3,
+    xmin=-0.1,xmax=1.1,
+    xlabel={$x$},
+    ylabel={Beta},
+    legend pos=outer north east,
+]
+\addplot [blue] {beta(x,1,1)}; \addlegendentry{$\alpha_{S}=1,\alpha_{F}=1$}
+\addplot [red] {beta(x,2,2)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=2$}
+\addplot [green] {beta(x,2,6)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=6$}
+\addplot [purple] {beta(x,6,2)}; \addlegendentry{$\alpha_{S}=6,\alpha_{F}=2$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[f(x;\alpha_S, \alpha_F) = \frac{x^{(\alpha_S-1)}(1-x)^{(\alpha_F-1)}}{B(\alpha_S,\alpha_F)}\]
+where 
+\[B(\alpha_S,\alpha_F) = \frac{\Gamma(\alpha_S)\Gamma(\alpha_F)}{\Gamma(\alpha_S+\alpha_F)}\text{ and } \Gamma(a) = (a-1)!.\]
+
+When $X\sim Beta(\alpha_S, \alpha_F)$, $\mathbb{E}[X] = \frac{\alpha_S}{\alpha_S + \alpha_F}$.
+
+\end{aside}
+
+If we model the posterior as a \emph{Beta} distribution on $c_{H_0}$ and $c_{T_0}$
+(that is $p(\theta)\sim Beta(c_{H_0},c_{T_0})$).
+
+If we then want to find the \textit{posterior}, $p(\theta\mid\mathcal{D})$? 
+\begin{align*}
+p(\theta\mid\mathcal{D}) & = \frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}\\
+				& \propto p(\mathcal{D}\mid\theta)p(\theta)\\
+				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot Beta(\alpha_{H_0},\alpha_{T_0})\\
+				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot \frac{p^{(\alpha_{H_0}-1)}(1-p)^{(\alpha_{T_0}-1)}}{B(\alpha_{H_0},\alpha_{T_0})}\\
+				& \sim Beta(\alpha_{H}+\alpha_{H_0},\alpha_{T}+\alpha_{T_0})
+\end{align*}
+
+%%%%%%%%%%%%%
+\section{Maximum \textit{a Posteriori} (MAP) Estimation}
+
+As a reminder 
+\[\hat\theta_{MLE} = \argmax_{\theta\in\Theta} p(\mathcal{D}\mid \theta).\]
+On the other hand if we want to include information of our prior knowledge 
+then we have MAP:
+\[\hat\theta_{MAP} = \argmax_{\theta\in\Theta} p(\theta\mid\mathcal{D}) =  \argmax_{\theta\in\Theta} p(\mathcal{D}\mid \theta)\cdot p(\theta).\]
+
+Note that in both cases we're making a \emph{point estimate} of $\theta$. 
+We still don't have the whole picture, we're using data to estimate our model, 
+but MAP is \emph{partially Bayesian}. 
+
+
+%%%%%%%%%%%%%%%
+\subsection{Example: \textit{Known} Prior}
+There are three types of coins which have different probabilities of landing heads when tossed
+\begin{itemize}
+\item[] Type $A$ coins are fair and have probability 0.5 of heads
+\item[] Type $B$ coins are bent and have probability 0.6 of heads
+\item[] Type $C$ coins are bent and have probability 0.9 of heads
+\end{itemize}
+
+Suppose you have a drawer containing 10 coins: 
+5 of type $A$, 3 of type $B$, and 2 of type $C$. 
+You reach into the drawer and pick a coin at random. 
+Without showing you the coin is flipped \textbf{once} and get \textbf{tails}. 
+What is the probability it is type $A$? Type $B$? Type $C$? 
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
+$\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
+\hline
+\hline
+$A$	& 0.5		& 0.5		& 0.25	& $\approx0.641$\\
+$B$	& 0.3		& 0.4		& 0.12	& $\approx0.308$\\
+$C$	& 0.2		& 0.1		& 0.02	& $\approx0.051$\\
+\hline
+\end{tabular}
+\end{center}
+
+Thus $\hat\theta_{MAP} = A$. 
+
+What if you then flip the same coin another 9 times, so including the first coin we have 
+$\alpha_H=6$ and $\alpha_T=4$.
+Notice in the table below, the prior does not change. 
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
+$\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
+\hline
+\hline
+$A$	& 0.5		& $0.97x10^{-3}$ & $4.88x10^{-4}$	& 0.570\\
+$B$	& 0.3		& $1.19x10^{-3}$ & $3.58x10^{-4}$	& 0.418\\
+$C$	& 0.2		& $0.05x10^{-3}$ & $0.11x10^{-4}$	& 0.012\\
+\hline
+\end{tabular}
+\end{center}
+
+In this case, it's still true that $\hat\theta_{MAP} = A$,
+but $\hat\theta_{MLE} = B$. 
+
+
+%%%%%%%%%%%%%%%
+\subsection{\textit{Unknown} Prior}
+Assume we have a similar scenario but this time we don't know the prior, 
+we follow a similar procedure to that for MLE: 
+take the zero point of the log probability. 
+\[\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta)p(\theta) = 0\]
+
+\begin{aside}[Conjugate Priors]
+Definition: If the prior and the posterior belong to the same parametric family, 
+then the prior is said to be conjugate for the likelihood.
+Parameters of the prior distribution
+are often called ``hyperparameters''.\\
+Example: $\alpha_S,\alpha_F$ in $Beta(\alpha_S,\alpha_F)$.
+\vspace{1em}
+
+How do you set the hyperparameters?
+\begin{itemize}
+\item Prior knowledge (from experienced domain-specific experts)
+\item If no prior knowledge, use “uninformative” prior (e.g., $Beta(1,1)$)
+\end{itemize}
+\vspace{1em}
+
+Some common conjugate prior sets are in the table below:
+\begin{center}\begin{tabular}{|c|c|c|}
+\hline
+Prior & Likelihood & Posterior\\
+\hline\hline
+Beta & Bernoulli & Beta\\
+Beta & Binomial & Beta\\
+Gamma & Poisson & Gamma\\
+Normal & Normal & Normal\\
+\hline
+\end{tabular}\end{center}
+
+
+\end{aside}
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S11
+Degroot and Schervish. ``Probability and Statistics''  \S\S7.1-7.4
+
+
+\end{document}

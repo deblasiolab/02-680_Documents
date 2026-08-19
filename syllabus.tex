@@ -162,13 +162,13 @@ At the end of the semester, students will be able to:
 \end{enumerate}
 
 %\clearpage
-\tableofcontents
+%\tableofcontents
 
 
 
 \input{instructional_staff}
 
-\clearpage
+%\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Logistics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -176,7 +176,7 @@ At the end of the semester, students will be able to:
 \paragraph{Course Topic Schedule:} Can be found \href{https://docs.google.com/spreadsheets/d/1AuxFOrYHO8UFzA6YwOEVaYlRdU7XbZr-j7E7GviOG9s}{on Google Sheets}\footnote{\url{https://docs.google.com/spreadsheets/d/1AuxFOrYHO8UFzA6YwOEVaYlRdU7XbZr-j7E7GviOG9s}}
 and is subject to change.
 
-
+\iffalse
 \paragraph{Topics covered this semester:}
 
 \begin{multicols}{2}
@@ -201,6 +201,7 @@ and is subject to change.
 \item Hypothesis testing
 \end{itemize}
 \end{multicols}
+\fi
 
 \paragraph{Textbook:} 
 There are no required textbooks for this course. Below are textbooks that can be good references: 
@@ -214,20 +215,22 @@ There are no required textbooks for this course. Below are textbooks that can be
 %\item \textbf{Linear Algebra Done Right} by Sheldon Axler
 \item \textbf{Basic Concepts of Linear Algebra} by Isaak and Manougian
 \end{itemize}
-
+\clearpage
 \paragraph{Communication platforms:}
 \begin{itemize}
-\item \textbf{Canvas Homepage.} 
-The course homepage will be hosted on Canvas. 
-Canvas will be used for attendance and as a central repository for grades. 
+\item \textbf{Homepage.} 
+Canvas will be used for quizzes and as a central repository for grades. 
 You should be automatically enrolled at \url{https://canvas.cmu.edu/courses/54762}.
 \item \textbf{Discussion Forum.} 
-An online forum is provided on Piazza as an area for discussion and questions. 
+An online forum is provided on Piazza as an area for discussion and questions linked within Canvas. 
 The forum will be moderated by the course staff who will respond to questions, 
 but students are encouraged to help each other via discussion, 
 within the bounds of the collaboration policy (Section~\ref{sec:collaboration}); 
 hints on assignment specifics will be provided by the teaching staff rather than discussed on the forum. 
-You can find the class on Piazza at\\ \url{https://piazza.com/cmu/fall2026/02680}.
+\url{https://piazza.com/cmu/fall2026/02680}.
+\item \textbf{Gradescope.} 
+Linked from within Canvas, allows for submission, grading, and feedback for homework assignments. 
+\url{https://www.gradescope.com/courses/1341903}.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -243,9 +246,9 @@ Your semester grade will be based on a combination of homework assignments, week
 The approximate percentages are as follows:
 \begin{center}
 \begin{tabular}{rl}
-\textbf{50\% } & Homework\\
-\textbf{10\% } & Attendance \& Participation\\
-\textbf{40\% } & Exams (20\% per)\\
+\textbf{30\% } & Homework\\
+\textbf{20\% } & Attendance, Participation, \& Quizzes\\
+\textbf{50\% } & Exams (25\% per)\\
 \end{tabular}
 \end{center}
 
@@ -283,8 +286,6 @@ To assist those students using \LaTeX, the source code for each assignment will 
 
 \begin{tcolorbox}[colback=red!5,colframe=red!75!black,title=Cheating policy]
 All work must be your own. Unauthorized collaboration or \href{https://www.cmu.edu/student-affairs/ocsi/}{plagiarism} will result in a negative grade (e.g., a homework worth 100 points will be factored in as a -100 points towards your final grade) and will be reported to your academic advisor and dean.
-
-\vspace{1em}
 See Section~\ref{sec:cheating}.
 \end{tcolorbox}
 
@@ -297,7 +298,7 @@ the whole assignment will be regraded and it is possible that fewer points
 may be awarded than the previous grade in light of new consideration.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Attendance \& Participation}
+\subsection{Attendance, Participation, \& Quizzes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Attendance will \emph{not} be taken, 
 but we will have occasional in-class exercises that serve to reinforce the concepts we have covered and provide feedback to the instructor. 
@@ -305,7 +306,7 @@ These exercises will not be graded for correctness, but participation will be ex
 You are allowed three ``dropped'' attendance grades without penalty. 
 These can be used for any purpose. 
 
-All classes will be live without an option for virtual participation.
+\textbf{All classes will be live without an option for virtual participation.}
 %All efforts will be made to record lectures, but will only be made available in extreme circumstances.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

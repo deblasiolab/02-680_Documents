@@ -1,0 +1,144 @@
+\include{includes}
+%SetFonts
+
+
+\title{Topic 5: Graphs}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%%%
+\section{The Basics}
+Typically we denote a graph as the tuple $G=\langle V, E\rangle$, 
+where $V$ is a set of nodes or \emph{vertices} and 
+\[E\subseteq V\times V \textnormal{\hspace{3em} or \hspace{3em}} E\subseteq \left\{\left\{u,v\right\} : u,v \in V\right\}\] 
+is a set of \emph{edges} or connections between two vertices.
+Which definition we use is dependent on $G$ being \emph{directed} or \emph{undirected} (i.e. does the order of the nodes in the edge set matter).  
+
+Some examples of things that can be represented as graphs: train/flight maps, cell interactions, social networks, etc. 
+In computational biology, we also represent genomes as graphs, in this case as a directed graph with changes denoted by different \emph{paths} from start to finish. 
+A \textit{path} is a sequence of nodes \[\langle v_1, v_2, v_3,...,v_k \rangle\] ($k\ge 1$) where every edge \[\langle v_{i}, v_{i+1}\rangle \in E\textnormal{\hspace{1em} (or  }\{ v_{i}, v_{i+1}\} \in E\textnormal{).}\]
+We say the path has \emph{length} $k$, and that is a path \textit{from} $v_1$ \textit{to} $v_k$.
+
+In the case of a genome graph, each edge would be \emph{labeled} with a string, but in other types of graphs the labels could be numerical 
+(in which we would usually call them \textit{weights}).
+A path label would then be the concatenation of all the edge labels, a path weight would be the sum of the weights. 
+We can also label or weight edges in some scenarios. 
+In all cases weights (labels) are typically represented by a function:
+\[\ell: E \rightarrow \Sigma^* \]
+(or maybe $w: E \rightarrow \reals$).
+
+A lot of times we want to talk about the \emph{neighborhood} of a node: 
+\[N_G(v) = \left\{ u \mid \left\{u,v\right\} \in E\right\}\]
+and we call the size of this set \[degree_G(v) := \left|N_G(v)\right| + \mathds{1}\left(v \in N_G\left(v\right)\right)\] the cardinality of the node or the \emph{degree}. 
+Here $\mathds{1}: \{\texttt{true},\texttt{false}\}\mapsto\{1,0\}$ in an indicator function that produces the value 1 when the input is true, and 0 otherwise.  
+In a directed graph we can restrict this to an in- and out-degree (and neighborhood)
+\[N^{in}_G(v) = \left\{ u \mid \left\langle u,v\right\rangle \in E\right\}\]
+\[N^{out}_G(v) = \left\{ u \mid \left\langle v,u\right\rangle \in E\right\}\]
+and thus $N_G(v) = N^{in}_G(v) \cup N^{out}_G(v)$ (and the degrees are the respective set cardinalities). 
+We call all of the nodes in $N_G(v)$ \emph{adjacent} to $v$. 
+
+A graph is \emph{regular} if \[\forall v \in V : degree_G(v) = k\] for some fixed $k$. 
+
+Note many times we will leave off the $G$ and simply write $N,N^{in},N^{out},degree$ when the graph in question is clear from context. 
+
+%\paragraph{Isomorphism. } Not sure if this is necessary 
+
+\paragraph{Complete Graphs.}
+A complete graph is one where all edges are present. 
+That is for $G=\langle V, E\rangle$ to be complete, 
+\[E= V\times V\setminus \left\{\left\langle v,v\right\rangle\mid v \in V\right\} \textnormal{\hspace{3em} or \hspace{3em}} E= \left\{\left\{u,v\right\} : u\ne v \in V\right\}\]
+We also know in that case that it is $|V|-1$ regular.
+We also call complete graphs \emph{Cliques}, especially in the context of subgraphs (below), 
+and we do that so often we have a special notation for that: $\mathcal{K}_n$ (for a clique of size $n$). 
+
+%\paragraph{Planar.}
+
+\paragraph{Subgraph.}
+Many times we only want to look at a particular part of a graph, 
+think about say a regulatory network.
+(A regulatory network is a directed graph with nodes that are genes, 
+and edges going from one gene to another if the source somehow impacts the expression of the sink.) 
+If we run an experiment and get a list of genes that are differentially expressed in some condition 
+(i.e. the expression level is different from the null/healthy case) 
+we may want to try and intuit something looking only at those changes. 
+
+So we define a \emph{subgraph} $G' = \langle V', E'\rangle$ where 
+$V' \subseteq V$ and \[E' \subseteq \left\{\left\langle u,v\right\rangle \mid u,v\in V'\wedge \left\langle u,v\right\rangle \in E \right\}.\]
+That is we choose a subset of nodes, and the edges associated only with the chose nodes. 
+In the example above, we almost always would want to look at the \emph{induced} subgraph, which is basically the same thing
+but $E'$ is \textit{equal} to the set of edges above rather than a subset.
+
+\subsection{Bipartite Graphs}
+A \emph{Bipartite} graph is $G=\left\langle \left(A\cup B\right), E \right\rangle$ 
+where \[E\subseteq \left\{\left\{u,v\right\} \mid u\in A, v\in B\right\}\] (in directed graphs edges can go from $A$ to $B$ or $B$ to $A$)
+and $A\cap B = \emptyset$. 
+That is, its a graph where the nodes can be separated into two groups, and no edge exists within the group.  
+These graphs come up a lot when doing some sort of assignment, in which case the actual assignment is a subgraph with all of the nodes but some subset of edges.
+An example could be assigning students to a peer advisor; 
+maybe $A$ is the set of first year students, and $B$ is the second years. 
+$E$ is $A\times B$, and the goal is to find a subgraph such that 
+\[\forall v \in A: |N^{out}_{G'}(v)|=1\]
+(the out-degree of each node in the subgraph is 1).
+
+%%Connected Components? 
+
+\paragraph{Connected.} 
+A graph $G$ is \emph{connected} if the following holds:
+\[ \forall u,v \in V : \exists \left\langle u,z_1,z_2,...,z_k,v \right\rangle \in V^* : \langle u,z_1 \rangle, \langle z_1,z_2 \rangle, ... \langle z_k,v \rangle \in E  \]
+That is, the graph is connected if for every pair of nodes, there is a path between them. 
+We say that a \emph{connected component} is a subgraph of $G$ that is connected 
+(note a graph that is already connected will only have one connected component). 
+
+
+%%%%%%%%%
+\section{Trees}
+A tree is a special type of graph that is fully connected and has exactly $|V|-1$ edges. 
+
+One consequence of this is that there are no \emph{cycles};
+a cycle is a special type of path $\langle v_1, v_2,.... v_{k-1}, v_1\rangle$ ($k\ge 2$) that ends at the same node it started at. 
+In a tree, nodes with only one neighbor \[Leaves(G) := \Bigl\{v \in V \;\Big|\; degree(v) =1\Bigr\}\] are called \emph{leaves}. 
+Nodes that are not leaves ($V\setminus Leaves(G)$)  are called \emph{internal nodes}.
+
+Many times we will deal with \emph{rooted} trees, though not always. 
+A rooted tree is one that has a specific node $r\in V$ designated as the root. 
+We call all of its neighbors it's \emph{children}, their neighbors (excluding the root itself) are grandchildren to the root and children to the respective nodes and so on. 
+In rooted trees we can also sometimes need to talk about \emph{levels}. 
+
+In a rooted tree we call all of the nodes below a specific node and the induced graph on them a \emph{subtree}, 
+note this is slightly different from a sub\textit{graph}, since its both restricted to rooted graphs and is definitional an induced subgraph from a specific node. 
+
+%Using one set and one function, define a tree (remember that $f(x)$ can only have one value...
+
+\paragraph{Regular Trees.} 
+Up to now there was no limit on the number of neighbors (children) a node could have, and in general this is true, but many times we want to know some general property of a tree. 
+We use the term \emph{$k$-ary trees} (more commonly we will talk about \emph{binary tree}, where $k$ is 2).
+A $k$-ary tree is one where every internal node has degree at most $k+1$; that is 
+$\forall v\in V, v $ is internal $: |N(v)| \le k+1$. 
+It makes more sense in rooted trees, it means each internal node has at most $k$ children. 
+So in a rooted binary tree, a node has at most 2 children. 
+
+\paragraph{Phylogeny.} 
+In biology we often use trees to show relatedness of species/individuals/strains, and we call them \emph{phylogeny}. 
+In this case we \textit{usually} label the leaves with known examples (exigent species, sequenced strains, etc.) and internal nodes represent (probably unknown) ancestors. 
+Many times we also add edge weights to these graphs that encode evolutionary distance. 
+In phylogeny species that are more related have a common ancestor farther from the root (or one that is \textit{lower}). 
+So in the phylogeny of Humans, Chimpanzee, and Mouse; Human and Chimp would share an ancestor, then only meet Mouse at the root.
+
+\subsection{From Graphs to Trees}
+This will be discussed much more in 02-613, but the process of extracting a tree from a graph is called finding an \emph{spanning tree}. 
+That is, for a graph $G=\langle V, E\rangle$ find a subgraph $T=\langle V, E'\rangle$ where:
+\begin{enumerate}
+\item $E' \subseteq E$
+\item $|E'| = |V|-1$
+\item $T$ is connected. 
+\end{enumerate}
+
+
+
+\section*{Useful References}
+Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 11.2-11.4
+
+\end{document}

@@ -1,0 +1,31 @@
+\include{includes}
+%SetFonts
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+
+\title{Topic 3: Asymptotics}
+\author{02-680: Essentials of Mathematics and Statistics}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+ \section{Big O}
+ To understand function behavior of say function $f(x)$ we often want to look at it its growth compared to another function $g(x)$,
+ for instance we might ask:
+ \begin{tcolorbox}
+ \centering
+ Does $f(x)$ grow no faster than $g(x)$?
+ \end{tcolorbox}
+ 
+ Define the \textbf{set} of functions $f(x)$ for which this is true: \\
+ For functions $h: \reals^{\ge 0} \rightarrow \reals^{\ge 0}$ and $g: \reals^{\ge 0} \rightarrow \reals^{\ge 0}$
+\[
+O\left(g\left(x\right)\right) := \left\{h(x) \mid \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) \le c \cdot g(x) \right\}
+\]
+ (notice the explicit use of $\ge$ vs $>$)
+
+\section*{Useful References}
+Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 6.2
+
+\end{document}  
