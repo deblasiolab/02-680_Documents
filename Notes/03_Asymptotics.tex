@@ -21,11 +21,64 @@
  Define the \textbf{set} of functions $f(x)$ for which this is true: \\
  For functions $h: \reals^{\ge 0} \rightarrow \reals^{\ge 0}$ and $g: \reals^{\ge 0} \rightarrow \reals^{\ge 0}$
 \[
-O\left(g\left(x\right)\right) := \left\{h(x) \mid \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) \le c \cdot g(x) \right\}
+O\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) \le c \cdot g(x) \bigg\}
 \]
  (notice the explicit use of $\ge$ vs $>$)
 
+The question above then becomes 
+\begin{tcolorbox}
+\centering
+Is $f(x) \in O\big(g(x)\big)$?
+\end{tcolorbox}
+
+\begin{aside}[pedantry detail]
+You might see someone use $f(x) = O(g(x))$, this is not technically correct, as its asking if a function is 
+equivalent to a set of functions. 
+\end{aside}
 \section*{Useful References}
+
+So as an example: $f(x) := 4x$ and $g(x)=x^2$. 
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+     legend style={at={(1,1)},anchor=north west},
+    samples=100,smooth,
+    ymin=0,ymax=60,
+    xmin=0,xmax=8,
+    xlabel={$x$},
+    ylabel={$f(x)/g(x)$},
+    domain=0:8,
+]
+\addplot [blue] {4*\x}; \addlegendentry{$4x$}
+\addplot [red] {\x^2}; \addlegendentry{$x^2$}
+\addplot [dotted, no marks] coordinates {(4,0) (4,60)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item $f(x) \in O(g(x) + h(x)) \iff f(x) \in O(\max(g(x),h(x)))$
+\item $f(x) \in O(g(x))$ and $g(x) \in O(h(x)) \implies f(x) \in O(h(x))$
+\item $f(x) \in O(h_1(x))$ and $g(x) \in O(h_2(x)) \implies f(x) + g(x) \in O(h_1(x) + h_2(x))$
+\item $f(x) \in O(h_1(x))$ and $g(x) \in O(h_2(x)) \implies f(x) \cdot g(x) \in O(h_1(x) \cdot h_2(x))$
+\end{itemize}
+
+\section{Others}
+\[
+\Omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, d > 0 : \forall x \ge x_0 : h(x) {\color{red}\boldsymbol{\ge}} d \cdot g(x) \bigg\}
+\]
+\[
+\Theta\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
+\]
+\[
+o\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) < c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \notin \Omega(g(x)) \bigg\}
+\]
+\[
+\omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) > c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \notin O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
+\]
+
+
 Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 6.2
 
 \end{document}  
