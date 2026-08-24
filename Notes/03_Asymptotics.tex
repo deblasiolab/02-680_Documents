@@ -35,7 +35,6 @@ Is $f(x) \in O\big(g(x)\big)$?
 You might see someone use $f(x) = O(g(x))$, this is not technically correct, as its asking if a function is 
 equivalent to a set of functions. 
 \end{aside}
-\section*{Useful References}
 
 So as an example: $f(x) := 4x$ and $g(x)=x^2$. 
 
@@ -72,12 +71,14 @@ So as an example: $f(x) := 4x$ and $g(x)=x^2$.
 \Theta\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
 \]
 \[
-o\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) < c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \notin \Omega(g(x)) \bigg\}
+o\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| {\forall \color{red}c>0}  : \exists x_0 \ge 0: \forall x \ge x_0 : h(x) {\color{red}<} c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \notin \Omega(g(x)) \bigg\}
 \]
 \[
-\omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, c > 0 : \forall x \ge x_0 : h(x) > c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \notin O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
+\omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| {\forall \color{red}c>0} : \exists x_0 \ge 0 : \forall x \ge x_0 : h(x) {\color{red}>} c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \notin O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
 \]
 
+%%%%%%%%%%%%%%%%%%
+\section*{Useful References}
 
 Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 6.2
 
