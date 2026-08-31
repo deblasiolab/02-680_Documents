@@ -63,6 +63,21 @@ So as an example: $f(x) := 4x$ and $g(x)=x^2$.
 \item $f(x) \in O(h_1(x))$ and $g(x) \in O(h_2(x)) \implies f(x) \cdot g(x) \in O(h_1(x) \cdot h_2(x))$
 \end{itemize}
 
+\subsection{Polynomials}
+Let $p(n) = \displaystyle_{i=0}^k a_in^k$ be a polynomial of order $k$,
+$p(n) \in O(n^k)$.
+
+Basic idea of proof: for $i<k$, $a_in^i < |a_i|n^k$ for any $n>1$. 
+
+\subsection{Logarithms \& Exponentials}
+Log << Polynomial << Exponential
+
+$log_n \in O(n^\epsilon)$ for $\epsilon >0$. (base of the log does not matter)
+
+$p(n) \in O(b^n)$ for any $b>1$ and $k\ge 0$ for the polynomial above.
+
+$b^n \in O(c^n) \iff b \le c$. 
+
 \section{Others}
 \[
 \Omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, d > 0 : \forall x \ge x_0 : h(x) {\color{red}\boldsymbol{\ge}} d \cdot g(x) \bigg\}
