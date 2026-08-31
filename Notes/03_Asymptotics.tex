@@ -78,6 +78,11 @@ $p(x) \in O(b^x)$ for any $b>1$ and $k\ge 0$ for the polynomial above.
 
 $b^x \in O(c^x) \iff b \le c$. 
 
+\subsection{Useful Examples}
+Is $3x^2+2 \in O(x^2)$? is $x^3 \in O(x^2)$?
+
+Is $3x+4y+5xy \in O(x)$? Is it $\in O(y)$? is it $\in O(xy)$?
+
 \section{Others}
 \[
 \Omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, d > 0 : \forall x \ge x_0 : h(x) {\color{red}\boldsymbol{\ge}} d \cdot g(x) \bigg\}
@@ -97,7 +102,7 @@ o\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| {\forall \color{red}c>0}  : \e
 
 \subsection{Useful Example}
 What is the relationship between these two functions: 
-\[f(x) = n^2 \quad g(x) = \begin{cases}n^3 & x\%2=0\\n & x\%2=1\end{cases}\]
+\[f(x) = x^2 \quad g(x) = \begin{cases}x^3 & x\%2=0\\x & x\%2=1\end{cases}\]
 Is $f(x)\in O(g(x))$? Is $f(x)\in \Omega(g(x))$? Is $f(x)\in o(g(x))$? Is $f(x)\in \omega(g(x))$?
 
 %%%%%%%%%%%%%%%%%%
