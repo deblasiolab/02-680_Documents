@@ -64,24 +64,27 @@ So as an example: $f(x) := 4x$ and $g(x)=x^2$.
 \end{itemize}
 
 \subsection{Polynomials}
-Let $p(n) = \displaystyle_{i=0}^k a_in^k$ be a polynomial of order $k$,
-$p(n) \in O(n^k)$.
+Let $p(x) = \displaystyle_{i=0}^k a_ix^k$ be a polynomial of order $k$,
+$p(x) \in O(x^k)$.
 
-Basic idea of proof: for $i<k$, $a_in^i < |a_i|n^k$ for any $n>1$. 
+Basic idea of proof: for $i<k$, $a_ix^i < |a_i|x^k$ for any $n>1$. 
 
 \subsection{Logarithms \& Exponentials}
 Log << Polynomial << Exponential
 
-$log_n \in O(n^\epsilon)$ for $\epsilon >0$. (base of the log does not matter)
+$\log x \in O(n^\epsilon)$ for $\epsilon >0$. (base of the log does not matter)
 
-$p(n) \in O(b^n)$ for any $b>1$ and $k\ge 0$ for the polynomial above.
+$p(x) \in O(b^x)$ for any $b>1$ and $k\ge 0$ for the polynomial above.
 
-$b^n \in O(c^n) \iff b \le c$. 
+$b^x \in O(c^x) \iff b \le c$. 
 
 \section{Others}
 \[
 \Omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| \exists x_0 \ge 0, d > 0 : \forall x \ge x_0 : h(x) {\color{red}\boldsymbol{\ge}} d \cdot g(x) \bigg\}
 \]
+ \begin{tcolorbox}
+ \[f(x) \in O(g(x)) \iff g(x) \in \Omega(f(x))\]
+ \end{tcolorbox}
 \[
 \Theta\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| h(x) \in O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
 \]
@@ -91,6 +94,11 @@ o\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| {\forall \color{red}c>0}  : \e
 \[
 \omega\big(g\left(x\right)\big) := \bigg\{h(x) \biggm| {\forall \color{red}c>0} : \exists x_0 \ge 0 : \forall x \ge x_0 : h(x) {\color{red}>} c \cdot g(x) \bigg\}  := \bigg\{h(x) \biggm| h(x) \notin O( g(x)) \wedge h(x) \in \Omega(g(x)) \bigg\}
 \]
+
+\subsection{Useful Example}
+What is the relationship between these two functions: 
+\[f(x) = n^2 \quad g(x) = \begin{cases}n^3 & x\%2=0\\n & x\%2=1\end{cases}\]
+Is $f(x)\in O(g(x))$? Is $f(x)\in \Omega(g(x))$? Is $f(x)\in o(g(x))$? Is $f(x)\in \omega(g(x))$?
 
 %%%%%%%%%%%%%%%%%%
 \section*{Useful References}
