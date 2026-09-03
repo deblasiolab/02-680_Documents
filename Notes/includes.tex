@@ -1,3 +1,8 @@
+\DocumentMetadata{
+  lang        = en-US,
+  tagging     = on,
+}
+
 \RequirePackage{shellesc}
 \documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
 
@@ -16,7 +21,7 @@
 
 \usepackage{dsfont}
 \usepackage[hang,flushmargin]{footmisc}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 
 \usepackage{pgfplots,pgfplotstable}
 
@@ -24,6 +29,11 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,patterns}
 \usepackage{tkz-fct}
+
+\ExplSyntaxOn
+\cs_new_protected:Npn \suspendtagging #1 { \tag_suspend:n{#1} }
+\cs_new_protected:Npn \resumetagging  #1 { \tag_resume:n{#1} }
+\ExplSyntaxOff
 
 \makeatletter
 \long\def\ifnodedefined#1#2#3{%
@@ -62,8 +72,6 @@
 \usepackage{arydshln}
 \usepackage{mathtools}
 
-%Accessibility issues
-\usepackage[a-1b]{pdfx}
 
 %\usepackage{tagpdf}
 %\tagpdfsetup{activate,paratagging,interwordspace}
@@ -71,7 +79,7 @@
 \usepackage{hyperref}
 \usepackage{lipsum}
 %\usepackage{axessibility}
-\usepackage{accessibility}
+%\usepackage{accessibility}
 
 %SetFonts
 \DeclareEmphSequence{\bfseries\itshape}

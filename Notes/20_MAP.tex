@@ -17,7 +17,9 @@ but we would still like to make useful inferences from data.
 
 When $p(H)$ is known, there is no disagreement, we will all just follow Bayes' Rule as written. 
 
+
 \begin{center}
+%\suspendtagging{bayes-diagram}
 \begin{dot2tex}[dot,mathmode]
 digraph O {
 direction="TB";
@@ -29,6 +31,7 @@ B->P[color="blue",label="\color{blue}\text{Bayesian}"];
 B->F[color="orange",label="\color{orange}\text{Frequentist}"];
 }
 \end{dot2tex}
+%\resumetagging{bayes-diagram}
 \end{center}
 
 When the prior is \textit{not} known, 
@@ -41,7 +44,9 @@ philosophical (subjectivity versus objectivity and the nature of probability).
 
 The main philosophical difference concerns the \emph{meaning of probability}.
 
-\begin{tabularx}{\textwidth}{XX}
+%removed for tagging
+%\begin{tabularx}{\textwidth}{XX}
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
 \hline
 Bayesians & Frequentists\\
 \hline\hline
@@ -54,7 +59,7 @@ Subjective interpretation
 you ``believe'' that you will get tails 50\% of the time & 
 the relative frequency of tails goes to 1/2 as the number of flips goes to infinity\\
 they consider a range of values each with its own probability of being true& they consider the parameter a single fixed (if unknown) value\\
-\end{tabularx}
+\end{tabular}
 
 %%%%%%%%%%%%%
 \section{Bayesians' Approach to Parameter Estimation}
