@@ -78,7 +78,7 @@ So we can easily expand $B$ from above to be all squares:
 B' = \left\{x^2 \mid x \in \ints \right\}
 \]
 
-We some times also want to slightly restrict these sets, so you may see something like $\ints^+$ which is equivalent to ${x \in \ints \mid x > 0}$, 
+We some times also want to slightly restrict these sets, so you may see something like $\ints^+$ which is equivalent to $\{x \in \ints \mid x > 0\}$, 
 or $\ints^{\ge0}$ which is equivalent to $\{x \in \ints \mid x \ge 0\}$.
 Note that technically $\ints^+$ does not include 0 and $\ints^{\ge0}$ does, 
 but be careful because some authors (hopefully not including myself) use the former when they mean the latter. 
@@ -275,19 +275,19 @@ and it is a function if they are both $\ints$.
 But it is \emph{not} a function if the domain is $\reals$ and the codomain is $\ints$; 
 in this case there are elements in the domain (lets say $d=1.5\in\reals$) 
 for which the result of the equation part ($f(d)=3(1.5)^2+2=6.75+2=8.75$)
-is not in the codomain ($5.25\notin\ints$).    
+is not in the codomain ($8.75\notin\ints$).    
 Thus the specification is not a function ($f(x) = 3x^2 + 2$, $f: \reals\mapsto\ints$).
 \end{tcolorbox}
 
 \paragraph{Function Composition ($\circ$).}
-We may find ourselves later in the semester needing to apply one function to the output of another,
-this i known as \emph{function composition} defined formally as
+We may find ourselves later in the semester needing to apply one function to the output of another.
+This is known as \emph{function composition}, defined formally as
 \[
 g\circ f: S \mapsto U \textnormal{ assuming } f: S \mapsto T \wedge g : T \mapsto U.
 \]
 In use it may look something like $g\left(f\left(x\right)\right)$, 
-so $x$ would need to be from $S$ since thats the input to $f$ and since the input to $g$ needs to be from $T$, 
-that also needs to be the codomain of $f$ then the codomain of $g$ ends up as the codomain of the composite function. 
+so $x$ would need to be from $S$, since that's the input to $f$, and since the input to $g$ needs to be from $T$, 
+that also needs to be the codomain of $f$. Thus the codomain of $g$ ends up as the codomain of the composite function. 
 
 \section*{Useful References}
 Liben-Nowell, ``Connecting Discrete Mathematics and Computer Science, 2e''. \S 2.3,2.5
