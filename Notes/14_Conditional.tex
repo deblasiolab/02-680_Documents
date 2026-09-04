@@ -93,12 +93,13 @@ Define the following events.
 \end{itemize}
 
 So, the conditional probabilities are as follows: 
-\begin{center}\begin{tabular}{rlrl}
-$p(A|C)$ & $= \frac{1}{2}$ & $p(A|\overline{C})$ & $= 1$\\
-$p(B|C)$ & $= \frac{1}{2}$ & $p(B|\overline{C})$ & $= 1$\\
-$p(A\cap B|C)$ & $= \frac{1}{4}$ & $p(A\cap B|\overline{C})$ & $= 1$\\
-\multicolumn{2}{r}{$p(C)=p(\overline{C})$} & \multicolumn{2}{l}{$=\frac{1}{2}$}
-\end{tabular}\end{center}
+\begin{alignat*}{2}
+p(A|C) &= \frac{1}{2} & p(A|\overline{C}) &= 1\\
+p(B|C) &= \frac{1}{2} & p(B|\overline{C}) &= 1\\
+p(A\cap B|C) &= \frac{1}{4} &\quad p(A\cap B|\overline{C}) &= 1\\
+&p(C) &= p(\overline{C}) = \frac{1}{2}
+\end{alignat*}
+
 
 Since \[p(A\cap B|C) = \frac{1}{4} = p(A|C)\cdotp(B|C)\]
 and \[p(A\cap B|\overline{C}) = 1 = p(A|\overline{C})\cdotp(B|\overline{C})\]

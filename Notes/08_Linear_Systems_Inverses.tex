@@ -1,7 +1,6 @@
 \include{includes}
 %SetFonts
 
-
 \title{Topic 8: Linear Systems \& Matrix Inverses}
 \author{02-680: Essentials of Mathematics and Statistics}
 %\date{}							% Activate to display a given date or no date
@@ -158,8 +157,8 @@ the result of these operations is equal to $A^{-1}$.
 \begin{enumerate}
 \item Create a \textit{partitioned} matrix 
 \[
-\left[\begin{array}{c;{2pt/1pt}c}A&I_n\end{array}\right] = 
-\left[\begin{array}{cccc;{2pt/1pt}cccc}
+\left[\begin{array}{c|c}A&I_n\end{array}\right] = 
+\left[\begin{array}{cccc|cccc}
 A_{11} & A_{12} & \hdots & A_{1m} & 1 & 0 & \hdots & 0\\
 A_{21} & A_{22} & \hdots & A_{2m} & 0 & 1 & \hdots & 0\\
 \vdots & \vdots & \ddots & \vdots &\vdots & \vdots & \ddots & \vdots \\
@@ -171,15 +170,15 @@ A_{n1} & A_{n2} & \hdots & A_{nm} & 0 & 0 & \hdots & 1\\
 \end{enumerate}
 
 \paragraph{An Example.} So applying the procedure to the example above: 
-\[\left[\begin{array}{cc;{2pt/1pt}cc} 3 & 2 & 1 & 0\\ 1 & -5 & 0 & 1\end{array}\right]\]
+\[\left[\begin{array}{cc|cc} 3 & 2 & 1 & 0\\ 1 & -5 & 0 & 1\end{array}\right]\]
 Subtract 3 times the second row from the first (that is $\beta=-3$ in Type III).
-\[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 17 & 1 & -3\\ 1 & -5 & 0 & 1\end{array}\right]\]
+\[\left[\begin{array}{cc|cc} 0 & 17 & 1 & -3\\ 1 & -5 & 0 & 1\end{array}\right]\]
 Divide the first row by 17 (this is $\alpha=\frac{1}{17}$ in Type II).
-\[\left[\begin{array}{cc;{2pt/1pt}cc} 0 & 1 & \frac{1}{17} & \frac{-3}{17}\\ 1 & -5 & 0 & 1\end{array}\right]\]
+\[\left[\begin{array}{cc|cc} 0 & 1 & \frac{1}{17} & \frac{-3}{17}\\ 1 & -5 & 0 & 1\end{array}\right]\]
 Swap the first and second rows (Type I).
-\[\left[\begin{array}{cc;{2pt/1pt}cc}  1 & -5 & 0 & 1\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
+\[\left[\begin{array}{cc|cc}  1 & -5 & 0 & 1\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
 Add 5 times the second row to the first (Type III with $\beta=5$).
-\[\left[\begin{array}{cc;{2pt/1pt}cc}  1 & 0 & \frac{5}{17} & \frac{2}{17}\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
+\[\left[\begin{array}{cc|cc}  1 & 0 & \frac{5}{17} & \frac{2}{17}\\0 & 1 & \frac{1}{17} & \frac{-3}{17}\\\end{array}\right]\]
 We can now the right hand side is exactly the inverse we saw above! 
 
 Note, this is not the only way of finding the inverse, but will be helpful in the next section. 
@@ -192,8 +191,8 @@ What if $C$ isn't even square (that is, if the system is over- or under-determin
 It turns out we can use a very similar procedure to find a solution (if it exists). 
 This time we set up a slightly different partitioned matrix: 
 \[
-\left[\begin{array}{c;{2pt/1pt}c}A&b\end{array}\right] = 
-\left[\begin{array}{cccc;{2pt/1pt}c}
+\left[\begin{array}{c|c}A&b\end{array}\right] = 
+\left[\begin{array}{cccc|c}
 A_{11} & A_{12} & \hdots & A_{1m} & b_1\\
 A_{21} & A_{22} & \hdots & A_{2m} & b_2\\
 \vdots & \vdots & \ddots & \vdots &\vdots  \\
@@ -211,15 +210,15 @@ what we end up with is a system where every equation is simply one variable and 
 So we can use, basically, the same procedure as before. 
 
 Lets look at our example:
-\[\left[\begin{array}{cc;{2pt/1pt}c} 3 & 2 & -1\\ 1 & -5 & 3\end{array}\right]\]
+\[\left[\begin{array}{cc|c} 3 & 2 & -1\\ 1 & -5 & 3\end{array}\right]\]
 Once again, apply a Type III operation with $\beta=-3$ from row 2 to row 1,
-\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 17 & -10\\ 1 & -5 & 3\end{array}\right]\]
+\[\left[\begin{array}{cc|c} 0 & 17 & -10\\ 1 & -5 & 3\end{array}\right]\]
 Apply Type II with $\alpha=\frac{1}{17}$ to row 1. 
-\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & -5 & 3\end{array}\right]\]
+\[\left[\begin{array}{cc|c} 0 & 1 & \frac{-10}{17}\\ 1 & -5 & 3\end{array}\right]\]
 Apply Type III with $\beta=5$ from row 1 to row 2.
-\[\left[\begin{array}{cc;{2pt/1pt}c} 0 & 1 & \frac{-10}{17}\\ 1 & 0 & \frac{1}{17}\end{array}\right]\]
+\[\left[\begin{array}{cc|c} 0 & 1 & \frac{-10}{17}\\ 1 & 0 & \frac{1}{17}\end{array}\right]\]
 Apply Type I to swap  row 1 to row 2.
-\[\left[\begin{array}{cc;{2pt/1pt}c} 1 & 0 & \frac{1}{17}\\0 & 1 & \frac{-10}{17}\end{array}\right]\]
+\[\left[\begin{array}{cc|c} 1 & 0 & \frac{1}{17}\\0 & 1 & \frac{-10}{17}\end{array}\right]\]
 
 If we turn that back into a system of equations, its: 
 
@@ -250,35 +249,35 @@ but can we determine the hyper-plane (if it exists) of the intersection?
 
 Using the method from above lets set up the problem as a matrix reduction: 
 
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 2 & -1 & 4 & 1 & -1 & 4\\
 3 & 2 & -2 & -5 &  2 & 9\\
 1 & 1 & 6 & 2 &  1 & 7\\
 \end{array}\right]\]
 
 Type I: swap rows 1 and 3 (this puts the leading 1 in the top row):
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 1 & 6 & 2 &  1 & 7\\
 3 & 2 & -2 & -5 &  2 & 9\\
 2 & -1 & 4 & 1 & -1 & 4\\
 \end{array}\right]\]
 
 Type III (x2): add row 1 with $\beta=-3$ to row 2, and add row 1 with $\beta=-2$ to row 3:
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 1 & 6 & 2 &  1 & 7\\
 0 & -1 & -20 & -11 &  -1 & -12\\
 0 & -3 & -8 & -3 & -3 & -10\\
 \end{array}\right]\]
 
 Type II: scale row 2 with $\alpha=-1$ (again to get a leading 1):
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 1 & 6 & 2 &  1 & 7\\
 0 & 1 & 20 & 11 &  1 & 12\\
 0 & -3 & -8 & -3 & -3 & -10\\
 \end{array}\right]\]
 
 Type III (x2): add row 2 with $\beta=-1$ to row 1, and add row 2 with $\beta=3$ to row 3:
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 0 & -14 & -9 &  0 & -5\\
 0 & 1 & 20 & 11 &  1 & 12\\
 0 & 0 & 52 & 30 & 0 & 26\\
@@ -286,14 +285,14 @@ Type III (x2): add row 2 with $\beta=-1$ to row 1, and add row 2 with $\beta=3$ 
 
 
 Type II: scale row 3 with $\alpha=\frac{1}{52}$ (again to get a leading 1):
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 0 & -14 & -9 &  0 & -5\\
 0 & 1 & 20 & 11 &  1 & 12\\
 0 & 0 & 1 & \frac{30}{52} & 0 & \frac{26}{52}\\
 \end{array}\right]\]
 
 Type III (x2): add row 3 with $\beta=14$ to row 1, and add row 3 with $\beta=-20$ to row 2:
-\[\left[\begin{array}{ccccc;{2pt/1pt}c} 
+\[\left[\begin{array}{ccccc|c} 
 1 & 0 & 0 & -\frac{48}{52} &  0 & 2\\
 0 & 1 & 0 & -\frac{28}{52} &  1 & 2\\
 0 & 0 & 1 & \frac{30}{52} & 0 & \frac{26}{52}\\
