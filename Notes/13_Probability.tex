@@ -15,8 +15,11 @@ Probability is the mathematical language for quantifying uncertainty
 
 %%%%%%%%%%%%
 \section{Basics}
-The \emph{sample space} ($\Omega$), sometimes called the universe, is the set of all possible 
-\textit{mutually exclusive} outcomes of an event. 
+The \emph{sample space} ($\Omega$), sometimes called the universe, is the set of all possible
+outcomes of an experiment (or random process).
+The outcomes are \textit{mutually exclusive}: exactly one outcome happens each time,
+and together they cover everything that could happen.
+(This $\Omega$ is not the $\Omega$ from asymptotics; same letter, different object.)
 \[\Omega_{coin}=\{\texttt{Heads},\texttt{Tails}\}\]
 \[\Omega_{twocoin}=\Omega_{coin}\times\Omega_{coin}=\{
 \langle\texttt{Heads},\texttt{Heads}\rangle,
@@ -26,35 +29,66 @@ The \emph{sample space} ($\Omega$), sometimes called the universe, is the set of
 
 A sample \emph{outcome}, or atomic element, $\omega\in\Omega$ is one of the possible things that can happen. 
 
-A set of events is a subset of the sample space with some condition. 
-For instance if the event is that the first of two coin tosses is heads. 
+An \emph{event} is a \emph{subset} of the sample space: a group of outcomes that we bundle together because we care about them as a group. 
+Outcomes are the \emph{elements} of $\Omega$; events are the \emph{subsets} of $\Omega$. 
+For instance, the event that the first of two coin tosses is heads: 
 \[A_{firstheads}=\{
 \langle\texttt{Heads},\texttt{Heads}\rangle,
-\langle\texttt{Heads},\texttt{Tails}\rangle\} \subset \Omega_{twocoin} \]
+\langle\texttt{Heads},\texttt{Tails}\rangle\} \subseteq \Omega_{twocoin} \]
 
-We say the \emph{probability} $p(A)$ of an event $A$ is the fraction of all outcomes that $A$ covers. 
+We say the \emph{probability} $p(A)$ of an event $A$ is the fraction of all outcomes that $A$ covers.
+(For now we assume all outcomes are equally likely; the axioms below describe what $p$ must satisfy in general.)
 So in the example above $p(A_{firstheads})=\frac{1}{2}$.
+Notice that $p$ takes an \emph{event} (a set), not an outcome. 
+When we write $p(\texttt{Heads})$ we really mean $p(\{\texttt{Heads}\})$, the event containing only that outcome. 
 
-An \emph{event space}, $\mathcal{A}$, is the set of all possible events. 
-For discrete events (such as coin flips) this can be thought of typically as the power set of $\Omega$. 
+\paragraph{Event space.}
+The \emph{event space}, $\mathcal{A}$, is the set of all events we are allowed to ask about.
+That makes it a set of sets.
+(We use the calligraphic $\mathcal{A}$ for the set of events and a plain $A$ for a single event.)
+For a single coin, $\Omega_{coin}=\{\texttt{Heads},\texttt{Tails}\}$ has two outcomes, but four events:
+\[\mathcal{A}_{coin}=\Big\{\;\emptyset,\;\;\{\texttt{Heads}\},\;\;\{\texttt{Tails}\},\;\;\{\texttt{Heads},\texttt{Tails}\}\;\Big\}\]
+(``nothing happens,'' ``heads,'' ``tails,'' and ``heads or tails''). 
+For discrete sample spaces (such as coin flips) we can typically take $\mathcal{A}$ to be the power set of $\Omega$, 
+so $|\mathcal{A}|=2^{|\Omega|}$. 
+The two-coin sample space has $|\Omega_{twocoin}|=4$ outcomes and so $2^4=16$ events. 
 In continuous spaces it is typically thought of as the Borel field of $\Omega$ (details of this are beyond the scope of the class for now). 
 
-Another way of saying this: 
-consider non-empty $\Omega$ and $\mathcal{A}$:
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+ & sample space $\Omega$ & event space $\mathcal{A}$\\\hline
+ contains & outcomes (what can happen) & events (what we can ask about)\\\hline
+ its members are & elements $\omega\in\Omega$ & subsets $A\subseteq\Omega$, so $A\in\mathcal{A}$\\\hline
+ one coin & 2 outcomes & 4 events\\\hline
+ two coins & 4 outcomes & 16 events\\\hline
+\end{tabular}
+\end{center}
+
+\begin{aside}[Think of it this way]
+$\Omega$ is the list of everything that could be in the freezer: each tissue sample is an outcome. 
+$\mathcal{A}$ is the list of every yes/no question you could ask about the sample you pulled, such as ``is it high expression?'' 
+Each question is the \emph{set} of outcomes for which the answer is yes, so each question is an event. 
+\end{aside}
+
+\paragraph{Why the event space has rules.}
+If we can ask whether $A$ happened, we should also be able to ask whether it did \emph{not} happen, and whether $A$ or $B$ happened:
 \begin{enumerate}
-\item $A\in\mathcal{A} \rightarrow \overline{A}\in\mathcal{A}$
-\item $A_1,A_2,... \in \mathcal{A} \rightarrow \bigcup_{i=1}^\infty A_i \in \mathcal{A}$.
+\item $A\in\mathcal{A} \rightarrow \overline{A}\in\mathcal{A}$ \quad (we can ask ``not $A$''; the \emph{complement} $\overline{A}=\Omega\setminus A$ is everything in $\Omega$ that is not in $A$)
+\item $A_1,A_2,... \in \mathcal{A} \rightarrow \bigcup_{i=1}^\infty A_i \in \mathcal{A}$ \quad (we can ask ``$A_1$ or $A_2$ or ...'')
 \end{enumerate}
+These are exactly what the axioms below need: Axiom 3 adds probabilities of unions, 
+and the complement rule $p(\overline{A})=1-p(A)$ only makes sense if $\overline{A}$ is an event. 
 
 %%%%%%%%
 \subsection{Three Axioms}
 
-\paragraph{Axiom 1: Positive Probability.}
+\paragraph{Axiom 1: Non-negative Probability.}
 For any event $A$, $p(A)\ge 0$.
 
-That is, we cannot have a negative probability. 
-In the previous example if $A_{threetails}$ is the event that you get 3 tails when a coin is tossed twice, 
-$p(A_{threetails})=0$ but this can't be negative.
+That is, we cannot have a negative probability (zero is allowed).
+In the previous example if $A_{threetails}$ is the event that you get 3 tails when a coin is tossed twice,
+then $A_{threetails}=\emptyset$ (it can't happen), so $p(A_{threetails})=0$ but this can't be negative.
 
 \paragraph{Axiom 2: Total Probability.}
 For any sample space $\Omega$, $p(\Omega)=1$. 
@@ -63,7 +97,7 @@ So for the example above the probability of a single coin flip being either \tex
 (as defined) there are no other possible outcomes. 
 
 \paragraph{Axiom 3: Disjoint Events.}
-For \textit{disjoint} events $A_1, A_2, ..., A_n$, \[p(A_1\cup A_2\cup ... \cup A_n)=p(A_1) + p(A_2) + ... + p(A_n).\]
+For \textit{pairwise disjoint} events $A_1, A_2, ..., A_n$ (no two of them share an outcome), \[p(A_1\cup A_2\cup ... \cup A_n)=p(A_1) + p(A_2) + ... + p(A_n).\]
 So in a single coin flip if $A_{heads}$ and $A_{tails}$ are the events of a single coin flip being heads and tails respectively, 
 we can see the events are disjoint (they don't share any outcomes)
 so \[p(A_{heads} \cup A_{tails}) = p(A_{heads}) + p(A_{tails}) = \frac{1}{2} + \frac{1}{2} = 1.\]
@@ -74,6 +108,9 @@ As a counter example lets define \[A_{lastheads}=\{
 We can see that 
 \[p(A_{firstheads} \cup A_{lastheads}) \ne p(A_{firstheads}) + p(A_{lastheads})\]
 because $A_{firstheads} \cap A_{lastheads} = \{\langle\texttt{Heads},\texttt{Heads}\rangle\} \ne \emptyset$ thus they are not disjoint.
+In fact the union has only 3 outcomes, so $p(A_{firstheads} \cup A_{lastheads})=\frac{3}{4}$,
+but $p(A_{firstheads}) + p(A_{lastheads}) = \frac{1}{2}+\frac{1}{2} = 1$:
+the outcome $\langle\texttt{Heads},\texttt{Heads}\rangle$ was counted twice.
 
 
 %%%%%%%%
@@ -105,11 +142,10 @@ With some algebra we find the original statement.
 
 \subsubsection{$0 \le p(A) \le 1$.}
 
-From axiom 1: $0 \le p(A)$. 
+From axiom 1: $0 \le p(A)$.
 
-We also know $p(\overline{A})\ge 0$ from axiom 1. (or really  $-1\times p(\overline{A})\le 0$)
-
-From above we know $p(A) = 1-p(\overline{A}) \le 1-0 = 1$.
+For the other side, the previous result gives $p(A) = 1-p(\overline{A})$,
+and $p(\overline{A})\ge 0$ by axiom 1, so $p(A) \le 1-0 = 1$.
 
 \subsubsection{If $A\subseteq B$ then $p(A) \le p(B)$.}
 
@@ -122,14 +158,23 @@ p(B) & = p(A \cup (B\setminus A)) &			B = A \cup (B\setminus A)\\
 %%%%%%%%%%%%%
 \section{Perspectives}
 
-For a coin toss effect, there are two methods for explaining $p(\texttt{Heads})=\frac{1}{2}$:
+For a coin toss, there are two common ways of explaining what $p(\texttt{Heads})=\frac{1}{2}$ means:
 
-\paragraph{Frequentists.} 
-You flip a coin 100 times, you get \texttt{Heads} approximately 50 of those tosses. 
-Frequentists are very objective in the explanation of things. 
+\paragraph{Frequentists.}
+Probability is a long-run frequency.
+You flip a coin 100 times, you get \texttt{Heads} approximately 50 of those tosses,
+and the more you flip the closer the fraction of \texttt{Heads} gets to $\frac{1}{2}$.
 
 \paragraph{Bayesian.}
-You \textit{believe} you will get heads 50\% of the times you flip the coin. 
-Bayesian logic is subject to its interpretation. 
+Probability is a degree of belief.
+You \textit{believe} you will get heads 50\% of the times you flip the coin,
+and you update that belief as you see evidence (for instance, a coin that keeps landing \texttt{Tails}).
+
+Both views follow the same three axioms and the same rules derived from them,
+so everything in this topic holds either way; they differ in what the number $p(A)$ is said to \emph{mean}.
+
+\section*{Useful References}
+Wasserman. ``All of Statistics: A Concise Course in Statistical Inference'' \S\S 1.2--1.3\\
+Degroot and Schervish. ``Probability and Statistics'' \S\S 1.2--1.5
 
 \end{document}

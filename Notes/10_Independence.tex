@@ -198,6 +198,37 @@ And for a third matrix $C\in\reals^{n\times m}$: $rank(A + C) \le rank(A) + rank
 Note that in the reduced form we talked about a couple topics ago (Linear Systems), the number of non-zero rows is the rank (and the rows are going to be linearly independent). 
 This also means that any nonsingular (invertible) matrix is full rank (i.e. rank is equal to $n$). 
 
+%%%%%%%%%%
+\section{Connecting Independence and Determinants}
+\textbf{$\det=0$ means vectors are dependent} $|\det|$ measures the volume of the box spanned by the vectors (area, in 2D). If one vector lies in the span of the others, there's no genuinely new direction left to extend into, so the box collapses flat and encloses zero volume.
+
+\emph{2D warm-up, easy to draw:} $u=\langle2,1\rangle,\ w=\langle4,2\rangle=2u$.
+\[
+\det\begin{bmatrix}2&1\\4&2\end{bmatrix}=2(2)-1(4)=0
+\]
+$w$ is just $u$ stretched --- both sit on the same line through the origin, so the ``parallelogram'' they form has zero width, hence zero area. Compare to $u=\langle2,1\rangle,\ w'=\langle1,2\rangle$ (independent): $\det=2(2)-1(1)=3\ne0$, and these two really do fan out into a parallelogram with positive area.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{scope}
+\draw[->,gray!50] (-0.3,0)--(3.5,0); \draw[->,gray!50] (0,-0.3)--(0,2.8);
+\draw[thick,blue,->] (0,0)--(2,1) node[right]{$u$};
+\draw[thick,blue,->] (0,0)--(4,2) node[right]{$w=2u$};
+\draw[dashed] (2,1)--(4,2);
+\node at (1.8,-0.8) {\footnotesize dependent: flat, area $=0$};
+\end{scope}
+\begin{scope}[xshift=6.5cm]
+\draw[->,gray!50] (-0.3,0)--(3.5,0); \draw[->,gray!50] (0,-0.3)--(0,2.8);
+\draw[thick,blue,->] (0,0)--(2,1) node[right]{$u$};
+\draw[thick,blue,->] (0,0)--(1,2) node[above]{$w'$};
+\fill[blue!15] (0,0)--(2,1)--(3,3)--(1,2)--cycle;
+\draw[dashed] (2,1)--(3,3)--(1,2);
+\node at (1.5,-0.8) {\footnotesize independent: area $=3$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+Same idea one dimension up: our three vectors are coplanar (all lying in the plane spanned by $v_1,v_2$), so the parallelepiped they'd form is flattened into that plane --- zero volume, $\det=0$.
+
 \section*{Useful References}
 Isaak and Manougian, ``Basic Concepts of Linear Algebra''. \S 3.1-3.4\\
 Wilder, ``10-606-f23:Lecture 4'' GitHub repository, \url{https://github.com/bwilder0/10606-f23/blob/main/files/notes_vectorspace.pdf}\\
