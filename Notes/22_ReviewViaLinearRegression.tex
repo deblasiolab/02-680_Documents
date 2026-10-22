@@ -58,6 +58,16 @@ To find the critical point of the curve (i.e. the minimum) we need
 \beta &= (X^TX)^{-1}X^Ty
 \end{align*}
 
+\begin{aside}[When does this solution exist?]
+The last step needs $X^TX$ to be invertible, and eigenelements (Topic 11) tell us when it is.
+\begin{itemize}
+\item $X^TX$ is symmetric, so its eigenvalues are real.
+\item A matrix is singular exactly when its determinant is $0$, and the determinant is the product of the eigenvalues. So $X^TX$ is invertible if and only if \emph{none} of its eigenvalues is $0$.
+\item A zero eigenvalue happens when the columns of $X$ are linearly dependent (Topic 10). For example, if every $x_i$ is the same value then the first column of $X$ is a multiple of the column of $1$s. With several predictors, the same thing happens if one is a combination of the others (e.g., one measurement is the sum of two others). Then $X^TX\beta=X^Ty$ has many solutions and $(X^TX)^{-1}$ does not exist.
+\item For any eigenvector $v$ of $X^TX$ with eigenvalue $\lambda$, we have $\lambda\|v\|_2^2=v^TX^TXv=\|Xv\|_2^2\ge0$, so every eigenvalue is non-negative. This is why the critical point we found is a minimum of the squared error and not a maximum.
+\end{itemize}
+\end{aside}
+
 What if I want to know the probability of some $y_i$ given $x_i$? (so $p(y_i\mid x_i)$)
 
 Assuming its some natural process, we can assume 
