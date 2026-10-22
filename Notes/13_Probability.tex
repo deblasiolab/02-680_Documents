@@ -53,6 +53,7 @@ For discrete sample spaces (such as coin flips) we can typically take $\mathcal{
 so $|\mathcal{A}|=2^{|\Omega|}$. 
 The two-coin sample space has $|\Omega_{twocoin}|=4$ outcomes and so $2^4=16$ events. 
 In continuous spaces it is typically thought of as the Borel field of $\Omega$ (details of this are beyond the scope of the class for now). 
+(Terminology note: the textbooks listed below do not use the name ``event space'' in these sections. The same object is called a $\sigma$-field or $\sigma$-algebra when they get to it later.)
 
 \begin{center}
 \begin{tabular}{|l|l|l|}
@@ -74,6 +75,7 @@ Each question is the \emph{set} of outcomes for which the answer is yes, so each
 \paragraph{Why the event space has rules.}
 If we can ask whether $A$ happened, we should also be able to ask whether it did \emph{not} happen, and whether $A$ or $B$ happened:
 \begin{enumerate}
+\item $\Omega\in\mathcal{A}$ \quad (we can ask ``does \emph{something} happen?''; this follows from the other two rules, but it is worth stating)
 \item $A\in\mathcal{A} \rightarrow \overline{A}\in\mathcal{A}$ \quad (we can ask ``not $A$''; the \emph{complement} $\overline{A}=\Omega\setminus A$ is everything in $\Omega$ that is not in $A$)
 \item $A_1,A_2,... \in \mathcal{A} \rightarrow \bigcup_{i=1}^\infty A_i \in \mathcal{A}$ \quad (we can ask ``$A_1$ or $A_2$ or ...'')
 \end{enumerate}
@@ -90,14 +92,15 @@ That is, we cannot have a negative probability (zero is allowed).
 In the previous example if $A_{threetails}$ is the event that you get 3 tails when a coin is tossed twice,
 then $A_{threetails}=\emptyset$ (it can't happen), so $p(A_{threetails})=0$ but this can't be negative.
 
-\paragraph{Axiom 2: Total Probability.}
+\paragraph{Axiom 2: Normalization.}
 For any sample space $\Omega$, $p(\Omega)=1$. 
 That is, the probability of something in the sample space happening is 1. 
 So for the example above the probability of a single coin flip being either \texttt{Heads} or \texttt{Tails} is 1, 
 (as defined) there are no other possible outcomes. 
 
-\paragraph{Axiom 3: Disjoint Events.}
-For \textit{pairwise disjoint} events $A_1, A_2, ..., A_n$ (no two of them share an outcome), \[p(A_1\cup A_2\cup ... \cup A_n)=p(A_1) + p(A_2) + ... + p(A_n).\]
+\paragraph{Axiom 3: Additivity.}
+For \textit{pairwise disjoint} events $A_1, A_2, ...$ (no two of them share an outcome; there may be finitely or countably infinitely many), \[p(A_1\cup A_2\cup ... )=p(A_1) + p(A_2) + ... .\]
+Most of our examples use just two or three events.
 So in a single coin flip if $A_{heads}$ and $A_{tails}$ are the events of a single coin flip being heads and tails respectively, 
 we can see the events are disjoint (they don't share any outcomes)
 so \[p(A_{heads} \cup A_{tails}) = p(A_{heads}) + p(A_{tails}) = \frac{1}{2} + \frac{1}{2} = 1.\]
