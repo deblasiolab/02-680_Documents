@@ -326,7 +326,7 @@ Parameterized by a value of $\lambda>0$, which is the average rate of arrivals o
     declare function={exp_dist(\k,\l)=(\k>=0)*\l*exp(-1*\l*\k);}
 ]
 \begin{axis}[
-	xmin=0,smooth,samples=50,
+	xmin=0,ymin=0,domain=0:5,smooth,samples=50,
     xlabel={$\omega$},
     ylabel={$p(\omega)$},
 ]

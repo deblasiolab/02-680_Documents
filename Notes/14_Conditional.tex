@@ -12,14 +12,15 @@
 We think of conditional probability as a restriction to some subset of our sample space. 
 If we know one thing happened already whats the probability of another conditioned on the thing we know. 
 
-The basic rule of conditional probability is the following:
-For some probability space $(\Omega, \mathcal{A}, P)$, and for events $A,B\in\mathcal{A}$
+A \emph{probability space} $(\Omega, \mathcal{A}, p)$ bundles the three things from last topic: the sample space $\Omega$, the event space $\mathcal{A}$, and the probability function $p$ that assigns each event a number. 
+(For discrete $\Omega$ the event space is the power set, so you can mostly ignore it for now; it must be named because $p(A\mid B)$ only makes sense for $A,B\in\mathcal{A}$.)
+The basic rule of conditional probability is the following: for events $A,B\in\mathcal{A}$
 \[p(A\mid B) = \frac{p(A\cap B)}{p(B)}\]
 
-Using the axiom of total probability we can show that 
+Using the normalization axiom ($p(\Omega)=1$) we can show that 
 \[p(A \mid \Omega) = \frac{p(A \cap \Omega)}{p(\Omega)} = \frac{p(A)}{1}\]
 
-Going back to the example from last topic if $A_{firstheads}$ is defined as before and $A_{allheads}=\langle\texttt{Heads},\texttt{Heads}\rangle$,
+Going back to the example from last topic if $A_{firstheads}$ is defined as before and $A_{allheads}=\{\langle\texttt{Heads},\texttt{Heads}\rangle\}$,
 we can say that 
 \[p(A_{allheads} \mid A_{firstheads}) = \frac{p(A_{allheads} \cap A_{firstheads})}{p(A_{firstheads})} = \frac{1/4}{1/2} = \frac{1}{2}\]
 This is based on the fact that \[A_{allheads} \subseteq A_{firstheads} \implies A_{allheads} \cap A_{firstheads} = A_{allheads}.\]
@@ -145,7 +146,7 @@ thus
 %%%%%%%%%%%%%%%
 \section{Bayes' Rule}
 
-For some probability space $(\Omega, \mathcal{A}, P)$, and for some event that already happened $B\in\mathcal{A}.$
+For some probability space $(\Omega, \mathcal{A}, p)$, and for some event that already happened $B\in\mathcal{A}.$
 Then the probability that some event $A\in\mathcal{A}$ also happens:
 \[p(A\mid B) = \frac{p(A\cap B)}{p(B)}\]
 (where $p(B)>0$). 
