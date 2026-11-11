@@ -9,7 +9,7 @@
 
 \section{Linear Regression}
 The \emph{linear regression} problem is as follows 
-(we covered this briefly in a previous topic (Independence), but with a slightly different formula):
+(we covered the least squares solution briefly in Topic 12 (Calculus), written there as $Ax=b$ with $x$ as the unknown; here the unknown is $\beta$ and $x$ is the data):
 \begin{itemize}
 \item[\textbf{$x$}] --- Independent variable[s] (what we control)
 \item[\textbf{$y$}] --- Dependent variable[s] (the measured values)
@@ -32,10 +32,11 @@ Clinical variables & Insulin level\\
 ... & ...
 \end{tabular}\end{center}
 
-Lets assume we have some $x,y\in\reals^n$, for $n$ samples where each $(x_i,y_i)$ are corresponding. 
-Then \[y = x^T\beta_s + \beta_0\]
+Let's assume we have some $x,y\in\reals^n$, for $n$ samples where each $(x_i,y_i)$ are corresponding. 
+Then for each sample $y_i = \beta_s x_i + \beta_0$, or for all samples at once \[y = \beta_s x + \beta_0\mathbf{1},\]
+where $\mathbf{1}\in\reals^n$ is the vector of all ones.
 
-To simplify things lets define:
+To simplify things let's define:
 $X = \begin{bmatrix} x_1 & 1\\x_2 & 1\\\vdots & \vdots\\x_n & 1\end{bmatrix}$ and $\beta = \begin{bmatrix}\beta_s\\\beta_0\end{bmatrix}$, 
 then the equation above becomes simply:
 \[y = X\beta.\]
@@ -70,24 +71,25 @@ The last step needs $X^TX$ to be invertible, and eigenelements (Topic 11) tell u
 
 What if I want to know the probability of some $y_i$ given $x_i$? (so $p(y_i\mid x_i)$)
 
-Assuming its some natural process, we can assume 
+Assuming it's some natural process, we can assume 
 \[p(y_i\mid x_i) \sim \mathcal{N}(\beta_0 + \beta_s x_i, \sigma^2).\]
 or equivalently
-\[y= \beta_0 + \beta_s x_i + \epsilon, \epsilon \sim \mathcal{N}(0,\sigma^2).\]
+\[y_i = \beta_0 + \beta_s x_i + \epsilon_i, \epsilon_i \sim \mathcal{N}(0,\sigma^2).\]
 
 So given the data, we can actually use MLE to find $\beta$!
+Let $X_i=\begin{bmatrix}x_i & 1\end{bmatrix}$ be the $i$th row of $X$, so the mean of $y_i$ is $X_i\beta=\beta_0+\beta_s x_i$.
 
 \begin{align*}
-\ln p(\mathcal{D}\mid \beta, \sigma) &= \ln \left[\prod_{i=1}^{n} \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma}(y_i-x_i\beta)^2}\right]\\
-	&= \sum_{i=1}^{n} \ln \left[\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma}(y_i-x_i\beta)^2}\right]\\
-	&=  \frac{-n}{2}\ln \sigma^2 + \sum_{i=1}^{n} \ln e^{-\frac{1}{2\sigma^2}(y_i-x_i\beta)^2}\\
-	&= \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2
+\ln p(\mathcal{D}\mid \beta, \sigma) &= \ln \left[\prod_{i=1}^{n} \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2}(y_i-X_i\beta)^2}\right]\\
+	&= \sum_{i=1}^{n} \ln \left[\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2}(y_i-X_i\beta)^2}\right]\\
+	&= \frac{-n}{2}\ln \sigma^2 - \frac{n}{2}\ln(2\pi) + \sum_{i=1}^{n} \ln e^{-\frac{1}{2\sigma^2}(y_i-X_i\beta)^2}\\
+	&= \frac{-n}{2}\ln \sigma^2 - \frac{n}{2}\ln(2\pi) -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-X_i\beta)^2
 \end{align*}
 
 \begin{align*}
-\frac{\partial}{\partial\beta} \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2 &= \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2\\
-&=  \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2} (Y-X\beta)^2\\
-&= -\frac{1}{2\sigma^2}  \frac{\partial}{\partial\beta} (Y^2-2Y^TX\beta+\beta^TX^TX\beta)\\
+\frac{\partial}{\partial\beta} {\color{red}\frac{-n}{2}\ln \sigma^2 - \frac{n}{2}\ln(2\pi)} -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-X_i\beta)^2 &= \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-X_i\beta)^2\\
+&=  \frac{\partial}{\partial\beta} -\frac{1}{2\sigma^2} \|y-X\beta\|_2^2\\
+&= -\frac{1}{2\sigma^2}  \frac{\partial}{\partial\beta} (y^Ty-2y^TX\beta+\beta^TX^TX\beta)\\
 &= ... \\
 \end{align*}
 
@@ -96,10 +98,10 @@ $\hat\beta_{MLE} = (X^TX)^{-1}X^Ty$, that's just Least Squares!
 But we don't know $\sigma$, that's actually, what we want to know because it models how uncertain we are with any given output.
 
 \begin{align*}
-\frac{\partial}{\partial\sigma^2} \frac{-n}{2}\ln \sigma^2 -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-x_i\beta)^2 &= \frac{-n}{2\sigma^2} +\frac{1}{2}(\sigma^2)^{-2}\sum_{i=1}^{n} (y_i-x_i\beta)^2
+\frac{\partial}{\partial\sigma^2} \frac{-n}{2}\ln \sigma^2 {\color{red}- \frac{n}{2}\ln(2\pi)} -\frac{1}{2\sigma^2}\sum_{i=1}^{n} (y_i-X_i\beta)^2 &= \frac{-n}{2\sigma^2} +\frac{1}{2}(\sigma^2)^{-2}\sum_{i=1}^{n} (y_i-X_i\beta)^2
 \end{align*}
 
-$\hat\sigma^2_{MLE} = \frac{\sum_{i=1}^{n} (y_i-x_i\beta)^2}{n}$
+$\hat\sigma^2_{MLE} = \frac{\sum_{i=1}^{n} (y_i-X_i\hat\beta_{MLE})^2}{n}$
 
 With these we can determine for some new $\tilde y$ and $\tilde x$ what $p(\tilde y \mid \tilde x)$ is. 
 
