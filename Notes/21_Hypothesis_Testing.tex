@@ -147,17 +147,17 @@ lets assume we know the typical variance of cholesterol among humans ($\sigma$) 
 
 \paragraph{Step 1. }
 In this case, since we're assuming that the samples are coming from a Gaussian (Normal) distribution ($X_1,X_2,\cdots,X_n\sim\mathcal{N}(\mu_0,\sigma^2)$), 
-the test statistic is the mean ($\overline{X_n}$). 
+the test statistic is the mean ($\overline{X}_n$). 
 And lets assume we're running a two-sided test 
 (we don't know if the impact is going to lower or raise cholesterol we just want to know if it changes); thus
 $H_0: \mu = \mu_0$ and $H_1: \mu \ne  \mu_0$.
 
-Under the null hypothesis \[\overline{X_n}\sim\mathcal{N}(\mu_0, \sigma^2/n)\] 
-or as we saw \[\frac{\overline{X_n}-\mu_0}{\sigma/\sqrt{n}}\sim\mathcal{N}(0,1).\]
+Under the null hypothesis \[\overline{X}_n\sim\mathcal{N}(\mu_0, \sigma^2/n)\] 
+or as we saw \[\frac{\overline{X}_n-\mu_0}{\sigma/\sqrt{n}}\sim\mathcal{N}(0,1).\]
 
 \paragraph{Step 2.}
 We want to compute the $p$-value, which is essentially the probability that we would see the test statistic under the null hypothesis (for $T$):
-\[p\left(\left|T\right| > \frac{\overline{X_n}-\mu_0}{\sigma/\sqrt{n}}\right)\]
+\[p\left(\left|T\right| > \frac{\overline{X}_n-\mu_0}{\sigma/\sqrt{n}}\right)\]
 
 \paragraph{Step 3.}
 Depending on how strict we want to be, we accept or reject $H_0$ based on the $p$-value. 
@@ -176,7 +176,7 @@ $> 0.1$&little to no evidence against $H_0$\\
 \paragraph{One-sided tests.} 
 For a one-sided test; that is one where for example $H_0: \mu \le \mu_0$ and $H_1: \mu > \mu_0$; 
 the only thing that changes is that in Step 2: 
-\[p\left(T > \frac{\overline{X_n}-\mu_0}{\sigma/\sqrt{n}}\right).\]
+\[p\left(T > \frac{\overline{X}_n-\mu_0}{\sigma/\sqrt{n}}\right).\]
 Notice that usually one-sided tests can be more powerful as they are only integrating over one region. 
 
 \paragraph{Main Takeaways.}
@@ -191,12 +191,12 @@ When performing tests, the main thing we need to do is determine:
 \section{$t$-tests: When $\sigma$ is Unknown}
 Lets again assume $X_1,X_2,\cdots,X_n\sim\mathcal{N}(\mu_0,\sigma^2)$ but this time we don't know $\sigma$. 
 We're going to define two statistics: 
-\[\overline{X_n} = \frac{1}{n}\sum X_i\]
+\[\overline{X}_n = \frac{1}{n}\sum X_i\]
 and
-\[\overline{\sigma}^2 = \frac{1}{n-1}\sum(X_i-\overline{X_n})^2\]
+\[\hat{\sigma}^2 = \frac{1}{n-1}\sum(X_i-\overline{X}_n)^2\]
 
 We're then going to say the following:
-\[\frac{\overline{X_n}-\mu_0}{\overline{\sigma}/\sqrt{n}}\sim t_{n-1}\]
+\[\frac{\overline{X}_n-\mu_0}{\hat{\sigma}/\sqrt{n}}\sim t_{n-1}\]
 
 \begin{aside}[The $t$ distribution]
 The $t$ distribution has one parameter: $\nu$, which is the number of \textit{degrees of freedom}. 
@@ -261,9 +261,9 @@ In these cases our hypotheses are:
 Another way to say this is to define some $\delta=X_1-X_2$, and let the hypotheses be 
 \[H_0: \delta=0 \;\;\;\;\text{ and }\;\;\;\;\;H_1: \delta \ne 0.\]
 
-As we did before we can compute $\overline{\delta_n}$ and $\overline{\sigma}_\delta$ from the data. 
+As we did before we can compute $\overline{\delta}_n$ and $\hat{\sigma}_\delta$ from the data. 
 and let our statistic be 
-\[\frac{\overline{\delta_n}-\mu_0}{\overline{\sigma_\delta}/\sqrt{n}}\sim t_{n-1}\]
+\[\frac{\overline{\delta}_n-\mu_0}{\hat{\sigma}_\delta/\sqrt{n}}\sim t_{n-1}\]
 
 
 %%%%%%%%%%%%
