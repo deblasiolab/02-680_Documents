@@ -51,20 +51,22 @@ Assume 48 of the 100 coins are heads, then $\overline{C}_{100} = \frac{48}{100}$
 
 
 \paragraph{Law of Large Numbers.} The \emph{law of large numbers} says that as $n$ grows, the probability that $\overline{X}_n$ is close to $\mu$ approaches 1. 
-\[\lim_{n\rightarrow\infty} p\left(\overline{X}_n=\mu\right) \to 1.\]
+\[p\left(\overline{X}_n=\mu\right) \to 1 \text{ as } n\rightarrow\infty.\]
 
 \begin{aside}[pedantry detail]
-Technically the probability that a continuous random variable's sample mean 
-is exactly equal to $\mu$ is generally 0 for any finite $n$, and stays 0 in the limit.
+Technically the probability that the sample mean is exactly equal to $\mu$ is 0 for a continuous random variable, 
+and even for a discrete one (like our coin flips) it goes to 0 as $n$ grows.
 Thus it's more precise to say that it's within some small region around $\mu$. 
-\[\lim_{n\rightarrow\infty} p(|\overline{X}_n-\mu| < \epsilon) \to 1, \text{ for any } \epsilon > 0\]
+\[\lim_{n\rightarrow\infty} p(|\overline{X}_n-\mu| < \epsilon) = 1, \text{ for any } \epsilon > 0\]
 \end{aside}
 
-\paragraph{Central Limit Theorem (brief introduction).} While similar to the law of large numbers the \emph{Central Limit Theorem} says that $n$ grows, 
-the distribution of $\overline{X}_n$ converges to the Gaussian (normal) distribution $N\left(\mu, \frac{\sigma^2}{n}\right)$. 
-\[\lim_{n\rightarrow\infty} \overline{X}_n \sim N\left(\mu, \frac{\sigma^2}{n}\right).\]
+\paragraph{Central Limit Theorem (brief introduction).} While similar to the law of large numbers the \emph{Central Limit Theorem} says that as $n$ grows, 
+the distribution of $\overline{X}_n$ becomes approximately the Gaussian (normal) distribution $N\left(\mu, \frac{\sigma^2}{n}\right)$. 
+\[\overline{X}_n \approx N\left(\mu, \frac{\sigma^2}{n}\right) \text{ for large } n.\]
+More formally (for finite $\sigma^2$), the standardized mean converges in distribution to a standard normal:
+\[\frac{\sqrt{n}\left(\overline{X}_n-\mu\right)}{\sigma} \to N(0,1) \text{ as } n\rightarrow\infty.\]
 
-These both say something similar and speak to the fact that more data will make the empirical mean will approach the underlying (theoretical) mean. 
+These both say something similar and speak to the fact that more data will make the empirical mean approach the underlying (theoretical) mean. 
 But the Central Limit Theorem is more precise, it allows us to approximate the probability that the sample size is not adequate 
 (gives some confidence on the probability from the LLN).
 We will see much more about this over the next couple weeks. 
@@ -115,7 +117,7 @@ Let $\mathcal{F}$ be a statistical model defined as a set of probability distrib
 We will focus on parametric models defined as
 \[\mathcal{F}\coloneq\{f(x \mid  \theta):\theta\in\Theta\},\]
 where 
-\[\theta = \{\theta_1, \theta_2, \cdots, \theta_k\} \] 
+\[\theta = (\theta_1, \theta_2, \cdots, \theta_k) \] 
 are unknown parameters $\theta\in\Theta$.
 
 The task is to find a distribution $\hat{f}\in\mathcal{F}$ that models the phenomenon well,
@@ -137,7 +139,7 @@ Remember Bayes' Theorem (written slightly differently):
 If we can figure out all the values on the right, we can get the probability of interest on the left 
 (how good our model parameters are given the data).  
 
-Lets start by looking at the most complicated component of the RHS: $p(data \mid hypothesis)$, 
+Let's start by looking at the most complicated component of the RHS: $p(data \mid hypothesis)$, 
 or in our case $p(\mathcal{D} \mid \theta)$. 
 Remember that the elements of $\mathcal{D}$ are i.i.d. thus we can rewrite it: 
 \[p(\mathcal{D} \mid \theta) = p(X_1,X_2,\cdots,X_n\mid\theta) = \prod_{i=1}^n p(X_i \mid \theta)\]
@@ -158,37 +160,37 @@ Thinking about how we maximize a function (or really find the parameter that max
 we need to take its derivative and check the $0$ points. 
 \[\frac{d}{d\theta}p(\mathcal{D}\mid \theta)=0\]
 (but we also need to ensure it's a max and not a min or saddle.)
-If there is no critical point, then we will use the maximum allowable parameter value. 
+If there is no critical point, then the maximum is at the boundary of the allowable parameter values (so check the endpoints). 
 
 \paragraph{Example. }
 Let's look at flipping a coin $n$ times, but we don't know if it's fair or not. 
 So each of the $\mathcal{D} = X_1, X_2, \cdots, X_n$ trials are independent, 
 thus $X_i \sim Bernoulli(\alpha)$, and thus $f(X_i=x\mid\theta)=\alpha^x(1-\alpha)^{1-x}$, 
-here $\theta = \{\alpha\}$. 
-But we also combine the trials, so it ends up looking a little like the binomial distribution, 
-assuming $k$ of our $n$ flips were heads: 
-\[p(\mathcal{D}\mid\theta) = {n \choose k} \alpha^k(1-\alpha)^{n-k}\]
+here $\theta = (\alpha)$. 
+Combining the trials, assuming $k$ of our $n$ flips were heads: 
+\[p(\mathcal{D}\mid\theta) = \alpha^k(1-\alpha)^{n-k}\]
 and we want to estimate $\alpha$. 
+(If we only recorded the \emph{number} of heads rather than the sequence, the likelihood would include a binomial coefficient ${n \choose k}$, but that is a constant and does not change the maximizing $\alpha$.)
 
 Notice that while through Bayes' rule we need $p(\theta)$ and $p(\mathcal{D})$ 
-the former is typically uniform and the latter does not change thus neither need to be considered when optimizing. 
+the former is assumed uniform here (a flat prior) and the latter does not change thus neither need to be considered when optimizing. 
 
-So lets assume that we have a sequence $\mathcal{D} = X_1, X_2, \cdots, X_{10} = 1,1,1,0,0,0,0,0,1,0$.
+So let's assume that we have a sequence $\mathcal{D} = X_1, X_2, \cdots, X_{10} = 1,1,1,0,0,0,0,0,1,0$.
 So we want to know 
-\[\argmax_\theta f(\mathcal{D}\mid\theta) = \argmax_\theta \left({10 \choose 4} \alpha^4(1-\alpha)^6\right)\]
+\[\argmax_\theta f(\mathcal{D}\mid\theta) = \argmax_\theta \left(\alpha^4(1-\alpha)^6\right)\]
 
 To find $\theta$ we using calculus we need the derivative: 
-\[\frac{d}{d\theta}\left({10 \choose 4} \alpha^4(1-\alpha)^6\right) = {10 \choose 4}\left(4\alpha^3\cdot(1-\alpha)^6-6\alpha^4(1-\alpha)^5\right)\]
+\[\frac{d}{d\theta}\left(\alpha^4(1-\alpha)^6\right) = 4\alpha^3\cdot(1-\alpha)^6-6\alpha^4(1-\alpha)^5\]
 
-Doing some algebra (notice the binomial coefficient is a constant thus does not impact the maximal $\theta$)
+Setting the derivative to zero and doing some algebra (for $0<\alpha<1$, we can divide both sides by $\alpha^3(1-\alpha)^5$)
 \begin{align*}
 4\alpha^3\cdot(1-\alpha)^6&=6\alpha^4(1-\alpha)^5\\
 4(1-\alpha) &= 6\alpha\\
 4 &= 10\alpha\\
 \end{align*}
 
-So the zero point(s) are 4/10, since thats a maximum we know $\hat{\alpha} = \frac{4}{10}$.
-Thus, given the sample we have, it looks like the coin is not fair. 
+So the only zero in $(0,1)$ is $4/10$. The derivative is also zero at $\alpha=0$ and $\alpha=1$, but the likelihood is $0$ there and positive in between, so this critical point must be the maximum and $\hat{\alpha} = \frac{4}{10}$.
+Note that this alone does not tell us the coin is unfair: with only 10 flips, 4 heads is well within what a fair coin produces (we will see how to quantify this in the hypothesis testing topic). 
 
 %%%%%%%%%%%%%%%%%%%%%
 \section{Deriving MLE for generic distributions}
@@ -205,13 +207,13 @@ Can we make the derivation in the example above more general.
 
 Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
 where $X_i \sim Bernoulli(\alpha)$.
-Find the MLE of $\theta=\{\alpha\}$.
+Find the MLE of $\theta=(\alpha)$.
 
 \begin{align*}
 \frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta) 	&= \frac{d}{d\theta} \ln \prod_{i=1}^n p(X_i\mid\theta)\\
 					    		     	&= \frac{d}{d\alpha} \ln \alpha^s(1-\alpha)^{n-s} & \text{assuming $s$ successes}\\
 					    			& = \frac{d}{d\alpha} s \ln \alpha + (n-s) \ln (1-\alpha)\\
-								& = \frac{s}{\alpha} - \frac{n-s}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a}{x} \frac{d}{dx}  f(x)			     
+								& = \frac{s}{\alpha} - \frac{n-s}{1-\alpha} 		& \text{log rule, assuming $\ln$} \frac{d}{dx} a \ln f(x) = \frac{a\,f^\prime(x)}{f(x)}			     
 \end{align*}
 
 Therefore, for a set of $n$ Bernoulli random variables with $s$ successes, (when we solve the previous equation equal to 0) 
@@ -222,45 +224,45 @@ Therefore, for a set of $n$ Bernoulli random variables with $s$ successes, (when
 \subsection{Normal (Gaussian)}
 Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
 where $X_i \sim \mathcal{N}(\mu, \sigma^2)$.
-Find the MLE of $\theta = \{\mu,\sigma^2\}$.
+Find the MLE of $\theta = (\mu,\sigma^2)$.
 
 \begin{align*}
 p(\mathcal{D}\mid\mu,\sigma^2) & = \prod_{i=1}^n p(X_i\mid\mu,\sigma^2)\\
-						& = \prod_{i=1}^n \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x-\mu)^2}{-2\sigma^2}}\\
-						& = \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x-\mu)^2}		     
+						& = \prod_{i=1}^n \frac{1}{\sigma\sqrt{2\pi}}\;\;e^{\frac{(x_i-\mu)^2}{-2\sigma^2}}\\
+						& = \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2}		     
 \end{align*}
 
 \begin{align*}
 \ln p(\mathcal{D}\mid\mu,\sigma^2) 
-						& = \ln \left(\left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x-\mu)^2}\right)	\\
-						& = \ln \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2	\\	
-						& = -n \ln \sigma - n \ln \sqrt{2\pi} - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2	\\	     
+						& = \ln \left(\left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n e^{\frac{1}{-2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2}\right)	\\
+						& = \ln \left( \frac{1}{\sigma\sqrt{2\pi}}\right)^n - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2	\\	
+						& = -n \ln \sigma - n \ln \sqrt{2\pi} - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2	\\	     
 \end{align*}
 
 Then we need to do two derivatives: 
 \begin{align*}
-\frac{d}{d\mu} {\color{red}-n \ln \sigma - n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\frac{d}{d\mu} \frac{-1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\frac{-1}{2\sigma^2}\sum_{i=1}^n \left(2\cdot(x-\mu)\cdot(-1)\right) &= 0\\
-\sum_{i=1}^n \left(x-\mu\right) &= 0\\
+\frac{d}{d\mu} {\color{red}-n \ln \sigma - n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2 &= 0\\
+\frac{d}{d\mu} \frac{-1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2 &= 0\\
+\frac{-1}{2\sigma^2}\sum_{i=1}^n \left(2\cdot(x_i-\mu)\cdot(-1)\right) &= 0\\
+\sum_{i=1}^n \left(x_i-\mu\right) &= 0\\
 \end{align*}
 
 Thus $\displaystyle\hat\mu_{MLE} = \frac{1}{n}\sum_{i=1}^n x_i$. 
 
 \begin{align*}
-\frac{d}{d\sigma} -n \ln \sigma {\color{red}- n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\frac{d}{d\sigma} -n \ln \sigma - \frac{1}{2\sigma^2}\sum_{i=1}^n (x-\mu)^2&= 0\\
-\frac{-n}{\sigma} + \sigma^{-3}\sum_{i=1}^n (x-\mu)^2 &= 0\\
-\sigma^{-2}\sum_{i=1}^n (x-\mu)^2 &= n\\
+\frac{d}{d\sigma} -n \ln \sigma {\color{red}- n \ln \sqrt{2\pi} }- \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2 &= 0\\
+\frac{d}{d\sigma} -n \ln \sigma - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2&= 0\\
+\frac{-n}{\sigma} + \sigma^{-3}\sum_{i=1}^n (x_i-\mu)^2 &= 0\\
+\sigma^{-2}\sum_{i=1}^n (x_i-\mu)^2 &= n\\
 \end{align*}
 
-Thus $\displaystyle\hat\sigma^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (x-\hat\mu_{MLE})^2$. 
+Thus $\displaystyle\hat\sigma^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (x_i-\hat\mu_{MLE})^2$. 
 
 %%%%%%%%%%%%%
 \subsection{Poisson}
 Assume we have a set $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
 where $X_i \sim Poisson(\lambda)$.
-Find the MLE of $\theta = \{\lambda\}$.
+Find the MLE of $\theta = (\lambda)$.
 
 \begin{align*}
 \ln p(\mathcal{D}\mid\lambda) & = \ln\left(\prod_{i=1}^n p(X_i\mid\lambda)\right)\\

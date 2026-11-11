@@ -193,10 +193,10 @@ Lets again assume $X_1,X_2,\cdots,X_n\sim\mathcal{N}(\mu_0,\sigma^2)$ but this t
 We're going to define two statistics: 
 \[\overline{X}_n = \frac{1}{n}\sum X_i\]
 and
-\[\hat{\sigma}^2 = \frac{1}{n-1}\sum(X_i-\overline{X}_n)^2\]
+\[s^2 = \frac{1}{n-1}\sum(X_i-\overline{X}_n)^2\]
 
 We're then going to say the following:
-\[\frac{\overline{X}_n-\mu_0}{\hat{\sigma}/\sqrt{n}}\sim t_{n-1}\]
+\[\frac{\overline{X}_n-\mu_0}{s/\sqrt{n}}\sim t_{n-1}\]
 
 \begin{aside}[The $t$ distribution]
 The $t$ distribution has one parameter: $\nu$, which is the number of \textit{degrees of freedom}. 
@@ -261,9 +261,9 @@ In these cases our hypotheses are:
 Another way to say this is to define some $\delta=X_1-X_2$, and let the hypotheses be 
 \[H_0: \delta=0 \;\;\;\;\text{ and }\;\;\;\;\;H_1: \delta \ne 0.\]
 
-As we did before we can compute $\overline{\delta}_n$ and $\hat{\sigma}_\delta$ from the data. 
+As we did before we can compute $\overline{\delta}_n$ and $s_\delta$ from the data. 
 and let our statistic be 
-\[\frac{\overline{\delta}_n-\mu_0}{\hat{\sigma}_\delta/\sqrt{n}}\sim t_{n-1}\]
+\[\frac{\overline{\delta}_n-\mu_0}{s_\delta/\sqrt{n}}\sim t_{n-1}\]
 
 
 %%%%%%%%%%%%
