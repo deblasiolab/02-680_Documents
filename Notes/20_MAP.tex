@@ -11,11 +11,11 @@
 \section{The Frequentist versus Bayesian Schools}
 
 Both schools of statistics start with probability. 
-For Bayesian inference, we take $H$ to be a hypothesis (parameters) and $D$ some data. 
+For Bayesian inference, we take $\theta$ to be a hypothesis (the parameters) and $\mathcal{D}$ some data. 
 Different people will have different a priori beliefs --- 
 but we would still like to make useful inferences from data. 
 
-When $p(H)$ is known, there is no disagreement, we will all just follow Bayes' Rule as written. 
+When $p(\theta)$ is known, there is no disagreement, we will all just follow Bayes' Rule (Topic 14) as written. 
 
 
 \begin{center}
@@ -24,9 +24,9 @@ When $p(H)$ is known, there is no disagreement, we will all just follow Bayes' R
 digraph O {
 direction="TB";
 node [shape="box"];
-B [label="p(H\mid D) = \frac{p(D\mid H)p(H)}{p(D)}"];
-P [label="p(H\mid D) = \frac{p(D\mid H){\color{blue} p_{prior}(H)}}{p(D)}"];
-F [label="\text{Likelihood }L(H \mid D) = p(D\mid H)"];
+B [label="p(\theta\mid\mathcal{D}) = \frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}"];
+P [label="p(\theta\mid\mathcal{D}) = \frac{p(\mathcal{D}\mid\theta){\color{blue} p_{prior}(\theta)}}{p(\mathcal{D})}"];
+F [label="\text{Likelihood }L(\theta \mid \mathcal{D}) = p(\mathcal{D}\mid\theta)"];
 B->P[color="blue",label="\color{blue}\text{Bayesian}"];
 B->F[color="orange",label="\color{orange}\text{Frequentist}"];
 }
@@ -42,7 +42,7 @@ Bayesians and frequentists take fundamentally different approaches to this chall
 The reasons for this split are both practical (ease of implementation and computation) and 
 philosophical (subjectivity versus objectivity and the nature of probability). 
 
-The main philosophical difference concerns the \emph{meaning of probability}.
+The main philosophical difference concerns the \emph{meaning of probability} (recall the two perspectives from Topic 13).
 
 %removed for tagging
 %\begin{tabularx}{\textwidth}{XX}
@@ -63,7 +63,7 @@ they consider a range of values each with its own probability of being true& the
 
 %%%%%%%%%%%%%
 \section{Bayesians' Approach to Parameter Estimation}
-Lets look at the coin flip example we had in the last topic: 
+Let's look at the coin flip example we had in the last topic: 
  $\mathcal{D} = X_1, X_2, \cdots, X_n$ 
 where $X_i \sim Bernoulli(\alpha)$.
 We can further summarize $\mathcal{D}$ into $c_H$ and $c_T$ 
@@ -83,12 +83,14 @@ Let's assume we have an experiment where we throw a coin 100 times, we want to k
 Vanilla MLE would say that 
 \[\hat\alpha_{MLE} = \frac{c_H}{c_H+c_T} = \frac{0}{0 + 100} = 0\]
   
-But we have a small belief this is a fair coin, so lets assume we add the pseudocounts $c_{H_0}=c_{T_0}=1$, 
+But we have a small belief this is a fair coin, so let's assume we add the pseudocounts $c_{H_0}=c_{T_0}=1$, 
 in that case 
 \[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}=\frac{0+1}{0+100+1+1} = \frac{1}{102}.\]
 
 If we're more confident in our prior and set  $c_{H_0}=c_{T_0}=100$ then
 \[\hat\alpha_{MLE-PC} = \frac{c_H+c_{H_0}}{c_H+c_T+c_{H_0}+c_{T_0}}=\frac{0+100}{0+100+100+100} = \frac{100}{300} = \frac{1}{3}.\]
+
+(We will see below that these pseudocount estimates are exactly MAP estimates under a Beta prior.)
 
 Pseudocounts are a way of exerting your \textit{belief}
 \begin{itemize}
@@ -115,33 +117,41 @@ The Beta distribution visually looks like an un-balanced normal.
     ylabel={Beta},
     legend pos=outer north east,
 ]
-\addplot [blue] {beta(x,1,1)}; \addlegendentry{$\alpha_{S}=1,\alpha_{F}=1$}
-\addplot [red] {beta(x,2,2)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=2$}
-\addplot [green] {beta(x,2,6)}; \addlegendentry{$\alpha_{S}=2,\alpha_{F}=6$}
-\addplot [purple] {beta(x,6,2)}; \addlegendentry{$\alpha_{S}=6,\alpha_{F}=2$}
+\addplot [blue] {beta(x,1,1)}; \addlegendentry{$a=1,b=1$}
+\addplot [red] {beta(x,2,2)}; \addlegendentry{$a=2,b=2$}
+\addplot [green] {beta(x,2,6)}; \addlegendentry{$a=2,b=6$}
+\addplot [purple] {beta(x,6,2)}; \addlegendentry{$a=6,b=2$}
 \end{axis}
 \end{tikzpicture}
 \end{center}
 
-\[f(x;\alpha_S, \alpha_F) = \frac{x^{(\alpha_S-1)}(1-x)^{(\alpha_F-1)}}{B(\alpha_S,\alpha_F)}\]
+\[f(x;a, b) = \frac{x^{(a-1)}(1-x)^{(b-1)}}{B(a,b)}\]
 where 
-\[B(\alpha_S,\alpha_F) = \frac{\Gamma(\alpha_S)\Gamma(\alpha_F)}{\Gamma(\alpha_S+\alpha_F)}\text{ and } \Gamma(a) = (a-1)!.\]
+\[B(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\text{ where } \Gamma(z) = (z-1)!\text{ for positive integers } z.\]
+(For non-integer $z$, $\Gamma$ extends the factorial smoothly, so $a$ and $b$ need not be integers.)
 
-When $X\sim Beta(\alpha_S, \alpha_F)$, $\mathbb{E}[X] = \frac{\alpha_S}{\alpha_S + \alpha_F}$.
+When $X\sim Beta(a, b)$, $\mathbb{E}[X] = \frac{a}{a + b}$. Note $Beta(1,1)$ is the uniform distribution on $[0,1]$.
 
 \end{aside}
 
-If we model the posterior as a \emph{Beta} distribution on $c_{H_0}$ and $c_{T_0}$
-(that is $p(\theta)\sim Beta(c_{H_0},c_{T_0})$).
+We can express a prior belief about the heads probability $\alpha$ (so $\theta=(\alpha)$) with a \emph{Beta} distribution,
+that is $p(\alpha)\sim Beta(a,b)$.
 
-If we then want to find the \textit{posterior}, $p(\theta\mid\mathcal{D})$? 
+What is the \textit{posterior}, $p(\alpha\mid\mathcal{D})$? 
 \begin{align*}
-p(\theta\mid\mathcal{D}) & = \frac{p(\mathcal{D}\mid\theta)p(\theta)}{p(\mathcal{D})}\\
-				& \propto p(\mathcal{D}\mid\theta)p(\theta)\\
-				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot Beta(\alpha_{H_0},\alpha_{T_0})\\
-				& = {{\alpha_H + \alpha_T} \choose \alpha_H} \cdot p^{\alpha_H} \cdot (1-p)^{\alpha_T} \cdot \frac{p^{(\alpha_{H_0}-1)}(1-p)^{(\alpha_{T_0}-1)}}{B(\alpha_{H_0},\alpha_{T_0})}\\
-				& \sim Beta(\alpha_{H}+\alpha_{H_0},\alpha_{T}+\alpha_{T_0})
+p(\alpha\mid\mathcal{D}) & = \frac{p(\mathcal{D}\mid\alpha)p(\alpha)}{p(\mathcal{D})}\\
+				& \propto p(\mathcal{D}\mid\alpha)p(\alpha)\\
+				& = \alpha^{c_H}(1-\alpha)^{c_T} \cdot Beta(a,b)\\
+				& = \alpha^{c_H}(1-\alpha)^{c_T} \cdot \frac{\alpha^{(a-1)}(1-\alpha)^{(b-1)}}{B(a,b)}\\
+				& \propto \alpha^{(c_H+a-1)}(1-\alpha)^{(c_T+b-1)}
 \end{align*}
+which is the density of a $Beta(c_H+a,\ c_T+b)$ distribution.
+(As in Topic 19 we used the likelihood of the observed sequence. If we only recorded the counts, a binomial coefficient would appear, 
+but it is constant in $\alpha$ and drops out.)
+
+\paragraph{Connection to pseudocounts.} The mean of a $Beta(c_H+a,\ c_T+b)$ distribution is $\frac{c_H+a}{c_H+c_T+a+b}$, 
+so the pseudocount estimate from above with $c_{H_0}=a$ and $c_{T_0}=b$ is the posterior \emph{mean}. 
+MAP instead uses the posterior \emph{mode}, which we derive in the example on unknown priors below.
 
 %%%%%%%%%%%%%
 \section{Maximum \textit{a Posteriori} (MAP) Estimation}
@@ -154,7 +164,10 @@ then we have MAP:
 
 Note that in both cases we're making a \emph{point estimate} of $\theta$. 
 We still don't have the whole picture, we're using data to estimate our model, 
-but MAP is \emph{partially Bayesian}. 
+but MAP is \emph{partially Bayesian}.
+
+If the prior is flat (uniform), $p(\theta)$ is constant and does not change the $\argmax$, so MAP gives the same answer as MLE. 
+That is why we could ignore $p(\theta)$ in Topic 19. A prior that is not flat, such as the pseudocounts above, pulls the estimate toward our prior belief. 
 
 
 %%%%%%%%%%%%%%%
@@ -169,7 +182,7 @@ There are three types of coins which have different probabilities of landing hea
 Suppose you have a drawer containing 10 coins: 
 5 of type $A$, 3 of type $B$, and 2 of type $C$. 
 You reach into the drawer and pick a coin at random. 
-Without showing you the coin is flipped \textbf{once} and get \textbf{tails}. 
+Without showing you the coin, it is flipped \textbf{once} and lands \textbf{tails}. 
 What is the probability it is type $A$? Type $B$? Type $C$? 
 
 \begin{center}
@@ -189,7 +202,7 @@ $C$	& 0.2		& 0.1		& 0.02	& $\approx0.051$\\
 Thus $\hat\theta_{MAP} = A$. 
 
 What if you then flip the same coin another 9 times, so including the first coin we have 
-$\alpha_H=6$ and $\alpha_T=4$.
+$c_H=6$ and $c_T=4$.
 Notice in the table below, the prior does not change. 
 
 \begin{center}
@@ -199,9 +212,9 @@ Hypothesis & Prior & Likelihood & Bayes Numerator & Posterior\\
 $\theta$ & $p(\theta)$ & $p(\mathcal{D}\mid\theta)$ & $p(\mathcal{D}\mid\theta)\cdot p(\theta)$ & $p(\theta\mid\mathcal{D})$\\
 \hline
 \hline
-$A$	& 0.5		& $0.97x10^{-3}$ & $4.88x10^{-4}$	& 0.570\\
-$B$	& 0.3		& $1.19x10^{-3}$ & $3.58x10^{-4}$	& 0.418\\
-$C$	& 0.2		& $0.05x10^{-3}$ & $0.11x10^{-4}$	& 0.012\\
+$A$	& 0.5		& $0.98\times10^{-3}$ & $4.88\times10^{-4}$	& 0.570\\
+$B$	& 0.3		& $1.19\times10^{-3}$ & $3.58\times10^{-4}$	& 0.418\\
+$C$	& 0.2		& $0.05\times10^{-3}$ & $0.11\times10^{-4}$	& 0.012\\
 \hline
 \end{tabular}
 \end{center}
@@ -212,23 +225,40 @@ but $\hat\theta_{MLE} = B$.
 
 %%%%%%%%%%%%%%%
 \subsection{\textit{Unknown} Prior}
-Assume we have a similar scenario but this time we don't know the prior, 
-we follow a similar procedure to that for MLE: 
-take the zero point of the log probability. 
-\[\frac{d}{d\theta} \ln p(\mathcal{D}\mid\theta)p(\theta) = 0\]
+Assume we have a similar scenario but this time there is no list of hypotheses with known prior probabilities (as in the coin drawer). 
+Instead we choose a prior \emph{distribution} for the parameter (see conjugate priors below), 
+and follow a similar procedure to that for MLE: 
+take the zero point of the log of the posterior. 
+\[\frac{d}{d\theta} \ln\bigl[p(\mathcal{D}\mid\theta)\,p(\theta)\bigr] = 0\]
+
+\paragraph{Example: Bernoulli with a Beta prior.}
+Let $X_i\sim Bernoulli(\alpha)$ with $c_H$ heads and $c_T$ tails, and a prior $\alpha\sim Beta(a,b)$. 
+From above, the posterior is proportional to $\alpha^{(c_H+a-1)}(1-\alpha)^{(c_T+b-1)}$. 
+Following the recipe from Topic 19, take the log and find the zero of the derivative:
+\begin{align*}
+\frac{d}{d\alpha} \ln\left[\alpha^{(c_H+a-1)}(1-\alpha)^{(c_T+b-1)}\right]
+& = \frac{d}{d\alpha}\left[(c_H+a-1)\ln\alpha + (c_T+b-1)\ln(1-\alpha)\right]\\
+& = \frac{c_H+a-1}{\alpha} - \frac{c_T+b-1}{1-\alpha} = 0.
+\end{align*}
+Solving gives
+\[\hat\alpha_{MAP} = \frac{c_H+a-1}{c_H+c_T+a+b-2}.\]
+This is the Bernoulli MLE from Topic 19 with $a-1$ extra heads and $b-1$ extra tails, 
+so it is exactly the pseudocount estimate from above with pseudocounts $c_{H_0}=a-1$ and $c_{T_0}=b-1$. 
+For the coin with $c_H=0$ and $c_T=100$: a $Beta(2,2)$ prior (pseudocounts of $1$) gives $\hat\alpha_{MAP}=\frac{1}{102}$, 
+while the flat $Beta(1,1)$ prior gives $\hat\alpha_{MAP}=0$, the same as the MLE.
 
 \begin{aside}[Conjugate Priors]
 Definition: If the prior and the posterior belong to the same parametric family, 
 then the prior is said to be conjugate for the likelihood.
 Parameters of the prior distribution
 are often called ``hyperparameters''.\\
-Example: $\alpha_S,\alpha_F$ in $Beta(\alpha_S,\alpha_F)$.
+Example: $a,b$ in $Beta(a,b)$.
 \vspace{1em}
 
 How do you set the hyperparameters?
 \begin{itemize}
 \item Prior knowledge (from experienced domain-specific experts)
-\item If no prior knowledge, use “uninformative” prior (e.g., $Beta(1,1)$)
+\item If no prior knowledge, use “uninformative” prior (e.g., $Beta(1,1)$, which is flat, so MAP equals MLE)
 \end{itemize}
 \vspace{1em}
 
@@ -244,6 +274,8 @@ Normal & Normal & Normal\\
 \hline
 \end{tabular}\end{center}
 
+The Bernoulli, Normal, and Poisson likelihoods are the ones whose MLEs we derived in Topic 19. 
+(We do not define the Gamma distribution here; it is the standard prior for a Poisson rate $\lambda$.)
 
 \end{aside}
 
